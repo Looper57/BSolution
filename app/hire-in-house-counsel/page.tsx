@@ -25,7 +25,7 @@ function PageHeader() {
             Hire In-House Counsel
           </h1>
           <p className="mt-8 text-[19px] text-white/55 leading-[1.75] max-w-2xl">
-            Build your corporate legal team with exceptional in-house counsel who combine commercial acumen with legal expertise. From first legal hires to General Counsel appointments.
+            Specialist search for corporate legal professionals, from first in-house counsel appointments to General Counsel and Chief Legal Officer mandates.
           </p>
         </div>
       </div>
@@ -39,7 +39,7 @@ function IntroSection() {
       <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-[18px] text-gray-600 leading-[1.8]">
-            The modern in-house counsel role has evolved dramatically. Today&apos;s corporate lawyers must be strategic advisors, risk managers, and business partners while maintaining the highest standards of legal excellence. Finding professionals who excel across all these dimensions requires specialist expertise and deep market knowledge. B Solution has spent over seventeen years identifying, assessing, and placing in-house legal professionals across Europe, from Legal Counsel to General Counsel and Chief Legal Officer appointments.
+            This page focuses on building corporate legal capability at every level. Since 2007, B Solution has supported corporate legal departments and financial institutions with searches for Legal Counsel, senior specialists, Heads of Legal, General Counsel and Chief Legal Officers across Europe and selected Middle Eastern markets.
           </p>
         </div>
       </div>
@@ -281,7 +281,7 @@ function CTASection() {
               Build Your In-House Legal Team
             </h2>
             <p className="text-gray-600 text-[17px] leading-[1.8] mb-8">
-              Whether you need your first legal hire or are expanding an established team, B Solution provides the expertise and network to find exceptional in-house counsel who will add immediate value to your organization.
+              Whether you need your first legal hire or are expanding an established team, B Solution provides a targeted and confidential search process shaped around the role, market and organisation.
             </p>
             <div className="space-y-4">
               <Link href="/legal-executive-search" className="flex items-center text-gold hover:text-gold/80 text-[14px] font-medium">

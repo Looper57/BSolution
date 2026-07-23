@@ -1,12 +1,62 @@
 "use client"
 
 import Link from 'next/link'
-import { ArrowRight, Shield, Users, Briefcase, Globe2, Lock, Heart, Star, CheckCircle } from 'lucide-react'
+import { ArrowRight, Shield, Users, Briefcase, Globe2, Lock, Heart, CheckCircle } from 'lucide-react'
 import { LanguageProvider, useLanguage } from '@/lib/language-context'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent } from '@/components/ui/card'
+import { localizedPath } from '@/lib/i18n/config'
+
+const candidatesLocalizedCopy = {
+  de: {
+    features: [
+      { icon: Lock, title: 'Vertrauliche Möglichkeiten', desc: 'Viele unserer Mandate werden nicht öffentlich ausgeschrieben. Durch eine Registrierung erhalten Sie Zugang zu Möglichkeiten, die zu Ihrer Erfahrung und Ihren Zielen passen.' },
+      { icon: Heart, title: 'Persönlicher Ansatz', desc: 'Wir nehmen uns Zeit, Ihre Karriereziele, Präferenzen und persönlichen Rahmenbedingungen zu verstehen. Wir stellen nur Möglichkeiten vor, die einen sinnvollen nächsten Schritt darstellen.' },
+      { icon: Shield, title: 'Vollständige Diskretion', desc: 'Ihre Privatsphäre hat höchste Priorität. Wir geben Ihre Daten niemals ohne Ihre ausdrückliche Zustimmung an Mandanten weiter und behandeln jede Kommunikation vertraulich.' },
+    ],
+    opportunitiesTitle: 'Arten von Karrieremöglichkeiten',
+    opportunitiesBody: 'Wir begleiten Mandate in Kanzleien und Rechtsabteilungen in Europa sowie in ausgewählten Märkten im Nahen Osten.',
+    lawFirmTitle: 'Möglichkeiten in Kanzleien',
+    lawFirmRoles: ['Positionen für Associates in verschiedenen Rechtsgebieten', 'Senior-Associate- und Counsel-Positionen', 'Partner- und Managing-Partner-Mandate', 'Leitung von Praxisgruppen', 'Internationale Wechsel und Secondments'],
+    inHouseTitle: 'Möglichkeiten in Rechtsabteilungen',
+    inHouseRoles: ['Positionen vom Legal Counsel bis zum Senior Legal Counsel', 'Head-of-Legal-Positionen', 'General-Counsel- und CLO-Mandate', 'Führungspositionen in Compliance und Governance', 'Regionale Legal-Director-Positionen'],
+    processTitle: 'Wie wir mit Kandidaten arbeiten',
+    steps: [
+      { num: '01', title: 'Erstes Gespräch', desc: 'In einem vertraulichen Gespräch lernen wir Ihren Hintergrund, Ihre Karriereziele und Ihre Erwartungen an den nächsten Schritt kennen.' },
+      { num: '02', title: 'Abgleich mit Mandaten', desc: 'Auf Grundlage Ihres Profils prüfen wir aktuelle Mandate und berücksichtigen Sie bei passenden zukünftigen Suchen.' },
+      { num: '03', title: 'Vorstellung und Begleitung', desc: 'Bei einer passenden Möglichkeit koordinieren wir die Vorstellung und begleiten Sie durch Gespräche und Verhandlungen.' },
+      { num: '04', title: 'Langfristige Beziehung', desc: 'Auch wenn sich nicht sofort eine passende Möglichkeit ergibt, bleiben wir für zukünftige Karriereschritte im Austausch.' },
+    ],
+    ctaTitle: 'Möchten Sie neue Möglichkeiten besprechen?',
+    ctaBody: 'Kontaktieren Sie uns für ein vertrauliches Gespräch über Ihre beruflichen Ziele. Wir beantworten alle Anfragen innerhalb von 48 Stunden.',
+    positionsCta: 'Aktuelle Positionen ansehen',
+  },
+  pl: {
+    features: [
+      { icon: Lock, title: 'Poufne możliwości', desc: 'Wiele naszych projektów nie jest publikowanych. Rejestracja umożliwia dostęp do możliwości dopasowanych do doświadczenia i planów zawodowych.' },
+      { icon: Heart, title: 'Indywidualne podejście', desc: 'Poświęcamy czas na zrozumienie celów zawodowych, preferencji i sytuacji kandydata. Przedstawiamy wyłącznie możliwości stanowiące właściwy kolejny krok.' },
+      { icon: Shield, title: 'Pełna dyskrecja', desc: 'Prywatność jest dla nas priorytetem. Nigdy nie przekazujemy danych klientom bez wyraźnej zgody kandydata, a całą komunikację prowadzimy poufnie.' },
+    ],
+    opportunitiesTitle: 'Rodzaje możliwości zawodowych',
+    opportunitiesBody: 'Prowadzimy projekty dla kancelarii i działów prawnych w Europie oraz na wybranych rynkach Bliskiego Wschodu.',
+    lawFirmTitle: 'Możliwości w kancelariach',
+    lawFirmRoles: ['Stanowiska Associate w różnych obszarach praktyki', 'Stanowiska Senior Associate i Counsel', 'Projekty dotyczące Partnerów i Managing Partnerów', 'Stanowiska liderów praktyk', 'Międzynarodowe transfery i oddelegowania'],
+    inHouseTitle: 'Możliwości w działach prawnych',
+    inHouseRoles: ['Stanowiska od Legal Counsel do Senior Legal Counsel', 'Stanowiska Head of Legal', 'Projekty General Counsel i CLO', 'Stanowiska kierownicze w compliance i governance', 'Regionalne stanowiska Legal Director'],
+    processTitle: 'Jak współpracujemy z kandydatami',
+    steps: [
+      { num: '01', title: 'Pierwsza rozmowa', desc: 'Podczas poufnej rozmowy poznajemy doświadczenie, cele zawodowe i oczekiwania dotyczące kolejnego kroku.' },
+      { num: '02', title: 'Dopasowanie możliwości', desc: 'Na podstawie profilu analizujemy aktualne projekty i uwzględniamy kandydata w przyszłych wyszukiwaniach.' },
+      { num: '03', title: 'Przedstawienie i wsparcie', desc: 'Gdy pojawia się odpowiednia możliwość, organizujemy przedstawienie i wspieramy podczas rozmów oraz negocjacji.' },
+      { num: '04', title: 'Długoterminowa relacja', desc: 'Jeśli odpowiednia możliwość nie pojawi się od razu, pozostajemy w kontakcie w sprawie przyszłych kroków zawodowych.' },
+    ],
+    ctaTitle: 'Chcesz omówić nowe możliwości?',
+    ctaBody: 'Skontaktuj się z nami, aby poufnie omówić swoje cele zawodowe. Odpowiadamy na wszystkie zapytania w ciągu 48 godzin.',
+    positionsCta: 'Zobacz aktualne oferty',
+  },
+} as const
 
 function PageHeader() {
   const { t } = useLanguage()
@@ -43,8 +93,9 @@ function IntroSection() {
 
 function ValuePropositionSection() {
   const { language } = useLanguage()
+  const nativeCopy = language === 'de' || language === 'pl' ? candidatesLocalizedCopy[language] : null
   
-  const features = language === 'en' ? [
+  const features = nativeCopy?.features ?? (language === 'en' ? [
     {
       icon: Lock,
       title: 'Confidential Opportunities',
@@ -76,7 +127,7 @@ function ValuePropositionSection() {
       title: 'Naprostá diskrétnost',
       desc: 'Vaše soukromí je prvořadé. Nikdy nesdílíme vaše údaje s klienty bez vašeho výslovného souhlasu a veškerá komunikace probíhá s nejvyšší důvěrností.'
     }
-  ]
+  ])
   
   return (
     <section className="bg-white py-20 lg:py-28">
@@ -99,26 +150,26 @@ function ValuePropositionSection() {
 
 function OpportunitiesSection() {
   const { language } = useLanguage()
+  const nativeCopy = language === 'de' || language === 'pl' ? candidatesLocalizedCopy[language] : null
   
-  const lawFirmRoles = language === 'en'
+  const lawFirmRoles = nativeCopy?.lawFirmRoles ?? (language === 'en'
     ? ['Associate positions across practice areas', 'Senior associate and counsel roles', 'Partner and managing partner opportunities', 'Practice group leadership positions', 'International secondments and transfers']
-    : ['Advokátní pozice napříč oblastmi praxe', 'Senior advokát a counsel pozice', 'Partnerské a managing partner příležitosti', 'Vedoucí pozice praxí', 'Mezinárodní stáže a transfery']
+    : ['Advokátní pozice napříč oblastmi praxe', 'Senior advokát a counsel pozice', 'Partnerské a managing partner příležitosti', 'Vedoucí pozice praxí', 'Mezinárodní stáže a transfery'])
   
-  const inHouseRoles = language === 'en'
+  const inHouseRoles = nativeCopy?.inHouseRoles ?? (language === 'en'
     ? ['Junior to senior legal counsel roles', 'Head of legal positions', 'General counsel and CLO appointments', 'Compliance and governance leadership', 'Regional legal director roles']
-    : ['Junior až senior legal counsel pozice', 'Head of legal pozice', 'General counsel a CLO jmenování', 'Compliance a governance vedení', 'Regionální právní ředitelské pozice']
+    : ['Junior až senior legal counsel pozice', 'Head of legal pozice', 'General counsel a CLO jmenování', 'Compliance a governance vedení', 'Regionální právní ředitelské pozice'])
   
   return (
     <section className="bg-off-white py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-navy text-center">
-          {language === 'en' ? 'Types of Opportunities' : 'Typy příležitostí'}
+          {nativeCopy?.opportunitiesTitle ?? (language === 'en' ? 'Types of Opportunities' : 'Typy příležitostí')}
         </h2>
         <p className="mt-4 text-center text-charcoal/60 max-w-2xl mx-auto">
-          {language === 'en'
+          {nativeCopy?.opportunitiesBody ?? (language === 'en'
             ? 'We work on mandates across private practice and in-house environments throughout Europe and Dubai.'
-            : 'Pracujeme na mandátech v advokacii i in-house prostředí po celé Evropě a v Dubaji.'
-          }
+            : 'Pracujeme na mandátech v advokacii i in-house prostředí po celé Evropě a v Dubaji.')}
         </p>
         
         <div className="mt-16 grid md:grid-cols-2 gap-8">
@@ -127,7 +178,7 @@ function OpportunitiesSection() {
             <CardContent className="p-8 lg:p-10">
               <Briefcase className="h-10 w-10 text-gold" />
               <h2 className="mt-6 text-white font-serif text-xl font-medium">
-                {language === 'en' ? 'Law Firm Opportunities' : 'Příležitosti v advokátních kancelářích'}
+                {nativeCopy?.lawFirmTitle ?? (language === 'en' ? 'Law Firm Opportunities' : 'Příležitosti v advokátních kancelářích')}
               </h2>
               <div className="mt-6 space-y-3">
                 {lawFirmRoles.map((role, index) => (
@@ -145,7 +196,7 @@ function OpportunitiesSection() {
             <CardContent className="p-8 lg:p-10">
               <Globe2 className="h-10 w-10 text-gold" />
               <h2 className="mt-6 text-navy font-serif text-xl font-medium">
-                {language === 'en' ? 'In-House Opportunities' : 'In-house příležitosti'}
+                {nativeCopy?.inHouseTitle ?? (language === 'en' ? 'In-House Opportunities' : 'In-house příležitosti')}
               </h2>
               <div className="mt-6 space-y-3">
                 {inHouseRoles.map((role, index) => (
@@ -165,8 +216,9 @@ function OpportunitiesSection() {
 
 function ProcessSection() {
   const { language } = useLanguage()
+  const nativeCopy = language === 'de' || language === 'pl' ? candidatesLocalizedCopy[language] : null
   
-  const steps = language === 'en' ? [
+  const steps = nativeCopy?.steps ?? (language === 'en' ? [
     { num: '01', title: 'Initial Conversation', desc: 'We start with a confidential discussion to understand your background, career aspirations, and what you\'re looking for in your next role.' },
     { num: '02', title: 'Opportunity Matching', desc: 'Based on your profile, we identify relevant opportunities from our current mandates or keep you in mind for future searches.' },
     { num: '03', title: 'Introduction & Support', desc: 'When a suitable opportunity arises, we facilitate introductions and support you throughout the interview and negotiation process.' },
@@ -176,13 +228,13 @@ function ProcessSection() {
     { num: '02', title: 'Párování příležitostí', desc: 'Na základě vašeho profilu identifikujeme relevantní příležitosti z našich aktuálních mandátů nebo vás máme v paměti pro budoucí vyhledávání.' },
     { num: '03', title: 'Představení & podpora', desc: 'Když se objeví vhodná příležitost, zprostředkujeme představení a podporujeme vás během celého pohovorového a vyjednávacího procesu.' },
     { num: '04', title: 'Dlouhodobý vztah', desc: 'Bez ohledu na to, zda se okamžitá příležitost naplní, udržujeme vztah pro budoucí kariérní kroky.' },
-  ]
+  ])
   
   return (
     <section className="bg-white py-20 lg:py-28">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         <h2 className="text-navy text-center">
-          {language === 'en' ? 'How We Work With Candidates' : 'Jak pracujeme s kandidáty'}
+          {nativeCopy?.processTitle ?? (language === 'en' ? 'How We Work With Candidates' : 'Jak pracujeme s kandidáty')}
         </h2>
         
         <div className="mt-16 grid md:grid-cols-2 lg:grid-cols-4 gap-8">
@@ -199,50 +251,9 @@ function ProcessSection() {
   )
 }
 
-function TestimonialsSection() {
-  const { language } = useLanguage()
-  
-  const testimonials = language === 'en' ? [
-    { quote: 'B Solution understood exactly what I was looking for and connected me with an opportunity I would never have found on my own.', role: 'Senior Associate, relocated to London' },
-    { quote: 'The discretion and professionalism throughout the process gave me confidence to explore a significant career change.', role: 'Now General Counsel, formerly Partner' },
-    { quote: 'They took time to understand my long-term goals, not just my immediate needs. That made all the difference.', role: 'Head of Legal, Technology sector' },
-  ] : [
-    { quote: 'B Solution přesně pochopili, co hledám, a spojili mě s příležitostí, kterou bych nikdy sám nenašel.', role: 'Senior Advokát, přestěhoval se do Londýna' },
-    { quote: 'Diskrétnost a profesionalita během celého procesu mi daly jistotu prozkoumat významnou kariérní změnu.', role: 'Nyní General Counsel, dříve Partner' },
-    { quote: 'Věnovali čas pochopení mých dlouhodobých cílů, nejen okamžitých potřeb. To udělalo velký rozdíl.', role: 'Head of Legal, Technologický sektor' },
-  ]
-  
-  return (
-    <section className="bg-navy py-20 lg:py-28">
-      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <h2 className="text-white text-center">
-          {language === 'en' ? 'What Candidates Say' : 'Co říkají kandidáti'}
-        </h2>
-        
-        <div className="mt-16 grid md:grid-cols-3 gap-8">
-          {testimonials.map((testimonial, index) => (
-            <Card key={index} className="border-0 bg-white/5 backdrop-blur">
-              <CardContent className="p-8">
-                <div className="flex gap-1">
-                  {[...Array(5)].map((_, i) => (
-                    <Star key={i} className="h-4 w-4 text-gold fill-gold" />
-                  ))}
-                </div>
-                <p className="mt-6 text-white/80 italic leading-relaxed">
-                  &ldquo;{testimonial.quote}&rdquo;
-                </p>
-                <p className="mt-6 text-gold text-sm font-medium">{testimonial.role}</p>
-              </CardContent>
-            </Card>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 function CTASection() {
   const { language, t } = useLanguage()
+  const nativeCopy = language === 'de' || language === 'pl' ? candidatesLocalizedCopy[language] : null
   
   return (
     <section className="bg-off-white py-20 lg:py-28">
@@ -250,13 +261,12 @@ function CTASection() {
         <div className="max-w-3xl mx-auto text-center">
           <Users className="h-12 w-12 text-gold mx-auto" />
           <h2 className="mt-6 text-navy">
-            {language === 'en' ? 'Ready to Explore New Opportunities?' : 'Připraveni prozkoumat nové příležitosti?'}
+            {nativeCopy?.ctaTitle ?? (language === 'en' ? 'Ready to Explore New Opportunities?' : 'Připraveni prozkoumat nové příležitosti?')}
           </h2>
           <p className="mt-4 text-charcoal/70 text-lg">
-            {language === 'en'
+            {nativeCopy?.ctaBody ?? (language === 'en'
               ? 'Contact us confidentially to discuss your career aspirations. We respond to all inquiries within 48 hours.'
-              : 'Kontaktujte nás důvěrně k projednání vašich kariérních aspirací. Na všechny dotazy odpovídáme do 48 hodin.'
-            }
+              : 'Kontaktujte nás důvěrně k projednání vašich kariérních aspirací. Na všechny dotazy odpovídáme do 48 hodin.')}
           </p>
           <div className="mt-10 flex flex-col sm:flex-row gap-4 justify-center">
             <Button 
@@ -264,7 +274,7 @@ function CTASection() {
               size="lg"
               className="bg-gold hover:bg-gold-hover text-white"
             >
-              <Link href="/contact">
+              <Link href={localizedPath(language, '/contact')}>
                 {t('candidates.cta')}
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
@@ -275,8 +285,8 @@ function CTASection() {
               variant="outline"
               className="border-navy text-navy hover:bg-navy hover:text-white"
             >
-              <Link href="/positions">
-                {language === 'en' ? 'View Open Positions' : 'Zobrazit volné pozice'}
+              <Link href={localizedPath(language, '/positions')}>
+                {nativeCopy?.positionsCta ?? (language === 'en' ? 'View Open Positions' : 'Zobrazit volné pozice')}
               </Link>
             </Button>
           </div>
@@ -296,7 +306,6 @@ function CandidatesPage() {
         <ValuePropositionSection />
         <OpportunitiesSection />
         <ProcessSection />
-        <TestimonialsSection />
         <CTASection />
       </main>
       <Footer />

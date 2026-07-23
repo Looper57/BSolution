@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Check } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { AuthorityProof } from '@/components/authority-proof'
 
 // Complete German content matching English homepage structure
 const content = {
@@ -17,8 +18,8 @@ const content = {
     cta: 'Kontakt aufnehmen',
   },
   hero: {
-    headline: 'Executive Search für juristische Führungskräfte',
-    subheadline: 'Vermeiden Sie kostspielige Fehlbesetzungen, die Ihr Unternehmen ausbremsen. Wir liefern bewährte juristische Führungskräfte für anspruchsvolle internationale Umgebungen.',
+    headline: 'Boutique Legal Executive Search für Anwaltskanzleien und Rechtsabteilungen',
+    subheadline: 'Wir identifizieren juristische Fach- und Führungskräfte sowie Compliance-Experten durch fundierte Marktkenntnis, diskrete Direktansprache und internationale Reichweite in Europa und im Nahen Osten.',
     trustLine1: 'Seit 2007 vertrauen uns Unternehmensjuristen und führende Kanzleien in ganz Europa.',
     trustLine2: 'Jede Suche führen wir gründlich, diskret und auf das jeweilige Mandat zugeschnitten durch.',
     ctaPrimary: 'Bedarf vertraulich besprechen',
@@ -27,7 +28,7 @@ const content = {
     eyebrow: 'Vertrauen',
     headline: 'Vertrauen führender juristischer Entscheidungsträger',
     columns: [
-      { title: '17+ Jahre Erfahrung', desc: 'Erfahrung in europäischen und internationalen Rechtsmärkten' },
+      { title: 'Seit 2007', desc: 'Erfahrung in europäischen und internationalen Rechtsmärkten' },
       { title: 'Internationale Besetzungen', desc: 'General Counsel, Head of Legal und Legal Director' },
       { title: 'Diskrete Suche', desc: 'Vertrauliche Mandate für strategische Positionen' },
     ],
@@ -145,6 +146,7 @@ export function HomepageDE() {
         <HeroSection />
         <TrustSection />
         <SegmentsSection />
+        <AuthorityProof locale="de" />
         <WhyUsSection />
         <AboutSection />
         <ServicesSection />

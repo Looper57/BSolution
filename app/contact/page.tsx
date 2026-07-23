@@ -12,6 +12,54 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { localizedPath } from '@/lib/i18n/config'
+
+const contactUiCopy = {
+  en: {
+    security: 'Please complete the security verification.',
+    failure: 'Failed to send message. Please try again or contact us directly at info@bsolution.eu',
+    thanks: 'Thank You',
+    success: 'We will contact you shortly.',
+    confidentiality: 'All enquiries are handled with strict confidentiality.',
+    another: 'Send Another Message',
+    select: 'Select an option',
+    sending: 'Sending...',
+    location: 'Prague, Czech Republic',
+  },
+  cs: {
+    security: 'Prosím dokončete bezpečnostní ověření.',
+    failure: 'Nepodařilo se odeslat zprávu. Zkuste to znovu nebo nás kontaktujte přímo na info@bsolution.eu',
+    thanks: 'Děkujeme',
+    success: 'Brzy se vám ozveme.',
+    confidentiality: 'Všechny dotazy jsou zpracovávány s naprostou důvěrností.',
+    another: 'Odeslat další zprávu',
+    select: 'Vyberte možnost',
+    sending: 'Odesílám...',
+    location: 'Praha, Česká republika',
+  },
+  de: {
+    security: 'Bitte schließen Sie die Sicherheitsüberprüfung ab.',
+    failure: 'Die Nachricht konnte nicht gesendet werden. Bitte versuchen Sie es erneut oder kontaktieren Sie uns direkt unter info@bsolution.eu.',
+    thanks: 'Vielen Dank',
+    success: 'Wir melden uns in Kürze bei Ihnen.',
+    confidentiality: 'Alle Anfragen werden streng vertraulich behandelt.',
+    another: 'Weitere Nachricht senden',
+    select: 'Bitte auswählen',
+    sending: 'Wird gesendet...',
+    location: 'Prag, Tschechien',
+  },
+  pl: {
+    security: 'Prosimy o ukończenie weryfikacji bezpieczeństwa.',
+    failure: 'Nie udało się wysłać wiadomości. Spróbuj ponownie lub skontaktuj się z nami bezpośrednio pod adresem info@bsolution.eu.',
+    thanks: 'Dziękujemy',
+    success: 'Skontaktujemy się wkrótce.',
+    confidentiality: 'Wszystkie zapytania traktujemy jako ściśle poufne.',
+    another: 'Wyślij kolejną wiadomość',
+    select: 'Wybierz opcję',
+    sending: 'Wysyłanie...',
+    location: 'Praga, Czechy',
+  },
+} as const
 
 function PageHeader() {
   const { t } = useLanguage()
@@ -48,6 +96,7 @@ declare global {
 
 function ContactForm() {
   const { language, t } = useLanguage()
+  const copy = contactUiCopy[language]
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -110,11 +159,7 @@ function ContactForm() {
     // Check if Turnstile token is available
     const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
     if (siteKey && !turnstileToken) {
-      setError(
-        language === 'en'
-          ? 'Please complete the security verification.'
-          : 'Prosím dokončete bezpečnostní ověření.'
-      )
+      setError(copy.security)
       setIsSubmitting(false)
       return
     }
@@ -153,11 +198,7 @@ function ContactForm() {
         window.turnstile.reset(widgetIdRef.current)
       }
     } catch {
-      setError(
-        language === 'en'
-          ? 'Failed to send message. Please try again or contact us directly at info@bsolution.eu'
-          : 'Nepodařilo se odeslat zprávu. Zkuste to znovu nebo nás kontaktujte přímo na info@bsolution.eu'
-      )
+      setError(copy.failure)
     } finally {
       setIsSubmitting(false)
     }
@@ -169,25 +210,19 @@ function ContactForm() {
         <CardContent className="p-10 lg:p-12 text-center">
           <CheckCircle className="h-16 w-16 text-gold mx-auto" />
           <h3 className="mt-6 text-navy font-serif text-2xl">
-            {language === 'en' ? 'Thank You' : 'Děkujeme'}
+            {copy.thanks}
           </h3>
           <p className="mt-4 text-charcoal/70">
-            {language === 'en'
-              ? 'We will contact you shortly.'
-              : 'Brzy se vám ozveme.'
-            }
+            {copy.success}
           </p>
           <p className="mt-6 text-charcoal/50 text-sm italic">
-            {language === 'en'
-              ? 'All enquiries are handled with strict confidentiality.'
-              : 'Všechny dotazy jsou zpracovávány s naprostou důvěrností.'
-            }
+            {copy.confidentiality}
           </p>
           <Button 
             onClick={() => setSubmitted(false)}
             className="mt-8 bg-gold hover:bg-gold-hover text-white"
           >
-            {language === 'en' ? 'Send Another Message' : 'Odeslat další zprávu'}
+            {copy.another}
           </Button>
         </CardContent>
       </Card>
@@ -279,7 +314,7 @@ function ContactForm() {
               onValueChange={(value) => setFormData({ ...formData, type: value })}
             >
               <SelectTrigger className="border-gray-light focus:border-gold focus:ring-gold">
-                <SelectValue placeholder={language === 'en' ? 'Select an option' : 'Vyberte možnost'} />
+                <SelectValue placeholder={copy.select} />
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="hiring">{t('contact.form.type.hiring')}</SelectItem>
@@ -323,7 +358,7 @@ function ContactForm() {
           >
             {isSubmitting ? (
               <>
-                {language === 'en' ? 'Sending...' : 'Odesílám...'}
+                {copy.sending}
                 <span className="ml-2 h-4 w-4 animate-spin rounded-full border-2 border-white border-t-transparent" />
               </>
             ) : (
@@ -335,10 +370,7 @@ function ContactForm() {
           </Button>
           
           <p className="text-center text-charcoal/50 text-sm mt-6">
-            {language === 'en'
-              ? 'All enquiries are handled with strict confidentiality.'
-              : 'Všechny dotazy jsou zpracovávány s naprostou důvěrností.'
-            }
+            {copy.confidentiality}
           </p>
         </form>
       </CardContent>
@@ -347,7 +379,8 @@ function ContactForm() {
 }
 
 function ContactInfo() {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
+  const copy = contactUiCopy[language]
   
   return (
     <div className="space-y-8">
@@ -364,7 +397,7 @@ function ContactInfo() {
               <h3 className="font-medium text-navy text-base">{t('contact.info.address')}</h3>
               <p className="mt-1 text-charcoal/70">
                 B Solution s.r.o.<br />
-                Prague, Czech Republic
+                {copy.location}
               </p>
             </div>
           </div>
@@ -426,25 +459,25 @@ function ContactInfo() {
           </h4>
           <div className="space-y-3">
             <Link 
-              href="/clients" 
+              href={localizedPath(language, '/clients')}
               className="block text-white/80 hover:text-gold transition-colors"
             >
               {t('nav.clients')}
             </Link>
             <Link 
-              href="/candidates" 
+              href={localizedPath(language, '/candidates')}
               className="block text-white/80 hover:text-gold transition-colors"
             >
               {t('nav.candidates')}
             </Link>
             <Link 
-              href="/positions" 
+              href={localizedPath(language, '/positions')}
               className="block text-white/80 hover:text-gold transition-colors"
             >
               {t('nav.positions')}
             </Link>
             <Link 
-              href="/services" 
+              href={localizedPath(language, '/services')}
               className="block text-white/80 hover:text-gold transition-colors"
             >
               {t('nav.services')}

@@ -45,14 +45,14 @@ function ForCompaniesContent() {
               {/* Headline */}
               <h1 className="text-white text-[clamp(2.5rem,6vw,4.25rem)] font-serif font-normal leading-[1.08] tracking-[-0.02em]">
                 {language === 'en' 
-                  ? 'Hire Top Legal Talent for Your Business'
+                  ? 'Legal Executive Search for Corporate Legal Departments'
                   : 'Najměte špičkové právní talenty pro vaši firmu'}
               </h1>
               
               {/* Subheadline */}
               <p className="mt-8 lg:mt-10 text-white/70 text-[18px] lg:text-[20px] leading-[1.7] max-w-2xl">
                 {language === 'en'
-                  ? 'We help companies across Europe and the Middle East hire exceptional legal professionals — from Senior Counsel to General Counsel.'
+                  ? 'We support corporate legal departments and financial institutions with confidential searches from Senior Counsel to General Counsel.'
                   : 'Pomáháme firmám v Evropě a na Blízkém východě najímat výjimečné právní profesionály — od Senior Counsel po General Counsel.'}
               </p>
               
@@ -221,13 +221,13 @@ function ForCompaniesContent() {
             
             <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-10">
               {(language === 'en' ? [
-                '17+ years of experience in legal recruitment',
+                'Legal Executive Search since 2007',
                 'Strong network across Europe and the Middle East',
                 'Access to passive, high-quality candidates',
                 'Discreet and confidential search process',
                 'Tailored approach for each client'
               ] : [
-                '17+ let zkušeností v právním náboru',
+                'Legal Executive Search od roku 2007',
                 'Silná síť v Evropě a na Blízkém východě',
                 'Přístup k pasivním, vysoce kvalitním kandidátům',
                 'Diskrétní a důvěrný vyhledávací proces',
@@ -311,11 +311,11 @@ function ForCompaniesContent() {
               
               <div className="mt-14 flex flex-wrap justify-center gap-12 lg:gap-20">
                 {(language === 'en' ? [
-                  { icon: Shield, label: '17+ Years Experience' },
+                  { icon: Shield, label: 'Since 2007' },
                   { icon: Users, label: 'International Placements' },
                   { icon: Target, label: 'Discreet & Confidential' }
                 ] : [
-                  { icon: Shield, label: '17+ let zkušeností' },
+                  { icon: Shield, label: 'Od roku 2007' },
                   { icon: Users, label: 'Mezinárodní umístění' },
                   { icon: Target, label: 'Diskrétní a důvěrné' }
                 ]).map((item, index) => (

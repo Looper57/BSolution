@@ -5,6 +5,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, MapPin } from 'lucide-react'
 import { legalPath } from '@/lib/routes'
+import { AuthorityProof } from '@/components/authority-proof'
 
 type Lang = 'en' | 'cs' | 'de' | 'pl'
 
@@ -12,12 +13,12 @@ type Lang = 'en' | 'cs' | 'de' | 'pl'
 const content = {
   en: {
     hero: {
-      headline: 'Hire Top Legal Talent in Europe — Fast, Confidential, Proven',
-      subheadline: 'Since 2007, we help law firms and companies hire exceptional lawyers and legal leaders across Europe and the Middle East.',
+      headline: 'Legal Executive Search for Law Firms and Corporate Legal Departments',
+      subheadline: 'Since 2007, B Solution has delivered confidential Executive Search assignments across Europe and the Middle East, including partner, General Counsel and legal leadership recruitment.',
       trustLine1: '',
       trustLine2: '',
-      ctaPrimary: 'Request Candidates',
-      ctaSecondary: 'Discuss Your Hiring Needs',
+      ctaPrimary: 'Discuss a Search',
+      ctaSecondary: 'Explore Our Services',
     },
     trustBar: {
       items: ['Trusted since 2007', 'Europe & Middle East', 'Legal Sector Exclusive', 'Confidential Retained Search'],
@@ -467,6 +468,7 @@ export function Homepage({ lang }: HomepageProps) {
         <HeroSection content={c.hero} langPrefix={langPrefix} />
         {c.trustBar && <TrustBar items={c.trustBar.items} />}
         <SocialProofSection content={c.socialProof} />
+        <AuthorityProof locale={lang} />
         {c.process && <ProcessSection content={c.process} />}
         <ClientsSection content={c.clients} langPrefix={langPrefix} />
         <DifferenceSection content={c.difference} />
@@ -769,7 +771,7 @@ function HeroSection({ content: c, langPrefix }: { content: typeof content.en.he
                 {c.ctaPrimary}
                 <ArrowRight className="ml-3 h-4 w-4" />
               </Link>
-              <Link href={`${langPrefix}/about`} className="inline-flex items-center text-white/60 hover:text-white/80 text-[11px] font-medium tracking-[0.08em] transition-colors">
+              <Link href={`${langPrefix}/services`} className="inline-flex items-center text-white/60 hover:text-white/80 text-[11px] font-medium tracking-[0.08em] transition-colors">
                 {c.ctaSecondary}
                 <ArrowRight className="ml-2 h-3.5 w-3.5" />
               </Link>

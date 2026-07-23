@@ -25,7 +25,7 @@ function PageHeader() {
             Legal Executive Search
           </h1>
           <p className="mt-8 text-[19px] text-white/55 leading-[1.75] max-w-2xl">
-            Retained executive search for General Counsel, Chief Legal Officers, and senior legal leadership positions. We identify and secure exceptional legal talent for organizations that demand excellence.
+            Retained Executive Search for General Counsel, Chief Legal Officers and senior legal leadership appointments across Europe and the Middle East.
           </p>
         </div>
       </div>
@@ -39,7 +39,7 @@ function IntroSection() {
       <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-[18px] text-gray-600 leading-[1.8]">
-            Legal executive search demands a fundamentally different approach than standard recruitment. The stakes are higher, confidentiality is paramount, and the talent pool is deliberately narrow. At B Solution, we specialize exclusively in legal sector executive search, bringing seventeen years of market expertise, established relationships with senior legal professionals, and a proven methodology refined through hundreds of successful placements across Europe and the Middle East.
+            This page focuses on the confidential process used for senior legal leadership appointments. Since 2007, B Solution has supported corporate legal departments, financial institutions and international law firms through targeted market mapping, direct approach and structured assessment.
           </p>
         </div>
       </div>
@@ -61,13 +61,13 @@ function WhySection() {
     },
     {
       icon: Clock,
-      title: 'Efficient Timelines',
-      description: 'While thorough, our process is designed for efficiency. Most executive searches conclude within 8-12 weeks, minimizing disruption to your organization.'
+      title: 'Disciplined Process',
+      description: 'Each search follows a defined process from mandate briefing and market mapping through direct approach, assessment and appointment support.'
     },
     {
       icon: CheckCircle,
-      title: 'Quality Guarantee',
-      description: 'We stand behind our placements. Our retention rates exceed industry standards because we focus on genuine fit, not just credentials.'
+      title: 'Leadership Assessment',
+      description: 'Assessment considers legal experience, leadership capability, motivation and the specific organisational context of the appointment.'
     }
   ]
   
