@@ -4,6 +4,13 @@ import type { Entity } from '@/lib/content/types'
 import { absoluteUrl, localizedPath, LOCALES, LOCALE_META, type Locale } from '@/lib/i18n/config'
 import { UI } from '@/lib/i18n/ui'
 import { authorityEntities } from '@/lib/content'
+import {
+  buildArticleSchema,
+  buildBreadcrumbSchema,
+  buildServiceSchema,
+  buildWebPageSchema,
+  serializeJsonLd,
+} from '@/lib/structured-data'
 
 const sectionLabels: Record<string, keyof typeof UI.en.nav> = {
   services: 'services',
@@ -24,26 +31,26 @@ export function AuthorityPage({ entity, locale, section }: { entity: Entity; loc
     .filter(([group]) => group !== 'insights')
     .flatMap(([, slugs]) => slugs ?? [])
   const relatedEntities = authorityEntities.filter((item) => item.slug !== entity.slug && relatedSlugs.includes(item.slug))
-  const schema = [
-    {
-      '@context': 'https://schema.org',
-      '@type': entity.kind === 'caseStudy' ? 'Article' : 'WebPage',
-      name: copy.title,
-      description: copy.metaDescription ?? copy.summary,
-      url: absoluteUrl(locale, currentPath),
-      inLanguage: LOCALE_META[locale].htmlLang,
-      publisher: { '@type': 'Organization', name: 'B Solution', url: 'https://www.bsolution.eu' },
-    },
-    {
-      '@context': 'https://schema.org',
-      '@type': 'BreadcrumbList',
-      itemListElement: [
-        { '@type': 'ListItem', position: 1, name: ui.common.home, item: absoluteUrl(locale, '/') },
-        { '@type': 'ListItem', position: 2, name: sectionLabel, item: absoluteUrl(locale, `/${section}`) },
-        { '@type': 'ListItem', position: 3, name: copy.title, item: absoluteUrl(locale, currentPath) },
-      ],
-    },
-  ]
+  const url = absoluteUrl(locale, currentPath)
+  const pageInput = {
+    name: copy.title,
+    description: copy.metaDescription ?? copy.summary,
+    url,
+    locale,
+  }
+  const schema = {
+    '@context': 'https://schema.org',
+    '@graph': [
+      buildWebPageSchema(pageInput),
+      ...(entity.kind === 'caseStudy' ? [buildArticleSchema(pageInput)] : []),
+      ...(entity.kind === 'service' ? [buildServiceSchema(pageInput)] : []),
+      buildBreadcrumbSchema(url, [
+        { name: ui.common.home, item: absoluteUrl(locale, '/') },
+        { name: sectionLabel, item: absoluteUrl(locale, `/${section}`) },
+        { name: copy.title, item: url },
+      ]),
+    ],
+  }
 
   return (
     <>
@@ -130,7 +137,7 @@ export function AuthorityPage({ entity, locale, section }: { entity: Entity; loc
         </div>
       </footer>
 
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: serializeJsonLd(schema) }} />
     </>
   )
 }

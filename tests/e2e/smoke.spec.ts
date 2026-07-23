@@ -1,4 +1,12 @@
-import { expect, test } from '@playwright/test'
+import { expect, test, type Page } from '@playwright/test'
+
+async function structuredDataNodes(page: Page) {
+  const jsonLd = await page.locator('script[type="application/ld+json"]').allTextContents()
+
+  return jsonLd
+    .map((value) => JSON.parse(value))
+    .flatMap((value) => value['@graph'] ?? [value])
+}
 
 const standardRoutes = [
   { path: '/', lang: 'en', identity: 'Legal Executive Search for Law Firms and Corporate Legal Departments', home: '/', canonical: 'https://www.bsolution.eu' },
@@ -50,6 +58,138 @@ test('English Services has one visible Legal Executive Search heading', async ({
     .filter({ visible: true })
   await expect(serviceHeadings).toHaveCount(1)
   await expect(serviceHeadings.first()).toBeVisible()
+})
+
+test('structured data exposes one connected global entity graph', async ({ page }) => {
+  await page.goto('/')
+  const nodes = await structuredDataNodes(page)
+
+  await expect(page.locator('script[type="application/ld+json"]')).toHaveCount(1)
+  const organizations = nodes.filter((node) => node['@type'] === 'Organization')
+  expect(organizations).toHaveLength(1)
+  expect(organizations[0]).toMatchObject({
+    contactPoint: {
+      '@type': 'ContactPoint',
+      contactType: 'recruitment',
+    },
+  })
+  expect(JSON.stringify(organizations[0])).not.toContain('customer service')
+  expect(nodes.find((node) => node['@type'] === 'Person')).toMatchObject({
+    name: 'Lukáš Benátčan',
+    worksFor: { '@id': 'https://www.bsolution.eu/#organization' },
+  })
+  expect(nodes.find((node) => node['@type'] === 'ProfessionalService')).toBeTruthy()
+})
+
+const localizedServiceSchemas = [
+  {
+    path: '/services/legal-executive-search',
+    canonical: 'https://www.bsolution.eu/services/legal-executive-search',
+    breadcrumbs: [
+      'https://www.bsolution.eu/',
+      'https://www.bsolution.eu/services',
+      'https://www.bsolution.eu/services/legal-executive-search',
+    ],
+  },
+  {
+    path: '/cs/services/legal-executive-search',
+    canonical: 'https://www.bsolution.eu/cs/services/legal-executive-search',
+    breadcrumbs: [
+      'https://www.bsolution.eu/cs',
+      'https://www.bsolution.eu/cs/services',
+      'https://www.bsolution.eu/cs/services/legal-executive-search',
+    ],
+  },
+  {
+    path: '/de/services/legal-executive-search',
+    canonical: 'https://www.bsolution.eu/de/services/legal-executive-search',
+    breadcrumbs: [
+      'https://www.bsolution.eu/de',
+      'https://www.bsolution.eu/de/services',
+      'https://www.bsolution.eu/de/services/legal-executive-search',
+    ],
+  },
+  {
+    path: '/pl/services/legal-executive-search',
+    canonical: 'https://www.bsolution.eu/pl/services/legal-executive-search',
+    breadcrumbs: [
+      'https://www.bsolution.eu/pl',
+      'https://www.bsolution.eu/pl/services',
+      'https://www.bsolution.eu/pl/services/legal-executive-search',
+    ],
+  },
+] as const
+
+for (const route of localizedServiceSchemas) {
+  test(`${route.path} exposes localized Service and ordered Breadcrumb schemas`, async ({ page }) => {
+    const response = await page.goto(route.path)
+    expect(response?.status()).toBe(200)
+    const nodes = await structuredDataNodes(page)
+    const service = nodes.find((node) => node['@type'] === 'Service')
+    const breadcrumbs = nodes.find((node) => node['@type'] === 'BreadcrumbList')
+
+    expect(nodes.filter((node) => node['@type'] === 'Organization')).toHaveLength(1)
+    expect(nodes.find((node) => node['@type'] === 'WebPage')).toMatchObject({
+      url: route.canonical,
+    })
+    expect(service).toMatchObject({
+      '@id': `${route.canonical}#service`,
+      url: route.canonical,
+      provider: { '@id': 'https://www.bsolution.eu/#organization' },
+    })
+    expect(breadcrumbs.itemListElement.map((item: { position: number }) => item.position)).toEqual([1, 2, 3])
+    expect(breadcrumbs.itemListElement.map((item: { item: string }) => item.item)).toEqual(route.breadcrumbs)
+  })
+}
+
+test('real case studies retain Article structured data', async ({ page }) => {
+  await page.goto('/case-studies/general-counsel-fintech')
+  const nodes = await structuredDataNodes(page)
+
+  expect(nodes.find((node) => node['@type'] === 'Article')).toMatchObject({
+    headline: 'Appointing a General Counsel for a scaling fintech',
+    publisher: { '@id': 'https://www.bsolution.eu/#organization' },
+  })
+})
+
+for (const path of ['/positions/general-counsel-prague', '/cs/positions/general-counsel-prague']) {
+  test(`${path} omits JobPosting without a verified publication date`, async ({ page }) => {
+    const response = await page.goto(path)
+    expect(response?.status()).toBe(200)
+    const nodes = await structuredDataNodes(page)
+
+    expect(nodes.find((node) => node['@type'] === 'JobPosting')).toBeUndefined()
+  })
+}
+
+test('schema types stay within their intended page boundaries', async ({ page }) => {
+  const cases = [
+    { path: '/', absent: ['Service', 'Article', 'FAQPage'] },
+    { path: '/about', absent: ['Service', 'Article', 'FAQPage'] },
+    { path: '/clients', absent: ['Service', 'Article', 'FAQPage'] },
+    {
+      path: '/services/legal-executive-search',
+      absent: ['Article', 'FAQPage'],
+    },
+    {
+      path: '/case-studies/general-counsel-fintech',
+      absent: ['Service', 'FAQPage'],
+    },
+    {
+      path: '/positions/general-counsel-prague',
+      absent: ['Service', 'Article', 'JobPosting', 'FAQPage'],
+    },
+  ]
+
+  for (const entry of cases) {
+    const response = await page.goto(entry.path)
+    expect(response?.status()).toBe(200)
+    const nodes = await structuredDataNodes(page)
+
+    for (const type of entry.absent) {
+      expect(nodes.filter((node) => node['@type'] === type), `${entry.path} must not emit ${type}`).toHaveLength(0)
+    }
+  }
 })
 
 const homepageEvidence = [
