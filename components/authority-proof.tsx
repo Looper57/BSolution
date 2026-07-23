@@ -13,6 +13,9 @@ const organisations = [
   'Komerční banka',
   'LBBW Bank',
   'Orco Property Group',
+  'Wolf Theiss',
+  'KPMG Legal',
+  'DLA Piper',
 ] as const
 
 const labels = {
