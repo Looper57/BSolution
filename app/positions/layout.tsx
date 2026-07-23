@@ -5,6 +5,11 @@ export const metadata: Metadata = {
   description: 'Explore current legal executive positions and career opportunities. General Counsel, CLO, partner, and senior legal roles at law firms and corporations across Europe and the Middle East.',
   alternates: {
     canonical: 'https://www.bsolution.eu/positions',
+    languages: {
+      en: 'https://www.bsolution.eu/positions',
+      cs: 'https://www.bsolution.eu/cs/positions',
+      'x-default': 'https://www.bsolution.eu/positions',
+    },
   },
   openGraph: {
     title: 'Legal Job Opportunities | B Solution',

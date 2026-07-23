@@ -27,11 +27,17 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     description: job.shortDescription,
     alternates: {
       canonical: `https://www.bsolution.eu/positions/${resolvedParams.slug}`,
+      languages: {
+        en: `https://www.bsolution.eu/positions/${resolvedParams.slug}`,
+        cs: `https://www.bsolution.eu/cs/positions/${resolvedParams.slug}`,
+        'x-default': `https://www.bsolution.eu/positions/${resolvedParams.slug}`,
+      },
     },
     openGraph: {
       title: `${job.title} - ${job.location} | B Solution`,
       description: job.shortDescription,
       type: 'website',
+      locale: 'en_GB',
       url: `https://www.bsolution.eu/positions/${resolvedParams.slug}`,
       images: [
         {

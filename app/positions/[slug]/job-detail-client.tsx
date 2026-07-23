@@ -7,9 +7,11 @@ import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { Button } from '@/components/ui/button'
 import type { Job } from '@/lib/jobs-data'
+import { localizedPath } from '@/lib/i18n/config'
 
 function JobDetailContent({ job }: { job: Job }) {
-  const { language } = useLanguage()
+  const { language: locale } = useLanguage()
+  const language = locale === 'cs' ? 'cs' : 'en'
   
   const title = language === 'en' ? job.title : job.titleCs
   const location = language === 'en' ? job.location : job.locationCs
@@ -67,7 +69,7 @@ function JobDetailContent({ job }: { job: Job }) {
           <div className="max-w-[1440px] mx-auto px-8 lg:px-20">
             {/* Back Link */}
             <Link 
-              href="/positions"
+              href={localizedPath(locale, '/positions')}
               className="inline-flex items-center text-white/40 hover:text-gold text-[12px] uppercase tracking-[0.12em] mb-14 transition-colors"
             >
               <ArrowLeft className="h-4 w-4 mr-2" />
@@ -173,7 +175,7 @@ function JobDetailContent({ job }: { job: Job }) {
                       asChild 
                       className="w-full bg-gold hover:bg-gold-dark text-navy font-semibold h-14 text-[12px] uppercase tracking-[0.1em]"
                     >
-                      <Link href="/contact">
+                      <Link href={localizedPath(locale, '/contact')}>
                         {language === 'en' ? 'Apply / Request Details' : 'Projevit zájem / Získat detaily'}
                         <ChevronRight className="ml-2 h-4 w-4" />
                       </Link>
@@ -234,7 +236,7 @@ function JobDetailContent({ job }: { job: Job }) {
                 variant="outline"
                 className="border-navy text-navy hover:bg-navy hover:text-white h-14 px-10 text-[11px] uppercase tracking-[0.12em]"
               >
-                <Link href="/positions">
+                <Link href={localizedPath(locale, '/positions')}>
                   {language === 'en' ? 'View All Opportunities' : 'Zobrazit všechny příležitosti'}
                 </Link>
               </Button>
@@ -242,7 +244,7 @@ function JobDetailContent({ job }: { job: Job }) {
                 asChild 
                 className="bg-gold hover:bg-gold-dark text-navy h-14 px-10 text-[11px] uppercase tracking-[0.12em]"
               >
-                <Link href="/contact">
+                <Link href={localizedPath(locale, '/contact')}>
                   {language === 'en' ? 'Contact Us' : 'Kontaktujte nás'}
                 </Link>
               </Button>

@@ -1,6 +1,7 @@
 import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
+import { headers } from 'next/headers'
 import './globals.css'
 
 export const viewport: Viewport = {
@@ -53,7 +54,7 @@ export const metadata: Metadata = {
     title: 'B Solution | Legal Executive Search',
     description: 'Specialist legal executive search and recruitment across Europe and the Middle East. Trusted by leading law firms and corporations since 2007.',
     type: 'website',
-    locale: 'en',
+    locale: 'en_GB',
     siteName: 'B Solution',
     url: 'https://www.bsolution.eu',
     images: [
@@ -126,13 +127,17 @@ const professionalServiceSchema = {
   "parentOrganization": { "@id": "https://www.bsolution.eu/#organization" }
 }
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode
 }>) {
+  const pathname = (await headers()).get('x-bsolution-pathname') ?? '/'
+  const routeLocale = pathname.split('/')[1]
+  const lang = routeLocale === 'cs' || routeLocale === 'de' || routeLocale === 'pl' ? routeLocale : 'en'
+
   return (
-    <html lang="en" className={`${inter.variable} ${playfair.variable}`}>
+    <html lang={lang} className={`${inter.variable} ${playfair.variable}`}>
       <head>
         <script
           type="application/ld+json"

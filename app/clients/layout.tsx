@@ -1,11 +1,10 @@
 import type { Metadata } from 'next'
+import { buildAlternates } from '@/lib/i18n/config'
 
 export const metadata: Metadata = {
   title: 'For Clients',
   description: 'Partner with B Solution for your legal recruitment needs. We serve corporations seeking in-house counsel and law firms looking for partners and associates across Europe and the Middle East.',
-  alternates: {
-    canonical: 'https://www.bsolution.eu/clients',
-  },
+  alternates: buildAlternates('en', '/clients'),
   openGraph: {
     title: 'Legal Recruitment for Clients | B Solution',
     description: 'Executive search and recruitment services for corporations and law firms. General Counsel, CLO, partners, and senior legal appointments.',

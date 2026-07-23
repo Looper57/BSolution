@@ -12,6 +12,7 @@ export const metadata: Metadata = {
       'cs': 'https://www.bsolution.eu/cs',
       'de': 'https://www.bsolution.eu/de',
       'pl': 'https://www.bsolution.eu/pl',
+      'x-default': 'https://www.bsolution.eu/',
     },
   },
   openGraph: {

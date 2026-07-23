@@ -9,11 +9,17 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: 'https://www.bsolution.eu/cookies',
+    languages: {
+      en: 'https://www.bsolution.eu/cookies',
+      cs: 'https://www.bsolution.eu/cs/cookies',
+      'x-default': 'https://www.bsolution.eu/cookies',
+    },
   },
   openGraph: {
     title: 'Cookie Policy | B Solution',
     description: 'Learn how we use cookies and similar technologies on our website.',
     url: 'https://www.bsolution.eu/cookies',
+    locale: 'en_GB',
   },
 }
 

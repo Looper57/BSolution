@@ -1,11 +1,10 @@
 import type { Metadata } from 'next'
+import { buildAlternates } from '@/lib/i18n/config'
 
 export const metadata: Metadata = {
   title: 'About Us',
   description: 'B Solution is a boutique legal executive search firm with 17+ years of experience serving law firms and corporations across Europe and the Middle East. Learn about our values, approach, and commitment to excellence.',
-  alternates: {
-    canonical: 'https://www.bsolution.eu/about',
-  },
+  alternates: buildAlternates('en', '/about'),
   openGraph: {
     title: 'About B Solution | Legal Executive Search',
     description: 'Boutique legal recruitment firm with 17+ years of experience. Trusted partner for General Counsel, CLO, and senior legal appointments.',

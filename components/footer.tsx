@@ -6,6 +6,7 @@ import { useLanguage } from '@/lib/language-context'
 import { cn } from '@/lib/utils'
 import { Logo } from '@/components/logo'
 import { localizedPath } from '@/lib/i18n/config'
+import { legalPath } from '@/lib/routes'
 
 export function Footer() {
   const { language, setLanguage, t } = useLanguage()
@@ -167,10 +168,10 @@ export function Footer() {
             {t('footer.copyright')}
           </p>
           <div className="flex items-center gap-10 text-[12px] text-white/20 tracking-[0.02em]">
-            <Link href="/privacy" className="hover:text-white/45 transition-colors">
+            <Link href={legalPath(language, '/privacy')} className="hover:text-white/45 transition-colors">
               {t('footer.privacy')}
             </Link>
-            <Link href="/cookies" className="hover:text-white/45 transition-colors">
+            <Link href={legalPath(language, '/cookies')} className="hover:text-white/45 transition-colors">
               {t('footer.cookies')}
             </Link>
           </div>

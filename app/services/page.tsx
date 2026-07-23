@@ -2,30 +2,9 @@
 
 import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
-import { LanguageProvider, useLanguage } from '@/lib/language-context'
-import { Header } from '@/components/header'
-import { Footer } from '@/components/footer'
-
-function PageHeader() {
-  const { t } = useLanguage()
-  
-  return (
-    <section className="bg-navy pt-32 pb-20 lg:pt-40 lg:pb-28">
-      <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
-        <div className="max-w-3xl">
-          <div className="flex items-center gap-4 mb-8">
-            <div className="w-12 h-px bg-gold" />
-            <p className="eyebrow">{t('services.eyebrow')}</p>
-          </div>
-          <h1 className="text-white">{t('services.page.title')}</h1>
-          <p className="mt-8 text-[19px] text-white/55 leading-[1.75] max-w-2xl">
-            {t('services.page.subtitle')}
-          </p>
-        </div>
-      </div>
-    </section>
-  )
-}
+import { useLanguage } from '@/lib/language-context'
+import { AuthorityHub } from '@/components/authority-hub'
+import { getEntitiesForSection } from '@/lib/content'
 
 function IntroSection() {
   const { t } = useLanguage()
@@ -34,6 +13,9 @@ function IntroSection() {
     <section className="bg-cream section-padding-sm border-b border-gray-200">
       <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
         <div className="max-w-3xl mx-auto text-center">
+          <p className="mb-5 text-[15px] font-medium text-navy">
+            {t('services.page.subtitle')}
+          </p>
           <p className="text-[18px] text-gray-600 leading-[1.8]">
             {t('services.page.intro')}
           </p>
@@ -259,25 +241,24 @@ function CTASection() {
   )
 }
 
-function ServicesPage() {
+export function ServicesOverview() {
   return (
     <>
-      <Header />
-      <main>
-        <PageHeader />
-        <IntroSection />
-        <ServicesContent />
-        <CTASection />
-      </main>
-      <Footer />
+      <IntroSection />
+      <ServicesContent />
+      <CTASection />
     </>
   )
 }
 
 export default function Page() {
   return (
-    <LanguageProvider>
-      <ServicesPage />
-    </LanguageProvider>
+    <AuthorityHub
+      locale="en"
+      kind="service"
+      path="/services"
+      entities={getEntitiesForSection('services')}
+      supplement={<ServicesOverview />}
+    />
   )
 }

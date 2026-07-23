@@ -2,6 +2,7 @@
 
 import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
+import { isEnglishOnlyStaticPage, legalPath } from '@/lib/routes'
 
 type Language = 'en' | 'cs' | 'de' | 'pl'
 
@@ -52,7 +53,7 @@ const translations: Record<Language, Record<string, string>> = {
     'clients.lawfirm.eyebrow': 'Law Firms',
     'clients.lawfirm.title': 'Strengthening Your Partnership',
     'clients.lawfirm.desc': 'We support international and domestic law firms in lateral partner recruitment, associate hiring, and strategic team development.',
-    'clients.cta': 'Explore Our Client Services',
+    'home.clients.cta': 'Explore Our Client Services',
     
     // Services
     'services.eyebrow': 'What We Do',
@@ -229,7 +230,7 @@ const translations: Record<Language, Record<string, string>> = {
     'clients.lawfirm.eyebrow': 'Advokátní kanceláře',
     'clients.lawfirm.title': 'Posilování partnerství',
     'clients.lawfirm.desc': 'Podporujeme mezinárodní i tuzemské kanceláře při laterálním náboru partnerů, získávání advokátů a strategickém rozvoji týmů.',
-    'clients.cta': 'Prozkoumat služby pro klienty',
+    'home.clients.cta': 'Prozkoumat služby pro klienty',
     
     // Services
     'services.eyebrow': 'Naše služby',
@@ -406,7 +407,7 @@ const translations: Record<Language, Record<string, string>> = {
     'clients.lawfirm.eyebrow': 'Kanzleien',
     'clients.lawfirm.title': 'Stärkung Ihrer Partnerschaft',
     'clients.lawfirm.desc': 'Wir unterstützen internationale und nationale Kanzleien bei der lateralen Partnerrekrutierung, der Einstellung von Associates und der strategischen Teamentwicklung.',
-    'clients.cta': 'Unsere Mandantenservices entdecken',
+    'home.clients.cta': 'Unsere Mandantenservices entdecken',
     
     // Services
     'services.eyebrow': 'Unsere Leistungen',
@@ -583,7 +584,7 @@ const translations: Record<Language, Record<string, string>> = {
     'clients.lawfirm.eyebrow': 'Kancelarie Prawne',
     'clients.lawfirm.title': 'Wzmacnianie Partnerstwa',
     'clients.lawfirm.desc': 'Wspieramy międzynarodowe i krajowe kancelarie w lateralnej rekrutacji partnerów, zatrudnianiu prawników i strategicznym rozwoju zespołów.',
-    'clients.cta': 'Poznaj nasze usługi dla klientów',
+    'home.clients.cta': 'Poznaj nasze usługi dla klientów',
     
     // Services
     'services.eyebrow': 'Nasze Usługi',
@@ -733,14 +734,16 @@ const [language, setLanguageState] = useState<Language>(initialLanguage)
 
 useEffect(() => {
 setLanguageState(initialLanguage)
-document.documentElement.lang = language
-}, [initialLanguage, language])
+}, [initialLanguage])
 
 const setLanguage = useCallback((nextLanguage: Language) => {
 const segments = pathname.split('/').filter(Boolean)
 if (['cs', 'de', 'pl'].includes(segments[0])) segments.shift()
 const basePath = segments.length ? `/${segments.join('/')}` : '/'
-const nextPath = nextLanguage === 'en' ? basePath : `/${nextLanguage}${basePath === '/' ? '' : basePath}`
+const nextPath = basePath === '/privacy' || basePath === '/cookies'
+  ? legalPath(nextLanguage, basePath)
+  : isEnglishOnlyStaticPage(basePath) ? basePath
+  : nextLanguage === 'en' ? basePath : `/${nextLanguage}${basePath === '/' ? '' : basePath}`
 setLanguageState(nextLanguage)
 router.push(nextPath)
 }, [pathname, router])

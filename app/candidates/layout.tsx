@@ -1,11 +1,10 @@
 import type { Metadata } from 'next'
+import { buildAlternates } from '@/lib/i18n/config'
 
 export const metadata: Metadata = {
   title: 'For Candidates',
   description: 'Explore confidential legal career opportunities with B Solution. We connect legal professionals with senior roles at law firms and corporations across Europe and the Middle East.',
-  alternates: {
-    canonical: 'https://www.bsolution.eu/candidates',
-  },
+  alternates: buildAlternates('en', '/candidates'),
   openGraph: {
     title: 'Legal Career Opportunities | B Solution',
     description: 'Confidential legal career opportunities. General Counsel, partner, and senior legal roles at leading law firms and corporations.',

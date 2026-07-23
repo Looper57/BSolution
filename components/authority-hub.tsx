@@ -44,7 +44,7 @@ const hubCopy: Record<Locale, Record<EntityKind, { title: string; intro: string 
   },
 }
 
-export function AuthorityHub({ locale, kind, entities }: { locale: Locale; kind: EntityKind; path: string; entities: Entity[] }) {
+export function AuthorityHub({ locale, kind, entities, supplement }: { locale: Locale; kind: EntityKind; path: string; entities: Entity[]; supplement?: React.ReactNode }) {
   const copy = hubCopy[locale][kind]
   const ui = UI[locale]
   return (
@@ -77,6 +77,7 @@ export function AuthorityHub({ locale, kind, entities }: { locale: Locale; kind:
             </div>
           </div>
         </section>
+        {supplement}
       </main>
       <Footer />
     </LanguageProvider>

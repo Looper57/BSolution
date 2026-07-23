@@ -9,9 +9,11 @@ import { Footer } from '@/components/footer'
 import { Button } from '@/components/ui/button'
 import { cn } from '@/lib/utils'
 import { getAllJobs, type Job } from '@/lib/jobs-data'
+import { localizedPath } from '@/lib/i18n/config'
 
 function PageHeader() {
-  const { language } = useLanguage()
+  const { language: locale } = useLanguage()
+  const language = locale === 'cs' ? 'cs' : 'en'
   
   return (
     <section className="bg-navy pt-40 pb-20 lg:pt-48 lg:pb-28">
@@ -34,7 +36,8 @@ function PageHeader() {
 }
 
 function PositionCard({ job, featured = false }: { job: Job; featured?: boolean }) {
-  const { language } = useLanguage()
+  const { language: locale } = useLanguage()
+  const language = locale === 'cs' ? 'cs' : 'en'
   
   const title = language === 'en' ? job.title : job.titleCs
   const location = language === 'en' ? job.location : job.locationCs
@@ -43,7 +46,7 @@ function PositionCard({ job, featured = false }: { job: Job; featured?: boolean 
   
   if (featured) {
     return (
-      <Link href={`/positions/${job.slug}`} className="block bg-navy p-8 lg:p-10 group hover:bg-navy-light transition-colors">
+      <Link href={localizedPath(locale, `/positions/${job.slug}`)} className="block bg-navy p-8 lg:p-10 group hover:bg-navy-light transition-colors">
         <div className="flex items-center justify-between gap-4 mb-6">
           <span className="text-gold text-[10px] font-semibold tracking-[0.2em] uppercase">
             {job.type === 'inhouse' 
@@ -78,7 +81,7 @@ function PositionCard({ job, featured = false }: { job: Job; featured?: boolean 
   
   return (
     <Link 
-      href={`/positions/${job.slug}`}
+      href={localizedPath(locale, `/positions/${job.slug}`)}
       className="flex flex-col sm:flex-row sm:items-center justify-between gap-4 py-7 hover:bg-cream/50 transition-colors px-6 -mx-6 group"
     >
       <div className="flex-1">
@@ -114,7 +117,8 @@ function PositionCard({ job, featured = false }: { job: Job; featured?: boolean 
 }
 
 function PositionsListSection() {
-  const { language } = useLanguage()
+  const { language: locale } = useLanguage()
+  const language = locale === 'cs' ? 'cs' : 'en'
   const [typeFilter, setTypeFilter] = useState<'all' | 'lawfirm' | 'inhouse'>('all')
   const [locationFilter, setLocationFilter] = useState<string>('all')
   
@@ -300,7 +304,8 @@ function PositionsListSection() {
 }
 
 function ConfidentialSection() {
-  const { language } = useLanguage()
+  const { language: locale } = useLanguage()
+  const language = locale === 'cs' ? 'cs' : 'en'
   
   return (
     <section className="bg-cream py-24 lg:py-32">
@@ -322,7 +327,7 @@ function ConfidentialSection() {
               size="lg"
               className="bg-gold hover:bg-gold-dark text-navy font-semibold h-14 px-12"
             >
-              <Link href="/contact">
+              <Link href={localizedPath(locale, '/contact')}>
                 {language === 'en' ? 'Schedule a Confidential Discussion' : 'Domluvit důvěrnou konzultaci'}
                 <ChevronRight className="ml-2 h-4 w-4" />
               </Link>

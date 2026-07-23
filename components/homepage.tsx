@@ -6,6 +6,7 @@ import Image from 'next/image'
 import { ArrowRight, MapPin } from 'lucide-react'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
+import { legalPath } from '@/lib/routes'
 
 type Lang = 'en' | 'cs' | 'de' | 'pl'
 
@@ -471,7 +472,7 @@ export function Homepage({ lang }: HomepageProps) {
         {c.process && <ProcessSection content={c.process} />}
         <ClientsSection content={c.clients} langPrefix={langPrefix} />
         <DifferenceSection content={c.difference} />
-        {lang === 'en' && c.industries && <IndustriesSection content={c.industries} />}
+        {lang === 'en' && 'industries' in c && <IndustriesSection content={c.industries} />}
         <IntroSection content={c.intro} langPrefix={langPrefix} />
         <ServicesSection content={c.services} langPrefix={langPrefix} />
         <GeographySection content={c.geography} />
@@ -711,8 +712,8 @@ function FooterLocalized({ lang, langPrefix }: { lang: Lang, langPrefix: string 
         <div className="pt-10 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-6">
           <p className="text-white/20 text-[12px]">{f.copyright}</p>
           <div className="flex items-center gap-8">
-            <Link href={`${langPrefix}/privacy`} className="text-white/20 hover:text-white/40 text-[12px] transition-colors">{f.privacy}</Link>
-            <Link href={`${langPrefix}/cookies`} className="text-white/20 hover:text-white/40 text-[12px] transition-colors">{f.cookies}</Link>
+            <Link href={legalPath(lang, '/privacy')} className="text-white/20 hover:text-white/40 text-[12px] transition-colors">{f.privacy}</Link>
+            <Link href={legalPath(lang, '/cookies')} className="text-white/20 hover:text-white/40 text-[12px] transition-colors">{f.cookies}</Link>
           </div>
         </div>
       </div>
