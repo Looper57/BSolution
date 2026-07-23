@@ -732,7 +732,7 @@ function FooterLocalized({ lang, langPrefix }: { lang: Lang, langPrefix: string 
 // Individual section components
 function HeroSection({ content: c, langPrefix }: { content: typeof content.en.hero, langPrefix: string }) {
   return (
-    <section className="relative min-h-[100svh] flex flex-col overflow-hidden">
+    <section className="relative min-h-[100svh] pt-[73px] lg:pt-[89px] flex flex-col overflow-hidden">
       {/* Mobile hero - simplified solid background */}
       <div className="absolute inset-0 bg-navy md:hidden">
         {/* Logo hidden on mobile as per requirements */}
