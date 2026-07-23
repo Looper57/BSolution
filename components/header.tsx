@@ -11,6 +11,12 @@ export function Header() {
   const { language, setLanguage, t } = useLanguage()
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false)
   const [scrolled, setScrolled] = useState(false)
+  const homepageLabel = {
+    en: 'BSolution homepage',
+    cs: 'Domovská stránka BSolution',
+    de: 'BSolution Startseite',
+    pl: 'Strona główna BSolution',
+  }[language]
 
   const handleScroll = useCallback(() => {
     setScrolled(window.scrollY > 10)
@@ -33,7 +39,7 @@ export function Header() {
     <>
       <a 
         href="#main-content" 
-        className="sr-only focus:not-sr-only focus:absolute focus:top-4 focus:left-4 focus:z-[60] focus:px-4 focus:py-2 focus:bg-gold focus:text-navy focus:text-sm focus:font-medium"
+        className="pointer-events-none fixed left-4 top-4 z-[60] -translate-y-24 opacity-0 focus-visible:pointer-events-auto focus-visible:translate-y-0 focus-visible:opacity-100 focus-visible:px-4 focus-visible:py-2 focus-visible:bg-gold focus-visible:text-navy focus-visible:text-sm focus-visible:font-medium"
       >
         Skip to main content
       </a>
@@ -51,7 +57,11 @@ export function Header() {
       <div className="max-w-[1440px] mx-auto px-8 lg:px-20">
         <div className="flex items-center justify-between min-h-[72px] lg:min-h-[88px] py-4 lg:py-5">
           {/* Home link - minimal text since logo is in hero image */}
-          <Link href={localizedPath(language, '/')} className="flex items-center flex-shrink-0">
+          <Link
+            href={localizedPath(language, '/')}
+            aria-label={homepageLabel}
+            className="flex items-center flex-shrink-0"
+          >
             <span className="text-[14px] lg:text-[15px] font-serif text-gold tracking-[0.06em]">B Solution</span>
           </Link>
 

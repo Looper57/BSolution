@@ -2,7 +2,7 @@ import { HomepagePL } from '@/components/homepage-pl'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'B Solution | Legal Executive Search | Polska',
+  title: { absolute: 'B Solution | Legal Executive Search | Polska' },
   description: 'Zatrudnij Head of Legal lub General Counsel, który naprawdę potrafi zarządzać. Wyspecjalizowana firma executive search dla sektora prawnego w Europie i na Bliskim Wschodzie od 2007 roku.',
   alternates: {
     canonical: 'https://www.bsolution.eu/pl',

@@ -158,7 +158,12 @@ function ServicesContent() {
               <div className="lg:col-span-5">
                 <span className="text-gold text-[13px] font-semibold tracking-[0.15em]">{service.num}</span>
                 <div className="w-full h-px bg-gray-200 my-6" />
-                <h2 className="text-navy">{service.title}</h2>
+                <h2
+                  aria-hidden={language === 'en' && index === 0 ? true : undefined}
+                  className={language === 'en' && index === 0 ? 'invisible text-navy' : 'text-navy'}
+                >
+                  {service.title}
+                </h2>
                 <p className="mt-6 text-gray-500 text-[17px] leading-[1.8]">
                   {service.description}
                 </p>

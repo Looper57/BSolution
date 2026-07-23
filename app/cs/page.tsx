@@ -2,7 +2,7 @@ import { HomepageCS } from '@/components/homepage-cs'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'B Solution | Legal Executive Search | Najděte právního lídra',
+  title: { absolute: 'B Solution | Legal Executive Search | Najděte právního lídra' },
   description: 'Vyhledejte Head of Legal nebo General Counsel, který skutečně vede. Specializovaná firma pro executive search v právním sektoru působící v Evropě a na Blízkém východě od roku 2007.',
   alternates: {
     canonical: 'https://www.bsolution.eu/cs',

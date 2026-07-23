@@ -2,7 +2,7 @@ import { Homepage } from '@/components/homepage'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'B Solution | Legal Executive Search',
+  title: { absolute: 'B Solution | Legal Executive Search' },
   description: 'Executive search for legal leaders. Specialist legal executive search firm serving law firms and corporations across Europe and the Middle East since 2007.',
   keywords: ['legal executive search', 'General Counsel recruitment', 'CLO search', 'Head of Legal hiring', 'law firm partner recruitment'],
   alternates: {

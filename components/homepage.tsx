@@ -527,12 +527,19 @@ function HeaderLocalized({ lang, nav, langPrefix }: { lang: Lang, nav: typeof na
   ]
 
   return (
-    <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-navy/98 backdrop-blur-md" : "bg-transparent"}`}>
+    <>
+      <a
+        href="#main-content"
+        className="pointer-events-none fixed left-4 top-4 z-[60] -translate-y-24 opacity-0 focus-visible:pointer-events-auto focus-visible:translate-y-0 focus-visible:opacity-100 focus-visible:px-4 focus-visible:py-2 focus-visible:bg-gold focus-visible:text-navy focus-visible:text-sm focus-visible:font-medium"
+      >
+        Skip to main content
+      </a>
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-500 ${scrolled ? "bg-navy/98 backdrop-blur-md" : "bg-transparent"}`}>
       <div className="h-px bg-gradient-to-r from-transparent via-gold/50 to-transparent" />
       
       <div className="max-w-[1440px] mx-auto px-8 lg:px-20">
         <div className="flex items-center justify-between min-h-[72px] lg:min-h-[88px] py-4 lg:py-5">
-          <Link href={langPrefix || '/'} className="flex items-center flex-shrink-0">
+          <Link href={langPrefix || '/'} aria-label={lang === 'en' ? 'BSolution homepage' : lang === 'cs' ? 'Domovská stránka BSolution' : lang === 'de' ? 'BSolution Startseite' : 'Strona główna BSolution'} className="flex items-center flex-shrink-0">
             <span className="text-[14px] lg:text-[15px] font-serif text-gold tracking-[0.06em]">B Solution</span>
           </Link>
 
@@ -627,7 +634,8 @@ function HeaderLocalized({ lang, nav, langPrefix }: { lang: Lang, nav: typeof na
           </div>
         </div>
       )}
-    </header>
+      </header>
+    </>
   )
 }
 
