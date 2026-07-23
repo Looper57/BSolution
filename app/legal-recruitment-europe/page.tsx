@@ -39,7 +39,7 @@ function IntroSection() {
       <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-[18px] text-gray-600 leading-[1.8]">
-            B Solution is a boutique legal recruitment consultancy with deep expertise across European legal markets. From our headquarters in Prague, we serve multinational corporations, international law firms, and regional businesses seeking exceptional legal talent. Our network spans the Czech Republic, Germany, Austria, Poland, Switzerland, the UK, and extends to dynamic markets in the Middle East including Dubai and the UAE.
+            This page focuses on cross-border Legal Executive Search across Europe. From Prague, B Solution supports corporate legal departments, financial institutions and international law firms with assignments that require coordinated market knowledge across jurisdictions. Selected projects also extend into the Middle East.
           </p>
         </div>
       </div>
@@ -52,7 +52,7 @@ function WhySection() {
     {
       icon: MapPin,
       title: 'Pan-European Network',
-      description: 'Established relationships with legal professionals across 15+ European jurisdictions, providing genuine market access that generalist recruiters cannot match.'
+      description: 'Established relationships across selected European legal markets support searches that extend beyond a single jurisdiction.'
     },
     {
       icon: Users,
@@ -66,8 +66,8 @@ function WhySection() {
     },
     {
       icon: Award,
-      title: 'Proven Track Record',
-      description: 'Over 17 years of successful placements for Fortune 500 companies, Magic Circle law firms, and leading regional practices.'
+      title: 'Since 2007',
+      description: 'B Solution has conducted Executive Search for international law firms, corporate legal departments and financial institutions since 2007.'
     }
   ]
   
@@ -249,7 +249,7 @@ function CTASection() {
               Start Your European Legal Search
             </h2>
             <p className="text-gray-600 text-[17px] leading-[1.8] mb-8">
-              Whether you are recruiting a General Counsel in Frankfurt, building an in-house team in Prague, or seeking partners for your London office, B Solution provides the market access and expertise to deliver exceptional results.
+              Whether you are recruiting a General Counsel, building an in-house legal team or seeking law firm partners across borders, B Solution provides a confidential and coordinated search process.
             </p>
             <div className="space-y-4">
               <Link href="/legal-executive-search" className="flex items-center text-gold hover:text-gold/80 text-[14px] font-medium">

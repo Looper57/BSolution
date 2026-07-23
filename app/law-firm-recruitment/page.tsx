@@ -25,7 +25,7 @@ function PageHeader() {
             Law Firm Recruitment
           </h1>
           <p className="mt-8 text-[19px] text-white/55 leading-[1.75] max-w-2xl">
-            Lateral partner recruitment, practice group development, and strategic talent acquisition for law firms across Europe. Building stronger practices through exceptional people.
+            Partner recruitment, practice-group development and strategic legal talent search for international and regional law firms across Europe.
           </p>
         </div>
       </div>
@@ -39,7 +39,7 @@ function IntroSection() {
       <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-[18px] text-gray-600 leading-[1.8]">
-            Law firm recruitment is fundamentally different from corporate hiring. Partner economics, practice development priorities, competitive dynamics, and the intensely relationship-driven nature of private practice demand specialized expertise. B Solution works exclusively with law firms and legal professionals, giving us unmatched insight into what makes lateral moves successful. From Magic Circle firms to leading regional practices, we have helped firms across Europe strengthen their teams and expand their capabilities through strategic talent acquisition.
+            This page focuses on private-practice mandates: partner recruitment, succession appointments, team moves and practice development. B Solution has supported international and regional law firms through confidential Executive Search assignments since 2007.
           </p>
         </div>
       </div>
@@ -66,8 +66,8 @@ function WhySection() {
     },
     {
       icon: Handshake,
-      title: 'Long-term Partnership',
-      description: 'Many of our law firm clients have worked with us for over a decade. We invest in understanding your firm and culture, improving our service over time.'
+      title: 'Mandate Context',
+      description: 'We invest in understanding the firm, partnership structure, practice priorities and cultural context before approaching the market.'
     }
   ]
   

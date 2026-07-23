@@ -24,44 +24,8 @@ function JobDetailContent({ job }: { job: Job }) {
     ? (language === 'en' ? 'Corporate / In-house' : 'Korporát / In-house')
     : (language === 'en' ? 'Law Firm' : 'Advokátní kancelář')
   
-  // JobPosting structured data
-  const jobPostingSchema = {
-    "@context": "https://schema.org",
-    "@type": "JobPosting",
-    "title": title,
-    "description": description,
-    "identifier": {
-      "@type": "PropertyValue",
-      "name": "B Solution",
-      "value": job.referenceCode
-    },
-    "datePosted": "2024-01-01",
-    "employmentType": "FULL_TIME",
-    "hiringOrganization": {
-      "@type": "Organization",
-      "name": "B Solution s.r.o.",
-      "sameAs": "https://www.bsolution.eu",
-      "logo": "https://www.bsolution.eu/images/logo.png"
-    },
-    "jobLocation": {
-      "@type": "Place",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": job.location,
-        "addressCountry": job.location === "Prague" ? "CZ" : job.location === "Dubai" ? "AE" : job.location === "London" ? "GB" : job.location === "Vienna" ? "AT" : job.location === "Munich" ? "DE" : job.location === "Warsaw" ? "PL" : job.location === "Budapest" ? "HU" : "EU"
-      }
-    },
-    "industry": industry,
-    "occupationalCategory": "Legal"
-  }
-  
   return (
     <>
-      {/* JobPosting Structured Data */}
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(jobPostingSchema) }}
-      />
       <Header />
       <main>
         {/* Hero Section */}

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter, Playfair_Display } from 'next/font/google'
 import { Analytics } from '@vercel/analytics/next'
 import { headers } from 'next/headers'
+import { globalStructuredData, serializeJsonLd } from '@/lib/structured-data'
 import './globals.css'
 
 export const viewport: Viewport = {
@@ -81,52 +82,6 @@ export const metadata: Metadata = {
   },
 }
 
-const organizationSchema = {
-  "@context": "https://schema.org",
-  "@type": "Organization",
-  "@id": "https://www.bsolution.eu/#organization",
-  "name": "B Solution s.r.o.",
-  "url": "https://www.bsolution.eu",
-  "logo": "https://www.bsolution.eu/images/logo.png",
-  "description": "Specialist legal executive search firm serving law firms and corporations across Europe and the Middle East since 2007.",
-  "foundingDate": "2007",
-  "address": {
-    "@type": "PostalAddress",
-    "addressLocality": "Prague",
-    "addressCountry": "CZ"
-  },
-  "contactPoint": {
-    "@type": "ContactPoint",
-    "telephone": "+420-272-681-206",
-    "contactType": "recruitment",
-    "email": "info@bsolution.eu",
-    "availableLanguage": ["English", "Czech"]
-  },
-  "sameAs": [
-    "https://www.linkedin.com/company/bsolution"
-  ]
-}
-
-const websiteSchema = {
-  "@context": "https://schema.org",
-  "@type": "WebSite",
-  "@id": "https://www.bsolution.eu/#website",
-  "name": "B Solution",
-  "url": "https://www.bsolution.eu",
-  "publisher": { "@id": "https://www.bsolution.eu/#organization" }
-}
-
-const professionalServiceSchema = {
-  "@context": "https://schema.org",
-  "@type": "ProfessionalService",
-  "@id": "https://www.bsolution.eu/#professional-service",
-  "name": "B Solution",
-  "url": "https://www.bsolution.eu",
-  "description": "Specialist legal executive search serving law firms and corporations across Europe and the Middle East.",
-  "areaServed": ["Europe", "Middle East"],
-  "parentOrganization": { "@id": "https://www.bsolution.eu/#organization" }
-}
-
 export default async function RootLayout({
   children,
 }: Readonly<{
@@ -141,7 +96,7 @@ export default async function RootLayout({
       <head>
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify([organizationSchema, websiteSchema, professionalServiceSchema]) }}
+          dangerouslySetInnerHTML={{ __html: serializeJsonLd(globalStructuredData) }}
         />
       </head>
       <body className="font-sans antialiased">

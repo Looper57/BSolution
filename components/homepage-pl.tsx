@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Check } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { AuthorityProof } from '@/components/authority-proof'
 
 // Complete Polish content matching homepage structure
 const content = {
@@ -17,8 +18,8 @@ const content = {
     cta: 'Kontakt',
   },
   hero: {
-    headline: 'Executive Search dla liderów prawnych',
-    subheadline: 'Uniknij kosztownych błędów rekrutacyjnych, które spowalniają rozwój Twojej firmy. Dostarczamy sprawdzonych liderów prawnych do wymagających środowisk międzynarodowych.',
+    headline: 'Butikowy Legal Executive Search dla kancelarii prawnych i korporacyjnych działów prawnych',
+    subheadline: 'Pozyskujemy prawników, specjalistów compliance oraz kadrę zarządzającą dzięki dogłębnej znajomości rynku, dyskretnym poszukiwaniom bezpośrednim i międzynarodowemu zasięgowi w Europie oraz na Bliskim Wschodzie.',
     trustLine1: 'Od 2007 roku zaufały nam działy prawne firm oraz wiodące kancelarie w całej Europie.',
     trustLine2: 'Każde poszukiwanie prowadzimy rzetelnie, dyskretnie i zgodnie ze specyfiką mandatu.',
     ctaPrimary: 'Omów swoje potrzeby (poufnie)',
@@ -27,7 +28,7 @@ const content = {
     eyebrow: 'Zaufanie',
     headline: 'Zaufanie liderów prawnych w całej Europie',
     columns: [
-      { title: 'Ponad 17 lat doświadczenia', desc: 'Doświadczenie na rynkach europejskich i międzynarodowych' },
+      { title: 'Od 2007 roku', desc: 'Doświadczenie na rynkach europejskich i międzynarodowych' },
       { title: 'Międzynarodowe rekrutacje', desc: 'General Counsel, Head of Legal i Legal Director' },
       { title: 'Dyskretne procesy', desc: 'Poufne projekty dla kluczowych stanowisk' },
     ],
@@ -145,6 +146,7 @@ export function HomepagePL() {
         <HeroSection />
         <TrustSection />
         <SegmentsSection />
+        <AuthorityProof locale="pl" />
         <WhyUsSection />
         <AboutSection />
         <ServicesSection />

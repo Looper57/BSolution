@@ -4,6 +4,7 @@ import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, Check } from 'lucide-react'
 import { useState, useEffect } from 'react'
+import { AuthorityProof } from '@/components/authority-proof'
 
 // Complete Czech content matching English homepage structure
 const content = {
@@ -17,17 +18,17 @@ const content = {
     cta: 'Kontaktujte nás',
   },
   hero: {
-    headline: 'Executive Search pro právní lídry',
-    subheadline: 'Vyhněte se nákladným chybám při náboru, které zpomalují váš byznys. Dodáváme prověřené právní lídry pro komplexní mezinárodní prostředí.',
+    headline: 'Butikový Legal Executive Search pro advokátní kanceláře a korporátní právní oddělení',
+    subheadline: 'Vyhledáváme právní, compliance a vedoucí odborníky prostřednictvím detailní znalosti trhu, diskrétního přímého oslovení a mezinárodního dosahu v Evropě a na Blízkém východě.',
     trustLine1: 'Důvěřují nám korporátní právní týmy a přední advokátní kanceláře napříč Evropou již od roku 2007.',
     trustLine2: 'Každé vyhledávání vedeme důsledně, diskrétně a podle konkrétního mandátu.',
-    ctaPrimary: 'Nezávazně probrat vaše potřeby (důvěrně)',
+    ctaPrimary: 'Probrat vyhledávání',
   },
   trust: {
     eyebrow: 'Důvěra',
     headline: 'Důvěřují nám právní lídři napříč Evropou',
     columns: [
-      { title: 'Více než 17 let zkušeností', desc: 'Působíme na právním trhu ve střední Evropě, západní Evropě i na Blízkém východě.' },
+      { title: 'Od roku 2007', desc: 'Působíme na právním trhu ve střední Evropě, západní Evropě i na Blízkém východě.' },
       { title: 'Mezinárodní obsazení pozic', desc: 'General Counsel, Head of Legal, Legal Director a další seniorní právní role.' },
       { title: 'Diskrétní a cílené vyhledávání', desc: 'Důvěrná zadání pro špičkové klienty a strategické pozice.' },
     ],
@@ -144,6 +145,7 @@ export function HomepageCS() {
         <HeroSection />
         <TrustSection />
         <SegmentsSection />
+        <AuthorityProof locale="cs" />
         <WhyUsSection />
         <AboutSection />
         <ServicesSection />

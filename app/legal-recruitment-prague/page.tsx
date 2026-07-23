@@ -25,7 +25,7 @@ function PageHeader() {
             Legal Recruitment Prague
           </h1>
           <p className="mt-8 text-[19px] text-white/55 leading-[1.75] max-w-2xl">
-            The leading legal recruitment consultancy in Prague and the Czech Republic. Deep local expertise combined with international reach for corporations and law firms.
+            Prague-based Legal Executive Search for corporate legal departments, financial institutions and law firms in the Czech market.
           </p>
         </div>
       </div>
@@ -39,7 +39,7 @@ function IntroSection() {
       <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-[18px] text-gray-600 leading-[1.8]">
-            Headquartered in Prague since 2007, B Solution has established itself as the premier legal recruitment consultancy serving the Czech market. Our unrivalled understanding of the local legal landscape, combined with genuine international reach, makes us the partner of choice for multinational corporations establishing or expanding Czech legal functions, international law firms entering or growing in the market, and leading domestic organizations seeking exceptional legal talent. We recruit across all levels, from first legal hires to General Counsel appointments.
+            This page focuses on Legal Executive Search in Prague and the Czech Republic. Headquartered in Prague since 2007, B Solution supports corporate legal departments, financial institutions and law firms with appointments ranging from specialist legal roles to partners and General Counsel.
           </p>
         </div>
       </div>
@@ -51,13 +51,13 @@ function WhySection() {
   const reasons = [
     {
       icon: MapPin,
-      title: 'Local Market Leadership',
-      description: 'Based in Prague, we have seventeen years of continuous presence in the Czech legal market. No other specialist legal recruiter matches our depth of local relationships and market knowledge.'
+      title: 'Established in Prague',
+      description: 'B Solution has operated from Prague since 2007, supporting legal appointments in the Czech market and cross-border assignments.'
     },
     {
       icon: Building2,
-      title: 'Complete Market Coverage',
-      description: 'We work with international law firms, leading domestic practices, multinational corporations, and Czech enterprises. Our network spans the entire Czech legal profession.'
+      title: 'Legal-Market Focus',
+      description: 'We work with international law firms, domestic practices, multinational corporations, financial institutions and Czech enterprises.'
     },
     {
       icon: Users,
@@ -66,8 +66,8 @@ function WhySection() {
     },
     {
       icon: Award,
-      title: 'Proven Track Record',
-      description: 'Hundreds of successful placements for clients including Fortune 500 companies, Magic Circle law firms, and market-leading Czech corporations.'
+      title: 'Executive Search Experience',
+      description: 'Previous cooperation includes international law firms and corporate organisations across legal and leadership appointments.'
     }
   ]
   
@@ -274,7 +274,7 @@ function CTASection() {
               Start Your Czech Legal Search
             </h2>
             <p className="text-gray-600 text-[17px] leading-[1.8] mb-8">
-              Whether you are establishing your first Czech legal function, expanding an existing team, or seeking lateral talent for your law firm, B Solution provides unmatched local expertise and proven execution capability.
+              Whether you are establishing your first Czech legal function, expanding an existing team or seeking lateral talent for your law firm, B Solution provides a focused and confidential search process.
             </p>
             <div className="space-y-4">
               <Link href="/legal-recruitment-europe" className="flex items-center text-gold hover:text-gold/80 text-[14px] font-medium">
