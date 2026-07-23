@@ -1,0 +1,205 @@
+@import 'tailwindcss';
+
+@custom-variant dark (&:is(.dark *));
+
+:root {
+  /* B Solution — Premium Legal Executive Search Palette */
+  --navy: #0F1B2D;
+  --navy-deep: #0A1220;
+  --navy-light: #14243A;
+  --white: #FFFFFF;
+  --off-white: #FAFAF8;
+  --cream: #F5F3EE;
+  --gold: #B08D57;
+  --gold-light: #C9A66B;
+  --gold-dark: #96783F;
+  --charcoal: #1C1F26;
+  --charcoal-light: #2A2E38;
+  --gray-100: #F7F6F3;
+  --gray-200: #ECEAE5;
+  --gray-300: #D8D5CE;
+  --gray-400: #A09B91;
+  --gray-500: #6B665C;
+  --gray-600: #4A463E;
+  
+  /* Semantic tokens */
+  --background: var(--white);
+  --foreground: var(--charcoal);
+  --card: var(--white);
+  --card-foreground: var(--charcoal);
+  --popover: var(--white);
+  --popover-foreground: var(--charcoal);
+  --primary: var(--navy);
+  --primary-foreground: var(--white);
+  --secondary: var(--cream);
+  --secondary-foreground: var(--navy);
+  --muted: var(--gray-200);
+  --muted-foreground: var(--gray-500);
+  --accent: var(--gold);
+  --accent-foreground: var(--white);
+  --destructive: #991B1B;
+  --destructive-foreground: var(--white);
+  --border: var(--gray-200);
+  --input: var(--gray-200);
+  --ring: var(--gold);
+  --radius: 0;
+}
+
+@theme inline {
+  --font-sans: 'Inter', 'Inter Fallback', system-ui, sans-serif;
+  --font-serif: 'Playfair Display', 'Playfair Display Fallback', Georgia, serif;
+  --font-mono: 'Geist Mono', 'Geist Mono Fallback', monospace;
+  
+  /* Colors */
+  --color-navy: var(--navy);
+  --color-navy-deep: var(--navy-deep);
+  --color-navy-light: var(--navy-light);
+  --color-off-white: var(--off-white);
+  --color-cream: var(--cream);
+  --color-gold: var(--gold);
+  --color-gold-light: var(--gold-light);
+  --color-gold-dark: var(--gold-dark);
+  --color-charcoal: var(--charcoal);
+  --color-charcoal-light: var(--charcoal-light);
+  --color-gray-100: var(--gray-100);
+  --color-gray-200: var(--gray-200);
+  --color-gray-300: var(--gray-300);
+  --color-gray-400: var(--gray-400);
+  --color-gray-500: var(--gray-500);
+  --color-gray-600: var(--gray-600);
+  
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-card: var(--card);
+  --color-card-foreground: var(--card-foreground);
+  --color-popover: var(--popover);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-primary: var(--primary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-secondary: var(--secondary);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-muted: var(--muted);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-accent: var(--accent);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-destructive: var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border: var(--border);
+  --color-input: var(--input);
+  --color-ring: var(--ring);
+  
+  --radius-sm: 0;
+  --radius-md: 0;
+  --radius-lg: 0;
+  --radius-xl: 0;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground antialiased;
+    font-feature-settings: "cv11", "ss01";
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeSpeed;
+  }
+  
+  /* Premium typography hierarchy */
+  h1 {
+    @apply font-serif font-normal leading-[1.05] tracking-[-0.03em];
+    font-size: clamp(2.75rem, 5vw + 1rem, 4.5rem);
+  }
+  
+  h2 {
+    @apply font-serif font-normal leading-[1.1] tracking-[-0.02em];
+    font-size: clamp(2rem, 3vw + 0.75rem, 3.25rem);
+  }
+  
+  h3 {
+    @apply font-serif font-normal leading-[1.15] tracking-[-0.01em];
+    font-size: clamp(1.5rem, 2vw + 0.5rem, 2rem);
+  }
+  
+  h4 {
+    @apply font-sans font-medium leading-snug tracking-[-0.01em];
+    font-size: clamp(1.125rem, 1vw + 0.5rem, 1.375rem);
+  }
+  
+  p {
+    @apply text-[17px] leading-[1.75] tracking-[0.005em];
+  }
+}
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Selection */
+::selection {
+  background-color: var(--gold);
+  color: var(--white);
+}
+
+/* Premium button base */
+.btn-primary {
+  @apply inline-flex items-center justify-center bg-gold text-white font-medium text-[13px] uppercase tracking-[0.1em] px-10 py-5 transition-colors;
+}
+.btn-primary:hover {
+  background-color: var(--gold-dark);
+}
+
+.btn-outline {
+  @apply inline-flex items-center justify-center border text-[13px] font-medium uppercase tracking-[0.1em] px-10 py-5 transition-colors;
+}
+
+/* Eyebrow text */
+.eyebrow {
+  @apply text-gold text-[11px] font-semibold uppercase tracking-[0.25em];
+}
+
+/* Subtle divider */
+.divider {
+  @apply w-12 h-px bg-gold;
+}
+
+/* Section spacing - generous whitespace */
+.section-padding {
+  @apply py-24 md:py-32 lg:py-40;
+  contain: layout style;
+}
+
+.section-padding-sm {
+  @apply py-16 md:py-20 lg:py-24;
+  contain: layout style;
+}
+
+/* Simplified gradient overlays */
+.gradient-navy {
+  background-color: var(--navy);
+}
+
+/* Texture class - simplified for performance */
+.texture-marble {
+  position: relative;
+}
+
+/* Premium card hover */
+.card-premium {
+  @apply transition-shadow;
+  contain: layout style;
+}
+.card-premium:hover {
+  box-shadow: 0 10px 30px -10px rgba(15, 27, 45, 0.1);
+}
+
+/* Performance optimizations */
+@media (prefers-reduced-motion: no-preference) {
+  .transition-colors,
+  .transition-shadow,
+  .transition-opacity {
+    transition-duration: 150ms;
+  }
+}
