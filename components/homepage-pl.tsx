@@ -281,7 +281,7 @@ function HeroSection() {
       
       <div className="relative w-full z-20 pb-16 lg:pb-24">
         <div className="max-w-[1440px] mx-auto px-8 lg:px-20">
-          <div className="max-w-lg">
+          <div className="max-w-lg translate-y-[60px]">
             <h1 className="text-white font-serif text-[clamp(1.5rem,3vw,2rem)] font-normal leading-[1.25] tracking-[-0.01em]">
               {c.headline}
             </h1>
