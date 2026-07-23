@@ -2,7 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
-import { MapPin, Phone, Mail, Linkedin, Send, CheckCircle, AlertCircle } from 'lucide-react'
+import { MapPin, Phone, Mail, Linkedin, Send, CheckCircle } from 'lucide-react'
 import { LanguageProvider, useLanguage } from '@/lib/language-context'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
@@ -152,7 +152,7 @@ function ContactForm() {
       if (widgetIdRef.current && window.turnstile) {
         window.turnstile.reset(widgetIdRef.current)
       }
-    } catch (err) {
+    } catch {
       setError(
         language === 'en'
           ? 'Failed to send message. Please try again or contact us directly at info@bsolution.eu'

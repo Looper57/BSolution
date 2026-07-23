@@ -39,7 +39,7 @@ function IntroSection() {
       <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-[18px] text-gray-600 leading-[1.8]">
-            The modern in-house counsel role has evolved dramatically. Today's corporate lawyers must be strategic advisors, risk managers, and business partners while maintaining the highest standards of legal excellence. Finding professionals who excel across all these dimensions requires specialist expertise and deep market knowledge. B Solution has spent over seventeen years identifying, assessing, and placing in-house legal professionals across Europe, from Legal Counsel to General Counsel and Chief Legal Officer appointments.
+            The modern in-house counsel role has evolved dramatically. Today&apos;s corporate lawyers must be strategic advisors, risk managers, and business partners while maintaining the highest standards of legal excellence. Finding professionals who excel across all these dimensions requires specialist expertise and deep market knowledge. B Solution has spent over seventeen years identifying, assessing, and placing in-house legal professionals across Europe, from Legal Counsel to General Counsel and Chief Legal Officer appointments.
           </p>
         </div>
       </div>

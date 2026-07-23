@@ -2,7 +2,7 @@
 
 import Link from 'next/link'
 import Image from 'next/image'
-import { ArrowRight, Check, Shield, Users, Target, AlertTriangle, Clock } from 'lucide-react'
+import { ArrowRight, Check, Clock } from 'lucide-react'
 import { LanguageProvider, useLanguage } from '@/lib/language-context'
 
 function HireLegalLeaderContent() {

@@ -4,8 +4,6 @@ import { useState, useEffect } from 'react'
 import Link from 'next/link'
 import Image from 'next/image'
 import { ArrowRight, MapPin } from 'lucide-react'
-import { Header } from '@/components/header'
-import { Footer } from '@/components/footer'
 import { legalPath } from '@/lib/routes'
 
 type Lang = 'en' | 'cs' | 'de' | 'pl'

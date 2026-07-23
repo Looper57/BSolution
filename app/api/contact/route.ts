@@ -119,10 +119,20 @@ export async function POST(req: Request) {
 
     console.log("[v0] Email sent successfully");
     return Response.json({ success: true });
-  } catch (error: any) {
+  } catch (error: unknown) {
     console.error("[v0] API error:", error);
+    const message =
+      error instanceof Error && error.message.length > 0
+        ? error.message
+        : typeof error === "object" &&
+            error !== null &&
+            "message" in error &&
+            typeof error.message === "string" &&
+            error.message.length > 0
+          ? error.message
+          : "Unknown error";
     return Response.json(
-      { success: false, error: error?.message || "Unknown error" },
+      { success: false, error: message },
       { status: 500 }
     );
   }

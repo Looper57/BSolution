@@ -733,6 +733,8 @@ const initialLanguage: Language = ['cs', 'de', 'pl'].includes(localeFromPath) ? 
 const [language, setLanguageState] = useState<Language>(initialLanguage)
 
 useEffect(() => {
+// Synchronize context after client-side navigation changes the locale segment.
+// eslint-disable-next-line react-hooks/set-state-in-effect
 setLanguageState(initialLanguage)
 }, [initialLanguage])
 

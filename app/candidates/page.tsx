@@ -42,7 +42,7 @@ function IntroSection() {
 }
 
 function ValuePropositionSection() {
-  const { language, t } = useLanguage()
+  const { language } = useLanguage()
   
   const features = language === 'en' ? [
     {
