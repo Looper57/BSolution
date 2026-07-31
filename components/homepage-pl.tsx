@@ -30,7 +30,7 @@ const content = {
     columns: [
       { title: 'Od 2007 roku', desc: 'Doświadczenie na rynkach europejskich i międzynarodowych' },
       { title: 'Międzynarodowe rekrutacje', desc: 'General Counsel, Head of Legal i Legal Director' },
-      { title: 'Dyskretne procesy', desc: 'Poufne projekty dla kluczowych stanowisk' },
+      { title: 'Dyskretne poszukiwania', desc: 'Poufne projekty dotyczące kluczowych stanowisk' },
     ],
   },
   segments: {
@@ -69,8 +69,8 @@ const content = {
     intro: 'Nasze usługi kierujemy do organizacji, które rozumieją wartość trafnej rekrutacji na poziomie senior za pierwszym razem.',
     cta: 'Skontaktuj się',
     items: [
-      { num: '01', title: 'Executive Search', desc: 'Retained search na pozycje General Counsel, Chief Legal Officer, Head of Legal i seniornych prawników in-house.' },
-      { num: '02', title: 'Rekrutacja prawników', desc: 'Wyszukiwanie partnerów, counsel, senior prawników i liderów praktyk w wiodących kancelariach.' },
+      { num: '01', title: 'Executive Search', desc: 'Retained Search dla General Counsel, Chief Legal Officer, Head of Legal oraz doświadczonych prawników wewnętrznych.' },
+      { num: '02', title: 'Rekrutacja prawników', desc: 'Poszukiwanie partnerów, counsel, doświadczonych prawników i liderów praktyk w wiodących kancelariach.' },
       { num: '03', title: 'Analizy rynku', desc: 'Mapowanie talentów, benchmarking wynagrodzeń i analiza konkurencji.' },
       { num: '04', title: 'Doradztwo strategiczne', desc: 'Konsultacje dotyczące struktury zespołu, planowania sukcesji i projektowania organizacji.' },
     ],
@@ -88,13 +88,13 @@ const content = {
   candidates: {
     eyebrow: 'Dla prawników',
     headline: 'Rozwój kariery',
-    desc: 'Wspieramy doświadczonych prawników w kolejnych krokach kariery. Nasze podejście jest doradcze — poświęcamy czas na zrozumienie Twoich celów i przedstawiamy tylko pozycje, które naprawdę pasują do Twojego profilu.',
+    desc: 'Wspieramy doświadczonych prawników w kolejnych krokach kariery. Nasze podejście jest doradcze — poświęcamy czas na zrozumienie Twoich celów i przedstawiamy wyłącznie stanowiska, które rzeczywiście odpowiadają Twojemu profilowi.',
     cta: 'Skontaktuj się z nami',
   },
   positions: {
     headline: 'Aktualne oferty',
     text: 'Wiele procesów prowadzimy dyskretnie i nie publikujemy ich publicznie. Skontaktuj się z nami poufnie.',
-    subtext: 'Nie wszystkie pozycje publikujemy publicznie. Wiele projektów prowadzimy bezpośrednio i poufnie.',
+    subtext: 'Nie wszystkie stanowiska publikujemy publicznie. Wiele projektów prowadzimy bezpośrednio i poufnie.',
     cta: 'Skontaktuj się z nami',
   },
   finalCta: {

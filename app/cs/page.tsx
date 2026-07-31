@@ -3,7 +3,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: { absolute: 'B Solution | Legal Executive Search | Najděte právního lídra' },
-  description: 'Vyhledejte Head of Legal nebo General Counsel, který skutečně vede. Specializovaná firma pro executive search v právním sektoru působící v Evropě a na Blízkém východě od roku 2007.',
+  description: 'Důvěrný Executive Search pro Head of Legal, General Counsel a seniorní právní lídry v Evropě a na Blízkém východě od roku 2007.',
   alternates: {
     canonical: 'https://www.bsolution.eu/cs',
     languages: {
@@ -16,7 +16,7 @@ export const metadata: Metadata = {
   },
   openGraph: {
     title: 'B Solution | Legal Executive Search | Najděte právního lídra',
-    description: 'Vyhledejte Head of Legal nebo General Counsel, který skutečně vede. Specializovaná firma pro executive search v právním sektoru.',
+    description: 'Důvěrný Executive Search pro Head of Legal, General Counsel a seniorní právní lídry v Evropě a na Blízkém východě.',
     locale: 'cs_CZ',
     url: 'https://www.bsolution.eu/cs',
     images: [

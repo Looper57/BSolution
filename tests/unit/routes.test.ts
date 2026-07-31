@@ -6,6 +6,7 @@ import {
   isEnglishOnlyStaticPage,
   isLocalizedLegalRoute,
   isLocalizedStaticPage,
+  legalExecutiveSearchCanonicalPath,
   legalPath,
   localizedHomepages,
   positionContentLocales,
@@ -22,7 +23,10 @@ describe('public route registry', () => {
   it('classifies stable public routes', () => {
     expect(isLocalizedStaticPage('/about')).toBe(true)
     expect(isAuthorityHub('/services')).toBe(true)
-    expect(isEnglishOnlyStaticPage('/legal-executive-search')).toBe(true)
+    expect(isEnglishOnlyStaticPage('/legal-executive-search')).toBe(false)
+    expect(legalExecutiveSearchCanonicalPath).toBe(
+      '/services/legal-executive-search',
+    )
     expect(apiRoutes).toEqual(['/api/contact'])
   })
 

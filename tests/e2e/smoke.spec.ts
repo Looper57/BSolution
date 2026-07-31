@@ -142,6 +142,169 @@ for (const route of localizedServiceSchemas) {
   })
 }
 
+const authorityRenderingRoutes = [
+  {
+    path: '/services/legal-executive-search',
+    lang: 'en',
+    h1: 'Legal Executive Search',
+    breadcrumb: 'Breadcrumb navigation',
+    primary: ['Discuss a confidential search', '/contact'],
+    secondary: ['For candidates', '/candidates'],
+    faq: 'Frequently asked questions',
+  },
+  {
+    path: '/cs/services/legal-executive-search',
+    lang: 'cs',
+    h1: 'Executive search v právním sektoru',
+    breadcrumb: 'Drobečková navigace',
+    primary: ['Projednat důvěrné vyhledávání', '/cs/contact'],
+    secondary: ['Pro kandidáty', '/cs/candidates'],
+    faq: 'Časté otázky',
+  },
+  {
+    path: '/de/services/legal-executive-search',
+    lang: 'de',
+    h1: 'Legal Executive Search',
+    breadcrumb: 'Brotkrümelnavigation',
+    primary: ['Vertrauliche Suche besprechen', '/de/contact'],
+    secondary: ['Für Kandidaten', '/de/candidates'],
+    faq: 'Häufig gestellte Fragen',
+  },
+  {
+    path: '/pl/services/legal-executive-search',
+    lang: 'pl',
+    h1: 'Executive search w sektorze prawnym',
+    breadcrumb: 'Nawigacja okruszkowa',
+    primary: ['Omów poufne poszukiwanie', '/pl/contact'],
+    secondary: ['Dla kandydatów', '/pl/candidates'],
+    faq: 'Najczęściej zadawane pytania',
+  },
+] as const
+
+for (const route of authorityRenderingRoutes) {
+  test(`${route.path} renders governed localized authority content`, async ({ page }) => {
+    const browserErrors: string[] = []
+    page.on('console', (message) => {
+      if (
+        message.type() === 'error'
+        && /hydration|application error|internal server error/i.test(message.text())
+      ) {
+        browserErrors.push(message.text())
+      }
+    })
+    page.on('pageerror', (error) => browserErrors.push(error.message))
+
+    const response = await page.goto(route.path)
+    expect(response?.status()).toBe(200)
+    await expect(page.locator('html')).toHaveAttribute('lang', route.lang)
+    const canonical = localizedServiceSchemas.find(
+      ({ path }) => path === route.path,
+    )!.canonical
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute(
+      'href',
+      canonical,
+    )
+    const expectedAlternates = {
+      en: 'https://www.bsolution.eu/services/legal-executive-search',
+      cs: 'https://www.bsolution.eu/cs/services/legal-executive-search',
+      de: 'https://www.bsolution.eu/de/services/legal-executive-search',
+      pl: 'https://www.bsolution.eu/pl/services/legal-executive-search',
+      'x-default': 'https://www.bsolution.eu/services/legal-executive-search',
+    }
+    for (const [language, href] of Object.entries(expectedAlternates)) {
+      await expect(
+        page.locator(`link[rel="alternate"][hreflang="${language}"]`),
+      ).toHaveAttribute('href', href)
+    }
+    await expect(
+      page.locator(
+        'link[rel="alternate"][href="https://www.bsolution.eu/legal-executive-search"]',
+      ),
+    ).toHaveCount(0)
+    await expect(page.getByRole('main')).toHaveCount(1)
+    await expect(page.getByRole('heading', { level: 1, name: route.h1 })).toHaveCount(1)
+    await expect(page.getByRole('navigation', { name: route.breadcrumb })).toBeVisible()
+    await expect(page.getByRole('heading', { level: 2, name: route.faq })).toBeVisible()
+
+    const sectionKinds = await page
+      .locator('[data-authority-section]')
+      .evaluateAll((elements) =>
+        elements.map((element) => element.getAttribute('data-authority-section')),
+      )
+    expect(sectionKinds).toEqual([
+      'market-context',
+      'employer-challenges',
+      'candidate-profile',
+      'typical-mandates',
+      'search-methodology',
+      'assessment-methodology',
+      'cross-border-capability',
+      'process-timeline',
+      'why-bsolution',
+    ])
+
+    await expect(page.locator('[data-authority-cta="primary"]')).toHaveAttribute(
+      'href',
+      route.primary[1],
+    )
+    await expect(page.locator('[data-authority-cta="primary"]')).toHaveText(
+      new RegExp(route.primary[0]),
+    )
+    await expect(page.locator('[data-authority-cta="secondary"]')).toHaveAttribute(
+      'href',
+      route.secondary[1],
+    )
+    await expect(page.locator('[data-authority-cta="secondary"]')).toHaveText(
+      new RegExp(route.secondary[0]),
+    )
+    const evidence = page.locator('[data-authority-evidence="root"]')
+    await expect(evidence).toBeVisible()
+    await expect(evidence.getByText('Vladimír Polách', { exact: true })).toBeVisible()
+    await expect(evidence.getByText('Dominika Nosačková', { exact: true })).toBeVisible()
+    await expect(evidence.locator('blockquote[lang="en"]')).toHaveCount(2)
+    await expect(evidence.getByText('Wolf Theiss', { exact: true })).toBeVisible()
+    await expect(evidence.getByText('KPMG Legal', { exact: true })).toBeVisible()
+    await expect(evidence.getByText('DLA Piper', { exact: true })).toBeVisible()
+
+    const nodes = await structuredDataNodes(page)
+    expect(nodes.some((node) => node['@type'] === 'FAQPage')).toBe(false)
+    expect(nodes.some((node) => ['Review', 'AggregateRating', 'Rating'].includes(node['@type']))).toBe(false)
+    expect(browserErrors).toEqual([])
+  })
+}
+
+test('legacy Legal Executive Search route permanently redirects in one hop', async ({
+  page,
+}) => {
+  const redirect = await page.request.get('/legal-executive-search', {
+    maxRedirects: 0,
+  })
+  expect(redirect.status()).toBe(308)
+  expect(
+    new URL(
+      redirect.headers().location,
+      'http://127.0.0.1:3100',
+    ).pathname,
+  ).toBe('/services/legal-executive-search')
+  const redirectBody = await redirect.text()
+  expect(redirectBody).not.toContain('rel="canonical"')
+  expect(redirectBody).not.toContain('hreflang=')
+  expect(redirectBody).not.toContain('application/ld+json')
+
+  const response = await page.goto('/legal-executive-search')
+  expect(response?.status()).toBe(200)
+  expect(new URL(response!.url()).pathname).toBe(
+    '/services/legal-executive-search',
+  )
+  let redirects = 0
+  let request = response!.request()
+  while (request.redirectedFrom()) {
+    redirects += 1
+    request = request.redirectedFrom()!
+  }
+  expect(redirects).toBe(1)
+})
+
 test('real case studies retain Article structured data', async ({ page }) => {
   await page.goto('/case-studies/general-counsel-fintech')
   const nodes = await structuredDataNodes(page)

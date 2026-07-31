@@ -41,7 +41,7 @@ export const industries: Entity[] = [
             heading: 'Právní vedení pod regulatorním dohledem',
             paragraphs: [
               'Firmy finančních služeb nesou právní a compliance zátěž, jaká nemá v jiných odvětvích obdoby: obezřetnostní regulace, pravidla chování, povinnosti v oblasti finanční kriminality i přeshraniční dohled doléhají na tentýž vedoucí tým. Právníci, kteří zde uspějí, čtou regulaci jako strategickou proměnnou, nikoli pouze jako omezení.',
-              'Hledáme pozice General Counsel a lídry compliance a boje proti finanční kriminalitě, kteří v tomto tlaku působili a dokážou si udržet důvěru představenstva i regulátora.',
+              'Vyhledáváme General Counsel a lídry compliance a boje proti finanční kriminalitě, kteří se v tomto prostředí osvědčili a dokážou si získat důvěru představenstva i regulátora.',
             ],
           },
         ],
@@ -121,7 +121,7 @@ export const industries: Entity[] = [
             heading: 'Právní vedení pro firmy, které se pohybují rychle',
             paragraphs: [
               'Technologické společnosti potřebují právní lídry, kteří udrží tempo s rychlými produktovými cykly a zároveň vybudují správu vyžadovanou dnes investory, regulátory i korporátními zákazníky. Ochrana dat, duševní vlastnictví, odpovědnost platforem a mezinárodní expanze se sbíhají v jediné právní funkci.',
-              'Nacházíme pozice General Counsel, kteří škálovali právní týmy během růstu, investičních kol a přeshraniční expanze, aniž by se stali brzdou podnikání.',
+              'Vyhledáváme General Counsel se zkušeností se škálováním právních týmů během růstu, investičních kol a přeshraniční expanze, aniž by se právní funkce stala brzdou podnikání.',
             ],
           },
         ],

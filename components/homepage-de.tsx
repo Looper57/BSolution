@@ -66,10 +66,10 @@ const content = {
   services: {
     eyebrow: 'Leistungen',
     headline: 'Unsere Leistungen',
-    intro: 'Unsere Dienstleistungen richten sich an Organisationen, die den Wert einer erfolgreichen Besetzung auf Senior-Level beim ersten Mal verstehen.',
+    intro: 'Unsere Leistungen richten sich an Organisationen, die den Wert einer erfolgreichen Besetzung auf Führungsebene gleich beim ersten Mal verstehen.',
     cta: 'Kontakt aufnehmen',
     items: [
-      { num: '01', title: 'Executive Search', desc: 'Retained Search für General Counsel, Chief Legal Officer, Head of Legal und Senior-Positionen.' },
+      { num: '01', title: 'Executive Search', desc: 'Retained Search für General Counsel, Chief Legal Officer, Head of Legal und weitere leitende Inhouse-Positionen.' },
       { num: '02', title: 'Legal Recruitment', desc: 'Gezielte Suche nach Partnern, Counsels, Senior Associates und Praxisgruppenleitern.' },
       { num: '03', title: 'Marktanalysen', desc: 'Talent Mapping, Vergütungsbenchmarking und Wettbewerbsanalyse.' },
       { num: '04', title: 'Strategische Beratung', desc: 'Beratung zu Teamstruktur, Nachfolgeplanung und Organisationsdesign.' },
@@ -101,7 +101,7 @@ const content = {
     headline: 'Suchen Sie eine juristische Führungskraft?',
     subheadline: 'Lassen Sie uns Ihren Bedarf vertraulich besprechen.',
     ctaPrimary: 'Bedarf vertraulich besprechen',
-    ctaSecondary: 'Unsere Recruiting-Services entdecken',
+    ctaSecondary: 'Unsere Leistungen entdecken',
     microcopy: 'Unverbindlich. Vollständig vertraulich.',
   },
   contactForm: {

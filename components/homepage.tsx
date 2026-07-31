@@ -24,19 +24,19 @@ const content = {
       items: ['Trusted since 2007', 'Europe & Middle East', 'Legal Sector Exclusive', 'Confidential Retained Search'],
     },
     socialProof: {
-      headline: 'Legal Recruitment That Delivers Results',
+      headline: 'Legal Executive Search for Critical Appointments',
       columns: [
-        { title: 'Direct Approach', desc: 'We identify and approach top legal talent directly — not job board applicants' },
-        { title: 'Confidential Search', desc: 'We handle sensitive searches for law firms and in-house teams with discretion' },
-        { title: 'Pre-Qualified Candidates', desc: 'We deliver curated shortlists of exceptional candidates, not stacks of CVs' },
+        { title: 'Direct Market Access', desc: 'We map the relevant market and approach accomplished legal professionals directly.' },
+        { title: 'Confidential Execution', desc: 'We manage sensitive mandates for law firms and in-house legal teams with complete discretion.' },
+        { title: 'Rigorous Assessment', desc: 'We present considered shortlists with clear, evidence-based assessment.' },
       ],
     },
     process: {
       headline: 'How It Works',
       steps: [
-        { num: '01', title: 'Tell us your hiring needs', desc: 'Share the role, requirements, and timeline' },
-        { num: '02', title: 'We identify top candidates', desc: 'We approach and assess the best legal talent' },
-        { num: '03', title: 'Receive a curated shortlist', desc: 'Meet pre-qualified candidates ready to interview' },
+        { num: '01', title: 'Define the mandate', desc: 'Align on the role, context, requirements and timetable.' },
+        { num: '02', title: 'Map and engage the market', desc: 'We identify, approach and assess relevant legal leaders.' },
+        { num: '03', title: 'Review a considered shortlist', desc: 'Meet candidates selected for their fit with the mandate.' },
       ],
     },
     industries: {
@@ -44,7 +44,7 @@ const content = {
       items: ['Law Firms', 'Banking & Finance', 'Technology', 'Pharma & Life Sciences', 'Real Estate & Development'],
     },
     clients: {
-      ctaPrimary: 'Request Candidates',
+      ctaPrimary: 'Discuss a Mandate',
       ctaSecondary: 'Explore Our Client Services',
       corporate: {
         title: 'In-House Legal Teams',
@@ -60,7 +60,7 @@ const content = {
       points: [
         { num: '01', title: 'Legal sector exclusive', desc: 'We focus only on legal recruitment — no generalist distractions' },
         { num: '02', title: 'Confidential retained search', desc: 'Discreet mandates handled with the highest level of trust' },
-        { num: '03', title: 'Direct candidate approach', desc: 'Access to passive candidates not actively looking on job boards' },
+        { num: '03', title: 'Direct candidate approach', desc: 'Access to passive candidates who are not actively pursuing a move.' },
         { num: '04', title: 'Speed without compromise', desc: 'Rigorous search tailored to each leadership mandate' },
       ],
     },
@@ -69,13 +69,13 @@ const content = {
       title: 'Legal Recruitment Specialists Since 2007',
       text1: 'We exclusively serve the legal sector — no generalist distractions. For nearly two decades, we have placed General Counsel, Heads of Legal, partners, and senior lawyers at leading organizations across Europe and the Middle East.',
       text2: 'We take on fewer mandates and deliver better results. Every search is handled with discretion, urgency, and a commitment to finding candidates who will make a lasting impact.',
-      cta: 'Request Candidates',
+      cta: 'Discuss a Mandate',
     },
     services: {
       eyebrow: 'What We Do',
       title: 'Legal Recruitment Services',
-      intro: 'We handle confidential searches for law firms and in-house legal teams. No job boards, no mass applications — just direct access to exceptional legal talent.',
-      cta: 'Request Candidates',
+      intro: 'We conduct confidential searches for law firms and in-house legal teams through disciplined market mapping, direct engagement and rigorous assessment.',
+      cta: 'Discuss a Mandate',
       items: [
         { num: '01', title: 'In-House Executive Search', desc: 'General Counsel, Chief Legal Officer, Head of Legal, and senior in-house leadership roles.' },
         { num: '02', title: 'Law Firm Recruitment', desc: 'Partner-level hires, team moves, and strategic lateral recruitment for leading law firms.' },
@@ -101,9 +101,9 @@ const content = {
     },
     finalCta: {
       headline: 'Looking to Hire Legal Talent?',
-      subheadline: "Get in touch and we'll connect you with the right candidates quickly and confidentially.",
-      ctaPrimary: 'Request Candidates',
-      ctaSecondary: 'Discuss Your Needs',
+      subheadline: "Begin a confidential conversation about the legal leadership appointment your organisation needs to make.",
+      ctaPrimary: 'Discuss a Mandate',
+      ctaSecondary: 'Arrange a Consultation',
     },
   },
   cs: {
@@ -143,7 +143,7 @@ const content = {
       headline: 'Co můžete očekávat',
       points: [
         'Důsledné vyhledávání přizpůsobené každému mandátu',
-        'Přístup k top kandidátům mimo otevřený trh',
+        'Přístup k prověřeným kandidátům mimo otevřený trh',
         'Plně důvěrný proces',
         'Dlouhodobé řešení, ne jen rychlé obsazení pozice',
       ],
@@ -166,7 +166,7 @@ const content = {
     socialProof: {
       headline: 'Nábor právníků, který přináší výsledky',
       columns: [
-        { title: 'Aktivní oslovování', desc: 'Aktivně oslovujeme top kandidáty — nespoléháme na pracovní portály' },
+        { title: 'Aktivní oslovování', desc: 'Systematicky oslovujeme relevantní kandidáty — nespoléháme na pracovní portály' },
         { title: 'Diskrétní výběrová řízení', desc: 'Řešíme citlivé nábory pro advokátní kanceláře i in-house týmy' },
         { title: 'Prověření kandidáti', desc: 'Dodáváme pečlivě vybrané kandidáty, ne hromady životopisů' },
       ],
@@ -205,7 +205,7 @@ const content = {
       intro: 'Naše služby jsou navrženy pro organizace, které chápou hodnotu správného obsazení seniorních pozic na první pokus.',
       cta: 'Nezávazně probrat vaše potřeby',
       items: [
-        { num: '01', title: 'Executive Search', desc: 'Retained search pro pozice General Counsel, Chief Legal Officer, Head of Legal a seniorní in-house pozice.' },
+        { num: '01', title: 'Executive Search', desc: 'Retained Search pro General Counsel, Chief Legal Officer, Head of Legal a seniorní pozice v interních právních týmech.' },
         { num: '02', title: 'Retained Legal Recruitment', desc: 'Vyhledávání partnerů, counsel, senior právníků a vedoucích praxí v předních advokátních kancelářích.' },
         { num: '03', title: 'Mapování trhu', desc: 'Komplexní mapování talentů, benchmarking odměňování a konkurenční zpravodajství.' },
         { num: '04', title: 'Strategické poradenství', desc: 'Konzultace ohledně strukturování týmů, plánování nástupnictví a organizačního designu právních funkcí.' },
@@ -230,7 +230,7 @@ const content = {
   },
   de: {
     hero: {
-      headline: 'Top-Juristen in Europa finden — schnell, diskret, effizient',
+      headline: 'Die richtigen Juristen in Europa finden — diskret und zielgerichtet',
       subheadline: 'Wir unterstützen Kanzleien und Unternehmen bei der Besetzung von Schlüsselpositionen im juristischen Bereich in Europa und dem Nahen Osten.',
       trustLine1: '',
       trustLine2: '',
@@ -244,7 +244,7 @@ const content = {
       headline: 'So funktioniert es',
       steps: [
         { num: '01', title: 'Sie definieren Ihren Bedarf', desc: 'Position, Anforderungen und Zeitrahmen festlegen' },
-        { num: '02', title: 'Wir identifizieren passende Kandidaten', desc: 'Gezielte Ansprache und Bewertung von Top-Juristen' },
+        { num: '02', title: 'Wir identifizieren passende Kandidaten', desc: 'Gezielte Ansprache und sorgfältige Bewertung relevanter Juristen' },
         { num: '03', title: 'Sie erhalten eine kuratierte Auswahl', desc: 'Treffen Sie vorausgewählte Kandidaten, bereit für Gespräche' },
       ],
     },
@@ -287,7 +287,7 @@ const content = {
     services: {
       eyebrow: 'Unsere Leistungen',
       title: 'Juristische Recruiting-Services',
-      intro: 'Wir führen diskrete Suchmandate für Kanzleien und Rechtsabteilungen durch. Keine Jobbörsen, keine Massenbewerbungen — nur direkter Zugang zu herausragenden juristischen Talenten.',
+      intro: 'Wir führen diskrete Suchmandate für Kanzleien und Rechtsabteilungen mit fundierter Marktkenntnis, direkter Ansprache und sorgfältiger Beurteilung durch.',
       cta: 'Kandidaten anfragen',
       items: [
         { num: '01', title: 'Executive Search', desc: 'Retained Search für General Counsel, Chief Legal Officer, Head of Legal und Senior-In-house-Positionen.' },

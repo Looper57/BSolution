@@ -90,12 +90,12 @@ function ServicesContent() {
       id: 'executive-search',
       num: '01',
       title: 'Legal Executive Search',
-      description: 'Naše retainerová služba executive search je navržena pro seniorní právní pozice, kde je prvořadá diskrétnost, důkladnost a znalost trhu. Pracujeme konzultativně na identifikaci a získání výjimečných právních lídrů.',
+      description: 'Naše služba retained Executive Search je určena pro seniorní právní pozice, u nichž jsou diskrétnost, důslednost a znalost trhu zásadní. Konzultativním přístupem identifikujeme a oslovujeme právní lídry odpovídající konkrétnímu mandátu.',
       features: [
         'Pozice General Counsel a Chief Legal Officer',
         'Pozice Head of Legal a regionálních právních ředitelů',
-        'Právní pozice na úrovni představenstva',
-        'Nábor partnerů a Managing partnerů',
+        'Právní vedení na úrovni představenstva',
+        'Vyhledávání partnerů a Managing Partnerů',
         'Komplexní mapování trhu a hodnocení kandidátů'
       ],
       idealFor: 'Korporace nabírající C-level nebo seniorní právní vedení a advokátní kanceláře hledající laterální partnery nebo vedoucí praxí. Ideální když je pozice kritická, důvěrná a vyžaduje důkladný přístup k trhu.'
@@ -104,7 +104,7 @@ function ServicesContent() {
       id: 'retained-recruitment',
       num: '02',
       title: 'Retained Legal Recruitment',
-      description: 'Dedikované vyhledávání zkušených právních profesionálů, kde záleží na kvalitě a diskrétnosti. Kombinujeme hlubokou znalost trhu s personalizovaným přístupem k identifikaci kandidátů odpovídajících technickým požadavkům i firemní kultuře.',
+      description: 'Cílené vyhledávání zkušených právních profesionálů, kde jsou kvalita a diskrétnost rozhodující. Kombinujeme hlubokou znalost trhu s individuálním přístupem k identifikaci kandidátů odpovídajících odborným požadavkům i kultuře organizace.',
       features: [
         'Pozice Senior Legal Counsel a Legal Counsel',
         'Senior advokáti a Counsel pro advokátní kanceláře',
@@ -118,7 +118,7 @@ function ServicesContent() {
       id: 'market-intelligence',
       num: '03',
       title: 'Analýza trhu',
-      description: 'Strategická inteligence poskytující detailní vhled do talentového prostředí, struktur konkurence a dynamiky trhu. Ideální pro informování náborových strategií nebo přípravu na budoucí potřeby recruitmentu.',
+      description: 'Tržní zpravodajství poskytující podrobný vhled do talentového prostředí, struktur konkurence a dynamiky trhu. Vhodné pro přípravu náborové strategie i plánování budoucích potřeb.',
       features: [
         'Identifikace a analýza talentového poolu',
         'Mapování týmových struktur konkurence',
@@ -126,7 +126,7 @@ function ServicesContent() {
         'Studie proveditelnosti vstupu na trh',
         'Podpora plánování nástupnictví'
       ],
-      idealFor: 'Organizace plánující strategické nábory, vstupující na nové trhy nebo usilující o pochopení konkurenčního talentového prostředí před rozhodnutím o recruitmentu.'
+      idealFor: 'Organizace plánující strategické nábory, vstupující na nové trhy nebo usilující o pochopení konkurenčního talentového prostředí před rozhodnutím o náboru.'
     },
     {
       id: 'strategic-advisory',
@@ -134,11 +134,11 @@ function ServicesContent() {
       title: 'Strategické poradenství',
       description: 'Poradenské služby pomáhající organizacím optimalizovat jejich právní talentovou strategii. Od strukturování týmů po plánování odměňování poskytujeme poznatky založené na tržních datech a sektorové expertíze.',
       features: [
-        'Poradenství v oblasti struktury a designu týmu',
+        'Poradenství v oblasti struktury a nastavení týmu',
         'Benchmarking odměňování a benefitů',
         'Vývoj strategie získávání talentů',
-        'Design pohovorového a hodnotícího procesu',
-        'Organizační design právní funkce'
+        'Nastavení pohovorového a hodnotícího procesu',
+        'Organizační uspořádání právní funkce'
       ],
       idealFor: 'Právní oddělení a advokátní kanceláře hledající odborné vedení při budování efektivních týmů, konkurenceschopných kompenzačních balíčků a udržitelných procesů získávání talentů.'
     }
@@ -223,7 +223,7 @@ function CTASection() {
         <p className="mt-6 text-white/50 text-[18px] max-w-2xl mx-auto leading-[1.75]">
           {language === 'en' 
             ? 'Contact us to explore how our services can support your legal recruitment and talent strategy needs.'
-            : 'Kontaktujte nás a prozkoumejte, jak naše služby mohou podpořit vaše potřeby v oblasti právního recruitmentu a talentové strategie.'
+            : 'Kontaktujte nás a zjistěte, jak naše služby mohou podpořit váš nábor v právním sektoru a talentovou strategii.'
           }
         </p>
         <div className="mt-12 flex flex-col sm:flex-row gap-4 justify-center">

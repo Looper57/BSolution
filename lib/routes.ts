@@ -23,6 +23,8 @@ export const localizedStaticPages = [
 export const positionListingPath = '/positions' as const
 export const positionContentLocales = ['en', 'cs'] as const satisfies readonly Locale[]
 export const positionFallbackLocales = ['de', 'pl'] as const satisfies readonly Locale[]
+export const legalExecutiveSearchCanonicalPath =
+  '/services/legal-executive-search' as const
 
 export const authorityDetailKinds = {
   services: 'service',
@@ -48,7 +50,6 @@ export const englishOnlyStaticPages = [
   '/for-companies',
   '/hire-legal-leader',
   '/legal-recruitment-europe',
-  '/legal-executive-search',
   '/hire-in-house-counsel',
   '/law-firm-recruitment',
   '/legal-recruitment-prague',

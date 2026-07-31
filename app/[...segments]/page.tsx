@@ -11,11 +11,17 @@ import { ServicesOverview } from '@/app/services/page'
 import { JobDetailClient } from '@/app/positions/[slug]/job-detail-client'
 import { getAllJobs, getJobBySlug } from '@/lib/jobs-data'
 import { AuthorityPage } from '@/components/authority-page'
+import { ProductionAuthorityPage } from '@/components/production-authority-page'
 import { AuthorityHub } from '@/components/authority-hub'
 import { authoritySections, getEntitiesForSection, getEntity } from '@/lib/content'
 import { absoluteUrl, buildAlternates, LOCALES, SITE_URL, type Locale } from '@/lib/i18n/config'
 import { hubRouteMetadata, staticRouteMetadata } from '@/lib/i18n/route-metadata'
 import { authorityHubKinds, isLocalizedLegalRoute, localizedStaticPages } from '@/lib/routes'
+import {
+  buildProductionAuthorityMetadata,
+  getAuthorityEvidenceViewModel,
+  getProductionAuthorityViewModel,
+} from '@/lib/authority-pages'
 
 const staticPages = { about: AboutPage, clients: ClientsPage, candidates: CandidatesPage, contact: ContactPage } as const
 const legalPages = { privacy: PrivacyPage, cookies: CookiesPage } as const
@@ -99,6 +105,9 @@ export async function generateMetadata({ params }: { params: Promise<{ segments:
     return metadata
   }
   if (path.length !== 2) return {}
+  if (path[0] === 'services' && path[1] === 'legal-executive-search') {
+    return buildProductionAuthorityMetadata(locale)
+  }
   const entity = getEntity(path[0], path[1])
   if (!entity) return {}
   const copy = entity.content[locale]
@@ -141,6 +150,14 @@ export default async function Page({ params }: { params: Promise<{ segments: str
     if (job) return <JobDetailClient job={job} />
   }
   if (path.length === 2) {
+    if (path[0] === 'services' && path[1] === 'legal-executive-search') {
+      return (
+        <ProductionAuthorityPage
+          viewModel={getProductionAuthorityViewModel(locale)}
+          evidence={getAuthorityEvidenceViewModel(locale)}
+        />
+      )
+    }
     const entity = getEntity(path[0], path[1])
     if (entity) return <AuthorityPage entity={entity} locale={locale} section={path[0]} />
   }

@@ -13,6 +13,7 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { localizedPath } from '@/lib/i18n/config'
+import { createContactRequestHeaders } from '@/lib/contact-security-client'
 
 const contactUiCopy = {
   en: {
@@ -84,6 +85,7 @@ declare global {
     turnstile?: {
       render: (container: string | HTMLElement, options: {
         sitekey: string;
+        action?: string;
         callback: (token: string) => void;
         'expired-callback'?: () => void;
         'error-callback'?: () => void;
@@ -125,6 +127,7 @@ function ContactForm() {
       if (window.turnstile && turnstileRef.current && !widgetIdRef.current) {
         widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
           sitekey: siteKey,
+          action: 'contact',
           callback: (token: string) => setTurnstileToken(token),
           'expired-callback': () => setTurnstileToken(null),
           'error-callback': () => setTurnstileToken(null),
@@ -167,9 +170,7 @@ function ContactForm() {
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
+        headers: createContactRequestHeaders(),
         body: JSON.stringify({
           ...formData,
           turnstileToken,
@@ -199,6 +200,10 @@ function ContactForm() {
       }
     } catch {
       setError(copy.failure)
+      setTurnstileToken(null)
+      if (widgetIdRef.current && window.turnstile) {
+        window.turnstile.reset(widgetIdRef.current)
+      }
     } finally {
       setIsSubmitting(false)
     }

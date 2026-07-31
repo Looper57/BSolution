@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     default: 'B Solution | Legal Executive Search',
     template: '%s | B Solution'
   },
-  description: 'Specialist legal executive search firm serving law firms and corporations across Europe and the Middle East. Trusted partner for General Counsel, CLO, and senior legal appointments since 2007.',
+  description: 'Specialist legal executive search for corporations and law firms across Europe and the Middle East. Trusted advisers on General Counsel, Chief Legal Officer and senior legal appointments since 2007.',
   keywords: ['legal executive search', 'General Counsel recruitment', 'CLO search', 'legal headhunting', 'law firm partner recruitment', 'in-house legal recruitment', 'legal jobs Europe', 'Prague legal recruitment'],
   authors: [{ name: 'B Solution s.r.o.' }],
   icons: {
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
   manifest: '/site.webmanifest',
   openGraph: {
     title: 'B Solution | Legal Executive Search',
-    description: 'Specialist legal executive search and recruitment across Europe and the Middle East. Trusted by leading law firms and corporations since 2007.',
+    description: 'Specialist legal executive search for corporations and law firms across Europe and the Middle East, trusted since 2007.',
     type: 'website',
     locale: 'en_GB',
     siteName: 'B Solution',
@@ -70,7 +70,7 @@ export const metadata: Metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'B Solution | Legal Executive Search',
-    description: 'Specialist legal executive search and recruitment across Europe and the Middle East.',
+    description: 'Specialist legal executive search for corporations and law firms across Europe and the Middle East.',
     images: ['https://www.bsolution.eu/images/og-image.jpg'],
   },
   robots: {

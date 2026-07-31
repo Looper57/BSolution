@@ -11,6 +11,11 @@ const nextConfig = {
   async redirects() {
     return [
       {
+        source: '/legal-executive-search',
+        destination: '/services/legal-executive-search',
+        permanent: true,
+      },
+      {
         source: '/for-clients',
         has: [{ type: 'query', key: 'lang', value: 'sk' }],
         destination: '/clients',

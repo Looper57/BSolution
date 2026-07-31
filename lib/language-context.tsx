@@ -657,7 +657,7 @@ const translations: Record<Language, Record<string, string>> = {
     'clients.lawfirms.intro': 'Od lateralnej rekrutacji partnerów po strategiczny rozwój zespołów — pomagamy kancelariom wzmacniać ich praktykę.',
     'clients.corporations.title': 'Dla Korporacji',
     'clients.corporations.intro': 'Doradzamy działom prawnym korporacji w budowaniu zespołów liderów, które przynoszą wyniki biznesowe.',
-    'clients.roles.title': 'Pozycje, które obsadzamy',
+    'clients.roles.title': 'Stanowiska, które obsadzamy',
     'clients.approach.title': 'Nasza Metodologia',
     'clients.approach.desc': 'Każdy mandat zaczyna się od dogłębnego zrozumienia Twojej organizacji, kultury i celów strategicznych. Następnie wykorzystujemy naszą sieć i znajomość rynku do identyfikacji i kontaktu z kandydatami z dyskrecją, której oczekują seniorni profesjonaliści.',
     'clients.cta': 'Omów swoje wymagania',

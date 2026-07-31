@@ -19,7 +19,7 @@ export const SEO_PUBLICATION_STATUSES = [
 ] as const
 
 export type SeoPublicationStatus = (typeof SEO_PUBLICATION_STATUSES)[number]
-export type SeoTopicStatus = 'clear' | 'duplicate' | 'cannibalizing'
+export type SeoTopicStatus = 'clear' | 'resolved' | 'duplicate' | 'cannibalizing'
 export type SeoArchiveAction = 'noindex' | 'redirect' | 'gone'
 
 export type SeoEvidence =
@@ -71,6 +71,7 @@ export const SEO_LINK_RELATIONSHIPS = [
   'child',
   'related-service',
   'related-practice',
+  'related-industry',
   'related-location',
   'candidate-path',
   'client-path',

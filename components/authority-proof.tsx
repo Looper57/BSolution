@@ -1,19 +1,8 @@
 import type { Locale } from '@/lib/i18n/config'
-
-const organisations = [
-  'White & Case',
-  'Clifford Chance',
-  'Bird & Bird',
-  'CMS Cameron McKenna',
-  'IBM',
-  'Johnson & Johnson',
-  'Coca-Cola',
-  'Zentiva',
-  'J&T Bank',
-  'Komerční banka',
-  'LBBW Bank',
-  'Orco Property Group',
-] as const
+import {
+  approvedHistoricalOrganisations,
+  approvedTestimonials,
+} from '@/lib/authority-pages/evidence'
 
 const labels = {
   en: {
@@ -42,23 +31,6 @@ const labels = {
   },
 } as const
 
-const testimonials = [
-  {
-    quote:
-      'Lukas is an experienced professional, customer oriented and constantly focused on business solutions providing a significant added value and professional guidance for his clients.',
-    name: 'Vladimír Polách',
-    role: 'Partner',
-    organisation: 'Squire Patton Boggs Prague',
-  },
-  {
-    quote:
-      'Lukáš is a real expert and professional – reliable, trustworthy, task oriented. He is good advisor, perfectly understanding and supporting business.',
-    name: 'Dominika Nosačková',
-    role: 'Head of Legal',
-    organisation: 'Coca-Cola HBC Czech Republic & Slovakia',
-  },
-] as const
-
 export function AuthorityProof({ locale }: { locale: Locale }) {
   const copy = labels[locale]
 
@@ -76,7 +48,7 @@ export function AuthorityProof({ locale }: { locale: Locale }) {
         </div>
 
         <ul className="mt-14 flex flex-wrap justify-center gap-x-8 gap-y-5" aria-label={copy.introduction}>
-          {organisations.map((organisation) => (
+          {approvedHistoricalOrganisations.map((organisation) => (
             <li
               key={organisation}
               className="text-navy/65 text-[13px] font-medium tracking-[0.04em]"
@@ -89,7 +61,7 @@ export function AuthorityProof({ locale }: { locale: Locale }) {
         <div className="mt-24">
           <h3 className="text-center text-navy text-[22px] font-serif">{copy.testimonials}</h3>
           <div className="mt-12 grid md:grid-cols-2 gap-8 lg:gap-12">
-            {testimonials.map((testimonial) => (
+            {approvedTestimonials.map((testimonial) => (
               <figure key={testimonial.name} className="border-t border-gold/30 pt-8">
                 <blockquote className="text-charcoal/75 text-[17px] leading-[1.8]">
                   &ldquo;{testimonial.quote}&rdquo;

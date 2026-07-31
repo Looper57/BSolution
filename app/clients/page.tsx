@@ -127,7 +127,7 @@ function CorporationsSection() {
             <p className="mt-6 text-gray-500 text-[17px] leading-[1.8]">
               {nativeCopy?.corporationBody ?? (language === 'en'
                 ? 'We have helped multinationals, regional headquarters, private equity portfolio companies, and market-leading enterprises build legal teams that deliver. From first legal hires to General Counsel appointments, we understand the unique dynamics of corporate legal recruitment.'
-                : 'Pomohli jsme nadnárodním společnostem, regionálním centrálám, portfoliovým společnostem private equity a předním podnikům budovat právní týmy, které přinášejí výsledky. Od prvních právních náboru po jmenování General Counsel chápeme unikátní dynamiku korporátního právního recruitmentu.')}
+                : 'Pomohli jsme nadnárodním společnostem, regionálním centrálám, portfoliovým společnostem private equity a předním podnikům budovat právní týmy, které přinášejí výsledky. Od prvního obsazení právní pozice po jmenování General Counsel chápeme specifika náboru do korporátních právních oddělení.')}
             </p>
             <Link 
               href={localizedPath(language, '/contact')}

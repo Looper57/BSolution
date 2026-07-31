@@ -51,8 +51,8 @@ const content = {
     points: [
       { num: '01', title: 'Hluboká znalost trhu', desc: 'Silná orientace na právní trhy v Evropě a na Blízkém východě.' },
       { num: '02', title: 'Diskrétnost a důvěrnost', desc: 'Citlivá zadání řešíme s maximální mírou důvěry a profesionality.' },
-      { num: '03', title: 'Prověřená síť kontaktů', desc: 'Přístup ke špičkovým právníkům, partnerům a decision-makerům.' },
-      { num: '04', title: 'Dlouhodobé partnerství', desc: 'Nepomáháme pouze s jedním hirem, ale s dlouhodobým rozvojem právních týmů.' },
+      { num: '03', title: 'Prověřená síť kontaktů', desc: 'Přístup ke špičkovým právníkům, partnerům a osobám s rozhodovací pravomocí.' },
+      { num: '04', title: 'Dlouhodobé partnerství', desc: 'Nepomáháme pouze s jedním obsazením, ale s dlouhodobým rozvojem právních týmů.' },
     ],
   },
   about: {
@@ -68,10 +68,10 @@ const content = {
     intro: 'Naše služby jsou určeny organizacím, které chápou hodnotu správně obsazené seniorní pozice hned napoprvé.',
     cta: 'Najít talent',
     items: [
-      { num: '01', title: 'Executive Search', desc: 'Retained search pro General Counsel, Chief Legal Officer, Head of Legal a další seniorní interní právní pozice.' },
+      { num: '01', title: 'Executive Search', desc: 'Retained Search pro General Counsel, Chief Legal Officer, Head of Legal a další seniorní pozice v interním právním týmu.' },
       { num: '02', title: 'Retained Legal Recruitment', desc: 'Cílené vyhledávání partnerů, counselů, seniorních advokátů a vedoucích osobností týmů pro přední advokátní kanceláře.' },
       { num: '03', title: 'Market Intelligence', desc: 'Mapování trhu, benchmarking odměňování a analýza konkurenčního prostředí.' },
-      { num: '04', title: 'Strategické poradenství', desc: 'Podpora při nastavování struktury právních týmů, succession planningu a organizačního designu právních funkcí.' },
+      { num: '04', title: 'Strategické poradenství', desc: 'Podpora při nastavování struktury právních týmů, plánování nástupnictví a návrhu organizačního uspořádání právních funkcí.' },
     ],
   },
   geography: {

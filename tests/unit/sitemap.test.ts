@@ -6,8 +6,20 @@ describe('sitemap', () => {
   const urls = entries.map((entry) => entry.url)
 
   it('contains only unique canonical URLs', () => {
-    expect(urls).toHaveLength(107)
+    expect(urls).toHaveLength(106)
     expect(new Set(urls).size).toBe(urls.length)
+  })
+
+  it('contains only canonical Legal Executive Search service routes', () => {
+    expect(urls).not.toContain('https://www.bsolution.eu/legal-executive-search')
+    expect(
+      urls.filter((url) => url.endsWith('/services/legal-executive-search')),
+    ).toEqual([
+      'https://www.bsolution.eu/services/legal-executive-search',
+      'https://www.bsolution.eu/cs/services/legal-executive-search',
+      'https://www.bsolution.eu/de/services/legal-executive-search',
+      'https://www.bsolution.eu/pl/services/legal-executive-search',
+    ])
   })
 
   it('contains one Services hub per supported locale', () => {

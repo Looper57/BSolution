@@ -11,6 +11,8 @@ import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Card, CardContent } from '@/components/ui/card'
 import { useState } from 'react'
+import { TurnstileField } from '@/components/security/turnstile-field'
+import { createContactRequestHeaders } from '@/lib/contact-security-client'
 
 function PageHeader() {
   return (
@@ -204,19 +206,24 @@ function SectorsSection() {
 function ContactForm() {
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
+  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
+  const [turnstileAttempt, setTurnstileAttempt] = useState(0)
   const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' })
   
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
+    if (process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && !turnstileToken) return
     setIsSubmitting(true)
     try {
       const response = await fetch('/api/contact', {
         method: 'POST',
-        headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(formData),
+        headers: createContactRequestHeaders(),
+        body: JSON.stringify({ ...formData, turnstileToken }),
       })
       if (response.ok) setSubmitted(true)
     } finally {
+      setTurnstileToken(null)
+      setTurnstileAttempt((attempt) => attempt + 1)
       setIsSubmitting(false)
     }
   }
@@ -255,6 +262,7 @@ function ContactForm() {
             <Label htmlFor="message">Message *</Label>
             <Textarea id="message" name="message" rows={4} required value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} />
           </div>
+          <TurnstileField key={turnstileAttempt} onToken={setTurnstileToken} />
           <Button type="submit" disabled={isSubmitting} className="w-full bg-gold hover:bg-gold/90 text-white">
             {isSubmitting ? 'Sending...' : 'Submit Enquiry'}
           </Button>
