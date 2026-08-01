@@ -650,6 +650,8 @@ function FooterLocalized({ lang, langPrefix }: { lang: Lang, langPrefix: string 
       privacy: 'Privacy',
       cookies: 'Cookies',
       copyright: '© 2007–2026 B Solution. All rights reserved.',
+      sisterPlatformPrefix: 'Need help with a specific personal legal situation? Our sister platform',
+      sisterPlatformSuffix: 'connects you with a verified lawyer in the Czech Republic and abroad.',
     },
     cs: {
       tagline: 'Legal executive search a poradenství v Evropě a na Blízkém východě.',
@@ -659,6 +661,8 @@ function FooterLocalized({ lang, langPrefix }: { lang: Lang, langPrefix: string 
       privacy: 'Soukromí',
       cookies: 'Cookies',
       copyright: '© 2007–2026 B Solution. Všechna práva vyhrazena.',
+      sisterPlatformPrefix: 'Potřebujete pomoc s konkrétní osobní právní situací (rozvod, dědictví, pracovní spor)? Naše sesterská platforma',
+      sisterPlatformSuffix: 'vás propojí s ověřeným advokátem v ČR i zahraničí.',
     },
     de: {
       tagline: 'Legal Executive Search und Beratung in Europa und dem Nahen Osten.',
@@ -668,6 +672,8 @@ function FooterLocalized({ lang, langPrefix }: { lang: Lang, langPrefix: string 
       privacy: 'Datenschutz',
       cookies: 'Cookies',
       copyright: '© 2007–2026 B Solution. Alle Rechte vorbehalten.',
+      sisterPlatformPrefix: 'Benötigen Sie Hilfe bei einer konkreten persönlichen Rechtsangelegenheit (Scheidung, Erbschaft, Arbeitsrechtsstreit)? Unsere Schwesterplattform',
+      sisterPlatformSuffix: 'verbindet Sie mit einem geprüften Anwalt in Tschechien und im Ausland.',
     },
     pl: {
       tagline: 'Legal executive search i doradztwo w Europie i na Bliskim Wschodzie.',
@@ -677,6 +683,8 @@ function FooterLocalized({ lang, langPrefix }: { lang: Lang, langPrefix: string 
       privacy: 'Prywatność',
       cookies: 'Cookies',
       copyright: '© 2007–2026 B Solution. Wszelkie prawa zastrzeżone.',
+      sisterPlatformPrefix: 'Potrzebujesz pomocy w konkretnej osobistej sprawie prawnej (rozwód, spadek, spór pracowniczy)? Nasza siostrzana platforma',
+      sisterPlatformSuffix: 'połączy Cię ze zweryfikowanym prawnikiem w Czechach i za granicą.',
     },
   }
 
@@ -696,6 +704,22 @@ function FooterLocalized({ lang, langPrefix }: { lang: Lang, langPrefix: string 
             </Link>
             <p className="text-white/30 text-[14px] leading-[1.8] max-w-sm">
               {f.tagline}
+            </p>
+
+            {/* Cross-referral to LawBridge.eu (2026-08-01) — same founder's
+                platform matching individuals with a verified lawyer for a
+                personal legal situation, disclosed as a sister platform. */}
+            <p className="mt-6 text-white/20 text-[13px] leading-[1.8] max-w-sm">
+              {f.sisterPlatformPrefix}{' '}
+              <a
+                href="https://www.lawbridge.eu"
+                target="_blank"
+                rel="noopener"
+                className="font-medium text-gold/60 hover:text-gold transition-colors"
+              >
+                LawBridge.eu
+              </a>{' '}
+              {f.sisterPlatformSuffix}
             </p>
           </div>
           

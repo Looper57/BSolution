@@ -40,7 +40,23 @@ export function Footer() {
             <p className="mt-8 text-[15px] text-white/35 leading-[1.8] max-w-sm">
               {t('footer.tagline')}
             </p>
-            
+
+            {/* Cross-referral to LawBridge.eu (2026-08-01) — same founder's
+                platform matching individuals with a verified lawyer for a
+                personal legal situation, disclosed as a sister platform. */}
+            <p className="mt-6 text-[13px] text-white/25 leading-[1.8] max-w-sm">
+              {t('footer.sisterPlatformPrefix')}{' '}
+              <a
+                href="https://www.lawbridge.eu"
+                target="_blank"
+                rel="noopener"
+                className="font-medium text-gold/70 hover:text-gold transition-colors"
+              >
+                {t('footer.sisterPlatformCta')}
+              </a>{' '}
+              {t('footer.sisterPlatformSuffix')}
+            </p>
+
             {/* Language */}
             <div className="flex items-center gap-1 mt-12 text-[11px] font-medium tracking-[0.12em] uppercase">
               <button

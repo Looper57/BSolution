@@ -135,6 +135,8 @@ const content = {
     address: 'Praga, Czechy',
     phone: '+420 272 681 206',
     email: 'info@bsolution.eu',
+    sisterPlatformPrefix: 'Potrzebujesz pomocy w konkretnej osobistej sprawie prawnej (rozwód, spadek, spór pracowniczy)? Nasza siostrzana platforma',
+    sisterPlatformSuffix: 'połączy Cię ze zweryfikowanym prawnikiem w Czechach i za granicą.',
   },
 }
 
@@ -707,8 +709,24 @@ function FooterPL() {
               <span className="text-[18px] font-serif text-gold tracking-[0.04em]">B Solution</span>
             </Link>
             <p className="mt-6 text-white/40 text-[14px] leading-[1.8]">{f.tagline}</p>
+
+            {/* Cross-referral to LawBridge.eu (2026-08-01) — same founder's
+                platform matching individuals with a verified lawyer for a
+                personal legal situation, disclosed as a sister platform. */}
+            <p className="mt-5 text-white/25 text-[13px] leading-[1.8]">
+              {f.sisterPlatformPrefix}{' '}
+              <a
+                href="https://www.lawbridge.eu"
+                target="_blank"
+                rel="noopener"
+                className="font-medium text-gold/60 hover:text-gold transition-colors"
+              >
+                LawBridge.eu
+              </a>{' '}
+              {f.sisterPlatformSuffix}
+            </p>
           </div>
-          
+
           <div>
             <h4 className="text-[11px] uppercase tracking-[0.2em] text-white/30 mb-6">{f.company}</h4>
             <nav className="space-y-3">

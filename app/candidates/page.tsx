@@ -32,6 +32,8 @@ const candidatesLocalizedCopy = {
     ctaTitle: 'Möchten Sie neue Möglichkeiten besprechen?',
     ctaBody: 'Kontaktieren Sie uns für ein vertrauliches Gespräch über Ihre beruflichen Ziele. Wir beantworten alle Anfragen innerhalb von 48 Stunden.',
     positionsCta: 'Aktuelle Positionen ansehen',
+    sisterPlatformPrefix: 'Geht es eher um eine persönliche Rechtsangelegenheit als um Ihre Karriere? Unsere Schwesterplattform',
+    sisterPlatformSuffix: 'verbindet Sie mit einem geprüften Anwalt in Tschechien und im Ausland.',
   },
   pl: {
     features: [
@@ -55,6 +57,8 @@ const candidatesLocalizedCopy = {
     ctaTitle: 'Chcesz omówić nowe możliwości?',
     ctaBody: 'Skontaktuj się z nami, aby poufnie omówić swoje cele zawodowe. Odpowiadamy na wszystkie zapytania w ciągu 48 godzin.',
     positionsCta: 'Zobacz aktualne oferty',
+    sisterPlatformPrefix: 'Chodzi raczej o osobistą sprawę prawną niż o karierę? Nasza siostrzana platforma',
+    sisterPlatformSuffix: 'połączy Cię ze zweryfikowanym prawnikiem w Czechach i za granicą.',
   },
 } as const
 
@@ -279,8 +283,8 @@ function CTASection() {
                 <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-            <Button 
-              asChild 
+            <Button
+              asChild
               size="lg"
               variant="outline"
               className="border-navy text-navy hover:bg-navy hover:text-white"
@@ -290,6 +294,28 @@ function CTASection() {
               </Link>
             </Button>
           </div>
+
+          {/* Cross-referral to LawBridge.eu (2026-08-01) — this page's
+              audience (individuals navigating a career move) is a genuine
+              fit for LawBridge's personal-legal-situation matching, unlike
+              the corporate-facing /clients page. Same founder, disclosed
+              as a sister platform. */}
+          <p className="mt-8 text-sm text-charcoal/50 leading-relaxed">
+            {nativeCopy?.sisterPlatformPrefix ?? (language === 'en'
+              ? 'Is this about a personal legal matter rather than your career? Our sister platform'
+              : 'Jde spíš o osobní právní záležitost než o kariéru? Naše sesterská platforma')}{' '}
+            <a
+              href="https://www.lawbridge.eu"
+              target="_blank"
+              rel="noopener"
+              className="font-medium text-gold hover:text-gold-hover transition-colors"
+            >
+              LawBridge.eu
+            </a>{' '}
+            {nativeCopy?.sisterPlatformSuffix ?? (language === 'en'
+              ? 'connects you with a verified lawyer in the Czech Republic and abroad.'
+              : 'vás propojí s ověřeným advokátem v ČR i zahraničí.')}
+          </p>
         </div>
       </div>
     </section>

@@ -112,7 +112,10 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.privacy': 'Privacy',
     'footer.cookies': 'Cookies',
     'footer.copyright': '© 2007–2026 B Solution. All rights reserved.',
-    
+    'footer.sisterPlatformPrefix': 'Need help with a specific personal legal situation? Our sister platform',
+    'footer.sisterPlatformCta': 'LawBridge.eu',
+    'footer.sisterPlatformSuffix': 'connects you with a verified lawyer in the Czech Republic and abroad.',
+
     // Services Page
     'services.page.title': 'Our Services',
     'services.page.subtitle': 'Comprehensive legal search and advisory solutions for discerning clients',
@@ -289,7 +292,10 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.privacy': 'Ochrana údajů',
     'footer.cookies': 'Cookies',
     'footer.copyright': '© 2007–2026 B Solution. Všechna práva vyhrazena.',
-    
+    'footer.sisterPlatformPrefix': 'Potřebujete pomoc s konkrétní osobní právní situací (rozvod, dědictví, pracovní spor)? Naše sesterská platforma',
+    'footer.sisterPlatformCta': 'LawBridge.eu',
+    'footer.sisterPlatformSuffix': 'vás propojí s ověřeným advokátem v ČR i zahraničí.',
+
     // Services Page
     'services.page.title': 'Naše služby',
     'services.page.subtitle': 'Komplexní řešení právního vyhledávání a poradenství pro náročné klienty',
@@ -466,7 +472,10 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.privacy': 'Datenschutz',
     'footer.cookies': 'Cookies',
     'footer.copyright': '© 2007–2026 B Solution. Alle Rechte vorbehalten.',
-    
+    'footer.sisterPlatformPrefix': 'Benötigen Sie Hilfe bei einer konkreten persönlichen Rechtsangelegenheit (Scheidung, Erbschaft, Arbeitsrechtsstreit)? Unsere Schwesterplattform',
+    'footer.sisterPlatformCta': 'LawBridge.eu',
+    'footer.sisterPlatformSuffix': 'verbindet Sie mit einem geprüften Anwalt in Tschechien und im Ausland.',
+
     // Services Page
     'services.page.title': 'Unsere Leistungen',
     'services.page.subtitle': 'Umfassende Legal-Search- und Beratungslösungen für anspruchsvolle Mandanten',
@@ -643,7 +652,10 @@ const translations: Record<Language, Record<string, string>> = {
     'footer.privacy': 'Prywatność',
     'footer.cookies': 'Cookies',
     'footer.copyright': '© 2007–2026 B Solution. Wszelkie prawa zastrzeżone.',
-    
+    'footer.sisterPlatformPrefix': 'Potrzebujesz pomocy w konkretnej osobistej sprawie prawnej (rozwód, spadek, spór pracowniczy)? Nasza siostrzana platforma',
+    'footer.sisterPlatformCta': 'LawBridge.eu',
+    'footer.sisterPlatformSuffix': 'połączy Cię ze zweryfikowanym prawnikiem w Czechach i za granicą.',
+
     // Services Page
     'services.page.title': 'Nasze Usługi',
     'services.page.subtitle': 'Kompleksowe rozwiązania legal search i doradztwa dla wymagających klientów',
