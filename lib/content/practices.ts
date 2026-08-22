@@ -17,7 +17,7 @@ export const practices: Entity[] = [
         title: 'General Counsel Search',
         summary:
           'Retained search for General Counsel and Chief Legal Officers who combine legal authority with commercial judgement at board level.',
-        metaTitle: 'General Counsel Search | Retained Executive Search',
+        metaTitle: 'Retained General Counsel Search',
         metaDescription:
           'Confidential retained search for General Counsel and Chief Legal Officers across Europe and the Middle East. Board-level legal leadership, rigorously assessed.',
         sections: [
@@ -46,9 +46,9 @@ export const practices: Entity[] = [
         title: 'Vyhledávání General Counsel',
         summary:
           'Exkluzivní vyhledávání pozic General Counsel a Chief Legal Officer, kteří spojují právní autoritu s obchodním úsudkem na úrovni představenstva.',
-        metaTitle: 'Vyhledávání General Counsel | Retained executive search',
+        metaTitle: 'Retained vyhledávání General Counsel',
         metaDescription:
-          'Důvěrné exkluzivní vyhledávání pozic General Counsel a Chief Legal Officer napříč Evropou a Blízkým východem. Právní vedení na úrovni představenstva, důkladně posouzené.',
+          'Důvěrné exkluzivní vyhledávání pozic General Counsel a Chief Legal Officer v Evropě a na Blízkém východě. Právní vedení na úrovni představenstva.',
         sections: [
           {
             heading: 'Moderní General Counsel',
@@ -75,9 +75,9 @@ export const practices: Entity[] = [
         title: 'General-Counsel-Suche',
         summary:
           'Mandatierte Suche nach General Counsel und Chief Legal Officers, die juristische Autorität mit unternehmerischem Urteilsvermögen auf Vorstandsebene verbinden.',
-        metaTitle: 'General-Counsel-Suche | Mandatierte Executive Search',
+        metaTitle: 'Mandatierte General-Counsel-Suche',
         metaDescription:
-          'Vertrauliche mandatierte Suche nach General Counsel und Chief Legal Officers in Europa und im Nahen Osten. Juristische Führung auf Vorstandsebene, gründlich beurteilt.',
+          'Vertrauliche mandatierte Suche nach General Counsel und Chief Legal Officers in Europa und im Nahen Osten. Führung auf Vorstandsebene.',
         sections: [
           {
             heading: 'Der moderne General Counsel',
@@ -104,9 +104,9 @@ export const practices: Entity[] = [
         title: 'Poszukiwanie General Counsel',
         summary:
           'Powierzone poszukiwanie na stanowiska General Counsel i Chief Legal Officer, którzy łączą autorytet prawny z osądem biznesowym na poziomie zarządu.',
-        metaTitle: 'Poszukiwanie General Counsel | Powierzony executive search',
+        metaTitle: 'Powierzone poszukiwanie General Counsel',
         metaDescription:
-          'Poufne, powierzone poszukiwanie na stanowiska General Counsel i Chief Legal Officer w Europie i na Bliskim Wschodzie. Przywództwo prawne na poziomie zarządu, rzetelnie ocenione.',
+          'Poufne, powierzone poszukiwanie General Counsel i Chief Legal Officer w Europie i na Bliskim Wschodzie. Przywództwo prawne na poziomie zarządu.',
         sections: [
           {
             heading: 'Nowoczesny General Counsel',
@@ -145,7 +145,7 @@ export const practices: Entity[] = [
         title: 'Compliance & Regulatory Leadership',
         summary:
           'Search for Chief Compliance Officers and Heads of Regulatory Affairs who protect the licence to operate in regulated markets.',
-        metaTitle: 'Compliance Officer Search | Regulatory Leadership',
+        metaTitle: 'Retained Compliance Officer Search',
         metaDescription:
           'Retained search for Chief Compliance Officers and Heads of Regulatory Affairs across regulated industries in Europe and the Middle East.',
         sections: [
@@ -173,7 +173,7 @@ export const practices: Entity[] = [
         title: 'Vedení compliance a regulatoriky',
         summary:
           'Vyhledávání pozic Chief Compliance Officer a vedoucích regulatorních záležitostí, kteří chrání oprávnění působit na regulovaných trzích.',
-        metaTitle: 'Vyhledávání Compliance Officer | Vedení regulatoriky',
+        metaTitle: 'Retained vyhledávání Compliance Officer',
         metaDescription:
           'Exkluzivní vyhledávání pozic Chief Compliance Officer a vedoucích regulatorních záležitostí napříč regulovanými odvětvími v Evropě a na Blízkém východě.',
         sections: [
@@ -229,7 +229,7 @@ export const practices: Entity[] = [
         title: 'Przywództwo w compliance i regulacjach',
         summary:
           'Poszukiwanie na stanowiska Chief Compliance Officer i dyrektorów ds. regulacyjnych, którzy chronią prawo do działania na rynkach regulowanych.',
-        metaTitle: 'Poszukiwanie Compliance Officer | Przywództwo regulacyjne',
+        metaTitle: 'Powierzone poszukiwanie Compliance Officer',
         metaDescription:
           'Powierzone poszukiwanie na stanowiska Chief Compliance Officer i dyrektorów ds. regulacyjnych w branżach regulowanych w Europie i na Bliskim Wschodzie.',
         sections: [

@@ -1,9 +1,16 @@
+import type { Metadata } from 'next'
 import Link from 'next/link'
 import { headers } from 'next/headers'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { LanguageProvider } from '@/lib/language-context'
 import { localizedPath, type Locale } from '@/lib/i18n/config'
+
+// Without this, the root layout's global `robots: { index: true }` applies
+// to every unknown path, marking 404s indexable (2026-08-22 Ahrefs audit).
+export const metadata: Metadata = {
+  robots: { index: false, follow: true },
+}
 
 const copy: Record<Locale, { title: string; description: string; action: string }> = {
   en: {

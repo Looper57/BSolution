@@ -44,6 +44,24 @@ jobs:
       - name: Production build
         run: pnpm build
 
+      # Technical-SEO graph crawl gate (2026-08-22 Ahrefs audit) — crawls
+      # the complete authoritative inventory (app/sitemap.ts's own output)
+      # plus every first-party link discovered on it, against the just-built
+      # .next output, and fails the job on any broken/redirecting hreflang,
+      # missing reciprocity, invalid canonical, internal link to a noindex
+      # non-navigable page, unclean 404, or unexplained URL expansion.
+      - name: Technical SEO graph crawl
+        run: pnpm graph-crawl:gate
+
+      - name: Upload graph crawl report
+        if: failure()
+        uses: actions/upload-artifact@v6
+        with:
+          name: graph-crawl-report
+          path: artifacts/graph-crawl-report.json
+          if-no-files-found: ignore
+          retention-days: 7
+
       - name: Install Playwright Chromium
         run: pnpm exec playwright install --with-deps chromium
 

@@ -16,7 +16,7 @@ export const caseStudies: Entity[] = [
         title: 'Appointing a General Counsel for a scaling fintech',
         summary:
           'A confidential retained search for the first General Counsel of a fast-growing, cross-border payments business.',
-        metaTitle: 'Case Study: General Counsel Search for a Fintech',
+        metaTitle: 'Case Study: General Counsel, Fintech',
         metaDescription:
           'How a confidential retained search identified the first General Counsel for a scaling cross-border fintech operating under multiple regulators.',
         sections: [
@@ -44,7 +44,7 @@ export const caseStudies: Entity[] = [
         title: 'Jmenování General Counsel pro rostoucí fintech',
         summary:
           'Důvěrné exkluzivní vyhledávání prvního General Counsel pro rychle rostoucí přeshraniční platební společnost.',
-        metaTitle: 'Případová studie: Vyhledávání General Counsel pro fintech',
+        metaTitle: 'Případová studie: General Counsel, fintech',
         metaDescription:
           'Jak důvěrné exkluzivní vyhledávání nalezlo prvního General Counsel pro rostoucí přeshraniční fintech působící pod několika regulátory.',
         sections: [
@@ -72,7 +72,7 @@ export const caseStudies: Entity[] = [
         title: 'Bestellung eines General Counsel für ein skalierendes Fintech',
         summary:
           'Eine vertrauliche mandatierte Suche nach dem ersten General Counsel eines schnell wachsenden, grenzüberschreitenden Zahlungsdienstleisters.',
-        metaTitle: 'Fallstudie: General-Counsel-Suche für ein Fintech',
+        metaTitle: 'Fallstudie: General Counsel, Fintech',
         metaDescription:
           'Wie eine vertrauliche mandatierte Suche den ersten General Counsel für ein skalierendes, grenzüberschreitendes Fintech unter mehreren Aufsichtsbehörden fand.',
         sections: [
@@ -100,9 +100,9 @@ export const caseStudies: Entity[] = [
         title: 'Powołanie General Counsel dla skalującego się fintechu',
         summary:
           'Poufne, powierzone poszukiwanie pierwszego General Counsel dla szybko rosnącej, transgranicznej firmy płatniczej.',
-        metaTitle: 'Studium przypadku: poszukiwanie General Counsel dla fintechu',
+        metaTitle: 'Studium przypadku: General Counsel, fintech',
         metaDescription:
-          'Jak poufne, powierzone poszukiwanie wskazało pierwszego General Counsel dla skalującego się, transgranicznego fintechu działającego pod nadzorem kilku regulatorów.',
+          'Jak poufne, powierzone poszukiwanie wskazało pierwszego General Counsel dla transgranicznego fintechu działającego pod nadzorem kilku regulatorów.',
         sections: [
           {
             heading: 'Zlecenie',

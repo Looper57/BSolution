@@ -23,6 +23,16 @@ export const localizedStaticPages = [
 export const positionListingPath = '/positions' as const
 export const positionContentLocales = ['en', 'cs'] as const satisfies readonly Locale[]
 export const positionFallbackLocales = ['de', 'pl'] as const satisfies readonly Locale[]
+
+/**
+ * A position detail page only has genuine content in `positionContentLocales`
+ * (see jobsData: no de/pl fields exist). Internal links must never point to
+ * the de/pl noindex duplicate as a primary destination — resolve to the
+ * locale-appropriate authoritative page instead (2026-08-22 Ahrefs audit).
+ */
+export function positionDetailLocale(locale: Locale): (typeof positionContentLocales)[number] {
+  return (positionContentLocales as readonly Locale[]).includes(locale) ? (locale as (typeof positionContentLocales)[number]) : 'en'
+}
 export const legalExecutiveSearchCanonicalPath =
   '/services/legal-executive-search' as const
 

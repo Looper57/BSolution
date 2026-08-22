@@ -2,10 +2,10 @@
 
 import { useState, useEffect } from 'react'
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight, MapPin } from 'lucide-react'
 import { legalPath } from '@/lib/routes'
 import { AuthorityProof } from '@/components/authority-proof'
+import { HeroBackgroundImage } from '@/components/hero-background-image'
 
 type Lang = 'en' | 'cs' | 'de' | 'pl'
 
@@ -763,13 +763,11 @@ function HeroSection({ content: c, langPrefix }: { content: typeof content.en.he
       </div>
       
       {/* Desktop hero */}
-      <Image 
-        src="/images/hero-background.png" 
-        alt="" 
-        fill 
-        className="object-cover hidden md:block" 
-        style={{ objectPosition: 'center calc(50% + 40px)', willChange: 'auto' }} 
-        priority 
+      <HeroBackgroundImage
+        fill
+        className="object-cover hidden md:block"
+        style={{ objectPosition: 'center calc(50% + 40px)', willChange: 'auto' }}
+        priority
         sizes="(max-width: 768px) 1px, 100vw"
         loading="eager"
         fetchPriority="high"

@@ -50,9 +50,9 @@ export const countries: Entity[] = [
         title: 'Legal Executive Search in der Tschechischen Republik',
         summary:
           'Mandatierte Suche nach General Counsel und erfahrenen Inhouse-Juristen in Prag und im tschechischen Markt.',
-        metaTitle: 'Legal Executive Search Tschechische Republik | Prag',
+        metaTitle: 'Legal Executive Search Tschechische Republik',
         metaDescription:
-          'Spezialisierte Legal Executive Search in der Tschechischen Republik. Vertrauliche Suche nach General Counsel und erfahrenen Inhouse-Juristen in Prag und darüber hinaus.',
+          'Spezialisierte Legal Executive Search in der Tschechischen Republik. Vertrauliche Suche nach General Counsel und erfahrenen Inhouse-Juristen in Prag.',
         sections: [
           {
             heading: 'Tiefe im tschechischen Markt',
@@ -94,7 +94,7 @@ export const countries: Entity[] = [
         title: 'Legal Executive Search in Germany',
         summary:
           'Retained search for General Counsel and Heads of Legal across Germany’s industrial, financial and technology sectors.',
-        metaTitle: 'Legal Executive Search Germany | General Counsel',
+        metaTitle: 'Legal Executive Search Germany',
         metaDescription:
           'Boutique legal executive search in Germany. Confidential retained search for General Counsel and Heads of Legal across the DACH region.',
         sections: [
@@ -111,7 +111,7 @@ export const countries: Entity[] = [
         title: 'Executive search v právním sektoru v Německu',
         summary:
           'Exkluzivní vyhledávání pozic General Counsel a vedoucích právních oddělení napříč německým průmyslem, financemi a technologiemi.',
-        metaTitle: 'Legal executive search Německo | General Counsel',
+        metaTitle: 'Legal executive search Německo',
         metaDescription:
           'Butikový executive search v právním sektoru v Německu. Důvěrné exkluzivní vyhledávání pozic General Counsel a vedoucích právních oddělení v regionu DACH.',
         sections: [
@@ -128,7 +128,7 @@ export const countries: Entity[] = [
         title: 'Legal Executive Search in Deutschland',
         summary:
           'Mandatierte Suche nach General Counsel und Leitern der Rechtsabteilung in Industrie, Finanzwesen und Technologie in Deutschland.',
-        metaTitle: 'Legal Executive Search Deutschland | General Counsel',
+        metaTitle: 'Legal Executive Search Deutschland',
         metaDescription:
           'Spezialisierte Legal Executive Search in Deutschland. Vertrauliche mandatierte Suche nach General Counsel und Leitern der Rechtsabteilung in der DACH-Region.',
         sections: [
@@ -145,7 +145,7 @@ export const countries: Entity[] = [
         title: 'Executive search prawny w Niemczech',
         summary:
           'Powierzone poszukiwanie na stanowiska General Counsel i dyrektorów działów prawnych w niemieckim przemyśle, finansach i technologii.',
-        metaTitle: 'Executive search prawny Niemcy | General Counsel',
+        metaTitle: 'Executive search prawny Niemcy',
         metaDescription:
           'Butikowy executive search prawny w Niemczech. Poufne, powierzone poszukiwanie na stanowiska General Counsel i dyrektorów działów prawnych w regionie DACH.',
         sections: [
@@ -191,7 +191,7 @@ export const countries: Entity[] = [
           'Exkluzivní vyhledávání právních lídrů v Dubaji, Abú Zabí a širším regionu Zálivu, zahrnující mandáty ve free zones i onshore.',
         metaTitle: 'Legal executive search SAE | Dubaj a Abú Zabí',
         metaDescription:
-          'Butikový executive search v právním sektoru ve Spojených arabských emirátech. Důvěrné vyhledávání pozic General Counsel a seniorních právníků v Dubaji, Abú Zabí a Zálivu.',
+          'Butikový executive search v právním sektoru ve Spojených arabských emirátech. Důvěrné vyhledávání pozic General Counsel v Dubaji, Abú Zabí a Zálivu.',
         sections: [
           {
             heading: 'Právní vedení v Zálivu',
@@ -208,7 +208,7 @@ export const countries: Entity[] = [
           'Mandatierte Suche nach Rechtsführungskräften in Dubai, Abu Dhabi und der weiteren Golfregion — von Freizonen- bis Onshore-Mandaten.',
         metaTitle: 'Legal Executive Search VAE | Dubai & Abu Dhabi',
         metaDescription:
-          'Spezialisierte Legal Executive Search in den Vereinigten Arabischen Emiraten. Vertrauliche Suche nach General Counsel und erfahrenen Juristen in Dubai, Abu Dhabi und am Golf.',
+          'Spezialisierte Legal Executive Search in den Vereinigten Arabischen Emiraten. Vertrauliche Suche nach General Counsel in Dubai, Abu Dhabi und am Golf.',
         sections: [
           {
             heading: 'Juristische Führung am Golf',
@@ -225,7 +225,7 @@ export const countries: Entity[] = [
           'Powierzone poszukiwanie liderów prawnych w Dubaju, Abu Zabi i szerszym regionie Zatoki, obejmujące zlecenia w strefach wolnocłowych i onshore.',
         metaTitle: 'Executive search prawny ZEA | Dubaj i Abu Zabi',
         metaDescription:
-          'Butikowy executive search prawny w Zjednoczonych Emiratach Arabskich. Poufne poszukiwanie na stanowiska General Counsel i doświadczonych prawników w Dubaju, Abu Zabi i regionie Zatoki.',
+          'Butikowy executive search prawny w Zjednoczonych Emiratach Arabskich. Poufne poszukiwanie na stanowiska General Counsel w Dubaju, Abu Zabi i regionie Zatoki.',
         sections: [
           {
             heading: 'Przywództwo prawne w regionie Zatoki',

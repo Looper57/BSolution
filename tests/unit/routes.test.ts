@@ -10,6 +10,7 @@ import {
   legalPath,
   localizedHomepages,
   positionContentLocales,
+  positionDetailLocale,
   positionFallbackLocales,
 } from '@/lib/routes'
 
@@ -41,5 +42,16 @@ describe('public route registry', () => {
   it('separates translated and fallback job locales', () => {
     expect(positionContentLocales).toEqual(['en', 'cs'])
     expect(positionFallbackLocales).toEqual(['de', 'pl'])
+  })
+
+  it('never resolves a position detail link to a fallback locale (2026-08-22 Ahrefs audit)', () => {
+    // en/cs have genuine job content — link stays in the visitor's own locale.
+    expect(positionDetailLocale('en')).toBe('en')
+    expect(positionDetailLocale('cs')).toBe('cs')
+    // de/pl positions are an untranslated English duplicate kept noindex —
+    // internal links must resolve to the authoritative English page, never
+    // to the de/pl duplicate as a primary destination.
+    expect(positionDetailLocale('de')).toBe('en')
+    expect(positionDetailLocale('pl')).toBe('en')
   })
 })

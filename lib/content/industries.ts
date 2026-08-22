@@ -50,7 +50,7 @@ export const industries: Entity[] = [
         title: 'Finanzdienstleistungen',
         summary:
           'Rechts- und Compliance-Führung für Banken, Asset Manager, Versicherer und Fintechs unter intensiver regulatorischer Aufsicht.',
-        metaTitle: 'Legal Executive Search für Finanzdienstleistungen',
+        metaTitle: 'Executive Search für Finanzdienstleistungen',
         metaDescription:
           'Mandatierte Rechts- und Compliance-Executive-Search für Banken, Asset Manager, Versicherer und Fintechs in Europa und im Nahen Osten.',
         sections: [
@@ -113,7 +113,7 @@ export const industries: Entity[] = [
         title: 'Technologie',
         summary:
           'Pozice General Counsel a právní vedení pro softwarové, platformové a deep-tech společnosti expandující přes hranice.',
-        metaTitle: 'Legal executive search pro technologické společnosti',
+        metaTitle: 'Executive search pro technologické firmy',
         metaDescription:
           'Exkluzivní vyhledávání právních lídrů pro technologické společnosti — od scale-upů po zavedené platformy — napříč Evropou a Blízkým východem.',
         sections: [
@@ -130,7 +130,7 @@ export const industries: Entity[] = [
         title: 'Technologie',
         summary:
           'General Counsel und juristische Führung für Software-, Plattform- und Deep-Tech-Unternehmen, die grenzüberschreitend skalieren.',
-        metaTitle: 'Legal Executive Search für Technologieunternehmen',
+        metaTitle: 'Executive Search für Technologieunternehmen',
         metaDescription:
           'Mandatierte Legal Executive Search für Technologieunternehmen — vom Scale-up bis zur etablierten Plattform — in Europa und im Nahen Osten.',
         sections: [
@@ -147,7 +147,7 @@ export const industries: Entity[] = [
         title: 'Technologie',
         summary:
           'General Counsel i przywództwo prawne dla firm software’owych, platformowych i deep-tech skalujących się ponad granicami.',
-        metaTitle: 'Executive search prawny dla firm technologicznych',
+        metaTitle: 'Executive search dla firm technologicznych',
         metaDescription:
           'Powierzony executive search prawny dla firm technologicznych — od scale-upów po ugruntowane platformy — w Europie i na Bliskim Wschodzie.',
         sections: [

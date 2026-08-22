@@ -10,7 +10,10 @@
     "lint": "eslint .",
     "test": "vitest run",
     "test:e2e": "playwright test",
-    "validate": "pnpm typecheck && pnpm lint && pnpm test && pnpm build && pnpm test:e2e"
+    "graph-crawl": "tsx scripts/graph-crawl.mts",
+    "graph-crawl:gate": "node scripts/run-graph-crawl-gate.mjs",
+    "validate": "pnpm typecheck && pnpm lint && pnpm test && pnpm build && pnpm test:e2e",
+    "validate:predeploy": "pnpm typecheck && pnpm lint && pnpm test && pnpm build && pnpm graph-crawl:gate && pnpm test:e2e"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
@@ -76,6 +79,7 @@
     "postcss": "^8.5",
     "sharp": "^0.35.2",
     "tailwindcss": "^4.2.0",
+    "tsx": "^4.23.12",
     "tw-animate-css": "1.3.3",
     "typescript": "5.7.3",
     "vitest": "^3.2.7"

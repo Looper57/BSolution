@@ -17,8 +17,18 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
   const job = getJobBySlug(resolvedParams.slug)
   
   if (!job) {
+    // This path calls notFound() below and renders the 404 boundary. Two
+    // gaps here (2026-08-22 Ahrefs audit): an empty/title-only metadata
+    // object doesn't override the root layout's global
+    // `robots: { index: true }`; and, more seriously, app/positions/layout.tsx
+    // sets a hardcoded canonical + hreflang cluster pointing at the real
+    // /positions listing — without an explicit override here, an unknown
+    // slug's 404 page rendered that listing's canonical and full hreflang
+    // cluster as if the 404 URL were a genuine member of it.
     return {
       title: 'Position Not Found',
+      robots: { index: false, follow: true },
+      alternates: {},
     }
   }
   

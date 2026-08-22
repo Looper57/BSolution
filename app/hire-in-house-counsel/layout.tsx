@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Hire In-House Counsel | B Solution - Corporate Legal Recruitment',
+  title: 'Hire In-House Counsel | Legal Recruitment',
   description: 'Specialist search for corporate legal teams, from in-house counsel and Legal Directors to General Counsel appointments across Europe.',
   keywords: ['in-house counsel recruitment', 'corporate legal hiring', 'General Counsel search', 'Legal Director recruitment', 'in-house lawyer'],
   alternates: {

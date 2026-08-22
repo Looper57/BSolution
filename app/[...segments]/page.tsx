@@ -27,6 +27,12 @@ const staticPages = { about: AboutPage, clients: ClientsPage, candidates: Candid
 const legalPages = { privacy: PrivacyPage, cookies: CookiesPage } as const
 const ogLocales: Record<Locale, string> = { en: 'en_GB', cs: 'cs_CZ', de: 'de_DE', pl: 'pl_PL' }
 
+// Every branch below that falls through to `notFound()` must declare this
+// explicitly — an empty `{}` doesn't override the root layout's global
+// `robots: { index: true }`, so a genuinely 404'd path rendered indexable
+// (2026-08-22 Ahrefs audit).
+const NOT_FOUND_METADATA: Metadata = { robots: { index: false, follow: true } }
+
 function translatedPositionAlternates(path: string) {
   return {
     languages: {
@@ -92,7 +98,7 @@ export async function generateMetadata({ params }: { params: Promise<{ segments:
   }
   if (path.length === 2 && path[0] === 'positions') {
     const job = getJobBySlug(path[1])
-    if (!job) return {}
+    if (!job) return NOT_FOUND_METADATA
     const title = locale === 'cs' ? job.titleCs : job.title
     const description = locale === 'cs' ? job.shortDescriptionCs : job.shortDescription
     const jobPath = `/positions/${job.slug}`
@@ -104,12 +110,12 @@ export async function generateMetadata({ params }: { params: Promise<{ segments:
     if (locale === 'de' || locale === 'pl') metadata.robots = { index: false, follow: true }
     return metadata
   }
-  if (path.length !== 2) return {}
+  if (path.length !== 2) return NOT_FOUND_METADATA
   if (path[0] === 'services' && path[1] === 'legal-executive-search') {
     return buildProductionAuthorityMetadata(locale)
   }
   const entity = getEntity(path[0], path[1])
-  if (!entity) return {}
+  if (!entity) return NOT_FOUND_METADATA
   const copy = entity.content[locale]
   return socialMetadata(locale, entity.basePath, copy.metaTitle ?? copy.title, copy.metaDescription ?? copy.summary)
 }

@@ -1,9 +1,9 @@
 'use client'
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight, Check, Clock } from 'lucide-react'
 import { LanguageProvider, useLanguage } from '@/lib/language-context'
+import { HeroBackgroundImage } from '@/components/hero-background-image'
 
 function HireLegalLeaderContent() {
   const { language } = useLanguage()
@@ -28,9 +28,7 @@ function HireLegalLeaderContent() {
         {/* HERO SECTION */}
         <section className="relative min-h-[100svh] flex items-center bg-navy overflow-hidden">
           {/* Background image with overlay */}
-          <Image
-            src="/images/hero-background.png"
-            alt=""
+          <HeroBackgroundImage
             fill
             className="object-cover object-center opacity-40"
             priority

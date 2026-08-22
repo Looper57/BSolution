@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Legal Recruitment Germany | B Solution - Syndikusanwalt & General Counsel Search',
-  description: 'Legal recruitment in Germany. Executive search for General Counsel, Syndikusanwalt, and senior legal professionals in Frankfurt, Munich, Dusseldorf, Hamburg, Berlin.',
+  title: 'Legal Recruitment Germany | Syndikusanwalt',
+  description: 'Legal recruitment in Germany. Executive search for General Counsel, Syndikusanwalt, and senior legal professionals in Frankfurt, Munich and Berlin.',
   keywords: ['legal recruitment Germany', 'Syndikusanwalt recruitment', 'German legal headhunter', 'Frankfurt legal jobs', 'Munich lawyer recruitment'],
   alternates: {
     canonical: 'https://www.bsolution.eu/legal-recruitment-germany',

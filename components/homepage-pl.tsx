@@ -1,10 +1,10 @@
 "use client"
 
 import Link from 'next/link'
-import Image from 'next/image'
 import { ArrowRight, Check } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { AuthorityProof } from '@/components/authority-proof'
+import { HeroBackgroundImage } from '@/components/hero-background-image'
 
 // Complete Polish content matching homepage structure
 const content = {
@@ -278,7 +278,7 @@ function HeroSection() {
       </div>
       
       {/* Desktop hero */}
-      <Image src="/images/hero-background.png" alt="" fill className="object-cover hidden md:block" style={{ objectPosition: 'center calc(50% + 40px)' }} priority sizes="100vw" />
+      <HeroBackgroundImage fill className="object-cover hidden md:block" style={{ objectPosition: 'center calc(50% + 40px)' }} priority sizes="100vw" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent z-10 hidden md:block" />
       
       <div className="flex-1" />

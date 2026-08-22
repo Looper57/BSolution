@@ -535,4 +535,33 @@ test('missing routes return the custom 404', async ({ page }) => {
   expect(response?.status()).toBe(404)
   await expect(page.getByText('Page not found', { exact: true })).toBeVisible()
   await expect(page.getByText(/Application error|Internal Server Error/)).toHaveCount(0)
+  // Regression (2026-08-22 Ahrefs audit): not-found.tsx previously had no
+  // metadata export, so it inherited the root layout's global
+  // `robots: { index: true }` — the 404 page was indexable. Next renders
+  // more than one <meta name="robots"> for this boundary (layout chain +
+  // the not-found segment both contribute), so assert every one of them is
+  // restrictive rather than assuming exactly one tag.
+  const robotsContents = await page.locator('meta[name="robots"]').evaluateAll((elements) =>
+    elements.map((element) => element.getAttribute('content')),
+  )
+  expect(robotsContents.length).toBeGreaterThan(0)
+  for (const content of robotsContents) {
+    expect(content).toMatch(/noindex/)
+  }
+  await expect(page.locator('link[rel="canonical"]')).toHaveCount(0)
+  await expect(page.locator('link[rel="alternate"][hrefLang]')).toHaveCount(0)
 })
+
+// Regression (2026-08-22 Ahrefs audit): position cards on /de/positions and
+// /pl/positions used to link to /de/positions/[slug] and /pl/positions/[slug]
+// — a noindex, canonical-elsewhere duplicate — as the primary destination,
+// because jobsData has no de/pl fields at all (positionFallbackLocales).
+// Internal links must resolve to the authoritative English page instead.
+for (const locale of ['de', 'pl'] as const) {
+  test(`${locale}/positions links to the authoritative English position page, not the untranslated fallback`, async ({ page }) => {
+    await page.goto(`/${locale}/positions`)
+    const firstPositionLink = page.locator('a[href*="/positions/general-counsel-prague"]').first()
+    await expect(firstPositionLink).toHaveAttribute('href', '/positions/general-counsel-prague')
+    await expect(page.locator(`a[href="/${locale}/positions/general-counsel-prague"]`)).toHaveCount(0)
+  })
+}

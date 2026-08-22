@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Hire a Legal Leader | Executive Search',
-  description: 'Find your next General Counsel, Head of Legal, or CLO with B Solution. Specialist legal executive search firm serving corporations across Europe and the Middle East.',
+  description: 'Find your next General Counsel, Head of Legal, or CLO with B Solution. Specialist legal executive search firm serving corporations across Europe.',
   alternates: {
     canonical: 'https://www.bsolution.eu/hire-legal-leader',
   },

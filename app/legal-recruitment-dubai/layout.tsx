@@ -1,7 +1,7 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Legal Recruitment Dubai | B Solution - UAE Legal Executive Search',
+  title: 'Legal Recruitment Dubai | UAE Executive Search',
   description: 'Legal recruitment in Dubai, Abu Dhabi, and UAE. Executive search for General Counsel, Regional Legal Directors, and law firm partners in the Middle East.',
   keywords: ['legal recruitment Dubai', 'UAE legal headhunter', 'DIFC lawyer recruitment', 'Abu Dhabi legal jobs', 'Middle East legal search'],
   alternates: {

@@ -3,7 +3,7 @@ import { buildAlternates } from '@/lib/i18n/config'
 
 export const metadata: Metadata = {
   title: 'For Clients',
-  description: 'Partner with B Solution for your legal recruitment needs. We serve corporations seeking in-house counsel and law firms looking for partners and associates across Europe and the Middle East.',
+  description: 'Partner with B Solution for legal recruitment. We serve corporations seeking in-house counsel and law firms seeking partners and associates across Europe.',
   alternates: buildAlternates('en', '/clients'),
   openGraph: {
     title: 'Legal Recruitment for Clients | B Solution',

@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Legal Recruitment Prague | B Solution - Czech Republic Legal Headhunter',
-  description: 'Legal Executive Search in Prague and the Czech market for law firms and corporate legal departments, supporting senior legal and leadership appointments since 2007.',
+  title: 'Legal Recruitment Prague | Legal Headhunter',
+  description: 'Legal Executive Search in Prague and the Czech market for law firms and corporate legal departments, since 2007.',
   keywords: ['legal recruitment Prague', 'Czech legal headhunter', 'Prague law firm recruitment', 'Czech Republic lawyer jobs', 'General Counsel Prague'],
   alternates: {
     canonical: 'https://www.bsolution.eu/legal-recruitment-prague',

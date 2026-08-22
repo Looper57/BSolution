@@ -6,20 +6,21 @@ describe('sitemap', () => {
   const urls = entries.map((entry) => entry.url)
 
   it('contains only unique canonical URLs', () => {
-    expect(urls).toHaveLength(106)
+    expect(urls).toHaveLength(102)
     expect(new Set(urls).size).toBe(urls.length)
   })
 
-  it('contains only canonical Legal Executive Search service routes', () => {
+  // /services/legal-executive-search is a distinct, evidence-gated page
+  // definition (lib/authority-pages/registry.ts) awaiting owner approval —
+  // its `indexationRequested` is currently false in all four locales, and
+  // it actually renders noindex. The generic content entity in
+  // lib/content/services.ts is unrelated and merely feeds the compiled
+  // registry; it must not put a noindex URL in the sitemap on its own
+  // (2026-08-22 Ahrefs audit: this test previously asserted the opposite,
+  // which is exactly the drift that produced the defect).
+  it('omits the Legal Executive Search service route until its evidence gate approves indexation', () => {
     expect(urls).not.toContain('https://www.bsolution.eu/legal-executive-search')
-    expect(
-      urls.filter((url) => url.endsWith('/services/legal-executive-search')),
-    ).toEqual([
-      'https://www.bsolution.eu/services/legal-executive-search',
-      'https://www.bsolution.eu/cs/services/legal-executive-search',
-      'https://www.bsolution.eu/de/services/legal-executive-search',
-      'https://www.bsolution.eu/pl/services/legal-executive-search',
-    ])
+    expect(urls.filter((url) => url.endsWith('/services/legal-executive-search'))).toEqual([])
   })
 
   it('contains one Services hub per supported locale', () => {

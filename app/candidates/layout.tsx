@@ -3,7 +3,7 @@ import { buildAlternates } from '@/lib/i18n/config'
 
 export const metadata: Metadata = {
   title: 'For Candidates',
-  description: 'Explore confidential legal career opportunities with B Solution. We connect legal professionals with senior roles at law firms and corporations across Europe and the Middle East.',
+  description: 'Explore confidential legal career opportunities with B Solution. We connect legal professionals with senior roles at law firms and corporations.',
   alternates: buildAlternates('en', '/candidates'),
   openGraph: {
     title: 'Legal Career Opportunities | B Solution',
