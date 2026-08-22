@@ -11,6 +11,8 @@ const clientsLocalizedCopy = {
   de: {
     corporationBody: 'Wir haben multinationale Unternehmen, regionale Zentralen und Portfoliounternehmen beim Aufbau ihrer Rechtsabteilungen unterstützt. Von der ersten juristischen Position bis zur Besetzung eines General Counsel verstehen wir die besonderen Anforderungen der Suche für Unternehmensrechtsabteilungen.',
     corporationCta: 'Suche für Rechtsabteilungen besprechen',
+    forCompaniesCta: 'Mehr für Unternehmen',
+    hireLegalLeaderCta: 'Eine Führungskraft im Rechtsbereich einstellen',
     corporationRolesTitle: 'Führungspositionen, die wir besetzen',
     corporationRoles: ['General Counsel', 'Chief Legal Officer', 'Head of Legal', 'Legal Director', 'Senior Legal Counsel', 'Legal Counsel', 'Compliance Director', 'Chief Compliance Officer'],
     lawFirmBody: 'Ob Sie einen Praxisbereich stärken, laterale Persönlichkeiten gewinnen oder die Partnernachfolge planen möchten: Wir verbinden Marktkenntnis mit gezielter Direktansprache. Unsere Erfahrung umfasst internationale Kanzleien, nationale Sozietäten und spezialisierte Boutiquen in Mitteleuropa und darüber hinaus.',
@@ -40,6 +42,8 @@ const clientsLocalizedCopy = {
   pl: {
     corporationBody: 'Wspieraliśmy międzynarodowe firmy, regionalne centrale i spółki portfelowe w budowaniu działów prawnych. Od pierwszego stanowiska prawniczego po rekrutację General Counsel rozumiemy specyfikę wyszukiwania dla korporacyjnych działów prawnych.',
     corporationCta: 'Omów wyszukiwanie dla działu prawnego',
+    forCompaniesCta: 'Więcej dla firm',
+    hireLegalLeaderCta: 'Zatrudnij lidera działu prawnego',
     corporationRolesTitle: 'Stanowiska kierownicze, które obsadzamy',
     corporationRoles: ['General Counsel', 'Chief Legal Officer', 'Head of Legal', 'Legal Director', 'Senior Legal Counsel', 'Legal Counsel', 'Compliance Director', 'Chief Compliance Officer'],
     lawFirmBody: 'Niezależnie od tego, czy kancelaria rozwija praktykę, poszukuje partnera lateralnego czy planuje sukcesję, łączymy znajomość rynku z bezpośrednim dotarciem do odpowiednich osób. Nasze doświadczenie obejmuje kancelarie międzynarodowe, krajowe i wyspecjalizowane butiki w Europie Środkowej i poza nią.',
@@ -129,13 +133,29 @@ function CorporationsSection() {
                 ? 'We have helped multinationals, regional headquarters, private equity portfolio companies, and market-leading enterprises build legal teams that deliver. From first legal hires to General Counsel appointments, we understand the unique dynamics of corporate legal recruitment.'
                 : 'Pomohli jsme nadnárodním společnostem, regionálním centrálám, portfoliovým společnostem private equity a předním podnikům budovat právní týmy, které přinášejí výsledky. Od prvního obsazení právní pozice po jmenování General Counsel chápeme specifika náboru do korporátních právních oddělení.')}
             </p>
-            <Link 
+            <Link
               href={localizedPath(language, '/contact')}
               className="inline-flex items-center mt-10 text-gold hover:text-gold-dark text-[13px] font-semibold uppercase tracking-[0.1em] transition-colors"
             >
               {nativeCopy?.corporationCta ?? (language === 'en' ? 'Discuss Corporate Search' : 'Projednat korporátní search')}
               <ArrowRight className="ml-2 h-4 w-4" />
             </Link>
+            <div className="mt-6 flex flex-wrap gap-x-8 gap-y-3">
+              <Link
+                href="/for-companies"
+                className="inline-flex items-center text-gray-500 hover:text-gold text-[12px] font-medium uppercase tracking-[0.08em] transition-colors"
+              >
+                {nativeCopy?.forCompaniesCta ?? (language === 'en' ? 'More for Companies' : 'Více pro firmy')}
+                <ArrowRight className="ml-2 h-3.5 w-3.5" />
+              </Link>
+              <Link
+                href="/hire-legal-leader"
+                className="inline-flex items-center text-gray-500 hover:text-gold text-[12px] font-medium uppercase tracking-[0.08em] transition-colors"
+              >
+                {nativeCopy?.hireLegalLeaderCta ?? (language === 'en' ? 'Hire a Legal Leader' : 'Najmout právního lídra')}
+                <ArrowRight className="ml-2 h-3.5 w-3.5" />
+              </Link>
+            </div>
           </div>
           <div className="bg-navy p-10 lg:p-12">
             <p className="eyebrow mb-6">

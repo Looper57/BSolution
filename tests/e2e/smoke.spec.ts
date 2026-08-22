@@ -565,3 +565,18 @@ for (const locale of ['de', 'pl'] as const) {
     await expect(page.locator(`a[href="/${locale}/positions/general-counsel-prague"]`)).toHaveCount(0)
   })
 }
+
+// Regression (2026-08-22 Ahrefs audit — "Hreflang to non-canonical", 18
+// occurrences): every /de and /pl positions listing and detail page
+// canonicalizes to the English original but was still declaring hreflang
+// annotations on itself, which is invalid per Google's guidance (hreflang
+// belongs only on the canonical page) and exactly what Ahrefs flagged.
+for (const path of ['/de/positions', '/pl/positions', '/de/positions/general-counsel-prague', '/pl/positions/general-counsel-prague']) {
+  test(`${path} canonicalizes to the English page and declares no hreflang on itself`, async ({ page }) => {
+    const response = await page.goto(path)
+    expect(response?.status()).toBe(200)
+    const canonical = await page.locator('link[rel="canonical"]').getAttribute('href')
+    expect(canonical).not.toContain(`/${path.split('/')[1]}/positions`)
+    await expect(page.locator('link[rel="alternate"][hrefLang]')).toHaveCount(0)
+  })
+}

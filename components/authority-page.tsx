@@ -4,6 +4,7 @@ import type { Entity } from '@/lib/content/types'
 import { absoluteUrl, localizedPath, LOCALES, LOCALE_META, type Locale } from '@/lib/i18n/config'
 import { UI } from '@/lib/i18n/ui'
 import { authorityEntities } from '@/lib/content'
+import { countryRecruitmentLandingPages } from '@/lib/routes'
 import {
   buildArticleSchema,
   buildBreadcrumbSchema,
@@ -11,6 +12,31 @@ import {
   buildWebPageSchema,
   serializeJsonLd,
 } from '@/lib/structured-data'
+
+// Label for the country-specific recruitment landing page cross-link below.
+// These landing pages are English-only (no translated content exists), so
+// every locale links to the same English URL — only the surrounding CTA
+// copy is localized (2026-08-22 Ahrefs audit: fixes the 5 orphan pages).
+const COUNTRY_LANDING_PAGE_LABEL: Record<string, Record<Locale, string>> = {
+  germany: {
+    en: 'Explore our dedicated Germany recruitment page',
+    cs: 'Prohlédněte si naši specializovanou stránku pro nábor v Německu',
+    de: 'Entdecken Sie unsere spezialisierte Seite zur Personalvermittlung in Deutschland',
+    pl: 'Zobacz naszą dedykowaną stronę rekrutacji w Niemczech',
+  },
+  'czech-republic': {
+    en: 'Explore our dedicated Prague recruitment page',
+    cs: 'Prohlédněte si naši specializovanou stránku pro nábor v Praze',
+    de: 'Entdecken Sie unsere spezialisierte Seite zur Personalvermittlung in Prag',
+    pl: 'Zobacz naszą dedykowaną stronę rekrutacji w Pradze',
+  },
+  'united-arab-emirates': {
+    en: 'Explore our dedicated Dubai & UAE recruitment page',
+    cs: 'Prohlédněte si naši specializovanou stránku pro nábor v Dubaji a SAE',
+    de: 'Entdecken Sie unsere spezialisierte Seite zur Personalvermittlung in Dubai und den VAE',
+    pl: 'Zobacz naszą dedykowaną stronę rekrutacji w Dubaju i ZEA',
+  },
+}
 
 const sectionLabels: Record<string, keyof typeof UI.en.nav> = {
   services: 'services',
@@ -27,6 +53,7 @@ export function AuthorityPage({ entity, locale, section }: { entity: Entity; loc
   const sectionLabel = ui.nav[sectionLabels[section]]
   const currentPath = entity.basePath
   const contactPath = localizedPath(locale, '/contact')
+  const countryLandingPage = entity.kind === 'country' ? countryRecruitmentLandingPages[entity.slug as keyof typeof countryRecruitmentLandingPages] : undefined
   const relatedSlugs = Object.entries(entity.related ?? {})
     .filter(([group]) => group !== 'insights')
     .flatMap(([, slugs]) => slugs ?? [])
@@ -113,6 +140,13 @@ export function AuthorityPage({ entity, locale, section }: { entity: Entity; loc
                     </Link>
                   ))}
                 </div>
+              </section>
+            )}
+            {countryLandingPage && (
+              <section className="border-t border-border pt-9">
+                <Link href={countryLandingPage} className="flex items-center justify-between gap-4 border border-gold/40 bg-cream p-6 text-sm font-medium text-navy transition-colors hover:border-gold">
+                  {COUNTRY_LANDING_PAGE_LABEL[entity.slug][locale]}<ArrowRight className="size-4 shrink-0" aria-hidden="true" />
+                </Link>
               </section>
             )}
           </article>

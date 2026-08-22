@@ -67,6 +67,17 @@ export const englishOnlyStaticPages = [
   '/legal-recruitment-dubai',
 ] as const
 
+// English-only recruitment landing pages, one per country, used to give the
+// dedicated country-specific page in englishOnlyStaticPages above a real
+// crawlable internal link from its matching location/country detail page —
+// previously reachable only via sitemap.xml, which Ahrefs correctly flags as
+// an orphan page (2026-08-22 Ahrefs audit).
+export const countryRecruitmentLandingPages = {
+  germany: '/legal-recruitment-germany',
+  'czech-republic': '/legal-recruitment-prague',
+  'united-arab-emirates': '/legal-recruitment-dubai',
+} as const satisfies Partial<Record<string, (typeof englishOnlyStaticPages)[number]>>
+
 export const apiRoutes = ['/api/contact'] as const
 
 export function isLocalizedStaticPage(path: string): path is (typeof localizedStaticPages)[number] {

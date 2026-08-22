@@ -1,6 +1,7 @@
 import { describe, expect, it } from 'vitest'
 import {
   checkForbiddenStructuredData,
+  checkHreflangOnNonCanonicalPage,
   checkOrganizationConsistency,
   extractCanonical,
   extractHreflangLinks,
@@ -34,6 +35,8 @@ function cleanTotals(): GraphCrawlReport['totals'] {
     crawlableUrlExpansionRatio: 1.08,
     entityConsistencyViolations: 0,
     forbiddenStructuredData: 0,
+    orphanPages: 0,
+    hreflangOnNonCanonicalPage: 0,
   }
 }
 
@@ -53,6 +56,8 @@ function emptyFindings(): GraphCrawlReport['findings'] {
     unknownRouteViolations: [],
     entityConsistencyViolations: [],
     forbiddenStructuredData: [],
+    orphanPages: [],
+    hreflangOnNonCanonicalPage: [],
   }
 }
 
@@ -77,6 +82,8 @@ describe('isGraphCrawlClean', () => {
     'unknownRouteViolations',
     'entityConsistencyViolations',
     'forbiddenStructuredData',
+    'orphanPages',
+    'hreflangOnNonCanonicalPage',
   ] as const)('fails when %s is nonzero', (field) => {
     const totals = cleanTotals()
     totals[field] = 1
@@ -160,6 +167,45 @@ describe('extractHreflangLinks', () => {
 
   it('returns an empty array when no hreflang is rendered', () => {
     expect(extractHreflangLinks('<head></head>')).toEqual([])
+  })
+})
+
+describe('checkHreflangOnNonCanonicalPage (2026-08-22 Ahrefs audit: "Hreflang to non-canonical")', () => {
+  const SITE = 'https://www.bsolution.eu'
+
+  it('passes a canonical page that declares hreflang on itself', () => {
+    const url = `${SITE}/positions`
+    const html = [
+      `<link rel="canonical" href="${url}" />`,
+      `<link rel="alternate" hrefLang="en" href="${url}" />`,
+      `<link rel="alternate" hrefLang="cs" href="${SITE}/cs/positions" />`,
+    ].join('\n')
+    expect(checkHreflangOnNonCanonicalPage(url, extractCanonical(html), html, SITE)).toEqual([])
+  })
+
+  it('passes a non-canonical page that correctly declares no hreflang (fixed state)', () => {
+    const url = `${SITE}/de/positions`
+    const html = `<link rel="canonical" href="${SITE}/positions" />`
+    expect(checkHreflangOnNonCanonicalPage(url, extractCanonical(html), html, SITE)).toEqual([])
+  })
+
+  it('flags a non-canonical page that still declares hreflang on itself (regression fixture — every /de and /pl positions page before the fix)', () => {
+    const url = `${SITE}/de/positions/general-counsel-prague`
+    const html = [
+      `<link rel="canonical" href="${SITE}/positions/general-counsel-prague" />`,
+      `<link rel="alternate" hrefLang="en" href="${SITE}/positions/general-counsel-prague" />`,
+      `<link rel="alternate" hrefLang="cs" href="${SITE}/cs/positions/general-counsel-prague" />`,
+      `<link rel="alternate" hrefLang="x-default" href="${SITE}/positions/general-counsel-prague" />`,
+    ].join('\n')
+    const violations = checkHreflangOnNonCanonicalPage(url, extractCanonical(html), html, SITE)
+    expect(violations).toHaveLength(1)
+    expect(violations[0].detail).toContain('en, cs, x-default')
+  })
+
+  it('flags a page with no canonical tag at all that still declares hreflang', () => {
+    const url = `${SITE}/pl/positions`
+    const html = `<link rel="alternate" hrefLang="en" href="${SITE}/positions" />`
+    expect(checkHreflangOnNonCanonicalPage(url, extractCanonical(html), html, SITE)).toHaveLength(1)
   })
 })
 

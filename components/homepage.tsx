@@ -9,6 +9,23 @@ import { HeroBackgroundImage } from '@/components/hero-background-image'
 
 type Lang = 'en' | 'cs' | 'de' | 'pl'
 
+// Secondary CTA labels for the English-only landing pages linked from the
+// homepage below — kept separate from the main `content` block since these
+// two pages have no translated content of their own to draw a title from
+// (2026-08-22 Ahrefs audit: fixes 2 of the 5 orphan pages).
+const forCompaniesLabel: Record<Lang, string> = {
+  en: 'More for companies',
+  cs: 'Více pro firmy',
+  de: 'Mehr für Unternehmen',
+  pl: 'Więcej dla firm',
+}
+const hireLegalLeaderLabel: Record<Lang, string> = {
+  en: 'Hire a legal leader',
+  cs: 'Najmout právního lídra',
+  de: 'Eine Führungskraft im Rechtsbereich einstellen',
+  pl: 'Zatrudnij lidera działu prawnego',
+}
+
 // All content definitions per language
 const content = {
   en: {
@@ -470,11 +487,11 @@ export function Homepage({ lang }: HomepageProps) {
         <SocialProofSection content={c.socialProof} />
         <AuthorityProof locale={lang} />
         {c.process && <ProcessSection content={c.process} />}
-        <ClientsSection content={c.clients} langPrefix={langPrefix} />
+        <ClientsSection content={c.clients} langPrefix={langPrefix} lang={lang} />
         <DifferenceSection content={c.difference} />
         {lang === 'en' && 'industries' in c && <IndustriesSection content={c.industries} />}
         <IntroSection content={c.intro} langPrefix={langPrefix} />
-        <ServicesSection content={c.services} langPrefix={langPrefix} />
+        <ServicesSection content={c.services} langPrefix={langPrefix} lang={lang} />
         <GeographySection content={c.geography} />
         <CandidatesSection content={c.candidates} langPrefix={langPrefix} />
         <FinalCTA content={c.finalCta} langPrefix={langPrefix} />
@@ -905,11 +922,11 @@ function IndustriesSection({ content: c }: { content: typeof content.en.industri
   )
 }
 
-function ClientsSection({ content: c, langPrefix }: { content: typeof content.en.clients, langPrefix: string }) {
+function ClientsSection({ content: c, langPrefix, lang }: { content: typeof content.en.clients, langPrefix: string, lang: Lang }) {
   return (
     <section className="bg-navy py-28 md:py-36 lg:py-48 relative overflow-hidden">
       <div className="absolute top-0 right-0 w-[50%] h-[50%]" style={{ background: 'radial-gradient(ellipse at top right, rgba(176, 141, 87, 0.06) 0%, transparent 60%)' }} />
-      
+
       <div className="max-w-[1440px] mx-auto px-8 lg:px-20 relative">
         <div className="grid lg:grid-cols-2 gap-10 lg:gap-16">
           <div className="bg-navy-light p-10 lg:p-14 border border-white/5">
@@ -917,6 +934,10 @@ function ClientsSection({ content: c, langPrefix }: { content: typeof content.en
             <p className="text-white/50 text-[16px] leading-[1.8] mb-10">{c.corporate.desc}</p>
             <Link href={`${langPrefix}/contact`} className="inline-flex items-center justify-center px-8 py-3.5 bg-gold hover:bg-gold-light text-navy text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors">
               {c.ctaPrimary}
+              <ArrowRight className="ml-2.5 h-3.5 w-3.5" />
+            </Link>
+            <Link href="/for-companies" className="inline-flex items-center mt-6 ml-2 text-white/50 hover:text-gold text-[11px] font-semibold uppercase tracking-[0.14em] transition-colors">
+              {forCompaniesLabel[lang]}
               <ArrowRight className="ml-2.5 h-3.5 w-3.5" />
             </Link>
           </div>
@@ -991,14 +1012,14 @@ function IntroSection({ content: c, langPrefix }: { content: typeof content.en.i
   )
 }
 
-function ServicesSection({ content: c, langPrefix }: { content: typeof content.en.services, langPrefix: string }) {
+function ServicesSection({ content: c, langPrefix, lang }: { content: typeof content.en.services, langPrefix: string, lang: Lang }) {
   return (
     <section className="bg-white py-28 md:py-36 lg:py-48" aria-labelledby="services-heading">
       <div className="max-w-[1440px] mx-auto px-8 lg:px-20">
         <div className="flex items-center justify-center mb-20 lg:mb-28" aria-hidden="true">
           <div className="w-16 h-px bg-gold/40" />
         </div>
-        
+
         <div className="grid lg:grid-cols-12 gap-16 lg:gap-20">
           <div className="lg:col-span-5">
             <div className="lg:sticky lg:top-40">
@@ -1007,6 +1028,10 @@ function ServicesSection({ content: c, langPrefix }: { content: typeof content.e
               <p className="mt-10 text-gray-500 text-[17px] leading-[1.85]">{c.intro}</p>
               <Link href={`${langPrefix}/contact`} className="inline-flex items-center justify-center px-10 py-4 bg-gold hover:bg-gold-light text-navy text-[12px] font-semibold uppercase tracking-[0.12em] transition-colors mt-14">
                 {c.cta}
+                <ArrowRight className="ml-3 h-4 w-4" />
+              </Link>
+              <Link href="/hire-legal-leader" className="inline-flex items-center text-gray-500 hover:text-gold text-[12px] font-semibold uppercase tracking-[0.1em] transition-colors mt-6">
+                {hireLegalLeaderLabel[lang]}
                 <ArrowRight className="ml-3 h-4 w-4" />
               </Link>
             </div>

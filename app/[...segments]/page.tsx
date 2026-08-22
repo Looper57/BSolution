@@ -33,8 +33,19 @@ const ogLocales: Record<Locale, string> = { en: 'en_GB', cs: 'cs_CZ', de: 'de_DE
 // (2026-08-22 Ahrefs audit).
 const NOT_FOUND_METADATA: Metadata = { robots: { index: false, follow: true } }
 
-function translatedPositionAlternates(path: string) {
+// A de/pl positions page has no genuine translated content (jobsData has no
+// de/pl fields) and its own canonical points at the en/cs original, so it
+// must not also declare hreflang annotations on itself — a page whose
+// canonical points elsewhere is not the page hreflang should be authored on.
+// Emitting `languages` there anyway is exactly what Ahrefs' "Hreflang to
+// non-canonical" check flags (2026-08-22 Ahrefs audit: 18 occurrences, every
+// /de and /pl positions listing and detail page).
+function positionAlternates(locale: Locale, path: string) {
+  const canonicalLocale = locale === 'cs' ? 'cs' : 'en'
+  const canonical = absoluteUrl(canonicalLocale, path)
+  if (locale !== canonicalLocale) return { canonical }
   return {
+    canonical,
     languages: {
       en: absoluteUrl('en', path),
       cs: absoluteUrl('cs', path),
@@ -71,10 +82,7 @@ export async function generateMetadata({ params }: { params: Promise<{ segments:
   if (path.length === 1 && path[0] === 'positions') {
     const copy = staticRouteMetadata[locale].positions
     const metadata = socialMetadata(locale, '/positions', copy.title, copy.description)
-    metadata.alternates = {
-      canonical: absoluteUrl(locale === 'cs' ? 'cs' : 'en', '/positions'),
-      ...translatedPositionAlternates('/positions'),
-    }
+    metadata.alternates = positionAlternates(locale, '/positions')
     if (locale === 'de' || locale === 'pl') metadata.robots = { index: false, follow: true }
     return metadata
   }
@@ -103,10 +111,7 @@ export async function generateMetadata({ params }: { params: Promise<{ segments:
     const description = locale === 'cs' ? job.shortDescriptionCs : job.shortDescription
     const jobPath = `/positions/${job.slug}`
     const metadata = socialMetadata(locale, jobPath, `${title} - ${locale === 'cs' ? job.locationCs : job.location}`, description)
-    metadata.alternates = {
-      canonical: absoluteUrl(locale === 'cs' ? 'cs' : 'en', jobPath),
-      ...translatedPositionAlternates(jobPath),
-    }
+    metadata.alternates = positionAlternates(locale, jobPath)
     if (locale === 'de' || locale === 'pl') metadata.robots = { index: false, follow: true }
     return metadata
   }

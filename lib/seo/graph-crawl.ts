@@ -36,6 +36,16 @@ const NAVIGABLE_FALLBACK_HUB_PATHS: readonly string[] = [
   ...productionAuthorityPages.map((page) => page.basePath),
 ]
 
+// Every authoritative sitemap URL must have at least one crawlable HTML
+// <a href> pointing to it from another inventory page — sitemap presence
+// alone does not make a page reachable by an ordinary crawl, and Ahrefs
+// correctly flags such a page as an orphan (2026-08-22 Ahrefs audit: this
+// is exactly what happened to the 5 English-only recruitment landing pages,
+// now fixed with real contextual links). This allowlist exists for pages
+// that are genuinely, deliberately reachable only via sitemap.xml/direct
+// entry (none currently) — keep it empty unless a real case is documented.
+const ORPHAN_PAGE_ALLOWLIST: readonly string[] = []
+
 interface FetchResult {
   status: number
   redirected: boolean
@@ -70,6 +80,8 @@ export interface GraphCrawlTotals {
   crawlableUrlExpansionRatio: number
   entityConsistencyViolations: number
   forbiddenStructuredData: number
+  orphanPages: number
+  hreflangOnNonCanonicalPage: number
 }
 
 export interface GraphCrawlFindings {
@@ -87,6 +99,8 @@ export interface GraphCrawlFindings {
   unknownRouteViolations: Violation[]
   entityConsistencyViolations: Violation[]
   forbiddenStructuredData: Violation[]
+  orphanPages: Violation[]
+  hreflangOnNonCanonicalPage: Violation[]
 }
 
 export interface GraphCrawlReport {
@@ -113,6 +127,8 @@ export function isGraphCrawlClean(report: GraphCrawlReport): boolean {
     && t.crawlableUrlExpansionRatio <= 1.25
     && t.entityConsistencyViolations === 0
     && t.forbiddenStructuredData === 0
+    && t.orphanPages === 0
+    && t.hreflangOnNonCanonicalPage === 0
   )
 }
 
@@ -121,7 +137,13 @@ function toLocal(url: string, siteOrigin: string): string {
 }
 
 function toCanonicalForm(url: string, siteOrigin: string): string {
-  return url.startsWith(siteOrigin) ? `${SITE_URL}${url.slice(siteOrigin.length)}` : url
+  const rewritten = url.startsWith(siteOrigin) ? `${SITE_URL}${url.slice(siteOrigin.length)}` : url
+  // Match app/sitemap.ts's own homepage normalization (absoluteCanonicalUrl):
+  // the root path never carries a trailing slash. Without this, a homepage
+  // link discovered as `href="/"` fails to match the sitemap's slash-less
+  // inventory entry and the homepage is misreported as an orphan with
+  // hreflang on a "non-canonical" page (both false positives).
+  return rewritten === `${SITE_URL}/` ? SITE_URL : rewritten
 }
 
 async function fetchPage(url: string): Promise<FetchResult> {
@@ -155,6 +177,18 @@ export function extractHreflangLinks(html: string): { lang: string; href: string
   let m: RegExpExecArray | null
   while ((m = re.exec(html))) results.push({ lang: m[1], href: m[2] })
   return results
+}
+
+// Per Google's guidance, hreflang annotations belong only on the canonical
+// version of a page — a page whose own canonical points elsewhere must not
+// also declare hreflang links on itself. Ahrefs flags this as "Hreflang to
+// non-canonical" (2026-08-22 Ahrefs audit: 18 occurrences, every /de and
+// /pl positions listing/detail page, fixed in app/[...segments]/page.tsx).
+export function checkHreflangOnNonCanonicalPage(url: string, canonical: string | null, html: string, siteOrigin: string): Violation[] {
+  if (canonical && toCanonicalForm(canonical, siteOrigin) === url) return []
+  const hreflang = extractHreflangLinks(html)
+  if (hreflang.length === 0) return []
+  return [{ url, detail: `page canonicalizes to ${canonical ?? '(none)'} but still declares hreflang for: ${hreflang.map((h) => h.lang).join(', ')}` }]
 }
 
 function extractInternalLinks(html: string, siteOrigin: string): string[] {
@@ -271,6 +305,8 @@ export async function runGraphCrawl(options: { baseUrl: string; concurrency?: nu
     unknownRouteViolations: [],
     entityConsistencyViolations: [],
     forbiddenStructuredData: [],
+    orphanPages: [],
+    hreflangOnNonCanonicalPage: [],
   }
 
   const pageCache = new Map<string, FetchResult>()
@@ -303,6 +339,9 @@ export async function runGraphCrawl(options: { baseUrl: string; concurrency?: nu
     const canonical = extractCanonical(html)
     if (!canonical || toCanonicalForm(canonical, siteOrigin) !== entry.url) {
       findings.canonicalMismatch.push({ url: entry.url, detail: `rendered canonical is ${canonical ?? '(none)'}` })
+    }
+    for (const violation of checkHreflangOnNonCanonicalPage(entry.url, canonical, html, siteOrigin)) {
+      findings.hreflangOnNonCanonicalPage.push(violation)
     }
     if (extractRobotsNoindex(html)) {
       findings.noindexInSitemap.push({ url: entry.url, detail: 'sitemap entry renders noindex' })
@@ -382,15 +421,27 @@ export async function runGraphCrawl(options: { baseUrl: string; concurrency?: nu
 
   // Pass 3: internal-link policy — every discovered first-party link must resolve
   // to a direct-200 inventory URL, or a navigable noindex fallback hub with a
-  // documented purpose (positions/services-style listing pages).
+  // documented purpose (positions/services-style listing pages). The same
+  // pass also builds the inbound-link graph used for orphan detection below.
   const inventoryUrlSet = new Set(entries.map((e) => e.url))
   const discovered = new Set<string>()
+  const inboundLinks = new Map<string, Set<string>>()
   for (const entry of clusterEntries) {
     const html = pageCache.get(toLocal(entry.url, siteOrigin))!.html!
     for (const link of extractInternalLinks(html, siteOrigin)) {
       const canonicalForm = toCanonicalForm(link, siteOrigin)
       if (/\.[a-z0-9]+$/i.test(new URL(link).pathname) || canonicalForm.includes('/api/')) continue
       discovered.add(canonicalForm)
+      if (canonicalForm === entry.url) continue
+      if (!inboundLinks.has(canonicalForm)) inboundLinks.set(canonicalForm, new Set())
+      inboundLinks.get(canonicalForm)!.add(entry.url)
+    }
+  }
+
+  for (const entry of entries) {
+    if (ORPHAN_PAGE_ALLOWLIST.includes(entry.url)) continue
+    if (!(inboundLinks.get(entry.url)?.size)) {
+      findings.orphanPages.push({ url: entry.url, detail: 'no crawlable HTML link from another inventory page points here (sitemap presence alone does not count)' })
     }
   }
 
@@ -402,6 +453,10 @@ export async function runGraphCrawl(options: { baseUrl: string; concurrency?: nu
       return
     }
     const html = result.html!
+    const canonical = extractCanonical(html)
+    for (const violation of checkHreflangOnNonCanonicalPage(link, canonical, html, siteOrigin)) {
+      findings.hreflangOnNonCanonicalPage.push(violation)
+    }
     if (!extractRobotsNoindex(html)) return // indexable and 200 but not in sitemap yet — informational, not a hard failure here
     const pathname = new URL(link).pathname
     const withoutLocale = LOCALES.reduce<string>((p, l) => (p === `/${l}` || p.startsWith(`/${l}/`) ? p.slice(`/${l}`.length) || '/' : p), pathname)
@@ -456,6 +511,8 @@ export async function runGraphCrawl(options: { baseUrl: string; concurrency?: nu
     crawlableUrlExpansionRatio: entries.length === 0 ? 0 : discovered.size / entries.length,
     entityConsistencyViolations: findings.entityConsistencyViolations.length,
     forbiddenStructuredData: findings.forbiddenStructuredData.length,
+    orphanPages: findings.orphanPages.length,
+    hreflangOnNonCanonicalPage: findings.hreflangOnNonCanonicalPage.length,
   }
 
   return { totals, findings }
