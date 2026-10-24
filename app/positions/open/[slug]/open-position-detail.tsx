@@ -8,6 +8,8 @@ import { Footer } from '@/components/footer'
 import { Button } from '@/components/ui/button'
 import { localizedPath } from '@/lib/i18n/config'
 import type { LivePosition } from '@/lib/live-positions'
+import { APPLICATIONS_ENABLED } from '@/lib/candidate-consent'
+import { ApplyForm } from './apply-form'
 
 function Detail({ position }: { position: LivePosition }) {
   const { language: locale } = useLanguage()
@@ -29,6 +31,7 @@ function Detail({ position }: { position: LivePosition }) {
           <div className="mt-10 space-y-4 text-navy/80 leading-relaxed">
             {position.description.split('\n').filter(Boolean).map((paragraph, i) => <p key={i}>{paragraph}</p>)}
           </div>
+          {APPLICATIONS_ENABLED ? <ApplyForm jobId={position.id} locale={locale} /> : null}
           <div className="mt-12">
             <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-navy font-semibold h-14 px-10">
               <Link href={`${localizedPath(locale, '/contact')}?position=${position.id}`}>
