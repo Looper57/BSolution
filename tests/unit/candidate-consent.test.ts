@@ -16,3 +16,13 @@ describe('candidate consent (M6, controller Yours Solution s.r.o.)', () => {
     expect(APPLY_ENDPOINT(501)).toBe('https://www.lawbridge.eu/api/recruitment/positions/501/apply')
   })
 })
+
+describe('consent for a CV without a position (M6.1)', () => {
+  it('matches lawbridge.eu and does not mention "this position"', async () => {
+    const { registrationConsentText, REGISTRATION_CONSENT_VERSION, REGISTER_ENDPOINT } = await import('@/lib/candidate-consent')
+    expect(REGISTRATION_CONSENT_VERSION).toBe('2026-10-24-yours-solution-2y-future')
+    expect(registrationConsentText('cs')).toContain('nabízení vhodných pozic')
+    expect(registrationConsentText('en')).not.toContain('this position')
+    expect(REGISTER_ENDPOINT).toMatch(/\/api\/recruitment\/candidates$/)
+  })
+})
