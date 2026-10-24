@@ -91,8 +91,8 @@ export async function generateMetadata({ params }: { params: Promise<{ segments:
       ? (locale === 'cs' ? 'Ochrana osobních údajů' : 'Privacy Policy')
       : (locale === 'cs' ? 'Zásady používání cookies' : 'Cookie Policy')
     const description = path[0] === 'privacy'
-      ? (locale === 'cs' ? 'Informace o tom, jak B Solution shromažďuje, používá a chrání osobní údaje.' : 'Learn how B Solution collects, uses, and protects personal data.')
-      : (locale === 'cs' ? 'Informace o používání cookies a podobných technologií na webu B Solution.' : 'Learn how B Solution uses cookies and similar technologies.')
+      ? (locale === 'cs' ? 'Zásady ochrany osobních údajů B Solution: jaké údaje shromažďujeme, k jakému účelu je používáme, jak dlouho je uchováváme a jak je chráníme.' : 'Learn how B Solution collects, uses, and protects personal data.')
+      : (locale === 'cs' ? 'Zásady používání cookies na webu B Solution: jaké cookies a podobné technologie web používá, k čemu slouží a jak dlouho se uchovávají.' : 'Learn how B Solution uses cookies and similar technologies.')
     const metadata = socialMetadata(locale, `/${path[0]}`, title, description)
     metadata.alternates = {
       canonical: absoluteUrl(locale, `/${path[0]}`),

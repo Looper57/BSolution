@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
   title: 'Cookie Policy',
-  description: 'B Solution cookie policy. Learn how we use cookies and similar technologies on our website.',
+  description: 'B Solution cookie policy: which cookies and similar technologies the bsolution.eu website uses, what they are for and how long they are kept.',
   robots: {
     index: true,
     follow: true,
