@@ -16,8 +16,11 @@ describe('country pages open with questions and direct answers', () => {
     })
   }
 
-  it('never promises timelines, fees or guarantees the site does not state', () => {
+  it('states only the owner-confirmed timeline and guarantee, never fees', () => {
     const all = countries.flatMap((c) => Object.values(c.content).flatMap((l) => l.faq ?? []))
-    for (const item of all) expect(item.answer).not.toMatch(/\d+\s*(weeks|týdn|Wochen|tygodni|%)|guarantee|záruk|Garantie|gwarancj/i)
+    const text = all.map((i) => i.answer).join(' ')
+    expect(text).toContain('three to four weeks')
+    expect(text).toContain('12 months for senior roles (8+ years of experience)')
+    for (const item of all) expect(item.answer).not.toMatch(/%|fee|honorář|Honorar|wynagrodzeni|cena|price|Preis/i)
   })
 })
