@@ -1,9 +1,17 @@
-import { describe, expect, it } from 'vitest'
+import { beforeAll, describe, expect, it, vi } from 'vitest'
+import type { MetadataRoute } from 'next'
 import sitemap from '@/app/sitemap'
 
 describe('sitemap', () => {
-  const entries = sitemap()
-  const urls = entries.map((entry) => entry.url)
+  // The open-positions feed (LawBridge) is empty here; tests/unit/live-positions.test.ts covers it.
+  let entries: MetadataRoute.Sitemap = []
+  let urls: string[] = []
+  beforeAll(async () => {
+    vi.stubGlobal('fetch', vi.fn(async () => new Response(JSON.stringify({ positions: [] }), { status: 200 })))
+    entries = await sitemap()
+    urls = entries.map((entry) => entry.url)
+    vi.unstubAllGlobals()
+  })
 
   it('contains only unique canonical URLs', () => {
     expect(urls).toHaveLength(102)

@@ -11,6 +11,7 @@ import { cn } from '@/lib/utils'
 import { getAllJobs, type Job } from '@/lib/jobs-data'
 import { localizedPath } from '@/lib/i18n/config'
 import { positionDetailLocale } from '@/lib/routes'
+import { livePositionPath, type LivePosition } from '@/lib/live-positions'
 
 function PageHeader() {
   const { language: locale } = useLanguage()
@@ -340,12 +341,39 @@ function ConfidentialSection() {
   )
 }
 
-function PositionsPage() {
+/** Positions published for bsolution.eu in the LawBridge console (M4). */
+function OpenPositionsSection({ positions }: { positions: LivePosition[] }) {
+  const { language: locale } = useLanguage()
+  const cs = locale === 'cs'
+  if (positions.length === 0) return null
+  return (
+    <section className="bg-white py-16 lg:py-20">
+      <div className="max-w-[1440px] mx-auto px-8 lg:px-20">
+        <h2 className="text-navy text-2xl lg:text-3xl font-serif">{cs ? 'Aktuálně otevřené pozice' : 'Open positions now'}</h2>
+        <ul className="mt-8 grid gap-6 md:grid-cols-2">
+          {positions.map((position) => (
+            <li key={position.id} className="border border-navy/10 p-6">
+              <Link href={livePositionPath(position)} className="block">
+                <h3 className="text-navy text-xl font-serif">{position.title}</h3>
+                <p className="mt-2 flex items-center gap-2 text-navy/60 text-sm"><MapPin className="h-4 w-4" />{[position.city, position.country].filter(Boolean).join(', ')}</p>
+                <p className="mt-3 text-navy/70 text-sm line-clamp-3">{position.description}</p>
+                <span className="mt-4 inline-flex items-center text-gold text-sm">{cs ? 'Detail pozice' : 'View position'}<ChevronRight className="ml-1 h-4 w-4" /></span>
+              </Link>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  )
+}
+
+function PositionsPage({ livePositions }: { livePositions: LivePosition[] }) {
   return (
     <>
       <Header />
       <main>
         <PageHeader />
+        <OpenPositionsSection positions={livePositions} />
         <PositionsListSection />
         <ConfidentialSection />
       </main>
@@ -354,10 +382,10 @@ function PositionsPage() {
   )
 }
 
-export function PositionsPageContent() {
+export function PositionsPageContent({ livePositions = [] }: { livePositions?: LivePosition[] }) {
   return (
     <LanguageProvider>
-      <PositionsPage />
+      <PositionsPage livePositions={livePositions} />
     </LanguageProvider>
   )
 }

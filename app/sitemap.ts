@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { jobsData } from '@/lib/jobs-data'
+import { getLivePositions, livePositionPath } from '@/lib/live-positions'
 import { authorityEntities } from '@/lib/content'
 import { productionAuthorityCanonicalRoutes, productionAuthorityPages } from '@/lib/authority-pages'
 import { getSitemapEligibleSeoPages } from '@/lib/seo-pages'
@@ -49,7 +50,7 @@ function localizedEntry(path: string, locale: Locale): MetadataRoute.Sitemap[num
   }
 }
 
-export default function sitemap(): MetadataRoute.Sitemap {
+export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const fullyLocalizedPaths = [
     '/',
     ...localizedStaticPages,
@@ -106,7 +107,17 @@ export default function sitemap(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  const entries = [...localizedPages, ...authorityPages, ...gatedAuthorityPages, ...positionListings, ...positionPages, ...legalPages, ...englishPages]
+  // Positions published for bsolution.eu in the LawBridge console (M4);
+  // English-only URLs, the text is as entered, and they leave the sitemap
+  // as soon as they close or expire.
+  const openPositionPages = (await getLivePositions()).map((position) => ({
+    url: `${SITE_URL}${livePositionPath(position)}`,
+    lastModified: position.postedAt ?? undefined,
+    changeFrequency: 'daily' as const,
+    priority: 0.8,
+  }))
+
+  const entries = [...localizedPages, ...authorityPages, ...gatedAuthorityPages, ...positionListings, ...positionPages, ...openPositionPages, ...legalPages, ...englishPages]
   const urls = new Set(entries.map((entry) => entry.url))
   if (urls.size !== entries.length) throw new Error('Sitemap contains duplicate canonical URLs')
   return entries
