@@ -6,8 +6,8 @@ import type { Metadata } from 'next'
 // app/positions/page.tsx instead, since a layout-level `alternates` is
 // inherited by every child, including a 404 (2026-08-22 Ahrefs audit).
 export const metadata: Metadata = {
-  title: 'Current Opportunities',
-  description: 'Explore current legal executive positions and career opportunities. General Counsel, CLO, partner, and senior legal roles across Europe.',
+  title: 'Legal Jobs and Mandates',
+  description: 'Open legal positions and examples of the General Counsel, CLO, partner and senior legal mandates B Solution fills across Europe and the Middle East.',
 }
 
 export default function PositionsLayout({

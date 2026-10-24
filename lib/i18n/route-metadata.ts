@@ -8,14 +8,14 @@ export const staticRouteMetadata: Record<Locale, Record<string, RouteMetadataCop
     clients: { title: 'Legal Executive Search for Clients', description: 'Retained legal executive search for corporations and law firms appointing General Counsel, legal leaders, partners and senior lawyers.' },
     candidates: { title: 'Legal Career Opportunities', description: 'Explore confidential opportunities for accomplished lawyers, legal leaders and law-firm partners across Europe and the Middle East.' },
     contact: { title: 'Contact B Solution', description: 'Arrange a confidential conversation about a legal executive search mandate, senior legal hire or career opportunity.' },
-    positions: { title: 'Current Legal Opportunities', description: 'View selected confidential mandates for General Counsel, senior in-house lawyers, law-firm partners and legal specialists.' },
+    positions: { title: 'Legal Jobs and Mandates', description: 'View selected confidential mandates for General Counsel, senior in-house lawyers, law-firm partners and legal specialists.' },
   },
   cs: {
     about: { title: 'O nás', description: 'Poznejte specialistu na executive search v právním sektoru, kterému jsou od roku 2007 svěřována seniorní obsazení v Evropě a na Blízkém východě.' },
     clients: { title: 'Legal Executive Search pro klienty', description: 'Retained executive search pro korporace a advokátní kanceláře obsazující General Counsel, právní lídry, partnery a seniorní právníky.' },
     candidates: { title: 'Kariérní příležitosti v právním sektoru', description: 'Objevte důvěrné příležitosti pro zkušené právníky, právní lídry a partnery advokátních kanceláří v Evropě a na Blízkém východě.' },
     contact: { title: 'Kontaktujte B Solution', description: 'Domluvte si důvěrný rozhovor o mandátu executive search, seniorním právním náboru nebo kariérní příležitosti v Evropě a na Blízkém východě.' },
-    positions: { title: 'Aktuální právní příležitosti', description: 'Prohlédněte si vybrané důvěrné mandáty pro General Counsel, seniorní interní právníky, partnery advokátních kanceláří a právní specialisty.' },
+    positions: { title: 'Právní pozice a mandáty', description: 'Prohlédněte si vybrané důvěrné mandáty pro General Counsel, seniorní interní právníky, partnery advokátních kanceláří a právní specialisty.' },
   },
   de: {
     about: { title: 'Über B Solution', description: 'Lernen Sie die auf Legal Executive Search spezialisierte Beratung kennen, der seit 2007 Führungsbesetzungen in Europa und im Nahen Osten anvertraut werden.' },

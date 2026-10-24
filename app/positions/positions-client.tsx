@@ -23,12 +23,12 @@ function PageHeader() {
         <div className="max-w-3xl">
           <div className="w-16 h-px bg-gold mb-8" />
           <h1 className="text-white text-[clamp(2rem,5vw,3.5rem)] font-serif leading-[1.1]">
-            {language === 'en' ? 'Current Opportunities' : 'Aktuální příležitosti'}
+            {language === 'en' ? 'Legal Career Opportunities' : 'Kariérní příležitosti v právu'}
           </h1>
           <p className="mt-8 text-xl text-white/50 leading-relaxed">
             {language === 'en'
-              ? 'Explore our current mandates across legal leadership roles in Europe and the Middle East.'
-              : 'Prozkoumejte naše aktuální mandáty v právních vedoucích rolích v Evropě a na Blízkém východě.'
+              ? 'Open positions first, then examples of the legal leadership mandates we fill across Europe and the Middle East. For similar roles, send us your CV.'
+              : 'Nahoře aktuálně otevřené pozice, pod nimi příklady právních vedoucích mandátů, které obsazujeme v Evropě a na Blízkém východě. Pro podobné role nám pošlete životopis.'
             }
           </p>
         </div>
@@ -249,7 +249,7 @@ function PositionsListSection() {
         {featuredJobs.length > 0 && (
           <div className="mb-20">
             <h3 className="text-[10px] font-semibold text-charcoal/40 uppercase tracking-[0.2em] mb-8">
-              {language === 'en' ? 'Featured Mandates' : 'Vybrané mandáty'}
+              {language === 'en' ? 'Examples of mandates we fill' : 'Příklady mandátů, které obsazujeme'}
             </h3>
             <div className="grid lg:grid-cols-3 gap-px bg-gray-200">
               {featuredJobs.map((job) => (
@@ -263,7 +263,7 @@ function PositionsListSection() {
         {regularJobs.length > 0 && (
           <div>
             <h3 className="text-[10px] font-semibold text-charcoal/40 uppercase tracking-[0.2em] mb-8">
-              {language === 'en' ? 'Additional Opportunities' : 'Další příležitosti'}
+              {language === 'en' ? 'More examples' : 'Další příklady'}
             </h3>
             <div className="divide-y divide-gray-100 border-t border-b border-gray-100">
               {regularJobs.map((job) => (
