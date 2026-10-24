@@ -839,7 +839,7 @@ function FooterCS() {
               <p>{f.address}</p>
               <p>{f.phone}</p>
               <a href={`mailto:${f.email}`} className="block hover:text-white/70 transition-colors">{f.email}</a>
-              <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" className="block hover:text-white/70 transition-colors">LinkedIn</a>
+              <a href="https://www.linkedin.com/company/bsolution" target="_blank" rel="noopener noreferrer" className="block hover:text-white/70 transition-colors">LinkedIn</a>
             </address>
           </div>
         </div>
