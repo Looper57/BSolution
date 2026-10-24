@@ -8,6 +8,8 @@ import { Footer } from '@/components/footer'
 import { Button } from '@/components/ui/button'
 import type { Job } from '@/lib/jobs-data'
 import { localizedPath } from '@/lib/i18n/config'
+import { APPLICATIONS_ENABLED } from '@/lib/candidate-consent'
+import { ApplyForm } from '@/app/positions/open/[slug]/apply-form'
 
 function JobDetailContent({ job }: { job: Job }) {
   const { language: locale } = useLanguage()
@@ -126,6 +128,7 @@ function JobDetailContent({ job }: { job: Job }) {
                     ))}
                   </ul>
                 </div>
+                {APPLICATIONS_ENABLED ? <ApplyForm id="cv-form" locale={language} similarTo={`${job.title} (${job.referenceCode})`} /> : null}
               </div>
               
               {/* Sidebar */}
@@ -146,7 +149,7 @@ function JobDetailContent({ job }: { job: Job }) {
                       asChild 
                       className="w-full bg-gold hover:bg-gold-dark text-navy font-semibold h-14 text-[12px] uppercase tracking-[0.1em]"
                     >
-                      <Link href={localizedPath(locale, '/contact')}>
+                      <Link href={APPLICATIONS_ENABLED ? '#cv-form' : localizedPath(locale, '/contact')}>
                         {language === 'en' ? 'Send CV for similar roles' : 'Poslat životopis pro podobné role'}
                         <ChevronRight className="ml-2 h-4 w-4" />
                       </Link>
