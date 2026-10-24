@@ -11,6 +11,9 @@ export const organizationSchema = {
   '@type': 'Organization',
   '@id': STRUCTURED_DATA_IDS.organization,
   name: 'B Solution s.r.o.',
+  // The brand people search for. Without it Google tends to read "B Solution"
+  // as the EU "b-solutions" initiative (search check 2026-10-24).
+  alternateName: ['B Solution', 'B Solution Legal Executive Search', 'bsolution.eu'],
   url: 'https://www.bsolution.eu',
   logo: {
     '@type': 'ImageObject',
