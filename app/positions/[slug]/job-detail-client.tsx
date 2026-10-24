@@ -66,6 +66,13 @@ function JobDetailContent({ job }: { job: Job }) {
                 </span>
               </div>
               
+              {/* Example mandate, not an open position (owner, 2026-10-24) */}
+              <p className="mt-6 inline-block border border-gold/40 px-4 py-2 text-gold text-[13px]">
+                {language === 'en'
+                  ? 'Example of a mandate we fill — not open right now. Send your CV for similar roles.'
+                  : 'Příklad mandátu, který obsazujeme — teď není otevřený. Pošlete životopis pro podobné role.'}
+              </p>
+
               {/* Reference Code */}
               <div className="mt-6 text-white/30 text-[12px] uppercase tracking-[0.1em]">
                 {language === 'en' ? 'Reference' : 'Reference'}: {job.referenceCode}
@@ -127,12 +134,12 @@ function JobDetailContent({ job }: { job: Job }) {
                   {/* Apply Card - Primary CTA */}
                   <div className="bg-navy p-10 lg:p-12 mb-6">
                     <h3 className="text-white text-xl font-serif mb-4">
-                      {language === 'en' ? 'Interested in this role?' : 'Máte zájem o tuto pozici?'}
+                      {language === 'en' ? 'Interested in a similar role?' : 'Máte zájem o podobnou roli?'}
                     </h3>
                     <p className="text-white/45 text-[15px] leading-[1.85] mb-10">
                       {language === 'en' 
-                        ? 'Contact us to discuss this opportunity in complete confidence. All enquiries are handled with strict discretion.'
-                        : 'Kontaktujte nás k důvěrnému projednání této příležitosti. Všechny dotazy jsou zpracovávány s naprostou diskrétností.'
+                        ? 'Send us your CV and we will contact you about similar positions, in complete confidence. All enquiries are handled with strict discretion.'
+                        : 'Pošlete nám životopis a ozveme se vám s podobnými pozicemi, zcela důvěrně. Všechny dotazy zpracováváme s naprostou diskrétností.'
                       }
                     </p>
                     <Button 
@@ -140,7 +147,7 @@ function JobDetailContent({ job }: { job: Job }) {
                       className="w-full bg-gold hover:bg-gold-dark text-navy font-semibold h-14 text-[12px] uppercase tracking-[0.1em]"
                     >
                       <Link href={localizedPath(locale, '/contact')}>
-                        {language === 'en' ? 'Apply / Request Details' : 'Projevit zájem / Získat detaily'}
+                        {language === 'en' ? 'Send CV for similar roles' : 'Poslat životopis pro podobné role'}
                         <ChevronRight className="ml-2 h-4 w-4" />
                       </Link>
                     </Button>
@@ -190,8 +197,8 @@ function JobDetailContent({ job }: { job: Job }) {
             </h2>
             <p className="text-charcoal/60 mb-12 max-w-xl mx-auto leading-relaxed">
               {language === 'en' 
-                ? 'View our full portfolio of current mandates or contact us about confidential opportunities not listed publicly.'
-                : 'Prohlédněte si naše kompletní portfolio aktuálních mandátů nebo nás kontaktujte ohledně důvěrných příležitostí, které nejsou veřejně inzerovány.'
+                ? 'See the positions open now and more examples of our mandates, or contact us about confidential opportunities not listed publicly.'
+                : 'Prohlédněte si aktuálně otevřené pozice a další příklady našich mandátů, nebo nás kontaktujte ohledně důvěrných příležitostí, které nejsou veřejně inzerovány.'
               }
             </p>
             <div className="flex flex-col sm:flex-row gap-5 justify-center">
