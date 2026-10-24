@@ -4,7 +4,7 @@ import { SITE_URL } from '@/lib/i18n/config'
  * Positions published for bsolution.eu in the LawBridge console (roadmap
  * M4, 2026-10-24). PCRecruiter is the record; the LawBridge feed returns
  * only positions published for this site with a publication end in the
- * future, so an empty feed simply shows nothing extra. Cached for an hour.
+ * future, so an empty feed simply shows nothing extra.
  */
 export interface LivePosition {
   id: number
@@ -27,7 +27,10 @@ function slugify(text: string): string {
 
 export async function getLivePositions(): Promise<LivePosition[]> {
   try {
-    const response = await fetch(FEED_URL, { next: { revalidate: 3600 } })
+    // No local cache: the LawBridge feed is already cached for an hour at
+    // its CDN and in front of PCRecruiter. A local data cache kept serving
+    // the empty pre-publication feed for hours (2026-10-24).
+    const response = await fetch(FEED_URL, { cache: 'no-store' })
     if (!response.ok) return []
     const body = (await response.json()) as { positions?: Omit<LivePosition, 'slug'>[] }
     return (body.positions ?? [])

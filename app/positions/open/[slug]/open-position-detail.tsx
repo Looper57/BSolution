@@ -34,7 +34,7 @@ function Detail({ position }: { position: LivePosition }) {
           {APPLICATIONS_ENABLED ? <ApplyForm jobId={position.id} locale={locale} /> : null}
           <div className="mt-12">
             <Button asChild size="lg" className="bg-gold hover:bg-gold-dark text-navy font-semibold h-14 px-10">
-              <Link href={`${localizedPath(locale, '/contact')}?position=${position.id}`}>
+              <Link href={localizedPath(locale, '/contact')}>
                 {cs ? 'Mám zájem o tuto pozici' : 'I am interested in this position'}
                 <ChevronRight className="ml-2 h-4 w-4" />
               </Link>

@@ -4,7 +4,7 @@ import { SITE_URL } from '@/lib/i18n/config'
 import { getLivePositionBySlug, jobPostingJsonLd, livePositionPath } from '@/lib/live-positions'
 import { OpenPositionDetail } from './open-position-detail'
 
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const position = await getLivePositionBySlug((await params).slug)
