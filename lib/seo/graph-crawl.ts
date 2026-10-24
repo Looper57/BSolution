@@ -288,7 +288,7 @@ async function mapWithConcurrency<T, R>(items: T[], concurrency: number, fn: (it
 export async function runGraphCrawl(options: { baseUrl: string; concurrency?: number }): Promise<GraphCrawlReport> {
   const { baseUrl, concurrency = 6 } = options
   const siteOrigin = new URL(baseUrl).origin
-  const entries = sitemap()
+  const entries = await sitemap()
 
   const findings: GraphCrawlFindings = {
     unexpectedStatus: [],
