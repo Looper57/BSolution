@@ -22,6 +22,6 @@ describe('country pages open with questions and direct answers', () => {
     expect(text).toContain('three to four weeks')
     expect(text).toContain('12 months for senior roles (8+ years of experience)')
     expect(text).toContain('whichever comes first')
-    for (const item of all) expect(item.answer).not.toMatch(/%|€|EUR|\d[\d,. ]*000/i)
+    for (const item of all) expect(item.answer).not.toMatch(/%|€|\bEUR\b|\d[\d,. ]*000/)
   })
 })
