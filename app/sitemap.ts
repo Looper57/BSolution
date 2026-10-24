@@ -50,6 +50,8 @@ function localizedEntry(path: string, locale: Locale): MetadataRoute.Sitemap[num
   }
 }
 
+export const revalidate = 3600
+
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const fullyLocalizedPaths = [
     '/',
@@ -110,7 +112,7 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   // Positions published for bsolution.eu in the LawBridge console (M4);
   // English-only URLs, the text is as entered, and they leave the sitemap
   // as soon as they close or expire.
-  const openPositionPages = (await getLivePositions()).map((position) => ({
+  const openPositionPages = (await getLivePositions({ revalidateSeconds: 3600 })).map((position) => ({
     url: `${SITE_URL}${livePositionPath(position)}`,
     lastModified: position.postedAt ?? undefined,
     changeFrequency: 'daily' as const,

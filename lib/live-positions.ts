@@ -25,12 +25,15 @@ function slugify(text: string): string {
   return text.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60)
 }
 
-export async function getLivePositions(): Promise<LivePosition[]> {
+/** `revalidateSeconds` only for the sitemap, which must stay a static,
+ * hourly regenerated file: served dynamically on Vercel it returned 404
+ * (2026-10-24). Pages read the feed live. */
+export async function getLivePositions(options: { revalidateSeconds?: number } = {}): Promise<LivePosition[]> {
   try {
     // No local cache: the LawBridge feed is already cached for an hour at
     // its CDN and in front of PCRecruiter. A local data cache kept serving
     // the empty pre-publication feed for hours (2026-10-24).
-    const response = await fetch(FEED_URL, { cache: 'no-store' })
+    const response = await fetch(FEED_URL, options.revalidateSeconds ? { next: { revalidate: options.revalidateSeconds } } : { cache: 'no-store' })
     if (!response.ok) return []
     const body = (await response.json()) as { positions?: Omit<LivePosition, 'slug'>[] }
     return (body.positions ?? [])
