@@ -2,7 +2,7 @@ import type { Metadata } from 'next'
 import { PositionsPageContent } from './positions-client'
 import { getLivePositions } from '@/lib/live-positions'
 
-export const revalidate = 3600
+export const dynamic = 'force-dynamic'
 
 // This listing's own canonical/hreflang/OpenGraph must live here, not in
 // layout.tsx (which also wraps /positions/[slug]) — a layout-level
