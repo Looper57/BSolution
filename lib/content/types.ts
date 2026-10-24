@@ -19,6 +19,10 @@ export interface LocalizedEntity {
   metaTitle?: string
   /** SEO meta description (falls back to summary when omitted). */
   metaDescription?: string
+  /** Question-first answers shown before the body (direct answers for search
+   * and AI extraction). Only facts the site already states — no invented
+   * timelines, fees or statistics. */
+  faq?: { question: string; answer: string }[]
   /** Ordered body sections. */
   sections: ContentSection[]
 }

@@ -38,6 +38,13 @@ const COUNTRY_LANDING_PAGE_LABEL: Record<string, Record<Locale, string>> = {
   },
 }
 
+const FAQ_HEADING: Record<Locale, string> = {
+  en: 'Questions and answers',
+  cs: 'Otázky a odpovědi',
+  de: 'Fragen und Antworten',
+  pl: 'Pytania i odpowiedzi',
+}
+
 const sectionLabels: Record<string, keyof typeof UI.en.nav> = {
   services: 'services',
   'practice-areas': 'practiceAreas',
@@ -71,6 +78,12 @@ export function AuthorityPage({ entity, locale, section }: { entity: Entity; loc
       buildWebPageSchema(pageInput),
       ...(entity.kind === 'caseStudy' ? [buildArticleSchema(pageInput)] : []),
       ...(entity.kind === 'service' ? [buildServiceSchema(pageInput)] : []),
+      ...(copy.faq?.length
+        ? [{
+            '@type': 'FAQPage',
+            mainEntity: copy.faq.map((item) => ({ '@type': 'Question', name: item.question, acceptedAnswer: { '@type': 'Answer', text: item.answer } })),
+          }]
+        : []),
       buildBreadcrumbSchema(url, [
         { name: ui.common.home, item: absoluteUrl(locale, '/') },
         { name: sectionLabel, item: absoluteUrl(locale, `/${section}`) },
@@ -117,6 +130,19 @@ export function AuthorityPage({ entity, locale, section }: { entity: Entity; loc
 
         <div className="mx-auto grid max-w-[1180px] gap-12 px-6 py-16 md:px-10 md:py-24 lg:grid-cols-[minmax(0,1fr)_280px] lg:px-0">
           <article className="flex flex-col gap-14">
+            {copy.faq?.length ? (
+              <section aria-labelledby="faq-heading">
+                <h2 id="faq-heading" className="text-balance font-serif text-3xl leading-tight text-navy">{FAQ_HEADING[locale]}</h2>
+                <dl className="mt-6 flex flex-col gap-6">
+                  {copy.faq.map((item) => (
+                    <div key={item.question} className="border-l-2 border-gold pl-6">
+                      <dt className="font-medium text-navy md:text-lg">{item.question}</dt>
+                      <dd className="mt-2 leading-relaxed text-muted-foreground">{item.answer}</dd>
+                    </div>
+                  ))}
+                </dl>
+              </section>
+            ) : null}
             {copy.sections.map((contentSection) => (
               <section key={contentSection.heading} className="border-t border-border pt-9 first:border-0 first:pt-0">
                 <h2 className="text-balance font-serif text-3xl leading-tight text-navy">{contentSection.heading}</h2>
