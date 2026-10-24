@@ -26,6 +26,7 @@ export const countries: Entity[] = [
           { question: 'How quickly can B Solution present candidates in the Czech Republic?', answer: 'The first candidates are typically presented within three to four weeks of agreeing the brief.' },
           { question: 'Is there a guarantee if a placed candidate leaves?', answer: 'Yes. B Solution replaces the candidate free of charge if they leave within 9 months for junior and non-lawyer roles, or within 12 months for senior roles (8+ years of experience).' },
           { question: 'Does B Solution work outside this market?', answer: 'Yes. B Solution works across Europe, the Gulf and beyond, without geographic limits, so cross-border mandates are run by the same team.' },
+          { question: 'How is a B Solution search paid?', answer: 'With an initial retainer when the search starts, then the success fee when the candidate signs the contract with the client or starts work, whichever comes first. If the contract is signed months before the start date, payment follows the signature.' },
         ],
         sections: [
           {
@@ -51,6 +52,7 @@ export const countries: Entity[] = [
           { question: 'Jak rychle B Solution předloží kandidáty v Česku?', answer: 'První kandidáty B Solution obvykle předloží do tří až čtyř týdnů od upřesnění zadání.' },
           { question: 'Je obsazení garantované, když kandidát odejde?', answer: 'Ano. Pokud kandidát odejde do 9 měsíců u juniorních a neprávnických pozic, nebo do 12 měsíců u seniorních pozic (8 a více let praxe), B Solution najde náhradu zdarma.' },
           { question: 'Působí B Solution i mimo tento trh?', answer: 'Ano. B Solution působí v celé Evropě, v Perském zálivu i jinde, bez geografického omezení, takže přeshraniční mandáty vede stejný tým.' },
+          { question: 'Jak se vyhledávání B Solution platí?', answer: 'Úvodní zálohou (retainer) při zahájení vyhledávání a poté odměnou za úspěch při podpisu smlouvy mezi kandidátem a klientem nebo při nástupu, podle toho, co nastane dříve. Pokud je smlouva podepsána měsíce před nástupem, platba se řídí podpisem.' },
         ],
         sections: [
           {
@@ -76,6 +78,7 @@ export const countries: Entity[] = [
           { question: 'Wie schnell stellt B Solution Kandidaten in Tschechien vor?', answer: 'Die ersten Kandidaten stellt B Solution in der Regel innerhalb von drei bis vier Wochen nach Abstimmung des Profils vor.' },
           { question: 'Gibt es eine Garantie, wenn ein vermittelter Kandidat geht?', answer: 'Ja. Verlässt der Kandidat das Unternehmen innerhalb von 9 Monaten (Junior- und nichtjuristische Positionen) oder 12 Monaten (Senior-Positionen ab 8 Jahren Erfahrung), findet B Solution kostenlos Ersatz.' },
           { question: 'Ist B Solution auch außerhalb dieses Marktes tätig?', answer: 'Ja. B Solution arbeitet in ganz Europa, am Golf und darüber hinaus ohne geografische Grenzen, sodass grenzüberschreitende Mandate vom selben Team geführt werden.' },
+          { question: 'Wie wird eine Suche von B Solution bezahlt?', answer: 'Mit einem Retainer zu Beginn der Suche und danach mit dem Erfolgshonorar bei Vertragsunterzeichnung zwischen Kandidat und Mandant oder bei Arbeitsantritt, je nachdem, was früher eintritt. Wird der Vertrag Monate vor dem Antritt unterzeichnet, richtet sich die Zahlung nach der Unterzeichnung.' },
         ],
         sections: [
           {
@@ -101,6 +104,7 @@ export const countries: Entity[] = [
           { question: 'Jak szybko B Solution przedstawia kandydatów w Czechach?', answer: 'Pierwszych kandydatów B Solution przedstawia zwykle w ciągu trzech do czterech tygodni od uzgodnienia profilu.' },
           { question: 'Czy jest gwarancja, jeśli zatrudniony kandydat odejdzie?', answer: 'Tak. Jeśli kandydat odejdzie w ciągu 9 miesięcy na stanowiskach juniorskich i nieprawniczych lub w ciągu 12 miesięcy na stanowiskach seniorskich (od 8 lat doświadczenia), B Solution bezpłatnie znajdzie zastępstwo.' },
           { question: 'Czy B Solution działa także poza tym rynkiem?', answer: 'Tak. B Solution działa w całej Europie, w regionie Zatoki i poza nimi, bez ograniczeń geograficznych, więc mandaty transgraniczne prowadzi ten sam zespół.' },
+          { question: 'Jak płaci się za poszukiwanie B Solution?', answer: 'Zaliczką (retainer) na początku poszukiwania, a następnie wynagrodzeniem za sukces przy podpisaniu umowy między kandydatem a klientem lub przy rozpoczęciu pracy, w zależności od tego, co nastąpi wcześniej. Jeśli umowa zostanie podpisana kilka miesięcy przed rozpoczęciem pracy, płatność wiąże się z podpisaniem.' },
         ],
         sections: [
           {
@@ -136,6 +140,7 @@ export const countries: Entity[] = [
           { question: 'How quickly can B Solution present candidates in Germany?', answer: 'The first candidates are typically presented within three to four weeks of agreeing the brief.' },
           { question: 'Is there a guarantee if a placed candidate leaves?', answer: 'Yes. B Solution replaces the candidate free of charge if they leave within 9 months for junior and non-lawyer roles, or within 12 months for senior roles (8+ years of experience).' },
           { question: 'Does B Solution work outside this market?', answer: 'Yes. B Solution works across Europe, the Gulf and beyond, without geographic limits, so cross-border mandates are run by the same team.' },
+          { question: 'How is a B Solution search paid?', answer: 'With an initial retainer when the search starts, then the success fee when the candidate signs the contract with the client or starts work, whichever comes first. If the contract is signed months before the start date, payment follows the signature.' },
         ],
         sections: [
           {
@@ -161,6 +166,7 @@ export const countries: Entity[] = [
           { question: 'Jak rychle B Solution předloží kandidáty v Německu?', answer: 'První kandidáty B Solution obvykle předloží do tří až čtyř týdnů od upřesnění zadání.' },
           { question: 'Je obsazení garantované, když kandidát odejde?', answer: 'Ano. Pokud kandidát odejde do 9 měsíců u juniorních a neprávnických pozic, nebo do 12 měsíců u seniorních pozic (8 a více let praxe), B Solution najde náhradu zdarma.' },
           { question: 'Působí B Solution i mimo tento trh?', answer: 'Ano. B Solution působí v celé Evropě, v Perském zálivu i jinde, bez geografického omezení, takže přeshraniční mandáty vede stejný tým.' },
+          { question: 'Jak se vyhledávání B Solution platí?', answer: 'Úvodní zálohou (retainer) při zahájení vyhledávání a poté odměnou za úspěch při podpisu smlouvy mezi kandidátem a klientem nebo při nástupu, podle toho, co nastane dříve. Pokud je smlouva podepsána měsíce před nástupem, platba se řídí podpisem.' },
         ],
         sections: [
           {
@@ -186,6 +192,7 @@ export const countries: Entity[] = [
           { question: 'Wie schnell stellt B Solution Kandidaten in Deutschland vor?', answer: 'Die ersten Kandidaten stellt B Solution in der Regel innerhalb von drei bis vier Wochen nach Abstimmung des Profils vor.' },
           { question: 'Gibt es eine Garantie, wenn ein vermittelter Kandidat geht?', answer: 'Ja. Verlässt der Kandidat das Unternehmen innerhalb von 9 Monaten (Junior- und nichtjuristische Positionen) oder 12 Monaten (Senior-Positionen ab 8 Jahren Erfahrung), findet B Solution kostenlos Ersatz.' },
           { question: 'Ist B Solution auch außerhalb dieses Marktes tätig?', answer: 'Ja. B Solution arbeitet in ganz Europa, am Golf und darüber hinaus ohne geografische Grenzen, sodass grenzüberschreitende Mandate vom selben Team geführt werden.' },
+          { question: 'Wie wird eine Suche von B Solution bezahlt?', answer: 'Mit einem Retainer zu Beginn der Suche und danach mit dem Erfolgshonorar bei Vertragsunterzeichnung zwischen Kandidat und Mandant oder bei Arbeitsantritt, je nachdem, was früher eintritt. Wird der Vertrag Monate vor dem Antritt unterzeichnet, richtet sich die Zahlung nach der Unterzeichnung.' },
         ],
         sections: [
           {
@@ -211,6 +218,7 @@ export const countries: Entity[] = [
           { question: 'Jak szybko B Solution przedstawia kandydatów w Niemczech?', answer: 'Pierwszych kandydatów B Solution przedstawia zwykle w ciągu trzech do czterech tygodni od uzgodnienia profilu.' },
           { question: 'Czy jest gwarancja, jeśli zatrudniony kandydat odejdzie?', answer: 'Tak. Jeśli kandydat odejdzie w ciągu 9 miesięcy na stanowiskach juniorskich i nieprawniczych lub w ciągu 12 miesięcy na stanowiskach seniorskich (od 8 lat doświadczenia), B Solution bezpłatnie znajdzie zastępstwo.' },
           { question: 'Czy B Solution działa także poza tym rynkiem?', answer: 'Tak. B Solution działa w całej Europie, w regionie Zatoki i poza nimi, bez ograniczeń geograficznych, więc mandaty transgraniczne prowadzi ten sam zespół.' },
+          { question: 'Jak płaci się za poszukiwanie B Solution?', answer: 'Zaliczką (retainer) na początku poszukiwania, a następnie wynagrodzeniem za sukces przy podpisaniu umowy między kandydatem a klientem lub przy rozpoczęciu pracy, w zależności od tego, co nastąpi wcześniej. Jeśli umowa zostanie podpisana kilka miesięcy przed rozpoczęciem pracy, płatność wiąże się z podpisaniem.' },
         ],
         sections: [
           {
@@ -246,6 +254,7 @@ export const countries: Entity[] = [
           { question: 'How quickly can B Solution present candidates in the UAE?', answer: 'The first candidates are typically presented within three to four weeks of agreeing the brief.' },
           { question: 'Is there a guarantee if a placed candidate leaves?', answer: 'Yes. B Solution replaces the candidate free of charge if they leave within 9 months for junior and non-lawyer roles, or within 12 months for senior roles (8+ years of experience).' },
           { question: 'Does B Solution work outside this market?', answer: 'Yes. B Solution works across Europe, the Gulf and beyond, without geographic limits, so cross-border mandates are run by the same team.' },
+          { question: 'How is a B Solution search paid?', answer: 'With an initial retainer when the search starts, then the success fee when the candidate signs the contract with the client or starts work, whichever comes first. If the contract is signed months before the start date, payment follows the signature.' },
         ],
         sections: [
           {
@@ -271,6 +280,7 @@ export const countries: Entity[] = [
           { question: 'Jak rychle B Solution předloží kandidáty v SAE?', answer: 'První kandidáty B Solution obvykle předloží do tří až čtyř týdnů od upřesnění zadání.' },
           { question: 'Je obsazení garantované, když kandidát odejde?', answer: 'Ano. Pokud kandidát odejde do 9 měsíců u juniorních a neprávnických pozic, nebo do 12 měsíců u seniorních pozic (8 a více let praxe), B Solution najde náhradu zdarma.' },
           { question: 'Působí B Solution i mimo tento trh?', answer: 'Ano. B Solution působí v celé Evropě, v Perském zálivu i jinde, bez geografického omezení, takže přeshraniční mandáty vede stejný tým.' },
+          { question: 'Jak se vyhledávání B Solution platí?', answer: 'Úvodní zálohou (retainer) při zahájení vyhledávání a poté odměnou za úspěch při podpisu smlouvy mezi kandidátem a klientem nebo při nástupu, podle toho, co nastane dříve. Pokud je smlouva podepsána měsíce před nástupem, platba se řídí podpisem.' },
         ],
         sections: [
           {
@@ -296,6 +306,7 @@ export const countries: Entity[] = [
           { question: 'Wie schnell stellt B Solution Kandidaten in den VAE vor?', answer: 'Die ersten Kandidaten stellt B Solution in der Regel innerhalb von drei bis vier Wochen nach Abstimmung des Profils vor.' },
           { question: 'Gibt es eine Garantie, wenn ein vermittelter Kandidat geht?', answer: 'Ja. Verlässt der Kandidat das Unternehmen innerhalb von 9 Monaten (Junior- und nichtjuristische Positionen) oder 12 Monaten (Senior-Positionen ab 8 Jahren Erfahrung), findet B Solution kostenlos Ersatz.' },
           { question: 'Ist B Solution auch außerhalb dieses Marktes tätig?', answer: 'Ja. B Solution arbeitet in ganz Europa, am Golf und darüber hinaus ohne geografische Grenzen, sodass grenzüberschreitende Mandate vom selben Team geführt werden.' },
+          { question: 'Wie wird eine Suche von B Solution bezahlt?', answer: 'Mit einem Retainer zu Beginn der Suche und danach mit dem Erfolgshonorar bei Vertragsunterzeichnung zwischen Kandidat und Mandant oder bei Arbeitsantritt, je nachdem, was früher eintritt. Wird der Vertrag Monate vor dem Antritt unterzeichnet, richtet sich die Zahlung nach der Unterzeichnung.' },
         ],
         sections: [
           {
@@ -321,6 +332,7 @@ export const countries: Entity[] = [
           { question: 'Jak szybko B Solution przedstawia kandydatów w ZEA?', answer: 'Pierwszych kandydatów B Solution przedstawia zwykle w ciągu trzech do czterech tygodni od uzgodnienia profilu.' },
           { question: 'Czy jest gwarancja, jeśli zatrudniony kandydat odejdzie?', answer: 'Tak. Jeśli kandydat odejdzie w ciągu 9 miesięcy na stanowiskach juniorskich i nieprawniczych lub w ciągu 12 miesięcy na stanowiskach seniorskich (od 8 lat doświadczenia), B Solution bezpłatnie znajdzie zastępstwo.' },
           { question: 'Czy B Solution działa także poza tym rynkiem?', answer: 'Tak. B Solution działa w całej Europie, w regionie Zatoki i poza nimi, bez ograniczeń geograficznych, więc mandaty transgraniczne prowadzi ten sam zespół.' },
+          { question: 'Jak płaci się za poszukiwanie B Solution?', answer: 'Zaliczką (retainer) na początku poszukiwania, a następnie wynagrodzeniem za sukces przy podpisaniu umowy między kandydatem a klientem lub przy rozpoczęciu pracy, w zależności od tego, co nastąpi wcześniej. Jeśli umowa zostanie podpisana kilka miesięcy przed rozpoczęciem pracy, płatność wiąże się z podpisaniem.' },
         ],
         sections: [
           {
