@@ -26,3 +26,13 @@ describe('consent for a CV without a position (M6.1)', () => {
     expect(REGISTER_ENDPOINT).toMatch(/\/api\/recruitment\/candidates$/)
   })
 })
+
+describe('search mandate consent (M12.1)', () => {
+  it('matches lawbridge.eu: approach only confirmed companies, free for the lawyer', async () => {
+    const { mandateConsentText, MANDATE_CONSENT_VERSION } = await import('@/lib/candidate-consent')
+    expect(MANDATE_CONSENT_VERSION).toBe('2026-10-25-yours-solution-2y-mandate')
+    expect(mandateConsentText('cs')).toContain('až poté, co danou firmu potvrdím')
+    expect(mandateConsentText('cs')).toContain('zdarma')
+    expect(mandateConsentText('fr')).toBe(mandateConsentText('en'))
+  })
+})
