@@ -16,6 +16,7 @@ import type {
   AuthorityEditorialSection,
   AuthorityFaqItem,
   ProductionAuthorityRecord,
+  AuthoritySituations,
 } from './types'
 import { validateProductionAuthorityRegistry } from './validation'
 import { validateAuthorityRelationships } from './relationships'
@@ -40,6 +41,7 @@ export interface ProductionAuthorityViewModel {
     h1: string
     proposition: string
   }
+  situations: AuthoritySituations | null
   executiveSummary: {
     heading: string
     paragraphs: readonly string[]
@@ -162,6 +164,7 @@ export function buildProductionAuthorityViewModel(
       h1: editorial.h1,
       proposition: editorial.proposition,
     },
+    situations: editorial.situations ?? null,
     executiveSummary: editorial.executiveSummary,
     definition: editorial.definition,
     sections: editorial.sections,

@@ -68,11 +68,19 @@ export interface AuthorityFaqItem {
   answer: string
 }
 
+export interface AuthoritySituations {
+  heading: string
+  items: readonly { question: string; answer: string }[]
+}
+
 export interface AuthorityEditorialContent {
   locale: Locale
   parentLabel: string
   h1: string
   proposition: string
+  /** Client situations with a direct answer, shown right below the hero
+   * (owner 2026-10-25: question-first for search and AI answers). */
+  situations?: AuthoritySituations
   executiveSummary: {
     heading: string
     paragraphs: [string, ...string[]]
