@@ -15,49 +15,28 @@ const nextConfig = {
         destination: '/services/legal-executive-search',
         permanent: true,
       },
+      // Legacy site paths (2026-10-25: 8 URLs reported as 404 in Search
+      // Console, some with ?lang=sk|ar). Every variant goes to the new page.
       {
         source: '/for-clients',
-        has: [{ type: 'query', key: 'lang', value: 'sk' }],
-        destination: '/clients',
-        statusCode: 301,
-      },
-      {
-        source: '/for-clients',
-        has: [{ type: 'query', key: 'lang', value: 'ar' }],
         destination: '/clients',
         statusCode: 301,
       },
       {
         source: '/for-candidates',
-        has: [{ type: 'query', key: 'lang', value: 'ar' }],
         destination: '/candidates',
         statusCode: 301,
       },
       {
         source: '/our-services',
-        has: [{ type: 'query', key: 'lang', value: 'sk' }],
         destination: '/services',
         statusCode: 301,
       },
       {
         source: '/our-story',
-        has: [{ type: 'query', key: 'lang', value: 'ar' }],
         destination: '/about',
         statusCode: 301,
       },
-      {
-        source: '/our-story',
-        has: [{ type: 'query', key: 'lang', value: 'sk' }],
-        destination: '/about',
-        statusCode: 301,
-      },
-      {
-        source: '/our-story',
-        destination: '/about',
-        statusCode: 301,
-      },
-      // Force the canonical host: redirect the apex domain (bsolution.eu)
-      // to the www subdomain with a permanent 301.
       {
         source: '/:path*',
         has: [{ type: 'host', value: 'bsolution.eu' }],
