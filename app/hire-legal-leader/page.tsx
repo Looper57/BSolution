@@ -329,7 +329,7 @@ function HireLegalLeaderContent() {
             </Link>
             
             <p className="text-white/30 text-[12px]">
-              © {new Date().getFullYear()} B Solution s.r.o. {language === 'en' ? 'All rights reserved.' : 'Všechna práva vyhrazena.'}
+              © {new Date().getFullYear()} Yours Solution s.r.o. (B Solution) {language === 'en' ? 'All rights reserved.' : 'Všechna práva vyhrazena.'}
             </p>
           </div>
         </div>

@@ -40,7 +40,7 @@ export const metadata: Metadata = {
   },
   description: 'Specialist legal executive search for corporations and law firms across Europe and the Middle East. Trusted advisers on General Counsel, Chief Legal Officer and senior legal appointments since 2007.',
   keywords: ['legal executive search', 'General Counsel recruitment', 'CLO search', 'legal headhunting', 'law firm partner recruitment', 'in-house legal recruitment', 'legal jobs Europe', 'Prague legal recruitment'],
-  authors: [{ name: 'B Solution s.r.o.' }],
+  authors: [{ name: 'B Solution' }],
   icons: {
     icon: [
       { url: '/favicon.ico', sizes: 'any' },

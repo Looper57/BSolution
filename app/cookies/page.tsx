@@ -30,7 +30,7 @@ function ContentSection() {
           {language === 'en' ? (
             <>
               <p className="text-lg text-charcoal/80 leading-relaxed">
-                This Cookie Policy explains how B Solution s.r.o. uses cookies and similar tracking technologies on our website.
+                This Cookie Policy explains how Yours Solution s.r.o. (B Solution) uses cookies and similar tracking technologies on our website.
               </p>
               
               <h2 className="mt-10">What Are Cookies?</h2>
@@ -58,7 +58,7 @@ function ContentSection() {
           ) : (
             <>
               <p className="text-lg text-charcoal/80 leading-relaxed">
-                Tyto Zásady používání cookies vysvětlují, jak B Solution s.r.o. používá cookies a podobné sledovací technologie na našich webových stránkách.
+                Tyto Zásady používání cookies vysvětlují, jak Yours Solution s.r.o. (B Solution) používá cookies a podobné sledovací technologie na našich webových stránkách.
               </p>
               
               <h2 className="mt-10">Co jsou cookies?</h2>

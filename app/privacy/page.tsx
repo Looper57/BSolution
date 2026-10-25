@@ -30,7 +30,7 @@ function ContentSection() {
           {language === 'en' ? (
             <>
               <p className="text-lg text-charcoal/80 leading-relaxed">
-                B Solution s.r.o. (&quot;B Solution&quot;, &quot;we&quot;, &quot;us&quot;) is committed to protecting your privacy and personal data. This Privacy Policy explains how we collect, use, and safeguard your information when you use our services or visit our website.
+                Yours Solution s.r.o., ID No. 19233043, Školská 689/20, 110 00 Prague 1, operating under the B Solution brand (&quot;B Solution&quot;, &quot;we&quot;, &quot;us&quot;), is committed to protecting your privacy and personal data. This Privacy Policy explains how we collect, use, and safeguard your information when you use our services or visit our website.
               </p>
               
               <h2 className="mt-10">Information We Collect</h2>
@@ -60,14 +60,14 @@ function ContentSection() {
               
               <h2 className="mt-10">Contact Us</h2>
               <p>If you have questions about this Privacy Policy or our data practices, please contact us at:</p>
-              <p>B Solution s.r.o.<br />Prague, Czech Republic<br />Email: info@bsolution.eu</p>
+              <p>Yours Solution s.r.o. (B Solution)<br />Školská 689/20, 110 00 Prague 1, Czech Republic<br />Email: info@bsolution.eu</p>
               
               <p className="mt-10 text-sm text-charcoal/60">Last updated: January 2026</p>
             </>
           ) : (
             <>
               <p className="text-lg text-charcoal/80 leading-relaxed">
-                B Solution s.r.o. (&quot;B Solution&quot;, &quot;my&quot;, &quot;nás&quot;) se zavazuje chránit vaše soukromí a osobní údaje. Tyto Zásady ochrany osobních údajů vysvětlují, jak shromažďujeme, používáme a chráníme vaše informace při využívání našich služeb nebo návštěvě našich webových stránek.
+                Yours Solution s.r.o., IČO 19233043, Školská 689/20, 110 00 Praha 1, vystupující pod značkou B Solution (&quot;B Solution&quot;, &quot;my&quot;, &quot;nás&quot;), se zavazuje chránit vaše soukromí a osobní údaje. Tyto Zásady ochrany osobních údajů vysvětlují, jak shromažďujeme, používáme a chráníme vaše informace při využívání našich služeb nebo návštěvě našich webových stránek.
               </p>
               
               <h2 className="mt-10">Informace, které shromažďujeme</h2>
@@ -97,7 +97,7 @@ function ContentSection() {
               
               <h2 className="mt-10">Kontaktujte nás</h2>
               <p>Máte-li dotazy ohledně těchto Zásad ochrany osobních údajů nebo našich datových postupů, kontaktujte nás prosím na:</p>
-              <p>B Solution s.r.o.<br />Praha, Česká republika<br />E-mail: info@bsolution.eu</p>
+              <p>Yours Solution s.r.o. (B Solution)<br />Školská 689/20, 110 00 Praha 1, Česká republika<br />E-mail: info@bsolution.eu</p>
               
               <p className="mt-10 text-sm text-charcoal/60">Poslední aktualizace: leden 2026</p>
             </>

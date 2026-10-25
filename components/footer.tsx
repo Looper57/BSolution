@@ -143,7 +143,7 @@ export function Footer() {
               {t('footer.connect')}
             </h4>
             <div className="space-y-4 text-[14px] text-white/35">
-              <p>B Solution s.r.o.</p>
+              <p>B Solution · Yours Solution s.r.o., IČO 19233043</p>
               <p>Prague, Czech Republic</p>
               <p className="pt-4">
                 <a 

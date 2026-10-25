@@ -401,7 +401,8 @@ function ContactInfo() {
             <div>
               <h3 className="font-medium text-navy text-base">{t('contact.info.address')}</h3>
               <p className="mt-1 text-charcoal/70">
-                B Solution s.r.o.<br />
+                B Solution · Yours Solution s.r.o.<br />
+                Školská 689/20, 110 00 Praha 1<br />
                 {copy.location}
               </p>
             </div>
