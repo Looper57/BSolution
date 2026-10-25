@@ -10,7 +10,10 @@ export const STRUCTURED_DATA_IDS = {
 export const organizationSchema = {
   '@type': 'Organization',
   '@id': STRUCTURED_DATA_IDS.organization,
-  name: 'B Solution s.r.o.',
+  name: 'B Solution',
+  // The operating company (ARES 2026-10-25); "B Solution s.r.o." does not exist.
+  legalName: 'Yours Solution s.r.o.',
+  identifier: { '@type': 'PropertyValue', propertyID: 'IČO', value: '19233043' },
   // The brand people search for. Without it Google tends to read "B Solution"
   // as the EU "b-solutions" initiative (search check 2026-10-24).
   alternateName: ['B Solution', 'B Solution Legal Executive Search', 'bsolution.eu'],
@@ -25,6 +28,8 @@ export const organizationSchema = {
   foundingDate: '2007',
   address: {
     '@type': 'PostalAddress',
+    streetAddress: 'Školská 689/20',
+    postalCode: '110 00',
     addressLocality: 'Prague',
     addressCountry: 'CZ',
   },

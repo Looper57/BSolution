@@ -18,7 +18,9 @@ describe('structured data', () => {
     expect(organizations).toHaveLength(1)
     expect(organizations[0]).toMatchObject({
       '@id': STRUCTURED_DATA_IDS.organization,
-      name: 'B Solution s.r.o.',
+      name: 'B Solution',
+      legalName: 'Yours Solution s.r.o.',
+      identifier: { '@type': 'PropertyValue', propertyID: 'IČO', value: '19233043' },
       foundingDate: '2007',
       url: 'https://www.bsolution.eu',
       contactPoint: {

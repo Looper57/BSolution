@@ -835,7 +835,7 @@ function FooterCS() {
           <div>
             <h4 className="text-[11px] text-white/60 uppercase tracking-[0.16em] font-medium mb-6">{f.connect}</h4>
             <address className="not-italic space-y-3 text-white/40 text-[14px]">
-              <p>B Solution s.r.o.</p>
+              <p>B Solution · Yours Solution s.r.o., IČO 19233043</p>
               <p>{f.address}</p>
               <p>{f.phone}</p>
               <a href={`mailto:${f.email}`} className="block hover:text-white/70 transition-colors">{f.email}</a>
