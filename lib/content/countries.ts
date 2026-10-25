@@ -801,4 +801,232 @@ export const countries: Entity[] = [
       },
     },
   },
+  {
+    kind: 'country',
+    slug: 'switzerland',
+    basePath: '/locations/switzerland',
+    complete: true,
+    areaServed: 'CH',
+    related: {
+      services: ['legal-executive-search'],
+      practices: ['general-counsel', 'compliance-officer'],
+      industries: ['pharma-life-sciences'],
+    },
+    content: {
+      en: {
+        title: 'Legal Executive Search in Switzerland',
+        summary:
+          'Search for General Counsel, Legal Directors and senior in-house counsel in Switzerland, including regional and EMEA legal roles.',
+        metaTitle: 'Legal Executive Search Switzerland',
+        metaDescription:
+          'Boutique legal executive search in Switzerland. Confidential search for General Counsel, Legal Directors and senior in-house counsel, incl. EMEA roles.',
+        faq: [
+          { question: 'Does B Solution recruit in-house lawyers in Switzerland?', answer: 'Yes. B Solution runs confidential searches for General Counsel, Legal Directors and senior in-house counsel in Switzerland, including roles in pharmaceutical companies and regional roles covering several countries.' },
+          { question: 'How does a B Solution legal executive search work?', answer: 'After agreeing the brief, B Solution maps the relevant market systematically, approaches passive candidates discreetly and presents a shortlist with an honest, evidence-based assessment of each candidate.' },
+          { question: 'How quickly can B Solution present candidates in Switzerland?', answer: 'The first candidates are typically presented within three to four weeks of agreeing the brief.' },
+          { question: 'Is there a guarantee if a placed candidate leaves?', answer: 'Yes. B Solution replaces the candidate free of charge if they leave within 9 months for junior and non-lawyer roles, or within 12 months for senior roles (8+ years of experience).' },
+          { question: 'How is a B Solution search paid?', answer: 'With an initial retainer when the search starts, then the success fee when the candidate signs the contract with the client or starts work, whichever comes first. If the contract is signed months before the start date, payment follows the signature.' },
+          { question: 'Does B Solution work outside this market?', answer: 'Yes. B Solution works across Europe, the Gulf and beyond, without geographic limits, so cross-border mandates are run by the same team.' },
+        ],
+        sections: [
+          {
+            heading: 'Switzerland as a base for regional legal teams',
+            paragraphs: [
+              'Switzerland is home to the international and regional headquarters of many pharmaceutical, life-sciences and industrial groups. Legal roles there often cover several countries or the whole EMEA region, so companies look for lawyers who combine Swiss or European legal experience with international business work.',
+              'B Solution has recruited lawyers for pharmaceutical companies in Switzerland and searches for candidates who work in the local language and English.',
+            ],
+          },
+        ],
+      },
+      cs: {
+        title: 'Executive search v právním sektoru ve Švýcarsku',
+        summary:
+          'Vyhledávání pozic General Counsel, Legal Director a seniorních interních právníků ve Švýcarsku, včetně regionálních a EMEA rolí.',
+        metaTitle: 'Legal executive search Švýcarsko',
+        metaDescription:
+          'Butikový executive search v právním sektoru ve Švýcarsku. Důvěrné vyhledávání pozic General Counsel, Legal Director a seniorních právníků.',
+        faq: [
+          { question: 'Hledá B Solution interní právníky ve Švýcarsku?', answer: 'Ano. B Solution vede důvěrná vyhledávání pozic General Counsel, Legal Director a seniorních interních právníků ve Švýcarsku, včetně pozic ve farmaceutických firmách a regionálních rolí pro více zemí.' },
+          { question: 'Jak probíhá executive search v právním sektoru s B Solution?', answer: 'Po upřesnění zadání B Solution systematicky zmapuje relevantní trh, diskrétně osloví pasivní kandidáty a předloží užší výběr s poctivým hodnocením každého kandidáta podloženým fakty.' },
+          { question: 'Jak rychle B Solution předloží kandidáty ve Švýcarsku?', answer: 'První kandidáty B Solution obvykle předloží do tří až čtyř týdnů od upřesnění zadání.' },
+          { question: 'Je obsazení garantované, když kandidát odejde?', answer: 'Ano. Pokud kandidát odejde do 9 měsíců u juniorních a neprávnických pozic, nebo do 12 měsíců u seniorních pozic (8 a více let praxe), B Solution najde náhradu zdarma.' },
+          { question: 'Jak se vyhledávání B Solution platí?', answer: 'Úvodní zálohou (retainer) při zahájení vyhledávání a poté odměnou za úspěch při podpisu smlouvy mezi kandidátem a klientem nebo při nástupu, podle toho, co nastane dříve. Pokud je smlouva podepsána měsíce před nástupem, platba se řídí podpisem.' },
+          { question: 'Působí B Solution i mimo tento trh?', answer: 'Ano. B Solution působí v celé Evropě, v Perském zálivu i jinde, bez geografického omezení, takže přeshraniční mandáty vede stejný tým.' },
+        ],
+        sections: [
+          {
+            heading: 'Švýcarsko jako základna regionálních právních týmů',
+            paragraphs: [
+              'Ve Švýcarsku sídlí mezinárodní a regionální centrály mnoha farmaceutických, life-sciences a průmyslových skupin. Právní role tam často pokrývají více zemí nebo celý region EMEA, proto firmy hledají právníky, kteří spojují švýcarskou nebo evropskou právní praxi s mezinárodní obchodní agendou.',
+              'B Solution hledala právníky pro farmaceutické firmy ve Švýcarsku a hledá kandidáty, kteří pracují v místním jazyce a v angličtině.',
+            ],
+          },
+        ],
+      },
+      de: {
+        title: 'Legal Executive Search in der Schweiz',
+        summary:
+          'Suche nach General Counsel, Legal Directors und Senior-Inhouse-Juristen in der Schweiz, auch für regionale und EMEA-Rollen.',
+        metaTitle: 'Legal Executive Search Schweiz',
+        metaDescription:
+          'Spezialisierte Legal Executive Search in der Schweiz. Vertrauliche Suche nach General Counsel, Legal Directors und Senior-Inhouse-Juristen.',
+        faq: [
+          { question: 'Sucht B Solution Inhouse-Juristen in der Schweiz?', answer: 'Ja. B Solution führt vertrauliche Suchen nach General Counsel, Legal Directors und Senior-Inhouse-Juristen in der Schweiz durch, auch für Positionen in Pharmaunternehmen und für Regionalrollen über mehrere Länder.' },
+          { question: 'Wie läuft eine Legal Executive Search mit B Solution ab?', answer: 'Nach Abstimmung des Profils analysiert B Solution den relevanten Markt systematisch, spricht passive Kandidaten diskret an und legt eine Shortlist mit einer ehrlichen, faktenbasierten Einschätzung jedes Kandidaten vor.' },
+          { question: 'Wie schnell stellt B Solution Kandidaten in der Schweiz vor?', answer: 'Die ersten Kandidaten stellt B Solution in der Regel innerhalb von drei bis vier Wochen nach Abstimmung des Profils vor.' },
+          { question: 'Gibt es eine Garantie, wenn ein vermittelter Kandidat geht?', answer: 'Ja. Verlässt der Kandidat das Unternehmen innerhalb von 9 Monaten (Junior- und nichtjuristische Positionen) oder 12 Monaten (Senior-Positionen ab 8 Jahren Erfahrung), findet B Solution kostenlos Ersatz.' },
+          { question: 'Wie wird eine Suche von B Solution bezahlt?', answer: 'Mit einem Retainer zu Beginn der Suche und danach mit dem Erfolgshonorar bei Vertragsunterzeichnung zwischen Kandidat und Mandant oder bei Arbeitsantritt, je nachdem, was früher eintritt. Wird der Vertrag Monate vor dem Antritt unterzeichnet, richtet sich die Zahlung nach der Unterzeichnung.' },
+          { question: 'Ist B Solution auch außerhalb dieses Marktes tätig?', answer: 'Ja. B Solution arbeitet in ganz Europa, am Golf und darüber hinaus ohne geografische Grenzen, sodass grenzüberschreitende Mandate vom selben Team geführt werden.' },
+        ],
+        sections: [
+          {
+            heading: 'Die Schweiz als Standort regionaler Rechtsteams',
+            paragraphs: [
+              'In der Schweiz sitzen die internationalen und regionalen Zentralen vieler Pharma-, Life-Sciences- und Industriekonzerne. Juristische Rollen umfassen dort oft mehrere Länder oder die gesamte EMEA-Region, daher suchen Unternehmen Juristen, die schweizerische oder europäische Rechtserfahrung mit internationaler Geschäftstätigkeit verbinden.',
+              'B Solution hat Juristen für Pharmaunternehmen in der Schweiz gesucht und sucht Kandidaten, die in der Landessprache und auf Englisch arbeiten.',
+            ],
+          },
+        ],
+      },
+      pl: {
+        title: 'Executive search prawny w Szwajcarii',
+        summary:
+          'Poszukiwanie na stanowiska General Counsel, Legal Director i starszych prawników wewnętrznych w Szwajcarii, w tym ról regionalnych i EMEA.',
+        metaTitle: 'Executive search prawny Szwajcaria',
+        metaDescription:
+          'Butikowy executive search prawny w Szwajcarii. Poufne poszukiwanie na stanowiska General Counsel, Legal Director i starszych prawników wewnętrznych.',
+        faq: [
+          { question: 'Czy B Solution rekrutuje prawników wewnętrznych w Szwajcarii?', answer: 'Tak. B Solution prowadzi poufne poszukiwania na stanowiska General Counsel, Legal Director i starszych prawników wewnętrznych w Szwajcarii, w tym w firmach farmaceutycznych i w rolach regionalnych obejmujących kilka krajów.' },
+          { question: 'Jak przebiega executive search prawny z B Solution?', answer: 'Po uzgodnieniu profilu B Solution systematycznie mapuje odpowiedni rynek, dyskretnie kontaktuje się z pasywnymi kandydatami i przedstawia krótką listę z rzetelną, opartą na faktach oceną każdego kandydata.' },
+          { question: 'Jak szybko B Solution przedstawia kandydatów w Szwajcarii?', answer: 'Pierwszych kandydatów B Solution przedstawia zwykle w ciągu trzech do czterech tygodni od uzgodnienia profilu.' },
+          { question: 'Czy jest gwarancja, jeśli zatrudniony kandydat odejdzie?', answer: 'Tak. Jeśli kandydat odejdzie w ciągu 9 miesięcy na stanowiskach juniorskich i nieprawniczych lub w ciągu 12 miesięcy na stanowiskach seniorskich (od 8 lat doświadczenia), B Solution bezpłatnie znajdzie zastępstwo.' },
+          { question: 'Jak płaci się za poszukiwanie B Solution?', answer: 'Zaliczką (retainer) na początku poszukiwania, a następnie wynagrodzeniem za sukces przy podpisaniu umowy między kandydatem a klientem lub przy rozpoczęciu pracy, w zależności od tego, co nastąpi wcześniej. Jeśli umowa zostanie podpisana kilka miesięcy przed rozpoczęciem pracy, płatność wiąże się z podpisaniem.' },
+          { question: 'Czy B Solution działa także poza tym rynkiem?', answer: 'Tak. B Solution działa w całej Europie, w regionie Zatoki i poza nimi, bez ograniczeń geograficznych, więc mandaty transgraniczne prowadzi ten sam zespół.' },
+        ],
+        sections: [
+          {
+            heading: 'Szwajcaria jako baza regionalnych zespołów prawnych',
+            paragraphs: [
+              'W Szwajcarii mają siedziby międzynarodowe i regionalne centrale wielu grup farmaceutycznych, life sciences i przemysłowych. Role prawne obejmują tam często kilka krajów lub cały region EMEA, dlatego firmy szukają prawników łączących szwajcarskie lub europejskie doświadczenie prawne z międzynarodową działalnością biznesową.',
+              'B Solution rekrutowała prawników dla firm farmaceutycznych w Szwajcarii i poszukuje kandydatów pracujących w języku lokalnym i po angielsku.',
+            ],
+          },
+        ],
+      },
+    },
+  },
+  {
+    kind: 'country',
+    slug: 'turkey',
+    basePath: '/locations/turkey',
+    complete: true,
+    areaServed: 'TR',
+    related: {
+      services: ['legal-executive-search'],
+      practices: ['general-counsel', 'compliance-officer'],
+      industries: ['pharma-life-sciences'],
+    },
+    content: {
+      en: {
+        title: 'Legal Executive Search in Turkey',
+        summary:
+          'Search for Legal Directors, Senior Legal Counsel and in-house legal leaders in Turkey, including roles in pharmaceutical companies.',
+        metaTitle: 'Legal Executive Search Turkey | Istanbul',
+        metaDescription:
+          'Boutique legal executive search in Turkey. Confidential search for Legal Directors, Senior Legal Counsel and in-house legal leaders in Istanbul.',
+        faq: [
+          { question: 'Does B Solution recruit in-house lawyers in Turkey?', answer: 'Yes. B Solution runs confidential searches for Legal Directors, Senior Legal Counsel and other in-house legal leaders in Turkey, including roles in pharmaceutical companies.' },
+          { question: 'How does a B Solution legal executive search work?', answer: 'After agreeing the brief, B Solution maps the relevant market systematically, approaches passive candidates discreetly and presents a shortlist with an honest, evidence-based assessment of each candidate.' },
+          { question: 'How quickly can B Solution present candidates in Turkey?', answer: 'The first candidates are typically presented within three to four weeks of agreeing the brief.' },
+          { question: 'Is there a guarantee if a placed candidate leaves?', answer: 'Yes. B Solution replaces the candidate free of charge if they leave within 9 months for junior and non-lawyer roles, or within 12 months for senior roles (8+ years of experience).' },
+          { question: 'How is a B Solution search paid?', answer: 'With an initial retainer when the search starts, then the success fee when the candidate signs the contract with the client or starts work, whichever comes first. If the contract is signed months before the start date, payment follows the signature.' },
+          { question: 'Does B Solution work outside this market?', answer: 'Yes. B Solution works across Europe, the Gulf and beyond, without geographic limits, so cross-border mandates are run by the same team.' },
+        ],
+        sections: [
+          {
+            heading: 'In-house legal roles in Turkey',
+            paragraphs: [
+              'Turkey is a large market where international groups run substantial local operations, often managed from Istanbul. In-house lawyers there handle Turkish law and local regulators while reporting to regional or global legal teams, so companies look for lawyers who work confidently in Turkish and English.',
+              'B Solution has recruited lawyers for pharmaceutical companies in Turkey and searches for candidates who work in Turkish and English.',
+            ],
+          },
+        ],
+      },
+      cs: {
+        title: 'Executive search v právním sektoru v Turecku',
+        summary:
+          'Vyhledávání pozic Legal Director, Senior Legal Counsel a vedoucích interních právníků v Turecku, včetně pozic ve farmaceutických firmách.',
+        metaTitle: 'Legal executive search Turecko | Istanbul',
+        metaDescription:
+          'Butikový executive search v právním sektoru v Turecku. Důvěrné vyhledávání pozic Legal Director, Senior Legal Counsel a vedoucích právníků.',
+        faq: [
+          { question: 'Hledá B Solution interní právníky v Turecku?', answer: 'Ano. B Solution vede důvěrná vyhledávání pozic Legal Director, Senior Legal Counsel a dalších vedoucích interních právníků v Turecku, včetně pozic ve farmaceutických firmách.' },
+          { question: 'Jak probíhá executive search v právním sektoru s B Solution?', answer: 'Po upřesnění zadání B Solution systematicky zmapuje relevantní trh, diskrétně osloví pasivní kandidáty a předloží užší výběr s poctivým hodnocením každého kandidáta podloženým fakty.' },
+          { question: 'Jak rychle B Solution předloží kandidáty v Turecku?', answer: 'První kandidáty B Solution obvykle předloží do tří až čtyř týdnů od upřesnění zadání.' },
+          { question: 'Je obsazení garantované, když kandidát odejde?', answer: 'Ano. Pokud kandidát odejde do 9 měsíců u juniorních a neprávnických pozic, nebo do 12 měsíců u seniorních pozic (8 a více let praxe), B Solution najde náhradu zdarma.' },
+          { question: 'Jak se vyhledávání B Solution platí?', answer: 'Úvodní zálohou (retainer) při zahájení vyhledávání a poté odměnou za úspěch při podpisu smlouvy mezi kandidátem a klientem nebo při nástupu, podle toho, co nastane dříve. Pokud je smlouva podepsána měsíce před nástupem, platba se řídí podpisem.' },
+          { question: 'Působí B Solution i mimo tento trh?', answer: 'Ano. B Solution působí v celé Evropě, v Perském zálivu i jinde, bez geografického omezení, takže přeshraniční mandáty vede stejný tým.' },
+        ],
+        sections: [
+          {
+            heading: 'Interní právní pozice v Turecku',
+            paragraphs: [
+              'Turecko je velký trh, kde mezinárodní skupiny provozují rozsáhlé místní pobočky, často řízené z Istanbulu. Interní právníci tam řeší turecké právo a místní úřady a zároveň podléhají regionálním nebo globálním právním týmům, proto firmy hledají právníky, kteří jistě pracují v turečtině i angličtině.',
+              'B Solution hledala právníky pro farmaceutické firmy v Turecku a hledá kandidáty, kteří pracují v turečtině a angličtině.',
+            ],
+          },
+        ],
+      },
+      de: {
+        title: 'Legal Executive Search in der Türkei',
+        summary:
+          'Suche nach Legal Directors, Senior Legal Counsel und juristischen Führungskräften in der Türkei, auch für Positionen in Pharmaunternehmen.',
+        metaTitle: 'Legal Executive Search Türkei | Istanbul',
+        metaDescription:
+          'Spezialisierte Legal Executive Search in der Türkei. Vertrauliche Suche nach Legal Directors, Senior Legal Counsel und Inhouse-Führungskräften.',
+        faq: [
+          { question: 'Sucht B Solution Inhouse-Juristen in der Türkei?', answer: 'Ja. B Solution führt vertrauliche Suchen nach Legal Directors, Senior Legal Counsel und weiteren juristischen Führungskräften in der Türkei durch, auch für Positionen in Pharmaunternehmen.' },
+          { question: 'Wie läuft eine Legal Executive Search mit B Solution ab?', answer: 'Nach Abstimmung des Profils analysiert B Solution den relevanten Markt systematisch, spricht passive Kandidaten diskret an und legt eine Shortlist mit einer ehrlichen, faktenbasierten Einschätzung jedes Kandidaten vor.' },
+          { question: 'Wie schnell stellt B Solution Kandidaten in der Türkei vor?', answer: 'Die ersten Kandidaten stellt B Solution in der Regel innerhalb von drei bis vier Wochen nach Abstimmung des Profils vor.' },
+          { question: 'Gibt es eine Garantie, wenn ein vermittelter Kandidat geht?', answer: 'Ja. Verlässt der Kandidat das Unternehmen innerhalb von 9 Monaten (Junior- und nichtjuristische Positionen) oder 12 Monaten (Senior-Positionen ab 8 Jahren Erfahrung), findet B Solution kostenlos Ersatz.' },
+          { question: 'Wie wird eine Suche von B Solution bezahlt?', answer: 'Mit einem Retainer zu Beginn der Suche und danach mit dem Erfolgshonorar bei Vertragsunterzeichnung zwischen Kandidat und Mandant oder bei Arbeitsantritt, je nachdem, was früher eintritt. Wird der Vertrag Monate vor dem Antritt unterzeichnet, richtet sich die Zahlung nach der Unterzeichnung.' },
+          { question: 'Ist B Solution auch außerhalb dieses Marktes tätig?', answer: 'Ja. B Solution arbeitet in ganz Europa, am Golf und darüber hinaus ohne geografische Grenzen, sodass grenzüberschreitende Mandate vom selben Team geführt werden.' },
+        ],
+        sections: [
+          {
+            heading: 'Inhouse-Rechtspositionen in der Türkei',
+            paragraphs: [
+              'Die Türkei ist ein großer Markt, in dem internationale Konzerne umfangreiche lokale Gesellschaften betreiben, oft von Istanbul aus geführt. Inhouse-Juristen bearbeiten dort türkisches Recht und lokale Behörden und berichten zugleich an regionale oder globale Rechtsteams, daher suchen Unternehmen Juristen, die sicher auf Türkisch und Englisch arbeiten.',
+              'B Solution hat Juristen für Pharmaunternehmen in der Türkei gesucht und sucht Kandidaten, die auf Türkisch und Englisch arbeiten.',
+            ],
+          },
+        ],
+      },
+      pl: {
+        title: 'Executive search prawny w Turcji',
+        summary:
+          'Poszukiwanie na stanowiska Legal Director, Senior Legal Counsel i liderów prawnych w Turcji, w tym w firmach farmaceutycznych.',
+        metaTitle: 'Executive search prawny Turcja | Stambuł',
+        metaDescription:
+          'Butikowy executive search prawny w Turcji. Poufne poszukiwanie na stanowiska Legal Director, Senior Legal Counsel i liderów prawnych w Stambule.',
+        faq: [
+          { question: 'Czy B Solution rekrutuje prawników wewnętrznych w Turcji?', answer: 'Tak. B Solution prowadzi poufne poszukiwania na stanowiska Legal Director, Senior Legal Counsel i innych liderów prawnych w Turcji, w tym w firmach farmaceutycznych.' },
+          { question: 'Jak przebiega executive search prawny z B Solution?', answer: 'Po uzgodnieniu profilu B Solution systematycznie mapuje odpowiedni rynek, dyskretnie kontaktuje się z pasywnymi kandydatami i przedstawia krótką listę z rzetelną, opartą na faktach oceną każdego kandydata.' },
+          { question: 'Jak szybko B Solution przedstawia kandydatów w Turcji?', answer: 'Pierwszych kandydatów B Solution przedstawia zwykle w ciągu trzech do czterech tygodni od uzgodnienia profilu.' },
+          { question: 'Czy jest gwarancja, jeśli zatrudniony kandydat odejdzie?', answer: 'Tak. Jeśli kandydat odejdzie w ciągu 9 miesięcy na stanowiskach juniorskich i nieprawniczych lub w ciągu 12 miesięcy na stanowiskach seniorskich (od 8 lat doświadczenia), B Solution bezpłatnie znajdzie zastępstwo.' },
+          { question: 'Jak płaci się za poszukiwanie B Solution?', answer: 'Zaliczką (retainer) na początku poszukiwania, a następnie wynagrodzeniem za sukces przy podpisaniu umowy między kandydatem a klientem lub przy rozpoczęciu pracy, w zależności od tego, co nastąpi wcześniej. Jeśli umowa zostanie podpisana kilka miesięcy przed rozpoczęciem pracy, płatność wiąże się z podpisaniem.' },
+          { question: 'Czy B Solution działa także poza tym rynkiem?', answer: 'Tak. B Solution działa w całej Europie, w regionie Zatoki i poza nimi, bez ograniczeń geograficznych, więc mandaty transgraniczne prowadzi ten sam zespół.' },
+        ],
+        sections: [
+          {
+            heading: 'Wewnętrzne stanowiska prawne w Turcji',
+            paragraphs: [
+              'Turcja to duży rynek, na którym międzynarodowe grupy prowadzą rozbudowane lokalne spółki, często zarządzane ze Stambułu. Prawnicy wewnętrzni zajmują się tam prawem tureckim i lokalnymi urzędami, a jednocześnie raportują do regionalnych lub globalnych zespołów prawnych, dlatego firmy szukają prawników swobodnie pracujących po turecku i angielsku.',
+              'B Solution rekrutowała prawników dla firm farmaceutycznych w Turcji i poszukuje kandydatów pracujących po turecku i angielsku.',
+            ],
+          },
+        ],
+      },
+    },
+  },
 ]
