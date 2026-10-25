@@ -10,6 +10,7 @@ export const countries: Entity[] = [
     related: {
       services: ['legal-executive-search'],
       practices: ['general-counsel', 'compliance-officer'],
+      industries: ['pharma-life-sciences'],
     },
     content: {
       en: {
@@ -355,6 +356,7 @@ export const countries: Entity[] = [
     related: {
       services: ['legal-executive-search'],
       practices: ['general-counsel', 'compliance-officer'],
+      industries: ['pharma-life-sciences'],
     },
     content: {
       en: {
@@ -581,6 +583,7 @@ export const countries: Entity[] = [
     related: {
       services: ['legal-executive-search'],
       practices: ['general-counsel', 'compliance-officer'],
+      industries: ['pharma-life-sciences'],
     },
     content: {
       en: {
