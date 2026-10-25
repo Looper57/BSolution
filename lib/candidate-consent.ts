@@ -40,4 +40,19 @@ export function registrationConsentText(locale: string): string {
  * switches them on there (RECRUITMENT_APPLICATIONS_ENABLED) and here. */
 export const APPLICATIONS_ENABLED = process.env.NEXT_PUBLIC_RECRUITMENT_APPLICATIONS_ENABLED === 'true'
 export const APPLY_ENDPOINT = (jobId: number) => `${process.env.NEXT_PUBLIC_LAWBRIDGE_ORIGIN ?? 'https://www.lawbridge.eu'}/api/recruitment/positions/${jobId}/apply`
+/** Search on the lawyer's behalf (shared roadmap M12.1). Same text and
+ * version as lawbridge.eu (lib/recruitment/candidate-consent.ts there). */
+export const MANDATE_CONSENT_VERSION = '2026-10-25-yours-solution-2y-mandate'
+
+const MANDATE_TEXT = {
+  en: 'I ask Yours Solution s.r.o. (B Solution) to search for suitable job opportunities for me according to my brief and agree that it processes my personal data and CV for this purpose for 2 years or until I withdraw my consent (info@bsolution.eu). B Solution will send me the opportunities it finds; it will approach a company or send it my CV with my name only after I confirm that company. AI may help with the search; a person makes the final selection. The service is free for me; the employer who hires me pays.',
+  cs: 'Žádám Yours Solution s.r.o. (B Solution), aby pro mě podle mého zadání vyhledávala vhodné pracovní příležitosti, a souhlasím, aby k tomu zpracovávala mé osobní údaje a životopis po dobu 2 let nebo do odvolání souhlasu (info@bsolution.eu). B Solution mi pošle nalezené příležitosti; firmu osloví nebo jí pošle můj životopis se jménem až poté, co danou firmu potvrdím. Při vyhledávání může pomáhat AI, konečný výběr dělá člověk. Služba je pro mě zdarma; platí zaměstnavatel, který mě přijme.',
+  de: 'Ich beauftrage Yours Solution s.r.o. (B Solution), nach meinen Vorgaben passende Stellen für mich zu suchen, und willige ein, dass sie dafür meine personenbezogenen Daten und meinen Lebenslauf für 2 Jahre oder bis zu meinem Widerruf (info@bsolution.eu) verarbeitet. B Solution sendet mir die gefundenen Stellen; ein Unternehmen wird erst angesprochen oder erhält meinen Lebenslauf mit Namen, nachdem ich dieses Unternehmen bestätigt habe. KI kann bei der Suche helfen; die endgültige Auswahl trifft ein Mensch. Der Service ist für mich kostenlos; es zahlt der Arbeitgeber, der mich einstellt.',
+  pl: 'Zlecam Yours Solution s.r.o. (B Solution) wyszukiwanie dla mnie odpowiednich ofert pracy zgodnie z moimi wymaganiami i wyrażam zgodę na przetwarzanie w tym celu moich danych osobowych i CV przez 2 lata lub do wycofania zgody (info@bsolution.eu). B Solution prześle mi znalezione oferty; skontaktuje się z firmą lub prześle jej moje CV z nazwiskiem dopiero po potwierdzeniu przeze mnie tej firmy. W wyszukiwaniu może pomagać AI, ostatecznego wyboru dokonuje człowiek. Usługa jest dla mnie bezpłatna; płaci pracodawca, który mnie zatrudni.',
+} as const
+
+export function mandateConsentText(locale: string): string {
+  return MANDATE_TEXT[(locale in MANDATE_TEXT ? locale : 'en') as keyof typeof MANDATE_TEXT]
+}
+
 export const REGISTER_ENDPOINT = `${process.env.NEXT_PUBLIC_LAWBRIDGE_ORIGIN ?? 'https://www.lawbridge.eu'}/api/recruitment/candidates`
