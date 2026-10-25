@@ -155,9 +155,9 @@ const authorityRenderingRoutes = [
   {
     path: '/cs/services/legal-executive-search',
     lang: 'cs',
-    h1: 'Executive search v právním sektoru',
+    h1: 'Executive search a nábor seniorních právníků',
     breadcrumb: 'Drobečková navigace',
-    primary: ['Projednat důvěrné vyhledávání', '/cs/contact'],
+    primary: ['Probrat důvěrné hledání', '/cs/contact'],
     secondary: ['Pro kandidáty', '/cs/candidates'],
     faq: 'Časté otázky',
   },

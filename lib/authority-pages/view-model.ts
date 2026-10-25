@@ -16,6 +16,7 @@ import type {
   AuthorityEditorialSection,
   AuthorityFaqItem,
   ProductionAuthorityRecord,
+  AuthoritySituations,
 } from './types'
 import { validateProductionAuthorityRegistry } from './validation'
 import { validateAuthorityRelationships } from './relationships'
@@ -40,6 +41,7 @@ export interface ProductionAuthorityViewModel {
     h1: string
     proposition: string
   }
+  situations: AuthoritySituations | null
   executiveSummary: {
     heading: string
     paragraphs: readonly string[]
@@ -101,10 +103,10 @@ export function buildProductionAuthorityViewModel(
     || rendering.locale !== page.locale
     || rendering.basePath !== page.basePath
     || rendering.canonical !== page.canonical
-    || page.publicationStatus !== 'owner-review'
-    || page.approval.status !== 'pending'
-    || page.indexationRequested
-    || page.topicStatus !== 'resolved'
+    || !(
+      (page.publicationStatus === 'owner-review' && page.approval.status === 'pending' && !page.indexationRequested && page.topicStatus === 'resolved')
+      || (page.publicationStatus === 'approved' && page.approval.status === 'approved' && page.approval.ownerId === page.ownerKey && page.topicStatus === 'clear')
+    )
   ) {
     throw new Error(`Authority page ${page.id} is not eligible for existing-route integration.`)
   }
@@ -162,6 +164,7 @@ export function buildProductionAuthorityViewModel(
       h1: editorial.h1,
       proposition: editorial.proposition,
     },
+    situations: editorial.situations ?? null,
     executiveSummary: editorial.executiveSummary,
     definition: editorial.definition,
     sections: editorial.sections,

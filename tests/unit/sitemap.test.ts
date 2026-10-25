@@ -14,7 +14,7 @@ describe('sitemap', () => {
   })
 
   it('contains only unique canonical URLs', () => {
-    expect(urls).toHaveLength(130)
+    expect(urls).toHaveLength(134)
     expect(new Set(urls).size).toBe(urls.length)
   })
 
@@ -26,9 +26,14 @@ describe('sitemap', () => {
   // registry; it must not put a noindex URL in the sitemap on its own
   // (2026-08-22 Ahrefs audit: this test previously asserted the opposite,
   // which is exactly the drift that produced the defect).
-  it('omits the Legal Executive Search service route until its evidence gate approves indexation', () => {
+  it('lists the owner-approved Legal Executive Search page once per locale, never the legacy route', () => {
     expect(urls).not.toContain('https://www.bsolution.eu/legal-executive-search')
-    expect(urls.filter((url) => url.endsWith('/services/legal-executive-search'))).toEqual([])
+    expect(urls.filter((url) => url.endsWith('/services/legal-executive-search')).sort()).toEqual([
+      'https://www.bsolution.eu/cs/services/legal-executive-search',
+      'https://www.bsolution.eu/de/services/legal-executive-search',
+      'https://www.bsolution.eu/pl/services/legal-executive-search',
+      'https://www.bsolution.eu/services/legal-executive-search',
+    ])
   })
 
   it('contains one Services hub per supported locale', () => {

@@ -43,12 +43,12 @@ describe('production authority registry', () => {
     })
   })
 
-  it('remains non-public while owner review and canonical consolidation are pending', () => {
+  it('is published by its owner: approved by the page owner, clear topic, indexation requested (2026-10-25)', () => {
     for (const page of productionAuthorityPages) {
-      expect(page.publicationStatus).toBe('owner-review')
-      expect(page.approval.status).toBe('pending')
-      expect(page.topicStatus).toBe('resolved')
-      expect(page.indexationRequested).toBe(false)
+      expect(page.publicationStatus).toBe('approved')
+      expect(page.approval).toEqual({ status: 'approved', ownerId: page.ownerKey })
+      expect(page.topicStatus).toBe('clear')
+      expect(page.indexationRequested).toBe(true)
       expect(page.structuredData.requested).not.toContain('FAQPage')
       expect(
         isPagePublishable(
@@ -56,8 +56,14 @@ describe('production authority registry', () => {
           productionAuthorityPages,
           productionAuthorityCanonicalRoutes,
         ),
-      ).toBe(false)
+      ).toBe(true)
     }
+  })
+
+  it('refuses approval by anyone other than the page owner', () => {
+    const invalid = structuredClone(productionAuthorityRegistry)
+    invalid[0].page.approval = { status: 'approved', ownerId: 'someone-else' }
+    expect(validateProductionAuthorityRegistry(invalid).valid).toBe(false)
   })
 
   it('uses normalized locale-specific canonical identity', () => {
@@ -81,9 +87,9 @@ describe('production authority registry', () => {
     for (const record of productionAuthorityRegistry) {
       expect(record.trustSignals.map((signal) => signal.kind)).toEqual(expectedKinds)
       expect(record.trustSignals.every((signal) => signal.status === 'approved')).toBe(true)
-      expect(record.review.status).toBe('owner-review')
-      expect(record.review.lastReviewed).toBeNull()
-      expect(record.review.nextReview).toBeNull()
+      expect(record.review.status).toBe('approved')
+      expect(record.review.lastReviewed).toBe('2026-10-25')
+      expect(record.review.nextReview).toBe('2027-04-25')
     }
   })
 
@@ -241,7 +247,7 @@ describe('production authority registry', () => {
 
   it('fails closed when an integrated registry record becomes invalid', () => {
     const invalid = structuredClone(productionAuthorityRegistry)
-    invalid[0].page.indexationRequested = true
+    invalid[0].review.status = 'owner-review'
 
     expect(() =>
       buildProductionAuthorityViewModel(
@@ -276,7 +282,7 @@ describe('production authority registry', () => {
     }
   })
 
-  it('builds localized noindex metadata from the exact validated registry', () => {
+  it('builds localized indexable metadata from the exact validated registry', () => {
     const expectedLanguages = Object.fromEntries(
       productionAuthorityRegistry.map(({ page }) => [
         page.locale,
@@ -294,7 +300,7 @@ describe('production authority registry', () => {
         canonical: page.canonical,
         languages: expectedLanguages,
       })
-      expect(metadata.robots).toEqual({ index: false, follow: true })
+      expect(metadata.robots).toEqual({ index: true, follow: true })
       expect(metadata.openGraph).toMatchObject({ url: page.canonical })
     }
   })

@@ -145,6 +145,21 @@ export function ProductionAuthorityPage({
         </section>
 
         <div className="mx-auto max-w-[1180px] px-6 py-16 md:px-10 md:py-24 lg:px-0">
+          {viewModel.situations && (
+            <section aria-labelledby={`${viewModel.id}-situations`} className="mb-16 max-w-4xl">
+              <h2 id={`${viewModel.id}-situations`} className="font-serif text-3xl text-navy">
+                {viewModel.situations.heading}
+              </h2>
+              <dl className="mt-8 flex flex-col gap-7">
+                {viewModel.situations.items.map((item) => (
+                  <div key={item.question} className="border-l-2 border-gold/60 pl-5">
+                    <dt className="text-lg font-medium text-navy">{item.question}</dt>
+                    <dd className="mt-2 text-base leading-relaxed text-muted-foreground md:text-lg">{item.answer}</dd>
+                  </div>
+                ))}
+              </dl>
+            </section>
+          )}
           <section
             aria-labelledby={`${viewModel.id}-executive-summary`}
             className="max-w-4xl"
