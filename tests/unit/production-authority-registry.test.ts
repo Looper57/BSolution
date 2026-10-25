@@ -66,6 +66,15 @@ describe('production authority registry', () => {
     expect(validateProductionAuthorityRegistry(invalid).valid).toBe(false)
   })
 
+  it('uses normalized locale-specific canonical identity', () => {
+    for (const page of productionAuthorityPages) {
+      expect(page.basePath).toBe('/services/legal-executive-search')
+      expect(page.canonical).toBe(getPageCanonical(page))
+      expect(page.translationKey).toBe('authority:legal-executive-search')
+      expect(page.ownerKey).toBe('owner:bsolution:legal-executive-search')
+    }
+  })
+
   it('records approved trust references without rendering them', () => {
     const expectedKinds = [
       'operating-history',
