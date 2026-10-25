@@ -103,10 +103,10 @@ export function buildProductionAuthorityViewModel(
     || rendering.locale !== page.locale
     || rendering.basePath !== page.basePath
     || rendering.canonical !== page.canonical
-    || page.publicationStatus !== 'owner-review'
-    || page.approval.status !== 'pending'
-    || page.indexationRequested
-    || page.topicStatus !== 'resolved'
+    || !(
+      (page.publicationStatus === 'owner-review' && page.approval.status === 'pending' && !page.indexationRequested && page.topicStatus === 'resolved')
+      || (page.publicationStatus === 'approved' && page.approval.status === 'approved' && page.approval.ownerId === page.ownerKey && page.topicStatus === 'clear')
+    )
   ) {
     throw new Error(`Authority page ${page.id} is not eligible for existing-route integration.`)
   }

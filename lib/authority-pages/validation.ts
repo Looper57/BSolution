@@ -115,15 +115,20 @@ export function validateProductionAuthorityRegistry(
         'Rendering integration must match the exact existing localized route identity.',
       )
     }
-    if (
-      page.publicationStatus !== 'owner-review'
-      || page.approval.status !== 'pending'
-      || page.indexationRequested
-      || page.topicStatus !== 'resolved'
-    ) {
+    // Either still in owner review (no indexation), or approved by the page's
+    // own owner with a clear topic (owner, 2026-10-25). Nothing in between.
+    const pendingReview = page.publicationStatus === 'owner-review'
+      && page.approval.status === 'pending'
+      && !page.indexationRequested
+      && page.topicStatus === 'resolved'
+    const ownerApproved = page.publicationStatus === 'approved'
+      && page.approval.status === 'approved'
+      && page.approval.ownerId === page.ownerKey
+      && page.topicStatus === 'clear'
+    if (!pendingReview && !ownerApproved) {
       add(
         'unsafe-rendering-integration-state',
-        'Existing-route rendering requires owner review, pending approval, disabled indexation and resolved canonical ownership.',
+        'Existing-route rendering requires either pending owner review without indexation, or approval by the page owner with a clear topic.',
       )
     }
 

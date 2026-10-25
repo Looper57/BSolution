@@ -274,12 +274,12 @@ function relationshipsFor(locale: Locale): SeoInternalLink[] {
 
 function reviewFor(locale: Locale): AuthorityReviewInformation {
   return {
-    status: 'owner-review',
+    status: 'approved',
     locale,
     contentOwnerId: 'owner:bsolution:legal-executive-search',
     evidenceOwnerId: 'owner:bsolution:legal-executive-search',
-    lastReviewed: null,
-    nextReview: null,
+    lastReviewed: '2026-10-25',
+    nextReview: '2027-04-25',
   }
 }
 
@@ -296,8 +296,10 @@ function pageFor(locale: Locale): SeoPageDefinition {
     slug: legalExecutiveSearch.slug,
     basePath: legalExecutiveSearch.basePath,
     pageType: 'service',
-    publicationStatus: 'owner-review',
-    approval: { status: 'pending' },
+    // Owner approved publication in chat 2026-10-25 after the Czech rewrite
+    // and client situations; canonical consolidation done in ae3fa28.
+    publicationStatus: 'approved',
+    approval: { status: 'approved', ownerId: 'owner:bsolution:legal-executive-search' },
     evidence: {
       status: 'approved',
       requirements: [
@@ -308,8 +310,8 @@ function pageFor(locale: Locale): SeoPageDefinition {
         'Documented Legal Executive Search methodology',
       ],
     },
-    topicStatus: 'resolved',
-    indexationRequested: false,
+    topicStatus: 'clear',
+    indexationRequested: true,
     canonical: absoluteUrl(locale, legalExecutiveSearch.basePath),
     title: copy.metaTitle ?? copy.title,
     metaDescription: copy.metaDescription ?? copy.summary,
