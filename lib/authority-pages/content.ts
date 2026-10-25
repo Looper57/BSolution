@@ -418,6 +418,17 @@ export const legalExecutiveSearchContent: Record<Locale, AuthorityEditorialConte
     h1: 'Legal Executive Search',
     proposition:
       'Mandatierte, vertrauliche Suche nach General Counsel, Chief Legal Officers und weiteren juristischen Führungskräften in ausgewählten Märkten Europas und des Nahen Ostens.',
+    situations: {
+      heading: 'Wobei wir helfen',
+      items: [
+        { question: 'Verlässt Sie ein Jurist und Sie brauchen schnell Ersatz?', answer: 'Wir beginnen sofort mit geeigneten Kandidaten aus unserer Datenbank mit mehr als 5.000 Personen aus dem Rechtsmarkt und suchen parallel im gesamten Markt. Die ersten Kandidaten stellen wir in der Regel innerhalb von drei bis vier Wochen vor.' },
+        { question: 'Suchen Sie einen Head of Legal, ohne dass es sich herumspricht?', answer: 'Wir suchen diskret, ohne Stellenanzeige. Den Namen Ihres Unternehmens erfahren Kandidaten erst, wenn das Gespräch es erfordert.' },
+        { question: 'Hat Ihre Stellenanzeige niemanden Passenden gebracht?', answer: 'Die stärksten Juristen suchen selten aktiv und antworten nicht auf Anzeigen. Wir finden sie und sprechen sie direkt an, mit einer Rolle, die ein vertrauliches Gespräch wert ist.' },
+        { question: 'Brauchen Sie einen Juristen für mehrere Länder oder eine ganze Region?', answer: 'Wir suchen grenzüberschreitend nach Kandidaten mit den benötigten Rechtsordnungen und Sprachen und Erfahrung im Reporting an regionale oder globale Führung.' },
+        { question: 'Bauen Sie ein neues Rechtsteam auf oder erweitern Sie es?', answer: 'Wir helfen, die wirklich benötigten Rollen zu definieren, und besetzen sie einzeln oder gemeinsam, damit das Team als Ganzes funktioniert.' },
+        { question: 'Sucht Ihre Kanzlei einen Partner oder Praxisgruppenleiter?', answer: 'Wir sprechen geeignete Kandidaten diskret an und prüfen, welche Mandanten und welche Praxis sie mitbringen würden, bevor Sie über Konditionen sprechen.' },
+      ],
+    },
     executiveSummary: {
       heading: 'Juristische Führungspositionen erfordern eine spezialisierte Suche',
       paragraphs: [
@@ -612,6 +623,17 @@ export const legalExecutiveSearchContent: Record<Locale, AuthorityEditorialConte
     h1: 'Executive search w sektorze prawnym',
     proposition:
       'Powierzone i poufne poszukiwania na stanowiska General Counsel, Chief Legal Officer oraz inne stanowiska kierownicze na wybranych rynkach Europy i Bliskiego Wschodu.',
+    situations: {
+      heading: 'W czym pomagamy',
+      items: [
+        { question: 'Odchodzi od Ciebie prawnik i potrzebujesz szybko następcy?', answer: 'Zaczynamy od razu od odpowiednich kandydatów z naszej bazy ponad 5 000 osób z rynku prawnego i równolegle przeszukujemy cały rynek. Pierwszych kandydatów przedstawiamy zwykle w ciągu trzech do czterech tygodni.' },
+        { question: 'Szukasz Head of Legal tak, aby nikt się o tym nie dowiedział?', answer: 'Szukamy dyskretnie, bez ogłoszenia. Nazwę Twojej firmy kandydaci poznają dopiero wtedy, gdy rozmowa tego wymaga.' },
+        { question: 'Ogłoszenie nie przyniosło odpowiednich kandydatów?', answer: 'Najlepsi prawnicy rzadko szukają pracy i nie odpowiadają na ogłoszenia. Znajdujemy ich i kontaktujemy się z nimi bezpośrednio z ofertą wartą poufnej rozmowy.' },
+        { question: 'Potrzebujesz prawnika na kilka krajów lub cały region?', answer: 'Szukamy ponad granicami kandydatów znających potrzebne systemy prawne i języki, z doświadczeniem w raportowaniu do regionalnego lub globalnego kierownictwa.' },
+        { question: 'Budujesz nowy dział prawny lub rozbudowujesz zespół?', answer: 'Pomagamy określić role, których naprawdę potrzebujesz, i obsadzamy je pojedynczo lub razem, aby zespół działał jako całość.' },
+        { question: 'Kancelaria szuka partnera lub szefa praktyki?', answer: 'Dyskretnie kontaktujemy się z odpowiednimi kandydatami i sprawdzamy, z jakimi klientami i jaką praktyką by przyszli, zanim zaczniesz rozmowy o warunkach.' },
+      ],
+    },
     executiveSummary: {
       heading: 'Stanowiska kierownicze w prawie wymagają specjalistycznych poszukiwań',
       paragraphs: [
