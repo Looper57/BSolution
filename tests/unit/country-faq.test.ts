@@ -2,7 +2,7 @@ import { describe, expect, it } from 'vitest'
 import { countries } from '@/lib/content/countries'
 
 describe('country pages open with questions and direct answers', () => {
-  for (const slug of ['czech-republic', 'germany', 'united-arab-emirates', 'poland', 'austria', 'hungary', 'united-kingdom']) {
+  for (const slug of ['czech-republic', 'germany', 'united-arab-emirates', 'poland', 'austria', 'hungary', 'united-kingdom', 'switzerland', 'turkey']) {
     it(`${slug} has Q&A in every locale, each answer a complete sentence`, () => {
       const country = countries.find((c) => c.slug === slug)!
       for (const locale of ['en', 'cs', 'de', 'pl'] as const) {

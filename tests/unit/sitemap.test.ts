@@ -14,7 +14,7 @@ describe('sitemap', () => {
   })
 
   it('contains only unique canonical URLs', () => {
-    expect(urls).toHaveLength(122)
+    expect(urls).toHaveLength(130)
     expect(new Set(urls).size).toBe(urls.length)
   })
 
