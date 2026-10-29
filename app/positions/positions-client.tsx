@@ -335,6 +335,12 @@ function ConfidentialSection() {
               </Link>
             </Button>
           </div>
+          <p className="mt-8">
+            {/* M13.3: external positions from employers' own job boards. */}
+            <Link href={localizedPath(locale, '/legal-jobs')} className="text-gold underline-offset-4 hover:underline">
+              {language === 'en' ? 'Browse open legal jobs from employers across Europe and the UAE' : 'Prohlédnout volné právnické pozice zaměstnavatelů v Evropě a SAE'}
+            </Link>
+          </p>
         </div>
       </div>
     </section>

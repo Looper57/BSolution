@@ -1,6 +1,7 @@
 import type { MetadataRoute } from 'next'
 import { jobsData } from '@/lib/jobs-data'
 import { getLivePositions, livePositionPath } from '@/lib/live-positions'
+import { getLegalJobs, legalJobPath, legalJobsCountryPath, legalJobsPath } from '@/lib/legal-jobs'
 import { authorityEntities } from '@/lib/content'
 import { productionAuthorityCanonicalRoutes, productionAuthorityPages } from '@/lib/authority-pages'
 import { getSitemapEligibleSeoPages } from '@/lib/seo-pages'
@@ -119,7 +120,18 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     priority: 0.8,
   }))
 
-  const entries = [...localizedPages, ...authorityPages, ...gatedAuthorityPages, ...positionListings, ...positionPages, ...openPositionPages, ...legalPages, ...englishPages]
+  // External legal positions (M13.3): the listing and every market page
+  // that has adverts, in all locales; each advert's English page (a closed
+  // one leaves the feed and the sitemap the same day).
+  const legalJobs = await getLegalJobs('en')
+  const legalJobCountries = [...new Set(legalJobs.map((job) => job.country).filter((c): c is string => Boolean(c)))]
+  const legalJobPages = [
+    ...LOCALES.map((locale) => ({ ...localizedEntry(legalJobsPath, locale), changeFrequency: 'daily' as const })),
+    ...legalJobCountries.flatMap((country) => LOCALES.map((locale) => ({ ...localizedEntry(legalJobsCountryPath(country), locale), changeFrequency: 'daily' as const }))),
+    ...legalJobs.map((job) => ({ url: `${SITE_URL}${legalJobPath(job)}`, lastModified: job.postedAt ?? job.firstSeenAt, changeFrequency: 'weekly' as const, priority: 0.5 })),
+  ]
+
+  const entries = [...localizedPages, ...authorityPages, ...gatedAuthorityPages, ...positionListings, ...positionPages, ...openPositionPages, ...legalJobPages, ...legalPages, ...englishPages]
   const urls = new Set(entries.map((entry) => entry.url))
   if (urls.size !== entries.length) throw new Error('Sitemap contains duplicate canonical URLs')
   return entries
