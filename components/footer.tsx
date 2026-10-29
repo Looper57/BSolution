@@ -16,6 +16,7 @@ export function Footer() {
       { href: '/about', label: 'nav.about' },
       { href: '/services', label: 'nav.services' },
       { href: '/positions', label: 'nav.positions' },
+      { href: '/legal-jobs', label: 'nav.legalJobs' },
       { href: '/contact', label: 'nav.contact' },
     ],
     services: [

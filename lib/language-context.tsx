@@ -21,6 +21,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.candidates': 'For Candidates',
     'nav.about': 'About',
     'nav.positions': 'Opportunities',
+    'nav.legalJobs': 'Legal jobs in Europe',
     'nav.contact': 'Contact',
     'nav.cta': 'Get in Touch',
     
@@ -201,6 +202,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.candidates': 'Pro kandidáty',
     'nav.about': 'O nás',
     'nav.positions': 'Příležitosti',
+    'nav.legalJobs': 'Právnické pozice',
     'nav.contact': 'Kontakt',
     'nav.cta': 'Kontaktujte nás',
     
@@ -381,6 +383,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.candidates': 'Für Kandidaten',
     'nav.about': 'Über uns',
     'nav.positions': 'Stellenangebote',
+    'nav.legalJobs': 'Jobs für Juristen',
     'nav.contact': 'Kontakt',
     'nav.cta': 'Kontakt aufnehmen',
     
@@ -561,6 +564,7 @@ const translations: Record<Language, Record<string, string>> = {
     'nav.candidates': 'Dla Kandydatów',
     'nav.about': 'O nas',
     'nav.positions': 'Oferty pracy',
+    'nav.legalJobs': 'Praca dla prawników',
     'nav.contact': 'Kontakt',
     'nav.cta': 'Skontaktuj się',
     
