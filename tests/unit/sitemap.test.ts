@@ -14,8 +14,14 @@ describe('sitemap', () => {
   })
 
   it('contains only unique canonical URLs', () => {
-    expect(urls).toHaveLength(134)
+    // 134 + the external legal-jobs listing in four locales (M13.3, 2026-10-29).
+    expect(urls).toHaveLength(138)
     expect(new Set(urls).size).toBe(urls.length)
+  })
+
+  it('lists the external legal-jobs page in every locale; with no adverts there are no market or advert pages', () => {
+    for (const url of ['https://www.bsolution.eu/legal-jobs', 'https://www.bsolution.eu/cs/legal-jobs', 'https://www.bsolution.eu/de/legal-jobs', 'https://www.bsolution.eu/pl/legal-jobs']) expect(urls).toContain(url)
+    expect(urls.filter((url) => /\/legal-jobs\/./.test(url))).toEqual([])
   })
 
   // /services/legal-executive-search is a distinct, evidence-gated page
