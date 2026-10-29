@@ -11,7 +11,8 @@ permissions:
 
 jobs:
   validate:
-    runs-on: ubuntu-latest
+    # Ubicloud managed runner (owner 2026-10-29, cost). To fall back, set ubuntu-latest.
+    runs-on: ubicloud-standard-2
     timeout-minutes: 20
 
     steps:
