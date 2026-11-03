@@ -33,16 +33,16 @@ export const AVAILABLE_LAWYERS: AvailableLawyer[] = [
   {
     ref: 'BS-L-001',
     headline: {
-      en: 'Senior attorney – real estate and commercial leasing',
-      cs: 'Seniorní advokát – nemovitosti a nájmy',
+      en: 'Senior attorney – real estate transactions and leasing',
+      cs: 'Seniorní advokát – nemovitostní transakce a nájmy',
     },
     summary: {
-      en: 'Many years leading the leasing team of an international law firm, advising foreign investors on office, retail and logistics property; now in-house legal leadership at a real estate group. Looking for a senior in-house role with an international scope, or a senior position in a law firm.',
-      cs: 'Dlouholeté vedení nájemního týmu mezinárodní advokátní kanceláře, klienti zahraniční investoři do kancelářských, obchodních a logistických nemovitostí; nyní vedoucí právní role in-house v realitní skupině. Hledá seniorní in-house roli s mezinárodním přesahem nebo seniorní pozici v advokátní kanceláři.',
+      en: 'Many years leading the leasing team of an international law firm, advising foreign investors on the acquisition, sale and leasing of office, retail and logistics property; now in-house legal leadership at a real estate group. Looking for a senior in-house role with an international scope, or a senior position in a law firm.',
+      cs: 'Dlouholeté vedení nájemního týmu mezinárodní advokátní kanceláře, klienti zahraniční investoři při nákupu, prodeji a pronájmu kancelářských, obchodních a logistických nemovitostí; nyní vedoucí právní role in-house v realitní skupině. Hledá seniorní in-house roli s mezinárodním přesahem nebo seniorní pozici v advokátní kanceláři.',
     },
     practiceAreas: {
-      en: ['Commercial leasing', 'Development and construction contracts', 'M&A (real estate)'],
-      cs: ['Nájmy komerčních nemovitostí', 'Developerské smlouvy a smlouvy o dílo', 'M&A (nemovitosti)'],
+      en: ['Real estate transactions (acquisitions and sales)', 'Commercial leasing', 'Development and construction contracts', 'M&A (real estate)'],
+      cs: ['Nemovitostní transakce (nákupy a prodeje)', 'Nájmy komerčních nemovitostí', 'Developerské smlouvy a smlouvy o dílo', 'M&A (nemovitosti)'],
     },
     yearsExperience: 15,
     qualification: {
