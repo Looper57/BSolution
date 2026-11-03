@@ -1,6 +1,7 @@
 "use client"
 
 import { useState, useEffect, useRef } from 'react'
+import { COPY as availableLawyersCopy, PROFILE_INQUIRY_KEY, isProfileRef } from '@/lib/available-lawyers'
 import Link from 'next/link'
 import { MapPin, Phone, Mail, Linkedin, Send, CheckCircle } from 'lucide-react'
 import { LanguageProvider, useLanguage } from '@/lib/language-context'
@@ -116,6 +117,22 @@ function ContactForm() {
     message: '',
   })
   const [honeypot, setHoneypot] = useState('')
+
+  // "Ask for the full profile" on /available-lawyers hands over the profile
+  // reference (PROFILE_INQUIRY_KEY): the enquiry arrives naming the profile.
+  useEffect(() => {
+    let ref: string | null = null
+    try {
+      ref = sessionStorage.getItem(PROFILE_INQUIRY_KEY)
+      sessionStorage.removeItem(PROFILE_INQUIRY_KEY)
+    } catch {
+      return
+    }
+    if (!isProfileRef(ref)) return
+    const message = availableLawyersCopy[language].inquiry(ref)
+    // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time prefill from the profile link after hydration
+    setFormData((current) => (current.message ? current : { ...current, message }))
+  }, [language])
   
   // Load Turnstile script and render widget
   useEffect(() => {

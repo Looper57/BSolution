@@ -2,6 +2,7 @@ import type { MetadataRoute } from 'next'
 import { jobsData } from '@/lib/jobs-data'
 import { getLivePositions, livePositionPath } from '@/lib/live-positions'
 import { getLegalJobs, legalJobPath, legalJobsCountryPath, legalJobsPath } from '@/lib/legal-jobs'
+import { AVAILABLE_LAWYERS, availableLawyersPath } from '@/lib/available-lawyers'
 import { authorityEntities } from '@/lib/content'
 import { productionAuthorityCanonicalRoutes, productionAuthorityPages } from '@/lib/authority-pages'
 import { getSitemapEligibleSeoPages } from '@/lib/seo-pages'
@@ -148,7 +149,14 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...(await translatedLegalJobPages()),
   ]
 
-  const entries = [...localizedPages, ...authorityPages, ...gatedAuthorityPages, ...positionListings, ...positionPages, ...openPositionPages, ...legalJobPages, ...legalPages, ...englishPages]
+  // Anonymous profiles of available lawyers (pilot 2026-11-03), every
+  // locale, only while a profile is listed.
+  const availableLawyerPages = AVAILABLE_LAWYERS.length === 0 ? [] : LOCALES.map((locale) => ({
+    ...localizedEntry(availableLawyersPath, locale),
+    changeFrequency: 'weekly' as const,
+  }))
+
+  const entries = [...localizedPages, ...availableLawyerPages, ...authorityPages, ...gatedAuthorityPages, ...positionListings, ...positionPages, ...openPositionPages, ...legalJobPages, ...legalPages, ...englishPages]
   const urls = new Set(entries.map((entry) => entry.url))
   if (urls.size !== entries.length) throw new Error('Sitemap contains duplicate canonical URLs')
   return entries
