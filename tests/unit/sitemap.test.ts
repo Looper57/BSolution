@@ -15,7 +15,8 @@ describe('sitemap', () => {
 
   it('contains only unique canonical URLs', () => {
     // 134 + the external legal-jobs listing in four locales (M13.3, 2026-10-29).
-    expect(urls).toHaveLength(138)
+    // + the available-lawyers listing in en and cs (pilot 2026-11-03).
+    expect(urls).toHaveLength(140)
     expect(new Set(urls).size).toBe(urls.length)
   })
 

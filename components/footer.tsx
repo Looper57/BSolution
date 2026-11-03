@@ -24,6 +24,7 @@ export function Footer() {
     services: [
       { href: '/clients', label: 'nav.clients' },
       { href: '/candidates', label: 'nav.candidates' },
+      { href: '/available-lawyers', label: 'nav.availableLawyers' },
     ]
   }
 

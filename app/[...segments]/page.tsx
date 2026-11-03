@@ -16,6 +16,8 @@ import { AuthorityHub } from '@/components/authority-hub'
 import { authoritySections, getEntitiesForSection, getEntity } from '@/lib/content'
 import { absoluteUrl, buildAlternates, LOCALES, SITE_URL, type Locale } from '@/lib/i18n/config'
 import { legalJobsMetadata, legalJobsPage } from '@/lib/legal-jobs-route'
+import { AvailableLawyersListing } from '@/components/available-lawyers'
+import { availableLawyersMetadata } from '@/lib/available-lawyers'
 import { hubRouteMetadata, staticRouteMetadata } from '@/lib/i18n/route-metadata'
 import { authorityHubKinds, isLocalizedLegalRoute, localizedStaticPages } from '@/lib/routes'
 import {
@@ -73,6 +75,7 @@ function socialMetadata(locale: Locale, path: string, title: string, description
 export async function generateMetadata({ params }: { params: Promise<{ segments: string[] }> }): Promise<Metadata> {
   const { locale, path } = parseSegments((await params).segments)
   if (locale !== 'en' && path[0] === 'legal-jobs' && path.length <= 2) return legalJobsMetadata(locale, path[1] ?? null)
+  if (locale !== 'en' && path.length === 1 && path[0] === 'available-lawyers') return availableLawyersMetadata(locale)
   if (path.length === 1 && path[0] in authorityHubKinds) {
     const copy = hubRouteMetadata[locale][path[0]]
     return socialMetadata(locale, `/${path[0]}`, copy.title, copy.description)
@@ -135,6 +138,7 @@ export function generateStaticParams() {
   const localizedStatic = LOCALES.filter((locale) => locale !== 'en').flatMap((locale) => [
     ...localizedStaticPages.map((page) => ({ segments: [locale, page.slice(1)] })),
     { segments: [locale, 'positions'] },
+    { segments: [locale, 'available-lawyers'] },
   ])
   const localizedLegal = [{ segments: ['cs', 'privacy'] }, { segments: ['cs', 'cookies'] }]
   const localizedJobs = LOCALES.filter((locale) => locale !== 'en').flatMap((locale) =>
@@ -151,6 +155,8 @@ export default async function Page({ params }: { params: Promise<{ segments: str
     if (page) return page
     notFound()
   }
+  // Anonymous profiles (pilot 2026-11-03); English lives in app/available-lawyers.
+  if (locale !== 'en' && path.length === 1 && path[0] === 'available-lawyers') return <AvailableLawyersListing locale={locale} />
   if (path.length === 1 && path[0] in staticPages) {
     const StaticPage = staticPages[path[0] as keyof typeof staticPages]
     return <StaticPage />
