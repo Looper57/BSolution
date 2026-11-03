@@ -64,7 +64,7 @@ export function contentLocale(locale: Locale): 'en' | 'cs' {
   return locale === 'cs' ? 'cs' : 'en'
 }
 
-/** The contact form recognises a profile reference in #profile-<ref>. */
+/** The contact form accepts only a reference of a listed profile. */
 export function isProfileRef(value: string | null): value is string {
   return value !== null && AVAILABLE_LAWYERS.some((lawyer) => lawyer.ref === value)
 }
@@ -189,8 +189,7 @@ export function availableLawyersMetadata(locale: Locale): Metadata {
   }
 }
 
-/** The contact page reads the profile from the fragment (#profile-BS-L-001):
- * a query string would make the link a non-canonical URL for crawlers. */
-export function profileInquiryHash(ref: string): string {
-  return `#profile-${ref}`
-}
+/** "Ask for the full profile" hands the reference to the contact page in
+ * sessionStorage: the link itself stays the plain /contact URL, because the
+ * SEO graph crawl treats ?query and #fragment links as extra URLs. */
+export const PROFILE_INQUIRY_KEY = 'bsolution.profileInquiry'

@@ -4,8 +4,9 @@ import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { LanguageProvider } from '@/lib/language-context'
 import { localizedPath, type Locale } from '@/lib/i18n/config'
-import { AVAILABLE_LAWYERS, COPY, contentLocale, profileInquiryHash, type AvailableLawyer } from '@/lib/available-lawyers'
+import { AVAILABLE_LAWYERS, COPY, contentLocale, type AvailableLawyer } from '@/lib/available-lawyers'
 import { serializeJsonLd } from '@/lib/structured-data'
+import { ProfileInquiryLink } from '@/components/profile-inquiry-link'
 
 function faqJsonLd(question: string, answer: string) {
   return { '@context': 'https://schema.org', '@type': 'FAQPage', mainEntity: [{ '@type': 'Question', name: question, acceptedAnswer: { '@type': 'Answer', text: answer } }] }
@@ -41,13 +42,14 @@ function ProfileCard({ locale, lawyer }: { locale: Locale; lawyer: AvailableLawy
         <Row icon={Navigation} label={copy.preferred} value={lawyer.preferredLocations[c].join(', ')} />
         <Row icon={Briefcase} label={copy.openTo} value={openTo} />
       </dl>
-      <Link
-        href={`${localizedPath(locale, '/contact')}${profileInquiryHash(lawyer.ref)}`}
+      <ProfileInquiryLink
+        href={localizedPath(locale, '/contact')}
+        profileRef={lawyer.ref}
         className="mt-8 inline-flex items-center gap-2 self-start bg-gold px-6 py-3 font-semibold text-navy hover:bg-gold-dark"
       >
         {copy.cta}
         <ArrowRight className="size-4" aria-hidden="true" />
-      </Link>
+      </ProfileInquiryLink>
     </article>
   )
 }
