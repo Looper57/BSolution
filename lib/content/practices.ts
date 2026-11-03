@@ -14,10 +14,13 @@ export const practices: Entity[] = [
     },
     content: {
       en: {
-        title: 'General Counsel Search',
+        // GSC 2026-11-03: "executive search chief legal officer" (16),
+        // "executive search head of legal" (20), "general counsels executive
+        // search" (19.5) — this page answers all three; the title names them.
+        title: 'General Counsel, Chief Legal Officer and Head of Legal Search',
         summary:
-          'Retained search for General Counsel and Chief Legal Officers who combine legal authority with commercial judgement at board level.',
-        metaTitle: 'Retained General Counsel Search',
+          'Retained executive search for General Counsel, Chief Legal Officers and Heads of Legal who combine legal authority with commercial judgement at board level.',
+        metaTitle: 'General Counsel & Head of Legal Executive Search',
         metaDescription:
           'Confidential retained search for General Counsel and Chief Legal Officers across Europe and the Middle East. Board-level legal leadership, rigorously assessed.',
         faq: [
