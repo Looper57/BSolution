@@ -11,6 +11,9 @@ import { localizedPath } from '@/lib/i18n/config'
 import { APPLICATIONS_ENABLED } from '@/lib/candidate-consent'
 import { ApplyForm } from '@/app/positions/open/[slug]/apply-form'
 
+// A form, not a mailto link: a visible address is harvested by spam bots (owner, 2026-11-03).
+const CONTACT_FORM_LABEL = { en: 'Contact form', cs: 'Kontaktní formulář', de: 'Kontaktformular', pl: 'Formularz kontaktowy' } as const
+
 function JobDetailContent({ job }: { job: Job }) {
   const { language: locale } = useLanguage()
   const language = locale === 'cs' ? 'cs' : 'en'
@@ -169,13 +172,13 @@ function JobDetailContent({ job }: { job: Job }) {
                         <Phone className="h-4 w-4 text-gold/70" />
                         +420 272 681 206
                       </a>
-                      <a 
-                        href="mailto:info@bsolution.eu" 
+                      <Link
+                        href={localizedPath(locale, '/contact')}
                         className="flex items-center gap-3 text-charcoal/70 hover:text-gold transition-colors text-[15px]"
                       >
                         <Mail className="h-4 w-4 text-gold/70" />
-                        info@bsolution.eu
-                      </a>
+                        {CONTACT_FORM_LABEL[locale]}
+                      </Link>
                     </div>
                   </div>
                   
