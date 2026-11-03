@@ -11,6 +11,10 @@ import { localizedPath } from '@/lib/i18n/config'
 import { APPLICATIONS_ENABLED } from '@/lib/candidate-consent'
 import { ApplyForm } from '@/app/positions/open/[slug]/apply-form'
 
+// Legal-leadership mandates link to the practice page that answers
+// "executive search general counsel / head of legal / CLO" (GSC 2026-11-03).
+const LEGAL_LEADERSHIP_SLUGS = new Set(['general-counsel-prague', 'head-of-legal-cee-vienna', 'chief-legal-officer-dubai', 'deputy-general-counsel-prague', 'regional-legal-director-emea-munich'])
+
 // A form, not a mailto link: a visible address is harvested by spam bots (owner, 2026-11-03).
 const CONTACT_FORM_LABEL = { en: 'Contact form', cs: 'Kontaktní formulář', de: 'Kontaktformular', pl: 'Formularz kontaktowy' } as const
 
@@ -207,6 +211,13 @@ function JobDetailContent({ job }: { job: Job }) {
                 : 'Prohlédněte si aktuálně otevřené pozice a další příklady našich mandátů, nebo nás kontaktujte ohledně důvěrných příležitostí, které nejsou veřejně inzerovány.'
               }
             </p>
+            {LEGAL_LEADERSHIP_SLUGS.has(job.slug) ? (
+              <p className="mb-8 text-[15px]">
+                <Link href={localizedPath(locale, '/practice-areas/general-counsel')} className="text-gold hover:underline">
+                  {language === 'en' ? 'How we search for General Counsel, Chief Legal Officers and Heads of Legal' : 'Jak vyhledáváme General Counsel, Chief Legal Officer a vedoucí právních oddělení'}
+                </Link>
+              </p>
+            ) : null}
             <div className="flex flex-col sm:flex-row gap-5 justify-center">
               <Button 
                 asChild 
