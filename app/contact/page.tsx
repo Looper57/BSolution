@@ -119,9 +119,9 @@ function ContactForm() {
   const [honeypot, setHoneypot] = useState('')
 
   // "Ask for the full profile" on /available-lawyers links here with
-  // ?profile=BS-L-001: the enquiry arrives already naming the profile.
+  // #profile-BS-L-001: the enquiry arrives already naming the profile.
   useEffect(() => {
-    const ref = new URLSearchParams(window.location.search).get('profile')
+    const ref = window.location.hash.startsWith('#profile-') ? decodeURIComponent(window.location.hash.slice('#profile-'.length)) : null
     if (!isProfileRef(ref)) return
     const message = availableLawyersCopy[language].inquiry(ref)
     // eslint-disable-next-line react-hooks/set-state-in-effect -- one-time prefill from the URL after hydration

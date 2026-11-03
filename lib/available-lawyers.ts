@@ -1,5 +1,5 @@
 import type { Metadata } from 'next'
-import { absoluteUrl, SITE_URL, type Locale } from '@/lib/i18n/config'
+import { absoluteUrl, buildAlternates, SITE_URL, type Locale } from '@/lib/i18n/config'
 
 /**
  * Available lawyers (pilot, 2026-11-03): anonymous profiles of lawyers who
@@ -64,7 +64,7 @@ export function contentLocale(locale: Locale): 'en' | 'cs' {
   return locale === 'cs' ? 'cs' : 'en'
 }
 
-/** The contact form recognises a profile reference in ?profile=. */
+/** The contact form recognises a profile reference in #profile-<ref>. */
 export function isProfileRef(value: string | null): value is string {
   return value !== null && AVAILABLE_LAWYERS.some((lawyer) => lawyer.ref === value)
 }
@@ -176,22 +176,21 @@ export const COPY: Record<Locale, {
   },
 }
 
-/** Profiles exist in English and Czech; de/pl show the English profiles
- * under translated labels, so they are noindex with a canonical to English
- * and stay out of the hreflang cluster (as /positions does). */
-export const availableLawyersContentLocales = ['en', 'cs'] as const satisfies readonly Locale[]
-
+/** Indexed in every site locale: labels are translated, the profile text
+ * is Czech on /cs and English elsewhere. */
 export function availableLawyersMetadata(locale: Locale): Metadata {
   const copy = COPY[locale]
   const url = absoluteUrl(locale, availableLawyersPath)
-  const indexed = (availableLawyersContentLocales as readonly Locale[]).includes(locale)
   return {
     title: copy.title,
     description: copy.metaDescription,
-    alternates: indexed
-      ? { canonical: url, languages: { en: absoluteUrl('en', availableLawyersPath), cs: absoluteUrl('cs', availableLawyersPath), 'x-default': absoluteUrl('en', availableLawyersPath) } }
-      : { canonical: absoluteUrl('en', availableLawyersPath) },
-    ...(indexed ? {} : { robots: { index: false, follow: true } }),
+    alternates: buildAlternates(locale, availableLawyersPath),
     openGraph: { title: copy.title, description: copy.metaDescription, url, siteName: 'B Solution', type: 'website', images: [{ url: `${SITE_URL}/images/og-image.jpg`, width: 1200, height: 630, alt: `${copy.title} — B Solution` }] },
   }
+}
+
+/** The contact page reads the profile from the fragment (#profile-BS-L-001):
+ * a query string would make the link a non-canonical URL for crawlers. */
+export function profileInquiryHash(ref: string): string {
+  return `#profile-${ref}`
 }
