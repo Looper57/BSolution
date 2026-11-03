@@ -4,6 +4,8 @@ import { useState, useEffect, useRef } from 'react'
 import Link from 'next/link'
 import { MapPin, Phone, Mail, Linkedin, Send, CheckCircle } from 'lucide-react'
 import { LanguageProvider, useLanguage } from '@/lib/language-context'
+
+const CONTACT_FORM_LABEL = { en: 'Contact form', cs: 'Kontaktní formulář', de: 'Kontaktformular', pl: 'Formularz kontaktowy' } as const
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { Button } from '@/components/ui/button'
@@ -240,7 +242,7 @@ function ContactForm() {
         <h3 className="text-navy font-serif text-xl font-medium mb-8">
           {t('contact.form.title')}
         </h3>
-        <form onSubmit={handleSubmit} className="space-y-6">
+        <form id="contact-form" onSubmit={handleSubmit} className="space-y-6 scroll-mt-28">
           {/* Honeypot field - hidden from users, catches bots */}
           <div className="absolute -left-[9999px]" aria-hidden="true">
             <input
@@ -429,11 +431,13 @@ function ContactInfo() {
             </div>
             <div>
               <h3 className="font-medium text-navy text-base">{t('contact.info.email')}</h3>
-              <a 
-                href="mailto:info@bsolution.eu" 
+              {/* The form on this page, not a mailto link: a visible address
+                  is harvested by spam bots (owner, 2026-11-03). */}
+              <a
+                href="#contact-form"
                 className="mt-1 text-charcoal/70 hover:text-gold transition-colors block"
               >
-                info@bsolution.eu
+                {CONTACT_FORM_LABEL[language]}
               </a>
             </div>
           </div>
