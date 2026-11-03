@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'Legal executive search, retained recruitment, market intelligence, and strategic advisory. Comprehensive legal talent solutions for firms and corporations.',
   alternates: buildAlternates('en', '/services'),
   openGraph: {
+    type: 'website',
+    siteName: 'B Solution',
     title: 'Legal Recruitment Services | B Solution',
     description: 'Executive search, retained recruitment, market intelligence, and strategic advisory for legal professionals and organizations.',
     url: 'https://www.bsolution.eu/services',

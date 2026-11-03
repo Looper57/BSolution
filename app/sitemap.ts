@@ -37,14 +37,17 @@ function absoluteCanonicalUrl(locale: Locale, path: string): string {
   return url === `${SITE_URL}/` ? SITE_URL : url
 }
 
-function localizedEntry(path: string, locale: Locale): MetadataRoute.Sitemap[number] {
+// `alternateLocales` narrows the hreflang cluster to the locales that really
+// have content (2026-11-03 Ahrefs audit: positions listed de/pl, whose pages
+// are noindex with a canonical to English — "hreflang to non-canonical").
+function localizedEntry(path: string, locale: Locale, alternateLocales: readonly Locale[] = LOCALES): MetadataRoute.Sitemap[number] {
   return {
     url: absoluteCanonicalUrl(locale, path),
     changeFrequency: path === '/' ? 'weekly' : 'monthly',
     priority: path === '/' ? 1 : 0.7,
     alternates: {
       languages: {
-        ...Object.fromEntries(LOCALES.map((alternate) => [alternate, absoluteCanonicalUrl(alternate, path)])),
+        ...Object.fromEntries(alternateLocales.map((alternate) => [alternate, absoluteCanonicalUrl(alternate, path)])),
         'x-default': absoluteCanonicalUrl('en', path),
       },
     },
@@ -83,11 +86,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     alternates: { languages: gatedXDefault ? { ...gatedLanguages, 'x-default': gatedXDefault } : gatedLanguages },
   }))
   const positionListings = positionContentLocales.map((locale) =>
-    localizedEntry(positionListingPath, locale)
+    localizedEntry(positionListingPath, locale, positionContentLocales)
   )
   const positionPages = jobsData.flatMap((job) =>
     positionContentLocales.map((locale) => ({
-      ...localizedEntry(`/positions/${job.slug}`, locale),
+      ...localizedEntry(`/positions/${job.slug}`, locale, positionContentLocales),
       changeFrequency: 'weekly' as const,
     }))
   )

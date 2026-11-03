@@ -7,6 +7,8 @@ export const metadata: Metadata = {
     canonical: 'https://www.bsolution.eu/hire-legal-leader',
   },
   openGraph: {
+    type: 'website',
+    siteName: 'B Solution',
     title: 'Hire a Legal Leader | B Solution',
     description: 'Specialist executive search for General Counsel, Head of Legal, and senior legal leadership positions.',
     url: 'https://www.bsolution.eu/hire-legal-leader',

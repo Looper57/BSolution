@@ -8,6 +8,8 @@ export const metadata: Metadata = {
     canonical: 'https://www.bsolution.eu/law-firm-recruitment',
   },
   openGraph: {
+    type: 'website',
+    siteName: 'B Solution',
     title: 'Law Firm Recruitment | B Solution',
     description: 'Lateral partner recruitment, practice group development, and strategic talent acquisition for law firms across Europe.',
     url: 'https://www.bsolution.eu/law-firm-recruitment',

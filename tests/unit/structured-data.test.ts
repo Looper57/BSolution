@@ -52,7 +52,7 @@ describe('structured data', () => {
     expect(service).toMatchObject({
       '@id': STRUCTURED_DATA_IDS.professionalService,
       parentOrganization: { '@id': STRUCTURED_DATA_IDS.organization },
-      serviceType: expect.arrayContaining([
+      knowsAbout: expect.arrayContaining([
         'Executive Search',
         'Legal Executive Search',
         'Cross-border recruitment',

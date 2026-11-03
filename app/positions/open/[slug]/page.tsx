@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
     title: `${position.title} – ${place}`.slice(0, 60),
     description,
     alternates: { canonical: `${SITE_URL}${livePositionPath(position)}` },
-    openGraph: { title: position.title, description, url: `${SITE_URL}${livePositionPath(position)}` },
+    openGraph: { title: position.title, description, url: `${SITE_URL}${livePositionPath(position)}`, siteName: 'B Solution', type: 'website', images: [{ url: `${SITE_URL}/images/og-image.jpg`, width: 1200, height: 630, alt: position.title }] },
   }
 }
 

@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'Explore confidential legal career opportunities with B Solution. We connect legal professionals with senior roles at law firms and corporations.',
   alternates: buildAlternates('en', '/candidates'),
   openGraph: {
+    type: 'website',
+    siteName: 'B Solution',
     title: 'Legal Career Opportunities | B Solution',
     description: 'Confidential legal career opportunities. General Counsel, partner, and senior legal roles at leading law firms and corporations.',
     url: 'https://www.bsolution.eu/candidates',

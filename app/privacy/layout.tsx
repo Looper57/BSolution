@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    type: 'website',
+    siteName: 'B Solution',
+    images: [{ url: 'https://www.bsolution.eu/images/og-image.jpg', width: 1200, height: 630, alt: 'B Solution - Legal Executive Search' }],
     title: 'Privacy Policy | B Solution',
     description: 'Learn how we collect, use, and protect your personal data.',
     url: 'https://www.bsolution.eu/privacy',

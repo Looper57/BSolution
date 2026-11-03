@@ -15,6 +15,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    type: 'website',
+    siteName: 'B Solution',
     title: 'B Solution | Legal Executive Search | Najděte právního lídra',
     description: 'Důvěrný Executive Search pro Head of Legal, General Counsel a seniorní právní lídry v Evropě a na Blízkém východě.',
     locale: 'cs_CZ',

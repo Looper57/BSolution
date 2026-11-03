@@ -20,6 +20,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    type: 'website',
+    siteName: 'B Solution',
     title: 'Legal Job Opportunities | B Solution',
     description: 'Current legal executive positions. General Counsel, partner, and senior legal roles at leading organizations.',
     url: 'https://www.bsolution.eu/positions',
