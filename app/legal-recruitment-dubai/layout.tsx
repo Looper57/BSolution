@@ -8,6 +8,8 @@ export const metadata: Metadata = {
     canonical: 'https://www.bsolution.eu/legal-recruitment-dubai',
   },
   openGraph: {
+    type: 'website',
+    siteName: 'B Solution',
     title: 'Legal Recruitment Dubai & UAE | B Solution',
     description: 'Executive search for legal professionals in Dubai, Abu Dhabi, and across the UAE and Middle East.',
     url: 'https://www.bsolution.eu/legal-recruitment-dubai',

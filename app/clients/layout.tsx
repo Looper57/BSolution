@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'Partner with B Solution for legal recruitment. We serve corporations seeking in-house counsel and law firms seeking partners and associates across Europe.',
   alternates: buildAlternates('en', '/clients'),
   openGraph: {
+    type: 'website',
+    siteName: 'B Solution',
     title: 'Legal Recruitment for Clients | B Solution',
     description: 'Executive search and recruitment services for corporations and law firms. General Counsel, CLO, partners, and senior legal appointments.',
     url: 'https://www.bsolution.eu/clients',

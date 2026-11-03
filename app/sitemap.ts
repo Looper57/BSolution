@@ -37,14 +37,17 @@ function absoluteCanonicalUrl(locale: Locale, path: string): string {
   return url === `${SITE_URL}/` ? SITE_URL : url
 }
 
-function localizedEntry(path: string, locale: Locale): MetadataRoute.Sitemap[number] {
+// `alternateLocales` narrows the hreflang cluster to the locales that really
+// have content (2026-11-03 Ahrefs audit: positions listed de/pl, whose pages
+// are noindex with a canonical to English — "hreflang to non-canonical").
+function localizedEntry(path: string, locale: Locale, alternateLocales: readonly Locale[] = LOCALES): MetadataRoute.Sitemap[number] {
   return {
     url: absoluteCanonicalUrl(locale, path),
     changeFrequency: path === '/' ? 'weekly' : 'monthly',
     priority: path === '/' ? 1 : 0.7,
     alternates: {
       languages: {
-        ...Object.fromEntries(LOCALES.map((alternate) => [alternate, absoluteCanonicalUrl(alternate, path)])),
+        ...Object.fromEntries(alternateLocales.map((alternate) => [alternate, absoluteCanonicalUrl(alternate, path)])),
         'x-default': absoluteCanonicalUrl('en', path),
       },
     },
@@ -52,6 +55,15 @@ function localizedEntry(path: string, locale: Locale): MetadataRoute.Sitemap[num
 }
 
 export const revalidate = 3600
+
+async function translatedLegalJobPages(): Promise<MetadataRoute.Sitemap> {
+  const perLocale = await Promise.all(LOCALES.filter((locale) => locale !== 'en').map(async (locale) =>
+    (await getLegalJobs(locale))
+      .filter((job) => job.summaryLocale === locale)
+      .map((job) => ({ url: absoluteCanonicalUrl(locale, legalJobPath(job)), lastModified: job.postedAt ?? job.firstSeenAt, changeFrequency: 'weekly' as const, priority: 0.5 })),
+  ))
+  return perLocale.flat()
+}
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const fullyLocalizedPaths = [
@@ -83,11 +95,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     alternates: { languages: gatedXDefault ? { ...gatedLanguages, 'x-default': gatedXDefault } : gatedLanguages },
   }))
   const positionListings = positionContentLocales.map((locale) =>
-    localizedEntry(positionListingPath, locale)
+    localizedEntry(positionListingPath, locale, positionContentLocales)
   )
   const positionPages = jobsData.flatMap((job) =>
     positionContentLocales.map((locale) => ({
-      ...localizedEntry(`/positions/${job.slug}`, locale),
+      ...localizedEntry(`/positions/${job.slug}`, locale, positionContentLocales),
       changeFrequency: 'weekly' as const,
     }))
   )
@@ -129,6 +141,11 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
     ...LOCALES.map((locale) => ({ ...localizedEntry(legalJobsPath, locale), changeFrequency: 'daily' as const })),
     ...legalJobCountries.flatMap((country) => LOCALES.map((locale) => ({ ...localizedEntry(legalJobsCountryPath(country), locale), changeFrequency: 'daily' as const }))),
     ...legalJobs.map((job) => ({ url: `${SITE_URL}${legalJobPath(job)}`, lastModified: job.postedAt ?? job.firstSeenAt, changeFrequency: 'weekly' as const, priority: 0.5 })),
+    // An advert whose summary exists in a locale is its own indexable,
+    // self-canonical page there (lib/legal-jobs-route.tsx) — it belongs in
+    // the sitemap too (2026-11-03: listings linked dozens of them, the graph
+    // crawl gate failed on the link-to-inventory ratio).
+    ...(await translatedLegalJobPages()),
   ]
 
   const entries = [...localizedPages, ...authorityPages, ...gatedAuthorityPages, ...positionListings, ...positionPages, ...openPositionPages, ...legalJobPages, ...legalPages, ...englishPages]

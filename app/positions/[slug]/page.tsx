@@ -44,6 +44,7 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
       },
     },
     openGraph: {
+      siteName: 'B Solution',
       title: `${job.title} - ${job.location} | B Solution`,
       description: job.shortDescription,
       type: 'website',

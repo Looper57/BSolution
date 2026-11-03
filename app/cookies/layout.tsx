@@ -16,6 +16,9 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    type: 'website',
+    siteName: 'B Solution',
+    images: [{ url: 'https://www.bsolution.eu/images/og-image.jpg', width: 1200, height: 630, alt: 'B Solution - Legal Executive Search' }],
     title: 'Cookie Policy | B Solution',
     description: 'Learn how we use cookies and similar technologies on our website.',
     url: 'https://www.bsolution.eu/cookies',

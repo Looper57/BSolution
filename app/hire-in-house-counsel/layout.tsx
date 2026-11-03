@@ -8,6 +8,8 @@ export const metadata: Metadata = {
     canonical: 'https://www.bsolution.eu/hire-in-house-counsel',
   },
   openGraph: {
+    type: 'website',
+    siteName: 'B Solution',
     title: 'Hire In-House Counsel | B Solution',
     description: 'Specialist search for in-house counsel, Legal Directors and General Counsel across Europe.',
     url: 'https://www.bsolution.eu/hire-in-house-counsel',

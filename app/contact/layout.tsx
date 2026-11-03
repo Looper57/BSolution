@@ -6,6 +6,8 @@ export const metadata: Metadata = {
   description: 'Get in touch with B Solution for confidential legal recruitment discussions. Based in Prague, serving clients across Europe and the Middle East.',
   alternates: buildAlternates('en', '/contact'),
   openGraph: {
+    type: 'website',
+    siteName: 'B Solution',
     title: 'Contact B Solution | Legal Executive Search',
     description: 'Schedule a confidential discussion about your legal recruitment needs. All enquiries handled with strict confidentiality.',
     url: 'https://www.bsolution.eu/contact',

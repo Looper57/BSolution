@@ -80,7 +80,9 @@ export const professionalServiceSchema = {
   url: 'https://www.bsolution.eu',
   description:
     'Legal Executive Search and cross-border recruitment for law firms and corporate legal departments across Europe and the Middle East.',
-  serviceType: [
+  // Ahrefs 2026-11-03: serviceType is not a ProfessionalService property
+  // (schema.org error on every page); knowsAbout is (via Organization).
+  knowsAbout: [
     'Executive Search',
     'Legal Executive Search',
     'Cross-border recruitment',

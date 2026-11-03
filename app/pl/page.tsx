@@ -15,6 +15,8 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    type: 'website',
+    siteName: 'B Solution',
     title: 'B Solution | Legal Executive Search | Polska',
     description: 'Poufny Executive Search dla General Counsel, Head of Legal i liderów prawnych w Europie oraz na Bliskim Wschodzie.',
     locale: 'pl_PL',

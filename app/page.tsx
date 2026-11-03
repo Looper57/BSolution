@@ -16,6 +16,7 @@ export const metadata: Metadata = {
     },
   },
   openGraph: {
+    siteName: 'B Solution',
     title: 'B Solution | Executive Search for Legal Leaders',
     description: 'Retained legal executive search for General Counsel, legal leaders and law-firm partners across Europe and the Middle East since 2007.',
     url: 'https://www.bsolution.eu/',
