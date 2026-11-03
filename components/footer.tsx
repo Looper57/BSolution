@@ -8,6 +8,8 @@ import { Logo } from '@/components/logo'
 import { localizedPath } from '@/lib/i18n/config'
 import { legalPath } from '@/lib/routes'
 
+const CONTACT_FORM_LABEL = { en: 'Contact form', cs: 'Kontaktní formulář', de: 'Kontaktformular', pl: 'Formularz kontaktowy' } as const
+
 export function Footer() {
   const { language, setLanguage, t } = useLanguage()
 
@@ -155,12 +157,14 @@ export function Footer() {
                 </a>
               </p>
               <p>
-                <a 
-                  href="mailto:info@bsolution.eu" 
+                {/* A form, not a mailto link: a visible address is harvested
+                    by spam bots (owner, 2026-11-03). */}
+                <Link
+                  href={localizedPath(language, '/contact')}
                   className="hover:text-gold transition-colors"
                 >
-                  info@bsolution.eu
-                </a>
+                  {CONTACT_FORM_LABEL[language]}
+                </Link>
               </p>
             </div>
             
