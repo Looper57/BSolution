@@ -41,8 +41,8 @@ export const AVAILABLE_LAWYERS: AvailableLawyer[] = [
       cs: 'Dlouholeté vedení nájemního týmu mezinárodní advokátní kanceláře, klienti zahraniční investoři do kancelářských, obchodních a logistických nemovitostí; nyní vedoucí právní role in-house v realitní skupině. Hledá seniorní in-house roli s mezinárodním přesahem nebo seniorní pozici v advokátní kanceláři.',
     },
     practiceAreas: {
-      en: ['Commercial leasing', 'Real estate transactions', 'Development and construction contracts', 'M&A (real estate)'],
-      cs: ['Nájmy komerčních nemovitostí', 'Nemovitostní transakce', 'Developerské smlouvy a smlouvy o dílo', 'M&A (nemovitosti)'],
+      en: ['Commercial leasing', 'Development and construction contracts', 'M&A (real estate)'],
+      cs: ['Nájmy komerčních nemovitostí', 'Developerské smlouvy a smlouvy o dílo', 'M&A (nemovitosti)'],
     },
     yearsExperience: 15,
     qualification: {
