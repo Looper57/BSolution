@@ -43,3 +43,8 @@ PR24 passed all52 native browser cases, but its main merge and production build 
 ## 2026-11-12 — sitemap date repair and employer discovery
 
 Fix the concrete timezone-less lastmod defect with validated calendar dates. Add a feed-independent employer sitemap sharing the existing approved canonical inventory and gates, advertised alongside the full sitemap. Strengthen the two existing international employer landing pages and voluntary enquiry paths. 188 local unit cases, types/lint/build and actual XML checked; full graph and exact-source remote browser validation follow. No private Search Console metrics in Git, no outbound acquisition or security weakening. See docs/reports/2026-11-12-employer-sitemap-recovery.md.
+
+
+## 2026-11-12 — complete sitemap recovery endpoint
+
+Keep the old complete sitemap available while exposing the same approved URL set at site-sitemap.xml with the XML envelope used by the successfully processed employer sitemap. Share the escaping/date serializer; robots references new complete and employer endpoints. Local191 units, lint/build/sequential post-build types and exact HTTP inventory/date/hreflang parity checked. Original Google error record is retained; actual new complete processing remains to be verified after deployment. No new marketing routes, fees, credentials or outbound actions.
