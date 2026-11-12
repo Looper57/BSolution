@@ -623,3 +623,39 @@ test('international employer pages answer distinct hiring needs without merging 
   await expect(firm).toContainText('target jurisdiction')
   await expect(firm.getByRole('link', { name: 'Discuss a law firm recruitment brief', exact: true })).toHaveAttribute('href', '/contact')
 })
+
+
+test('German employers can discover a leadership service and initiate their own enquiry', async ({ page, request }) => {
+  const response = await request.get('/de')
+  expect(await response.text()).toContain('Sie suchen juristische Verstärkung')
+  await page.goto('/de')
+  const help = page.getByRole('region', { name: 'Sie suchen juristische Verstärkung für Ihr Unternehmen oder Ihre Kanzlei?', exact: true })
+  await expect(help).toBeVisible()
+  await expect(help.getByRole('link', { name: 'Zusammenarbeit mit B Solution', exact: true })).toHaveAttribute('href', '/de/clients')
+  await help.getByRole('link', { name: 'General Counsel oder Head of Legal finden', exact: true }).click()
+  await expect(page).toHaveURL(/\/de\/practice-areas\/general-counsel$/)
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('Head of Legal')
+  await page.locator('aside a[href="/de/contact"]').click()
+  await expect(page).toHaveURL(/\/de\/contact$/)
+  await expect(page.getByRole('textbox').first()).toBeVisible()
+})
+
+for (const route of [
+  { path: '/practice-areas/general-counsel', lang: 'en', question: 'Do we need a General Counsel, a Group General Counsel or a Head of Legal?', heading: 'Which legal leadership appointment does your business need?' },
+  { path: '/de/practice-areas/general-counsel', lang: 'de', question: 'Brauchen wir einen General Counsel, Group General Counsel oder Head of Legal?', heading: 'Welche juristische Führungsrolle braucht Ihr Unternehmen?' },
+]) {
+  test(`${route.lang} leadership answers stay visible, canonical and consistent with FAQ data`, async ({ page, request }) => {
+    const response = await request.get(route.path)
+    expect(response.status()).toBe(200)
+    expect(await response.text()).toContain(route.question)
+    await page.goto(route.path)
+    await expect(page.locator('html')).toHaveAttribute('lang', route.lang)
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://www.bsolution.eu${route.path}`)
+    await expect(page.getByRole('heading', { name: route.heading, exact: true })).toBeVisible()
+    const visible = await page.locator('section[aria-labelledby="faq-heading"] dt').allTextContents()
+    expect(visible).toContain(route.question)
+    const nodes = await structuredDataNodes(page)
+    const faq = nodes.find(node => node['@type'] === 'FAQPage')
+    expect(faq.mainEntity.map((item: { name: string }) => item.name)).toEqual(visible)
+  })
+}
