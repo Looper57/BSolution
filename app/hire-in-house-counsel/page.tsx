@@ -1,6 +1,7 @@
 "use client"
 
 import Link from 'next/link'
+import { RecruitmentBrief } from '@/components/recruitment-brief'
 import { ArrowRight, Briefcase, Scale, Users, TrendingUp } from 'lucide-react'
 import { LanguageProvider } from '@/lib/language-context'
 import { Header } from '@/components/header'
@@ -321,6 +322,7 @@ function HireInHouseCounselPage() {
         <WhySection />
         <ProcessSection />
         <RolesSection />
+        <RecruitmentBrief audience="in-house" />
         <CTASection />
       </main>
       <Footer />

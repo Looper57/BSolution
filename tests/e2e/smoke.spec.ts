@@ -580,3 +580,46 @@ for (const path of ['/de/positions', '/pl/positions', '/de/positions/general-cou
     await expect(page.locator('link[rel="alternate"][hrefLang]')).toHaveCount(0)
   })
 }
+
+
+test('international employer journeys are crawlable in initial HTML and reach canonical services', async ({ page, request }) => {
+  // Read the actual server HTML before browser hydration: search bots and
+  // visitors must receive useful links without waiting for client effects.
+  const html = await request.get('/')
+  expect(html.status()).toBe(200)
+  expect(await html.text()).toContain('Legal recruitment for international law firms and in-house teams')
+  await page.goto('/')
+  const section = page.getByRole('region', { name: 'Legal recruitment for international law firms and in-house teams', exact: true })
+  await expect(section).toBeVisible()
+  for (const path of ['/law-firm-recruitment', '/services/legal-executive-search', '/hire-in-house-counsel', '/practice-areas/general-counsel', '/practice-areas/compliance-officer', '/legal-recruitment-europe', '/legal-recruitment-germany', '/legal-recruitment-dubai', '/contact']) {
+    await expect(section.locator(`a[href="${path}"]`)).toHaveCount(1)
+    const response = await request.get(path, { maxRedirects: 0 })
+    expect(response.status(), path).toBe(200)
+    expect(await response.text(), path).toContain(`href="https://www.bsolution.eu${path}"`)
+  }
+  await section.getByRole('link', { name: 'Hire an in-house lawyer', exact: true }).click()
+  await expect(page).toHaveURL(/\/hire-in-house-counsel$/)
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+  await page.goto('/services')
+  await expect(page).toHaveTitle('Legal Recruitment & Executive Search Services | B Solution')
+  const reference = await request.get('/llms.txt')
+  expect(reference.status()).toBe(200)
+  expect(reference.headers()['content-type']).toContain('text/plain')
+  expect(await reference.text()).toContain('Yours Solution s.r.o.')
+})
+
+
+test('international employer pages answer distinct hiring needs without merging search intent', async ({ page }) => {
+  await page.goto('/hire-in-house-counsel')
+  const corporate = page.getByRole('region', { name: 'Planning an in-house legal hire across borders', exact: true })
+  await expect(corporate).toContainText('Group General Counsel')
+  await expect(corporate.locator('dt')).toHaveCount(3)
+  await corporate.getByRole('link', { name: 'General Counsel and Head of Legal recruitment', exact: true }).click()
+  await expect(page).toHaveURL(/\/practice-areas\/general-counsel$/)
+  await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+  await page.goto('/law-firm-recruitment')
+  const firm = page.getByRole('region', { name: 'Planning a partner, lateral hire or team move', exact: true })
+  await expect(firm.locator('dt')).toHaveCount(3)
+  await expect(firm).toContainText('target jurisdiction')
+  await expect(firm.getByRole('link', { name: 'Discuss a law firm recruitment brief', exact: true })).toHaveAttribute('href', '/contact')
+})
