@@ -683,22 +683,26 @@ test('brand fonts load from this site without Google Fonts requests', async ({ p
 })
 
 test('Google receives valid sitemap dates and a separate canonical employer inventory', async ({ page, request }) => {
-  const full = await request.get('/sitemap.xml')
+  const full = await request.get('/site-sitemap.xml')
+  const legacy = await request.get('/sitemap.xml')
   const employers = await request.get('/employer-sitemap.xml')
   expect(full.status()).toBe(200)
+  expect(legacy.status()).toBe(200)
   expect(employers.status()).toBe(200)
   expect(employers.headers()['content-type']).toContain('application/xml')
   await page.goto('/de')
-  const parsed = await page.evaluate(({ fullXml, employerXml }) => {
+  const parsed = await page.evaluate(({ fullXml, employerXml, legacyXml }) => {
     const read = (xml: string) => {
       const document = new DOMParser().parseFromString(xml, 'application/xml')
       const values = (name: string) => [...document.getElementsByTagNameNS('http://www.sitemaps.org/schemas/sitemap/0.9', name)].map(node => node.textContent!)
       return { errors: document.querySelectorAll('parsererror').length, urls: values('loc'), dates: values('lastmod'), alternateCount: document.getElementsByTagNameNS('http://www.w3.org/1999/xhtml', 'link').length }
     }
-    return { full: read(fullXml), employers: read(employerXml) }
-  }, { fullXml: await full.text(), employerXml: await employers.text() })
+    return { full: read(fullXml), employers: read(employerXml), legacy: read(legacyXml) }
+  }, { fullXml: await full.text(), employerXml: await employers.text(), legacyXml: await legacy.text() })
   expect(parsed.full.errors).toBe(0)
   expect(parsed.employers.errors).toBe(0)
+  expect(parsed.legacy.errors).toBe(0)
+  expect(parsed.full.urls.slice().sort()).toEqual(parsed.legacy.urls.slice().sort())
   expect(parsed.employers.urls.length).toBeGreaterThan(50)
   expect(new Set(parsed.employers.urls).size).toBe(parsed.employers.urls.length)
   expect(parsed.employers.alternateCount).toBeGreaterThan(0)
@@ -709,6 +713,7 @@ test('Google receives valid sitemap dates and a separate canonical employer inve
   expect(parsed.full.dates.every(date => /^\d{4}-\d{2}-\d{2}$/.test(date))).toBe(true)
   const robots = await request.get('/robots.txt')
   expect(await robots.text()).toContain('Sitemap: https://www.bsolution.eu/employer-sitemap.xml')
+  expect(await robots.text()).toContain('Sitemap: https://www.bsolution.eu/site-sitemap.xml')
 })
 
 test('foreign employer pages state their recruitment scope and lead to a voluntary enquiry', async ({ page, request }) => {

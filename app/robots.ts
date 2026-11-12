@@ -7,7 +7,7 @@ export default function robots(): MetadataRoute.Robots {
       allow: '/',
       disallow: ['/api/'],
     },
-    sitemap: ['https://www.bsolution.eu/sitemap.xml', 'https://www.bsolution.eu/employer-sitemap.xml'],
+    sitemap: ['https://www.bsolution.eu/site-sitemap.xml', 'https://www.bsolution.eu/employer-sitemap.xml'],
     host: 'https://www.bsolution.eu',
   }
 }
