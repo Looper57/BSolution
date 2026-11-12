@@ -1,6 +1,8 @@
 import { beforeAll, describe, expect, it, vi } from 'vitest'
 import type { MetadataRoute } from 'next'
 import sitemap from '@/app/sitemap'
+import { getEmployerSitemapEntries } from '@/lib/sitemap-entries'
+import { GET as employerSitemap } from '@/app/employer-sitemap.xml/route'
 
 describe('sitemap', () => {
   // The open-positions feed (LawBridge) is empty here; tests/unit/live-positions.test.ts covers it.
@@ -59,5 +61,48 @@ describe('sitemap', () => {
   it('excludes German and Polish fallback job details', () => {
     expect(urls.some((url) => url.includes('/de/positions/'))).toBe(false)
     expect(urls.some((url) => url.includes('/pl/positions/'))).toBe(false)
+  })
+})
+
+describe('employer discovery independent of external feeds', () => {
+  it('shares approved canonical inventory with the full sitemap, without jobs or candidate pages', async () => {
+    const fetch = vi.fn(async () => { throw new Error('feed unavailable') })
+    vi.stubGlobal('fetch', fetch)
+    try {
+      const employers = getEmployerSitemapEntries()
+      expect(fetch).not.toHaveBeenCalled()
+      expect(employers.some(entry => entry.url.endsWith('/law-firm-recruitment'))).toBe(true)
+      expect(employers.some(entry => entry.url.endsWith('/hire-in-house-counsel'))).toBe(true)
+      expect(employers.some(entry => entry.url.endsWith('/de/practice-areas/general-counsel'))).toBe(true)
+      expect(employers.some(entry => /\/(legal-jobs|positions|candidates|available-lawyers)(\/|$)/.test(new URL(entry.url).pathname))).toBe(false)
+      expect(new Set(employers.map(entry => entry.url)).size).toBe(employers.length)
+      const xml = await employerSitemap().text()
+      expect(xml).toContain('xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"')
+      expect(xml).not.toContain('<lastmod>')
+      expect(fetch).not.toHaveBeenCalled()
+      const all = new Set((await sitemap()).map(entry => entry.url))
+      expect(employers.every(entry => all.has(entry.url))).toBe(true)
+    } finally { vi.unstubAllGlobals() }
+  })
+
+  it('serializes timezone-less dates on source and translated job pages and omits malformed dates', async () => {
+    vi.stubGlobal('fetch', vi.fn(async (url: string) => {
+      if (url.includes('/positions?')) return new Response(JSON.stringify({ positions: [
+        { id: 123, title: 'Legal Counsel', validThrough: '2099-12-31T23:59:59Z', postedAt: '2026-11-11T05:23:02.93' },
+      ] }))
+      const locale = new URL(url).searchParams.get('locale') ?? 'en'
+      return new Response(JSON.stringify({ jobs: [
+        { id: '11111111-1111-4111-8111-111111111111', title: 'Legal Counsel', status: 'open', summaryLocale: locale, sourceUrl: 'https://example.com/job', postedAt: '2026-11-10T12:30:45.123456', firstSeenAt: '2026-11-11T00:00:00Z' },
+        { id: '22222222-2222-4222-8222-222222222222', title: 'Counsel', status: 'open', summaryLocale: locale, sourceUrl: 'https://example.com/second', postedAt: '2026-02-30T00:00:00Z' },
+      ] }))
+    }))
+    try {
+      const entries = await sitemap()
+      expect(entries.find(entry => entry.url.includes('/positions/open/123-'))?.lastModified).toBe('2026-11-11')
+      for (const prefix of ['', '/cs', '/de', '/pl']) {
+        expect(entries.find(entry => entry.url === `https://www.bsolution.eu${prefix}/legal-jobs/11111111-1111-4111-8111-111111111111`)?.lastModified).toBe('2026-11-10')
+        expect(entries.find(entry => entry.url === `https://www.bsolution.eu${prefix}/legal-jobs/22222222-2222-4222-8222-222222222222`)?.lastModified).toBeUndefined()
+      }
+    } finally { vi.unstubAllGlobals() }
   })
 })

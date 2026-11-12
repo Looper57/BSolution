@@ -38,3 +38,8 @@ npm run build succeeded with the changed package script and reported Next16.2web
 ## 2026-11-12 — deterministic local brand fonts
 
 PR24 passed all52 native browser cases, but its main merge and production build failed on a second next/font/google URL extension parser error. Preserve those failures; last successful content remains live. Replace external build-time Google Fonts fetching with licensed, provenance-pinned Inter / Playfair Display WOFF2 assets using next/font/local. Add an actual same-site font-load browser regression. Local package build/types/full lint PASS; exact new CI and production verification must follow. See docs/reports/2026-11-12-local-font-build.md.
+
+
+## 2026-11-12 — sitemap date repair and employer discovery
+
+Fix the concrete timezone-less lastmod defect with validated calendar dates. Add a feed-independent employer sitemap sharing the existing approved canonical inventory and gates, advertised alongside the full sitemap. Strengthen the two existing international employer landing pages and voluntary enquiry paths. 188 local unit cases, types/lint/build and actual XML checked; full graph and exact-source remote browser validation follow. No private Search Console metrics in Git, no outbound acquisition or security weakening. See docs/reports/2026-11-12-employer-sitemap-recovery.md.

@@ -681,3 +681,49 @@ test('brand fonts load from this site without Google Fonts requests', async ({ p
   expect(fonts).toEqual(['loaded', 'loaded'])
   expect(externalFontRequests).toEqual([])
 })
+
+test('Google receives valid sitemap dates and a separate canonical employer inventory', async ({ page, request }) => {
+  const full = await request.get('/sitemap.xml')
+  const employers = await request.get('/employer-sitemap.xml')
+  expect(full.status()).toBe(200)
+  expect(employers.status()).toBe(200)
+  expect(employers.headers()['content-type']).toContain('application/xml')
+  await page.goto('/de')
+  const parsed = await page.evaluate(({ fullXml, employerXml }) => {
+    const read = (xml: string) => {
+      const document = new DOMParser().parseFromString(xml, 'application/xml')
+      const values = (name: string) => [...document.getElementsByTagNameNS('http://www.sitemaps.org/schemas/sitemap/0.9', name)].map(node => node.textContent!)
+      return { errors: document.querySelectorAll('parsererror').length, urls: values('loc'), dates: values('lastmod'), alternateCount: document.getElementsByTagNameNS('http://www.w3.org/1999/xhtml', 'link').length }
+    }
+    return { full: read(fullXml), employers: read(employerXml) }
+  }, { fullXml: await full.text(), employerXml: await employers.text() })
+  expect(parsed.full.errors).toBe(0)
+  expect(parsed.employers.errors).toBe(0)
+  expect(parsed.employers.urls.length).toBeGreaterThan(50)
+  expect(new Set(parsed.employers.urls).size).toBe(parsed.employers.urls.length)
+  expect(parsed.employers.alternateCount).toBeGreaterThan(0)
+  expect(parsed.employers.urls.every(url => parsed.full.urls.includes(url))).toBe(true)
+  expect(parsed.employers.urls).toContain('https://www.bsolution.eu/hire-in-house-counsel')
+  expect(parsed.employers.urls).toContain('https://www.bsolution.eu/law-firm-recruitment')
+  expect(parsed.employers.urls.some(url => /\/(positions|legal-jobs|candidates|available-lawyers)(\/|$)/.test(new URL(url).pathname))).toBe(false)
+  expect(parsed.full.dates.every(date => /^\d{4}-\d{2}-\d{2}$/.test(date))).toBe(true)
+  const robots = await request.get('/robots.txt')
+  expect(await robots.text()).toContain('Sitemap: https://www.bsolution.eu/employer-sitemap.xml')
+})
+
+test('foreign employer pages state their recruitment scope and lead to a voluntary enquiry', async ({ page, request }) => {
+  for (const route of [
+    { path: '/law-firm-recruitment', heading: 'International Law Firm Recruitment', title: 'International Law Firm Recruitment', enquiry: 'Discuss a law firm recruitment brief' },
+    { path: '/hire-in-house-counsel', heading: 'In-House Legal Recruitment for Companies', title: 'In-House Legal Recruitment', enquiry: 'Discuss an in-house legal recruitment brief' },
+  ]) {
+    const response = await request.get(route.path)
+    expect(await response.text()).toContain(route.heading)
+    await page.goto(route.path)
+    await expect(page).toHaveTitle(new RegExp(route.title))
+    await expect(page.getByRole('heading', { level: 1, name: route.heading, exact: true })).toBeVisible()
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://www.bsolution.eu${route.path}`)
+    await page.getByRole('link', { name: route.enquiry, exact: true }).click()
+    await expect(page).toHaveURL(/\/contact$/)
+    await expect(page.getByRole('textbox').first()).toBeVisible()
+  }
+})
