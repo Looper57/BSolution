@@ -1,5 +1,5 @@
 import type { Metadata, Viewport } from 'next'
-import { Inter, Playfair_Display } from 'next/font/google'
+import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
 import { headers } from 'next/headers'
 import { globalStructuredData, serializeJsonLd } from '@/lib/structured-data'
@@ -12,24 +12,24 @@ export const viewport: Viewport = {
   themeColor: '#0F1B2D',
 }
 
-const inter = Inter({ 
-  subsets: ['latin'],
-  weight: ['400', '500', '600'],
+const inter = localFont({
+  src: './fonts/inter.woff2',
+  weight: '400 600',
   variable: '--font-inter',
   display: 'swap',
   preload: true,
   fallback: ['system-ui', 'sans-serif'],
-  adjustFontFallback: true,
+  adjustFontFallback: 'Arial',
 })
 
-const playfair = Playfair_Display({ 
-  subsets: ['latin'],
-  weight: ['400', '500'],
+const playfair = localFont({
+  src: './fonts/playfair-display.woff2',
+  weight: '400 500',
   variable: '--font-playfair',
   display: 'swap',
   preload: true,
   fallback: ['Georgia', 'serif'],
-  adjustFontFallback: true,
+  adjustFontFallback: 'Times New Roman',
 })
 
 export const metadata: Metadata = {

@@ -659,3 +659,25 @@ for (const route of [
     expect(faq.mainEntity.map((item: { name: string }) => item.name)).toEqual(visible)
   })
 }
+
+test('brand fonts load from this site without Google Fonts requests', async ({ page, request }) => {
+  const externalFontRequests: string[] = []
+  page.on('request', req => {
+    if (/^https:\/\/(fonts\.googleapis\.com|fonts\.gstatic\.com)\//.test(req.url())) externalFontRequests.push(req.url())
+  })
+  await page.goto('/de')
+  const fontUrls = await page.locator('link[rel="preload"][as="font"]').evaluateAll(elements => elements.map(element => element.getAttribute('href')!))
+  expect(fontUrls).toHaveLength(2)
+  for (const url of fontUrls) {
+    expect(url).toMatch(/^\/_next\/static\/media\/.+\.woff2$/)
+    const response = await request.get(url)
+    expect(response.status()).toBe(200)
+    expect((await response.body()).subarray(0, 4).toString()).toBe('wOF2')
+  }
+  const fonts = await page.evaluate(async () => {
+    await document.fonts.ready
+    return [...document.fonts].filter(font => !font.family.includes('Fallback')).map(font => font.status)
+  })
+  expect(fonts).toEqual(['loaded', 'loaded'])
+  expect(externalFontRequests).toEqual([])
+})

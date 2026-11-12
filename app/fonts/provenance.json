@@ -1,0 +1,30 @@
+{
+  "upstream": "https://github.com/google/fonts",
+  "commit": "35e77c3854970a550d9894a85aba21420813a019",
+  "assets": [
+    {
+      "name": "inter",
+      "source": "https://raw.githubusercontent.com/google/fonts/35e77c3854970a550d9894a85aba21420813a019/ofl/inter/Inter%5Bopsz%2Cwght%5D.ttf",
+      "sourceSha256": "29160a80ff49ddcab2c97711247e08b1fab27a484a329ce8b813d820dc559031",
+      "sourceBytes": 876576,
+      "license": "inter-OFL.txt",
+      "file": "inter.woff2",
+      "sha256": "9dc81b7b12f55908106931faff14932cdb1e896e626450d7ca34325ce54940fe",
+      "bytes": 350572,
+      "conversion": "Lossless WOFF2 compression, fontTools 4.68.0 / Brotli 1.2.1; no glyph subsetting",
+      "localeGlyphCoverage": "EN/CS/DE/PL diacritics verified"
+    },
+    {
+      "name": "playfair-display",
+      "source": "https://raw.githubusercontent.com/google/fonts/35e77c3854970a550d9894a85aba21420813a019/ofl/playfairdisplay/PlayfairDisplay%5Bwght%5D.ttf",
+      "sourceSha256": "c40f2293766a503bc70cce9e512ef844a4ccb7cbcde792fe2ea31d191917d8d6",
+      "sourceBytes": 300724,
+      "license": "playfair-display-OFL.txt",
+      "file": "playfair-display.woff2",
+      "sha256": "5aab741080b750d2d5abe9437a250f1ee8942b4a0d1fca5a823c0cce7bc0224e",
+      "bytes": 106460,
+      "conversion": "Lossless WOFF2 compression, fontTools 4.68.0 / Brotli 1.2.1; no glyph subsetting",
+      "localeGlyphCoverage": "EN/CS/DE/PL diacritics verified"
+    }
+  ]
+}

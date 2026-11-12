@@ -33,3 +33,8 @@ INTENT: AGENT-ACTIVITY.md, package.json, docs/reports/2026-11-12-font-build-comp
 ## 2026-11-12 — CODEX — HANDOFF — actual package webpack build passed
 
 npm run build succeeded with the changed package script and reported Next16.2webpack. Runtime/source/dependency/font bytes are unchanged; the same compiler command and app had already passed local graph/CUA and169unit/type/lint checks. New fix PR runs the untouched full Quality workflow and52native cases before release. No cache purge, dependency upgrade, workflow/gate bypass or same-head retry. Original d80d4d2 font-compiler failure retained; production inbound content remains available and verified. Final source guard/push and CI follow.
+
+
+## 2026-11-12 — deterministic local brand fonts
+
+PR24 passed all52 native browser cases, but its main merge and production build failed on a second next/font/google URL extension parser error. Preserve those failures; last successful content remains live. Replace external build-time Google Fonts fetching with licensed, provenance-pinned Inter / Playfair Display WOFF2 assets using next/font/local. Add an actual same-site font-load browser regression. Local package build/types/full lint PASS; exact new CI and production verification must follow. See docs/reports/2026-11-12-local-font-build.md.
