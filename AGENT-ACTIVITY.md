@@ -23,3 +23,13 @@ INTENT: AGENT-ACTIVITY.md, components/german-employer-paths.tsx, components/home
 ## 2026-11-12 — CODEX — HANDOFF — inbound employer discovery locally verified
 
 Permanent inbound acquisition policy recorded; current Germany-filtered query/page evidence stored privately. Native German employer section links to existing canonical services; EN/DE legal-leadership answers cover first hire, succession and regional/group remit.169unit cases14files/types/full lint/webpack build and actual275URL/1266hreflang graph PASS, all error invariants zero. CUA verified DE homepage→leadership page→German enquiry form, two readable original screenshots; no form submitted. Three new native cases are written, not yet executed on this source; known local Chromium process denial not retried. Add this single source increment to existing draft PR23; unchanged Quality CI validates all52cases. Existing commercial terms, other locales, canonical routes, CRM and customer outreach remain unchanged. No schema, event, provider, deployment or ranking-gain claim.
+
+## 2026-11-12 — CODEX — START — deterministic release build after main font compiler failure
+
+Inbound PR23 source ba22d10 passed Quality43307575214/all52native cases and merged as d80d4d2; Production deployment7749859338 succeeded and live EN/DE content/canonicals verified. Main Quality43308330983 then failed at Turbopack Google-font import mapping: next/font/google queries have exactly one entry. Merge tree equals tested head; no causal content defect/cache explanation inferred. Standardise package build to the documented webpack compiler already verified locally against this exact runtime. No dependency/version/font/content/workflow/gate change; no blind retry. New focused fix branch from current main, actual script build and unchanged CI before release.
+
+INTENT: AGENT-ACTIVITY.md, package.json, docs/reports/2026-11-12-font-build-compiler.md
+
+## 2026-11-12 — CODEX — HANDOFF — actual package webpack build passed
+
+npm run build succeeded with the changed package script and reported Next16.2webpack. Runtime/source/dependency/font bytes are unchanged; the same compiler command and app had already passed local graph/CUA and169unit/type/lint checks. New fix PR runs the untouched full Quality workflow and52native cases before release. No cache purge, dependency upgrade, workflow/gate bypass or same-head retry. Original d80d4d2 font-compiler failure retained; production inbound content remains available and verified. Final source guard/push and CI follow.

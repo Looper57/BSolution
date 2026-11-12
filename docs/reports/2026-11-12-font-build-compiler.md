@@ -1,0 +1,7 @@
+# Production build compiler — 12 November 2026
+
+The merged inbound source d80d4d2 is tree-identical to ba22d10, which passed Quality43307575214 and all52native browser cases. Vercel Production deployment7749859338 succeeded; live homepage, DE employer navigation, EN/DE leadership answers and services metadata/canonicals were verified. Main Quality43308330983 subsequently failed at its build step before browser execution, with NextFontGoogleFontFileReplacer import mapping errors: “next/font/google queries have exactly one entry”. No business content failure or specific cache/network cause is established by that trace.
+
+The build script explicitly selects Next.js's supported webpack compiler. The exact same runtime had already built successfully with next build --webpack locally, followed by a275URL graph crawl and connected-browser verification. This makes the ordinary package build use that verified compiler rather than the implicit Turbopack default. Installed Next CLI help documents --webpack. No dependency/font/version changes, workflow edits, test skips or lower gates. The original failed main result is preserved separately from the successful source run.
+
+The actual package script is built locally, then the unchanged Quality workflow must verify the new fix source before merge. Native source tests and production checks follow in the private shared release evidence. This compiler fix adds no acquisition mechanism or customer communication.
