@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowRight, Check } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { AuthorityProof } from '@/components/authority-proof'
+import { GermanEmployerPaths } from '@/components/german-employer-paths'
 import { HeroBackgroundImage } from '@/components/hero-background-image'
 
 // Complete German content matching English homepage structure
@@ -149,6 +150,7 @@ export function HomepageDE() {
         <TrustSection />
         <SegmentsSection />
         <AuthorityProof locale="de" />
+        <GermanEmployerPaths />
         <WhyUsSection />
         <AboutSection />
         <ServicesSection />

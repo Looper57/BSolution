@@ -5,6 +5,7 @@ import Link from 'next/link'
 import { ArrowRight, MapPin } from 'lucide-react'
 import { legalPath } from '@/lib/routes'
 import { AuthorityProof } from '@/components/authority-proof'
+import { InternationalRecruitment } from '@/components/international-recruitment'
 import { HeroBackgroundImage } from '@/components/hero-background-image'
 
 type Lang = 'en' | 'cs' | 'de' | 'pl'
@@ -486,6 +487,7 @@ export function Homepage({ lang }: HomepageProps) {
         {c.trustBar && <TrustBar items={c.trustBar.items} />}
         <SocialProofSection content={c.socialProof} />
         <AuthorityProof locale={lang} />
+        {lang === 'en' && <InternationalRecruitment />}
         {c.process && <ProcessSection content={c.process} />}
         <ClientsSection content={c.clients} langPrefix={langPrefix} lang={lang} />
         <DifferenceSection content={c.difference} />

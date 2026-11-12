@@ -35,7 +35,7 @@ export const staticRouteMetadata: Record<Locale, Record<string, RouteMetadataCop
 
 export const hubRouteMetadata: Record<Locale, Record<string, RouteMetadataCopy>> = {
   en: {
-    services: { title: 'Legal Executive Search Services', description: 'Focused search and advisory for senior legal, compliance and law-firm appointments across Europe and the Middle East.' },
+    services: { title: 'Legal Recruitment & Executive Search Services', description: 'Focused search and advisory for senior legal, compliance and law-firm appointments across Europe and the Middle East.' },
     'practice-areas': { title: 'Practice Areas', description: 'Specialist market knowledge for leadership mandates where technical credibility and commercial judgement matter.' },
     industries: { title: 'Industries', description: 'Sector-aware legal executive search informed by regulation, operating models and the realities of each market, for in-house teams and law firms.' },
     locations: { title: 'Locations', description: 'Cross-border legal executive search across Europe and the Middle East, grounded in the legal talent markets we know directly.' },

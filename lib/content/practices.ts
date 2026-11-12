@@ -22,8 +22,10 @@ export const practices: Entity[] = [
           'Retained executive search for General Counsel, Chief Legal Officers and Heads of Legal who combine legal authority with commercial judgement at board level.',
         metaTitle: 'General Counsel & Head of Legal Executive Search',
         metaDescription:
-          'Confidential retained search for General Counsel and Chief Legal Officers across Europe and the Middle East. Board-level legal leadership, rigorously assessed.',
+          'Find a General Counsel, Chief Legal Officer or Head of Legal for a first appointment, succession or regional leadership role in Europe and the Middle East.',
         faq: [
+          { question: 'Do we need a General Counsel, a Group General Counsel or a Head of Legal?', answer: 'Start with the responsibility the business needs: a first legal leader, leadership of an existing department, group-wide governance or coordination across countries. Titles vary between companies. Define reporting lines, board access, team responsibility and jurisdictions before agreeing the search profile with B Solution.' },
+          { question: 'What should we prepare before requesting a confidential legal leadership search?', answer: 'Outline why the role is needed, the employment location, business sector, countries supported, required languages and qualification, reporting line and team remit. You can then contact B Solution to discuss the brief and scope of a confidential search. Do not include confidential personnel information in an initial enquiry.' },
           { question: 'Is your General Counsel leaving and you need a successor fast?', answer: 'B Solution starts with suitable lawyers it already knows from its database of more than 5,000 candidates from the legal market and searches the wider market at the same time, discreetly and without an advert.' },
           { question: 'Does B Solution search for General Counsel and Chief Legal Officers?', answer: 'Yes. B Solution runs confidential searches for General Counsel, Chief Legal Officers and Heads of Legal in companies and financial institutions across Europe and beyond.' },
           { question: 'How does a B Solution legal executive search work?', answer: 'After agreeing the brief, B Solution maps the relevant market systematically, approaches passive candidates discreetly and presents a shortlist with an honest, evidence-based assessment of each candidate.' },
@@ -31,6 +33,18 @@ export const practices: Entity[] = [
           { question: 'Is there a guarantee if a placed candidate leaves?', answer: 'Yes. B Solution replaces the candidate free of charge if they leave within 9 months for junior and non-lawyer roles, or within 12 months for senior roles (8+ years of experience).' },
         ],
         sections: [
+          {
+            heading: 'Which legal leadership appointment does your business need?',
+            paragraphs: [
+              'A useful search brief starts with the business situation. A first in-house legal leader may need to build the function, while a successor inherits a team and established relationships. A regional or Group General Counsel may need to coordinate several jurisdictions, external advisers and reporting lines.',
+              'For a Head of Legal or Chief Legal Officer appointment, define the decisions the person will own and how the role works with management, finance, compliance and external counsel. The required scope matters more than the title alone.',
+            ],
+            bullets: [
+              'First legal leadership hire: define which work becomes in-house and what stays with external counsel.',
+              'Succession or confidential replacement: establish continuity, decision-makers and confidentiality requirements.',
+              'Regional or group leadership: specify countries, reporting lines, working languages and team responsibilities.',
+            ],
+          },
           {
             heading: 'The modern General Counsel',
             paragraphs: [
@@ -89,13 +103,15 @@ export const practices: Entity[] = [
         ],
       },
       de: {
-        title: 'General-Counsel-Suche',
+        title: 'General Counsel, Chief Legal Officer und Head of Legal finden',
         summary:
           'Mandatierte Suche nach General Counsel und Chief Legal Officers, die juristische Autorität mit unternehmerischem Urteilsvermögen auf Vorstandsebene verbinden.',
-        metaTitle: 'Mandatierte General-Counsel-Suche',
+        metaTitle: 'General Counsel & Head of Legal finden | Executive Search',
         metaDescription:
-          'Vertrauliche mandatierte Suche nach General Counsel und Chief Legal Officers in Europa und im Nahen Osten. Führung auf Vorstandsebene.',
+          'General Counsel, Chief Legal Officer oder Head of Legal gesucht? Vertrauliche Suche für Erstbesetzung, Nachfolge und regionale Rechtsabteilungen in Europa.',
         faq: [
+          { question: 'Brauchen wir einen General Counsel, Group General Counsel oder Head of Legal?', answer: 'Ausgangspunkt ist die benötigte Verantwortung: eine erste juristische Führungskraft, die Leitung einer bestehenden Rechtsabteilung, konzernweite Governance oder die Zusammenarbeit über Ländergrenzen hinweg. Titel unterscheiden sich zwischen Unternehmen. Klären Sie Berichtslinien, Zugang zur Geschäftsleitung, Teamverantwortung und betreute Länder, bevor Sie das Suchprofil mit B Solution abstimmen.' },
+          { question: 'Was sollten wir für die Anfrage einer vertraulichen Suche vorbereiten?', answer: 'Beschreiben Sie den Anlass der Besetzung, Beschäftigungsort, Branche, betreute Länder, benötigte Sprachen und Qualifikation sowie Berichtslinie und Teamaufgaben. Anschließend können Sie B Solution kontaktieren, um das Profil und den Umfang einer vertraulichen Suche zu besprechen. Vertrauliche Personaldaten gehören nicht in eine erste Anfrage.' },
           { question: 'Verlässt Ihr General Counsel das Unternehmen und Sie brauchen schnell einen Nachfolger?', answer: 'B Solution beginnt mit geeigneten Juristen aus seiner Datenbank mit mehr als 5.000 Kandidaten aus dem Rechtsmarkt und sucht parallel diskret und ohne Stellenanzeige im gesamten Markt.' },
           { question: 'Sucht B Solution General Counsel und Chief Legal Officers?', answer: 'Ja. B Solution führt vertrauliche Suchen nach General Counsel, Chief Legal Officers und Heads of Legal in Unternehmen und Finanzinstituten in Europa und darüber hinaus durch.' },
           { question: 'Wie läuft eine Legal Executive Search mit B Solution ab?', answer: 'Nach Abstimmung des Profils analysiert B Solution den relevanten Markt systematisch, spricht passive Kandidaten diskret an und legt eine Shortlist mit einer ehrlichen, faktenbasierten Einschätzung jedes Kandidaten vor.' },
@@ -103,6 +119,18 @@ export const practices: Entity[] = [
           { question: 'Gibt es eine Garantie, wenn ein vermittelter Kandidat geht?', answer: 'Ja. Verlässt der Kandidat das Unternehmen innerhalb von 9 Monaten (Junior- und nichtjuristische Positionen) oder 12 Monaten (Senior-Positionen ab 8 Jahren Erfahrung), findet B Solution kostenlos Ersatz.' },
         ],
         sections: [
+          {
+            heading: 'Welche juristische Führungsrolle braucht Ihr Unternehmen?',
+            paragraphs: [
+              'Ein hilfreiches Suchprofil beginnt mit der Situation des Unternehmens. Eine erste juristische Führungskraft baut möglicherweise die Funktion auf; bei einer Nachfolge werden ein bestehendes Team und eingespielte Beziehungen übernommen. Ein regionaler oder Group General Counsel kann mehrere Länder, externe Berater und Berichtslinien koordinieren müssen.',
+              'Definieren Sie für einen Head of Legal oder Chief Legal Officer, welche Entscheidungen die Person verantwortet und wie die Rolle mit Geschäftsleitung, Finanzen, Compliance und externen Kanzleien zusammenarbeitet. Der konkrete Aufgabenbereich ist wichtiger als der Titel allein.',
+            ],
+            bullets: [
+              'Erste juristische Führungsrolle: festlegen, welche Aufgaben intern übernommen und welche extern vergeben werden.',
+              'Nachfolge oder vertrauliche Neubesetzung: Kontinuität, Entscheider und Vertraulichkeit klären.',
+              'Regionale oder konzernweite Leitung: Länder, Berichtslinien, Arbeitssprachen und Teamaufgaben definieren.',
+            ],
+          },
           {
             heading: 'Der moderne General Counsel',
             paragraphs: [

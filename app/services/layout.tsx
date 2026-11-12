@@ -1,15 +1,18 @@
 import type { Metadata } from 'next'
 import { buildAlternates } from '@/lib/i18n/config'
+import { hubRouteMetadata } from '@/lib/i18n/route-metadata'
+
+const serviceMetadata = hubRouteMetadata.en.services
 
 export const metadata: Metadata = {
-  title: 'Services',
-  description: 'Legal executive search, retained recruitment, market intelligence, and strategic advisory. Comprehensive legal talent solutions for firms and corporations.',
+  title: serviceMetadata.title,
+  description: serviceMetadata.description,
   alternates: buildAlternates('en', '/services'),
   openGraph: {
     type: 'website',
     siteName: 'B Solution',
-    title: 'Legal Recruitment Services | B Solution',
-    description: 'Executive search, retained recruitment, market intelligence, and strategic advisory for legal professionals and organizations.',
+    title: `${serviceMetadata.title} | B Solution`,
+    description: serviceMetadata.description,
     url: 'https://www.bsolution.eu/services',
     images: [
       {

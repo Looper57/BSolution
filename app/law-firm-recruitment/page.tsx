@@ -1,6 +1,7 @@
 "use client"
 
 import Link from 'next/link'
+import { RecruitmentBrief } from '@/components/recruitment-brief'
 import { ArrowRight, Building, UserCheck, Globe, Handshake } from 'lucide-react'
 import { LanguageProvider } from '@/lib/language-context'
 import { Header } from '@/components/header'
@@ -293,6 +294,7 @@ function LawFirmRecruitmentPage() {
         <WhySection />
         <ServicesSection />
         <PracticeAreasSection />
+        <RecruitmentBrief audience="law-firm" />
         <CTASection />
       </main>
       <Footer />
