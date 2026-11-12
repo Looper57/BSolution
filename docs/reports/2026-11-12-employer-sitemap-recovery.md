@@ -1,0 +1,19 @@
+# Employer discovery and sitemap recovery — 12 November 2026
+
+The public sitemap returned well-formed XML, but the live feed supplied lastmod values such as 2026-11-11T05:23:02.93: a time without a timezone. That violates the W3C Datetime profile required by the sitemap protocol. A successful XML parse alone did not validate this requirement. Google documents the missing-timezone error explicitly. This is a concrete defect; the Search Console fetch status alone does not prove it is the sole cause of that status.
+
+Normalize source timestamps to their supplied calendar date (YYYY-MM-DD), which the protocol accepts. Do not infer a timezone or substitute the current time. Invalid optional dates are omitted. This applies to live mandates, English external jobs and genuine translated job pages. Source publication/first-observation semantics are unchanged; no feed values are altered in the CRM or source site.
+
+A separate static /employer-sitemap.xml contains existing employer, service, practice, country, industry, insight, identity and contact URLs. It uses the same canonical inventory and publication gates as the complete sitemap, excluding candidate and job routes. It does not fetch either external feed, does not invent lastmod dates and preserves genuine hreflang alternatives. robots.txt advertises both sitemaps. The complete /sitemap.xml remains available with the same URL set and hourly feed refresh; the extra sitemap supports separate employer reporting and independent discovery when feeds are unavailable. It is not a ranking-priority mechanism.
+
+Existing law-firm and in-house landing pages now describe the buyer intent in their titles, H1 and social metadata. Their hiring-brief sections clarify the business situation and provide a voluntary contact path. No new marketing landing URL, country office, result, fee or guarantee is claimed. No outbound customer acquisition.
+
+Local validation: 188 unit cases in15 files, types, full lint and package build. Actual local XML: complete275 URLs/113 valid calendar dates; employer108 URLs/no fabricated dates, all contained in the complete sitemap. Full graph and the unchanged remote Quality gates verify the final source. Two new browser cases parse both actual XML responses, check canonical inventory/robots and exercise both employer enquiry paths. Private Search Console data and final processing evidence remain in the shared roadmap folder outside this public repository.
+
+Sources:
+- https://www.sitemaps.org/protocol.html
+- https://developers.google.com/search/blog/2006/04/using-lastmod-attribute
+- https://developers.google.com/search/docs/crawling-indexing/sitemaps/build-sitemap
+- https://support.google.com/webmasters/answer/7451001
+
+After deployment, validate production XML and resubmit the corrected sitemap plus the employer sitemap once. Only a successful Search Console processing result can establish recovery; a submission acknowledgement or live inspection success alone cannot.

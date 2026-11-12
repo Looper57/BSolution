@@ -26,7 +26,7 @@ function PageHeader() {
             <p className="text-gold text-[11px] font-semibold uppercase tracking-[0.2em]">In-House Legal</p>
           </div>
           <h1 className="text-white text-[42px] lg:text-[56px] font-serif leading-[1.1]">
-            Hire In-House Counsel
+            In-House Legal Recruitment for Companies
           </h1>
           <p className="mt-8 text-[19px] text-white/55 leading-[1.75] max-w-2xl">
             Specialist search for corporate legal professionals, from first in-house counsel appointments to General Counsel and Chief Legal Officer mandates.

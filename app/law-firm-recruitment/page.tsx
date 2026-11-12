@@ -26,7 +26,7 @@ function PageHeader() {
             <p className="text-gold text-[11px] font-semibold uppercase tracking-[0.2em]">Private Practice</p>
           </div>
           <h1 className="text-white text-[42px] lg:text-[56px] font-serif leading-[1.1]">
-            Law Firm Recruitment
+            International Law Firm Recruitment
           </h1>
           <p className="mt-8 text-[19px] text-white/55 leading-[1.75] max-w-2xl">
             Partner recruitment, practice-group development and strategic legal talent search for international and regional law firms across Europe.
