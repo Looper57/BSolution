@@ -122,3 +122,7 @@ Repair repeat-message widget mounting and pending shared-script attachment after
 ## 2026-11-13 — Responsive homepage hero transfers
 
 Avoid downloading a CSS-hidden desktop hero on mobile across all four homepage languages. Preserve Next image optimization, desktop artwork/crop, decorative accessibility and normal rendering on pages where it is visible on mobile. Add SSR checks and native browser proof for mobile zero-request/desktop successful loading, with a retained JSON artifact. No claimed field performance score or ranking gain; see docs/reports/2026-11-13-responsive-hero-loading.md.
+
+## 2026-11-13 — Voluntary discovery and recorded enquiry outcomes
+
+Add a translated optional visitor-reported discovery field with strict server enum validation, provider-accepted event logging and matching server-generated enquiry reference in the email. Add a private aggregate-report command that deduplicates provider acceptances, separates employer/candidate enquiries and optionally joins independently entered qualification/mandate records. Missing outcomes stay unknown; no inferred organic attribution, cookies, real lead test, new CRM write or prospecting. See docs/enquiry-measurement.md.

@@ -2,6 +2,7 @@
 
 import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
+import { discoverySources, discoverySource as parseDiscoverySource, discoveryCopy, type DiscoverySource } from '@/lib/enquiry-discovery'
 import { contactFormPage } from '@/lib/contact-form-context'
 import { enquiryServices, enquiryServiceFromHash, type EnquiryService } from '@/lib/service-enquiry'
 import { Send, CheckCircle } from 'lucide-react'
@@ -93,6 +94,7 @@ export function ContactForm({ heading, initialType = '' }: {
     message: '',
   })
   const [honeypot, setHoneypot] = useState('')
+  const [discoverySource, setDiscoverySource] = useState<DiscoverySource | undefined>()
   const [serviceInterest, setServiceInterest] = useState<EnquiryService | undefined>()
 
   useEffect(() => {
@@ -163,6 +165,7 @@ export function ContactForm({ heading, initialType = '' }: {
           ...formData,
           formPage,
           serviceInterest,
+          discoverySource,
           turnstileToken,
           _hp: honeypot,
         }),
@@ -175,6 +178,7 @@ export function ContactForm({ heading, initialType = '' }: {
       }
       
       setSubmitted(true)
+      setDiscoverySource(undefined)
       setFormData({
         name: '',
         email: '',
@@ -344,6 +348,16 @@ export function ContactForm({ heading, initialType = '' }: {
             />
           </div>
           
+          <div className="space-y-2">
+            <Label htmlFor="discovery-source" className="text-charcoal">{discoveryCopy[language].label}</Label>
+            <select id="discovery-source" name="discoverySource" value={discoverySource ?? ''}
+              onChange={event => setDiscoverySource(parseDiscoverySource(event.target.value))}
+              className="flex h-10 w-full rounded-md border border-gray-light bg-white px-3 py-2 text-sm focus:border-gold focus:outline-none focus:ring-2 focus:ring-gold">
+              <option value="">{discoveryCopy[language].empty}</option>
+              {Object.entries(discoverySources).map(([value, label]) => <option key={value} value={value}>{label[language]}</option>)}
+            </select>
+          </div>
+
           {/* Cloudflare Turnstile Widget */}
           {process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && (
             <div ref={turnstileRef} className="flex justify-center" />

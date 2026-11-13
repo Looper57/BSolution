@@ -1,3 +1,4 @@
+import { discoverySource as parseDiscoverySource, type DiscoverySource } from '@/lib/enquiry-discovery';
 import { enquiryService, type EnquiryService } from '@/lib/service-enquiry';
 import { contactFormPage, type ContactFormPage } from '@/lib/contact-form-context';
 
@@ -14,6 +15,7 @@ export type ContactEmailInput = {
   honeypot: string;
   formPage?: ContactFormPage;
   serviceInterest?: EnquiryService;
+  discoverySource?: DiscoverySource;
   company?: string;
   phone?: string;
   type?: "hiring" | "candidate" | "other" | "";
@@ -105,7 +107,10 @@ export async function parseContactInput(
   const rawService = readOptionalString(body, "serviceInterest");
   const serviceInterest = enquiryService(rawService);
   if (rawService && !serviceInterest) throw new ContactInputError("Service interest is invalid");
-  return { name, email, message, turnstileToken, honeypot, company, phone, type, formPage, serviceInterest };
+  const rawDiscovery = readOptionalString(body, "discoverySource");
+  const discoverySource = parseDiscoverySource(rawDiscovery);
+  if (rawDiscovery && !discoverySource) throw new ContactInputError("Discovery source is invalid");
+  return { name, email, message, turnstileToken, honeypot, company, phone, type, formPage, serviceInterest, discoverySource };
 }
 
 function hasDuplicateTopLevelKeys(source: string): boolean {

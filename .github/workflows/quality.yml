@@ -70,12 +70,11 @@ jobs:
         run: pnpm test:e2e
 
       - name: Upload responsive hero proof
-        if: always()
         uses: actions/upload-artifact@v6
         with:
           name: responsive-hero-proof
-          path: test-results/**/attachments/responsive-hero-transfer-proof-*.json
-          if-no-files-found: ignore
+          path: artifacts/responsive-hero-proof.json
+          if-no-files-found: error
           retention-days: 7
 
       # This dummy public key exists only in the CI build. Provider script and
