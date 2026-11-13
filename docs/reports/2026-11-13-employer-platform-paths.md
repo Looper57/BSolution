@@ -1,0 +1,7 @@
+# Employer paths between services, profiles and legal advice
+
+The four client pages lacked a direct route to the existing published candidate catalogue. Add a localized employer decision section connecting a scoped executive-search enquiry and the published anonymous profiles. Reuse the existing explicit service handoff into the contact form; do not introduce an order, fee or guarantee. A separate secondary note identifies sister platform LawBridge as the route for external legal advice on a specific matter, with a verified canonical public directory URL in the same language.
+
+LawBridge's actual public directory and its own hreflang confirm the EN/CS/DE/PL destinations. The existing careers/job feed and authenticated partner ordering are separate surfaces: this change neither links a private partner identifier/token nor implies that a new public recruitment checkout is available. No change to the LawBridge repository, CRM, contracts, candidate data, paid access or forms. Candidate profile and CV consent rules stay intact.
+
+Four native browser journeys verify rendered text, profile navigation and language-preserving search selection. External navigation is not exercised against real third parties in CI; the actual four public directory endpoints are verified independently over HTTP. Preserve the existing source/main, graph and production checks. Update genuine content dates for the four client pages only. This completes a useful portion of roadmap M9.8, not the full two-platform order lifecycle or proof of commercial impact.

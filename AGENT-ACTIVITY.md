@@ -102,3 +102,7 @@ Add a local, read-only content queue command with existing-route validation, rev
 ## 2026-11-13 — Owner-approved compliance employer brief
 
 Add the explicitly approved six-paragraph English section to the existing compliance leadership page. Clarify role scope, reporting, resources, location/remit, working languages, assessment and an initial employer brief. Keep the route, translations and commercial FAQs intact. One new native journey covers rendered text and existing service/contact navigation. Private draft/approval records remain outside Git; see docs/reports/2026-11-13-compliance-employer-brief.md. Release requires the ordinary checks; no commercial or ranking gain is inferred.
+
+## 2026-11-13 — Employer service, candidate and adviser paths
+
+Connect the four existing client pages to localized published candidate profiles and explicit executive-search enquiry selection. A separate note links the verified public LawBridge directory for external legal-adviser needs in the same language. No private partner link, checkout, CRM or LawBridge source change. Four browser journeys cover the paths and language preservation; genuine modification dates apply to the four edited client pages. See docs/reports/2026-11-13-employer-platform-paths.md.
