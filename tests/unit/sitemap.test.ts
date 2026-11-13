@@ -85,8 +85,10 @@ describe('employer discovery independent of external feeds', () => {
         'https://www.bsolution.eu',
         'https://www.bsolution.eu/clients',
         'https://www.bsolution.eu/cs/clients',
+        'https://www.bsolution.eu/cs/locations/united-kingdom',
         'https://www.bsolution.eu/de',
         'https://www.bsolution.eu/de/clients',
+        'https://www.bsolution.eu/de/locations/united-kingdom',
         'https://www.bsolution.eu/for-companies',
         'https://www.bsolution.eu/hire-in-house-counsel',
         'https://www.bsolution.eu/hire-legal-leader',
@@ -94,10 +96,12 @@ describe('employer discovery independent of external feeds', () => {
         'https://www.bsolution.eu/legal-recruitment-dubai',
         'https://www.bsolution.eu/legal-recruitment-europe',
         'https://www.bsolution.eu/legal-recruitment-germany',
+        'https://www.bsolution.eu/locations/united-kingdom',
         'https://www.bsolution.eu/pl/clients',
+        'https://www.bsolution.eu/pl/locations/united-kingdom',
         'https://www.bsolution.eu/practice-areas/compliance-officer',
       ])
-      expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(14)
+      expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(18)
       expect(fetch).not.toHaveBeenCalled()
       // An unavailable publication feed must not silently publish a new
       // full sitemap with every active mandate removed. The independent

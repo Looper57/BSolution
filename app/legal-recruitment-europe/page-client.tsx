@@ -83,7 +83,7 @@ function SearchScopeSection() {
       <div className="mx-auto max-w-[1200px]">
         <h2 id="europe-search-scope" className="font-serif text-3xl leading-tight text-navy md:text-4xl">Agree the cross-border search brief</h2>
         <dl className="mt-10 grid gap-8 md:grid-cols-2">{decisions.map(decision => <div key={decision.title}><dt className="text-lg font-medium text-navy">{decision.title}</dt><dd className="mt-3 leading-relaxed text-gray-600">{decision.text}</dd></div>)}</dl>
-        <p className="mt-10 max-w-3xl leading-relaxed text-gray-600">For a Germany-based appointment, see the <Link href="/legal-recruitment-germany" className="underline underline-offset-4 hover:text-gold">Germany legal recruitment brief</Link>. For a corporate role, compare <Link href="/hire-legal-leader" className="underline underline-offset-4 hover:text-gold">Legal Counsel, Head of Legal and General Counsel responsibilities</Link> before setting the search criteria.</p>
+        <p className="mt-10 max-w-3xl leading-relaxed text-gray-600">For a Germany-based appointment, see the <Link href="/legal-recruitment-germany" className="underline underline-offset-4 hover:text-gold">Germany legal recruitment brief</Link>. For a UK-based appointment, prepare the <Link href="/locations/united-kingdom" className="underline underline-offset-4 hover:text-gold">UK legal recruitment brief</Link>. For a corporate role, compare <Link href="/hire-legal-leader" className="underline underline-offset-4 hover:text-gold">Legal Counsel, Head of Legal and General Counsel responsibilities</Link> before setting the search criteria.</p>
       </div>
     </section>
   )

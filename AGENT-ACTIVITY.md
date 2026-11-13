@@ -146,3 +146,7 @@ Investigate the three own-mandate404s in the main graph crawl. Align the short f
 ## 2026-11-13 — Employer search-service handoff
 
 Keep the explicit Legal Executive Search choice when an employer follows the primary action from the localized service page. Reuse the existing translated, removable service selection and extend the four real browser journeys. No API generation or provider setup is part of this change.
+
+## 2026-11-13 — Existing UK employer brief
+
+Improve the existing UK entry for international law-firm and in-house hiring, with clearer EN/DE intent, concrete briefing questions and an inbound link from the Europe brief. Replace the ambiguous specific example in four languages, preserve every original FAQ/commercial statement and add only genuine modification dates. No new route, office, reference or API provider.
