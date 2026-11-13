@@ -1,9 +1,6 @@
 import { readFile } from 'node:fs/promises'
-import { getEmployerSitemapEntries } from '../../lib/sitemap-entries'
-import { authorityEvidenceRegistry } from '../../lib/authority-pages/evidence'
 import { inspectQueue } from './workflow'
-import { productionAuthorityPages } from '../../lib/authority-pages/registry'
-import { localizedPath } from '../../lib/i18n/config'
+import { editorialContext } from './context'
 
 async function main() {
   const args = process.argv.slice(2)
@@ -14,8 +11,7 @@ async function main() {
     options[key] = value
   }
   if (!options['--input']) throw new Error('A private queue file is required; no default private path is stored in the repository.')
-  const allowedPaths = new Set(getEmployerSitemapEntries().map(entry => new URL(entry.url).pathname))
-  const report = inspectQueue(JSON.parse(await readFile(options['--input'], 'utf8')), { asOf: options['--as-of'] ?? new Date().toISOString().slice(0, 10), allowedPaths, pageIds: new Map(productionAuthorityPages.map(page => [localizedPath(page.locale, page.basePath), page.id])), evidence: authorityEvidenceRegistry })
+  const report = inspectQueue(JSON.parse(await readFile(options['--input'], 'utf8')), editorialContext(options['--as-of'] ?? new Date().toISOString().slice(0, 10)))
   if (options['--prepare']) {
     const task = report.tasks.find(task => task.id === options['--prepare'])
     if (!report.valid || !task?.ready) {
