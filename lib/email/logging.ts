@@ -15,6 +15,7 @@ export type EmailLogEvent = {
   durationMs: number;
   resendMessageId?: string;
   errorCategory?: string;
+  enquiryType?: "hiring" | "candidate" | "other" | "unspecified";
 };
 
 export function logEmailEvent(event: EmailLogEvent): void {

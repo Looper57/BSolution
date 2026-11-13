@@ -7,11 +7,17 @@ export type ContactEmailContent = {
 };
 
 export function createContactEmailContent(
-  input: Pick<ContactEmailInput, "name" | "email" | "message">
+  input: Pick<ContactEmailInput, "name" | "email" | "message" | "company" | "phone" | "type">
 ): ContactEmailContent {
   const safeName = escapeHtml(input.name);
   const safeEmail = escapeHtml(input.email);
   const safeMessage = escapeHtml(input.message);
+
+  const details = [
+    ["Company", input.company],
+    ["Phone", input.phone],
+    ["Enquiry type", input.type],
+  ].filter((entry): entry is [string, string] => Boolean(entry[1]));
 
   return {
     subject: `B Solution website enquiry — ${stripHeaderControls(input.name)}`,
@@ -20,6 +26,7 @@ export function createContactEmailContent(
       "",
       `Name: ${input.name}`,
       `Email: ${input.email}`,
+      ...details.map(([label, value]) => `${label}: ${value}`),
       "",
       "Message:",
       input.message,
@@ -36,6 +43,7 @@ export function createContactEmailContent(
       <h1>New contact form enquiry</h1>
       <p><strong>Name:</strong> ${safeName}</p>
       <p><strong>Email:</strong> ${safeEmail}</p>
+      ${details.map(([label, value]) => `<p><strong>${label}:</strong> ${escapeHtml(value)}</p>`).join("\n")}
       <p><strong>Message:</strong></p>
       <p style="white-space: pre-wrap;">${safeMessage}</p>
     </main>

@@ -58,3 +58,7 @@ Unify public external-job list/country/detail lookups to remove independently st
 ## 2026-11-13 — employer decision guides
 
 Improve the two existing corporate entry points with specific hiring situations, agreed leadership-brief questions and contextual links to established services and markets. Keep the fintech account visibly illustrative, remove an unsupported generic replacement duration, and publish accurate modification dates only for the two edited pages. No new landing route, altered terms, customer outreach or invented proof. Local200 units/types/lint/build/strict graph and actual HTTP/XML checked; two new native browser cases and exact-source CI verify the new57-case suite before release.
+
+## 2026-11-13 — inbound enquiry integrity
+
+Repair the three localized homepage forms that previously showed success without sending. Extract the existing secure contact form, retain optional company/phone/type fields at the server boundary, and classify only provider-accepted enquiries in non-personal structured logs. Add failure/retry and payload/privacy regression coverage. No real test emails, outbound acquisition, added tracking identifiers, changed recipients or weaker security. See docs/reports/2026-11-13-inbound-enquiry-integrity.md; exact-source CI and production proof follow before closeout.
