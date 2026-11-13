@@ -13,7 +13,8 @@
     "graph-crawl": "tsx scripts/graph-crawl.mts",
     "graph-crawl:gate": "node scripts/run-graph-crawl-gate.mjs",
     "validate": "pnpm typecheck && pnpm lint && pnpm test && pnpm build && pnpm test:e2e",
-    "validate:predeploy": "pnpm typecheck && pnpm lint && pnpm test && pnpm build && pnpm graph-crawl:gate && pnpm test:e2e"
+    "validate:predeploy": "pnpm typecheck && pnpm lint && pnpm test && pnpm build && pnpm graph-crawl:gate && pnpm test:e2e",
+    "content:queue": "tsx scripts/editorial/queue.mts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",
