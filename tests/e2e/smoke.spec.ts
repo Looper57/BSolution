@@ -1093,14 +1093,14 @@ test('all homepage languages avoid hidden hero transfers on mobile and load it o
     await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
     const image = page.locator('picture img[aria-hidden="true"]')
     await expect(image).toHaveCount(1)
-    await expect(image).toHaveJSProperty('currentSrc', expect.stringMatching(/^data:image\/gif;/))
+    await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.currentSrc)).toMatch(/^data:image\/gif;/)
     const mobileRequests = heroRequests.length
     expect(mobileRequests, `hidden desktop image requested on mobile at ${path}`).toBe(0)
     expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
     await page.setViewportSize({ width: 1280, height: 900 })
     await expect(image).toBeVisible()
     await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.complete && element.naturalWidth > 1)).toBe(true)
-    await expect(image).toHaveJSProperty('currentSrc', expect.stringMatching(/\/_next\/image\?/))
+    await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.currentSrc)).toMatch(/\/_next\/image\?/)
     expect(heroRequests.length).toBeGreaterThan(0)
     report.push({ path, mobileHeroRequests: mobileRequests, desktopHeroRequests: heroRequests.length, desktopWidth: await image.evaluate((element: HTMLImageElement) => element.naturalWidth) })
   }
