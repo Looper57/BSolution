@@ -1018,3 +1018,20 @@ test('a mobile European employer can reach and submit the existing scoped enquir
   await expect(form).toHaveCount(0)
   expect(submitted).toMatchObject({ type: 'hiring', formPage: '/legal-recruitment-europe', message: 'Germany-based regional legal lead, English and German, group reporting.' })
 })
+
+test('an employer can read the compliance scope and reach the established search enquiry', async ({ page, request }) => {
+  const path = '/practice-areas/compliance-officer'
+  const html = await (await request.get(path)).text()
+  expect(html).toContain('Define the compliance role before the search')
+  expect(html).toContain('coordinates a regional or group programme')
+  await page.goto(path)
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://www.bsolution.eu${path}`)
+  await expect(page.getByRole('heading', { name: 'Define the compliance role before the search', exact: true })).toBeVisible()
+  const section = page.locator('article section').filter({ has: page.getByRole('heading', { name: 'Define the compliance role before the search', exact: true }) })
+  await expect(section.locator('p')).toHaveCount(6)
+  await expect(section).toContainText('Identify confidentiality requirements for a replacement search.')
+  await expect(page.locator('article a[href="/services/legal-executive-search"]')).toBeVisible()
+  await page.locator('aside a[href="/contact"]').click()
+  await expect(page).toHaveURL(/contact$/)
+  await expect(page.locator('form#contact-form')).toBeVisible()
+})
