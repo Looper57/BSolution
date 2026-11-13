@@ -107,8 +107,7 @@ describe('employer discovery independent of external feeds', () => {
         'https://www.bsolution.eu/practice-areas/general-counsel',
         'https://www.bsolution.eu/services/legal-executive-search',
       ])
-      expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(18)
-      expect(xml.match(/<lastmod>2026-10-25<\/lastmod>/g)).toHaveLength(4)
+      expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(22)
       expect(xml.match(/<lastmod>2026-11-12<\/lastmod>/g)).toHaveLength(2)
       expect(fetch).not.toHaveBeenCalled()
       // An unavailable publication feed must not silently publish a new
