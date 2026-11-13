@@ -90,6 +90,10 @@ describe("contact input validation", () => {
     { phone: "Bad\nPhone" },
     { company: { unsafe: true } },
     { type: "admin" },
+    { formPage: "https://example.com/private" },
+    { formPage: "/contact?email=private@example.com" },
+    { formPage: "/unknown/private-path" },
+    { formPage: { bad: true } },
   ])("rejects invalid optional enquiry details", async (details) => {
     await expect(parseContactInput(request({ name: "Name", email: "a@example.com", message: "Hello", ...details }))).rejects.toBeInstanceOf(ContactInputError);
   });
@@ -195,6 +199,7 @@ describe("contact email API boundary", () => {
         company: "Example Legal",
         phone: "+49 123 456",
         type: "hiring",
+        formPage: "/hire-in-house-counsel",
       })
     );
 
@@ -213,6 +218,8 @@ describe("contact email API boundary", () => {
     const log = JSON.stringify(info.mock.calls);
     const accepted = info.mock.calls.map(call => JSON.parse(String(call[1]))).find(event => event.status === "accepted");
     expect(accepted.enquiryType).toBe("hiring");
+    expect(accepted.formPage).toBe("/hire-in-house-counsel");
+    expect(payload.text).toContain("Submitted from: /hire-in-house-counsel");
     for (const privateValue of ["Example Legal", "+49 123 456", "visitor@example.com", "A confidential enquiry"]) expect(log).not.toContain(privateValue);
   });
 

@@ -7,7 +7,7 @@ export type ContactEmailContent = {
 };
 
 export function createContactEmailContent(
-  input: Pick<ContactEmailInput, "name" | "email" | "message" | "company" | "phone" | "type">
+  input: Pick<ContactEmailInput, "name" | "email" | "message" | "company" | "phone" | "type" | "formPage">
 ): ContactEmailContent {
   const safeName = escapeHtml(input.name);
   const safeEmail = escapeHtml(input.email);
@@ -17,6 +17,7 @@ export function createContactEmailContent(
     ["Company", input.company],
     ["Phone", input.phone],
     ["Enquiry type", input.type],
+    ["Submitted from", input.formPage],
   ].filter((entry): entry is [string, string] => Boolean(entry[1]));
 
   return {

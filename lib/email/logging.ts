@@ -1,3 +1,5 @@
+import type { ContactFormPage } from '@/lib/contact-form-context';
+
 export type EmailLogStatus =
   | "accepted"
   | "rejected"
@@ -15,6 +17,7 @@ export type EmailLogEvent = {
   durationMs: number;
   resendMessageId?: string;
   errorCategory?: string;
+  formPage?: ContactFormPage;
   enquiryType?: "hiring" | "candidate" | "other" | "unspecified";
 };
 
