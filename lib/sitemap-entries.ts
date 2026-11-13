@@ -157,8 +157,8 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   )
   // Positions published for bsolution.eu in the LawBridge console (M4);
   // English-only URLs, the text is as entered, and they leave the sitemap
-  // as soon as they close or expire.
-  const openPositionPages = (await getLivePositions({ revalidateSeconds: 3600 })).map((position) => ({
+  // when the shared feed withdraws them or their validity expires.
+  const openPositionPages = (await getLivePositions({ required: true })).map((position) => ({
     url: `${SITE_URL}${livePositionPath(position)}`,
     lastModified: sitemapDate(position.postedAt),
     changeFrequency: 'daily' as const,
