@@ -69,7 +69,7 @@ describe('employer discovery independent of external feeds', () => {
     const fetch = vi.fn(async () => { throw new Error('feed unavailable') })
     vi.stubGlobal('fetch', fetch)
     try {
-      vi.useFakeTimers({ toFake: ['Date'] }); vi.setSystemTime('2026-11-13T12:00:00Z')
+      vi.useFakeTimers({ toFake: ['Date'] }); vi.setSystemTime('2026-11-14T12:00:00Z')
       const employers = getEmployerSitemapEntries()
       expect(fetch).not.toHaveBeenCalled()
       expect(employers.some(entry => entry.url.endsWith('/law-firm-recruitment'))).toBe(true)
@@ -107,7 +107,12 @@ describe('employer discovery independent of external feeds', () => {
         'https://www.bsolution.eu/practice-areas/general-counsel',
         'https://www.bsolution.eu/services/legal-executive-search',
       ])
-      expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(22)
+      expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(20)
+      expect(employers.filter(entry => entry.lastModified === '2026-11-14').map(entry => entry.url).sort()).toEqual([
+        'https://www.bsolution.eu/de',
+        'https://www.bsolution.eu/de/clients',
+      ])
+      expect(xml.match(/<lastmod>2026-11-14<\/lastmod>/g)).toHaveLength(2)
       expect(xml.match(/<lastmod>2026-11-12<\/lastmod>/g)).toHaveLength(2)
       expect(fetch).not.toHaveBeenCalled()
       // An unavailable publication feed must not silently publish a new

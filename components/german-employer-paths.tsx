@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { serviceEnquiryHref } from '@/lib/service-enquiry'
 
 export function GermanEmployerPaths() {
   return <section aria-labelledby="employer-help-heading" className="bg-cream px-8 py-20 lg:px-20 lg:py-28">
@@ -9,12 +10,15 @@ export function GermanEmployerPaths() {
       <div className="mt-10 grid gap-8 md:grid-cols-2">
         <article className="border-t border-navy/20 pt-6">
           <h3 className="font-serif text-2xl text-navy">Für Unternehmen und Rechtsabteilungen</h3>
-          <p className="mt-4 leading-relaxed text-gray-600">Sie besetzen erstmals eine juristische Führungsrolle, planen die Nachfolge Ihres General Counsel oder suchen einen Head of Legal für mehrere Länder? Klären Sie Aufgaben, Verantwortung und Zielmarkt für Ihre Suche.</p>
+          <p className="mt-4 leading-relaxed text-gray-600">Sie suchen einen Legal Counsel für das Tagesgeschäft, einen Senior Legal Counsel für ein Fachgebiet oder den ersten Unternehmensjuristen? Auch bei der Besetzung eines Head of Legal oder General Counsel beginnt die Suche mit den tatsächlichen Aufgaben: Verträge, Beratung der Fachbereiche, betreute Länder und Verantwortung im Unternehmen.</p>
           <ul className="mt-5 space-y-3 text-navy">
+            <li><Link className="underline underline-offset-4 hover:text-gold" href="/de/clients#inhouse-suchprofil">Suchprofil für Ihren Unternehmensjuristen vorbereiten</Link></li>
+            <li><Link className="underline underline-offset-4 hover:text-gold" href="/hire-in-house-counsel">Legal Counsel oder ersten Inhouse-Juristen einstellen (Englisch)</Link></li>
             <li><Link className="underline underline-offset-4 hover:text-gold" href="/legal-recruitment-germany">Personalbedarf in Deutschland konkretisieren (Englisch)</Link></li>
             <li><Link className="underline underline-offset-4 hover:text-gold" href="/de/practice-areas/general-counsel">General Counsel oder Head of Legal finden</Link></li>
             <li><Link className="underline underline-offset-4 hover:text-gold" href="/de/practice-areas/compliance-officer">Compliance-Führungskraft finden</Link></li>
           </ul>
+          <Link className="mt-7 inline-flex min-h-12 items-center bg-navy px-6 py-3 text-sm font-semibold text-white hover:bg-navy/90" href={serviceEnquiryHref('executive-search', 'de')}>Suche nach einem Unternehmensjuristen anfragen</Link>
         </article>
         <article className="border-t border-navy/20 pt-6">
           <h3 className="font-serif text-2xl text-navy">Für Anwaltskanzleien</h3>

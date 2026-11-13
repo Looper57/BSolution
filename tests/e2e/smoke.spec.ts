@@ -908,7 +908,7 @@ for (const market of [
   })
 }
 
-test('German employers can knowingly open the English Germany recruitment brief', async ({ page }) => {
+test('German employers can reach corporate hiring briefs and a German search enquiry', async ({ page }) => {
   await page.goto('/de')
   await page.getByRole('link', { name: 'Personalbedarf in Deutschland konkretisieren (Englisch)', exact: true }).click()
   await expect(page).toHaveURL(/legal-recruitment-germany$/)
@@ -919,6 +919,23 @@ test('German employers can knowingly open the English Germany recruitment brief'
   await page.locator('header').getByRole('button', { name: 'Auf Deutsch umschalten', exact: true }).click()
   await expect(page).toHaveURL(/de\/clients$/)
   await expect(page.locator('html')).toHaveAttribute('lang', 'de')
+  await page.goto('/de')
+  await page.getByRole('link', { name: 'Suchprofil für Ihren Unternehmensjuristen vorbereiten', exact: true }).click()
+  await expect(page).toHaveURL(/de\/clients#inhouse-suchprofil$/)
+  const corporateBrief = page.locator('#inhouse-suchprofil')
+  await expect(corporateBrief.getByRole('heading', { name: 'Unternehmensjuristen und Inhouse-Teams', exact: true })).toBeInViewport()
+  await expect(corporateBrief.locator('dt')).toHaveCount(3)
+  await page.goto('/de')
+  await page.getByRole('link', { name: 'Legal Counsel oder ersten Inhouse-Juristen einstellen (Englisch)', exact: true }).click()
+  await expect(page).toHaveURL(/hire-in-house-counsel$/)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+  await expect(page.getByRole('heading', { level: 1, name: 'In-House Legal Recruitment for Companies', exact: true })).toBeVisible()
+  await page.goto('/de')
+  await page.getByRole('link', { name: 'Suche nach einem Unternehmensjuristen anfragen', exact: true }).click()
+  await expect(page).toHaveURL(/de\/contact#service-executive-search$/)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'de')
+  await expect(page.getByRole('region', { name: 'Ausgewählte Leistung', exact: true })).toContainText('Legal Executive Search')
+  await expect(page.locator('form#contact-form')).toBeVisible()
 })
 
 test('an explicitly chosen service reaches the visible enquiry and survives a failed send', async ({ page }) => {
