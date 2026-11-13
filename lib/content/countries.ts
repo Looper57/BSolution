@@ -700,13 +700,12 @@ export const countries: Entity[] = [
     },
     content: {
       en: {
-        title: 'Legal Executive Search in the United Kingdom',
-        summary:
-          'Retained search for law-firm partners and senior in-house lawyers in London, including partners with portable practices and cross-border mandates.',
-        metaTitle: 'Legal Executive Search UK | London',
-        metaDescription:
-          'Boutique legal executive search in the United Kingdom. Confidential retained search for law-firm partners and senior in-house lawyers in London.',
+        title: "UK legal recruitment for law firms and in-house teams",
+        summary: "Discuss a UK-based partner, counsel or legal leadership appointment with B Solution. Define the office, team, countries supported and responsibilities before choosing the search profile.",
+        metaTitle: "UK Legal Recruitment for Law Firms & In-House Teams",
+        metaDescription: "UK legal recruitment for law firms and in-house teams. Define partner, counsel and legal leadership briefs with B Solution, including cross-border roles.",
         faq: [
+          {"question": "What should we prepare for a UK legal recruitment brief?", "answer": "Describe the UK office or place of work, role, reporting line, countries supported, required qualification and working languages. Distinguish an in-house workload from a law-firm practice brief and identify confidentiality requirements before sharing names or documents."},
           { question: 'Does B Solution recruit law-firm partners in London?', answer: 'Yes. B Solution runs retained, confidential searches for law-firm partners and senior in-house lawyers in London and across the United Kingdom, including lateral partner hires with portable practices.' },
           { question: 'How does a B Solution legal executive search work?', answer: 'After agreeing the brief, B Solution maps the relevant market systematically, approaches passive candidates discreetly and presents a shortlist with an honest, evidence-based assessment of each candidate.' },
           { question: 'How quickly can B Solution present candidates in the United Kingdom?', answer: 'The first candidates are typically presented within three to four weeks of agreeing the brief.' },
@@ -716,12 +715,26 @@ export const countries: Entity[] = [
         ],
         sections: [
           {
-            heading: 'London and cross-border legal leadership',
-            paragraphs: [
-              'London remains the centre of international legal practice, and many senior roles there carry responsibility for clients, teams or deals across continental Europe and the Gulf. Partner hires in particular depend on portable client relationships, cultural fit and a credible business plan.',
-              'B Solution fills mandates such as a banking and finance partner with a strong portable practice for a top-tier international law firm, and connects London roles with candidates from its European and Gulf network.',
-            ],
+            "heading": "Define the UK appointment and its wider remit",
+            "paragraphs": [
+              "State where the appointee will work and which offices, businesses or jurisdictions the role will support. A London-based appointment may have a wider remit; agree the location and cross-border responsibilities separately. Specify the working arrangement, required qualification and languages for the actual work.",
+              "For an in-house role, distinguish ownership of the UK workload from regional coordination or group legal leadership. Identify the reporting line, internal stakeholders, team and external advisers available. Use the responsibilities to decide between a Legal Counsel, Head of Legal and General Counsel brief."
+            ]
           },
+          {
+            "heading": "Prepare a law-firm partner or team brief",
+            "paragraphs": [
+              "For a lateral partner, define the practice, specialist work, place in the partnership and expectations for leadership and business development. For a team move, identify each role and the support the receiving office will provide. Separate individual responsibilities from the plan for the whole practice.",
+              "Discuss proposed client opportunities separately from confirmed commitments. An initial web enquiry can describe the practice, office and purpose of the search without identifying individual candidates or clients. Agree an appropriate process before sharing sensitive information."
+            ]
+          },
+          {
+            "heading": "Start with a brief that decision-makers can assess",
+            "paragraphs": [
+              "Share the role, place of work, geographic remit, working languages, required experience, reason for the appointment and decision timetable. For a replacement, identify confidentiality restrictions. For a cross-border role, explain how the UK office or business will work with colleagues elsewhere.",
+              "Agree assessment criteria and interview decision-makers before comparing candidates. Explore evidence relevant to the work, leadership and business relationships the appointee will need to handle. Use the contact link to discuss the scope of a retained search with B Solution."
+            ]
+          }
         ],
       },
       cs: {
@@ -741,22 +754,21 @@ export const countries: Entity[] = [
         ],
         sections: [
           {
-            heading: 'Londýn a přeshraniční právní vedení',
-            paragraphs: [
-              'Londýn zůstává centrem mezinárodní advokacie a mnoho seniorních rolí tam nese odpovědnost za klienty, týmy nebo transakce v kontinentální Evropě a v Perském zálivu. Nábor partnerů závisí především na přenositelné klientele, kulturní shodě a důvěryhodném obchodním plánu.',
-              'B Solution obsazuje mandáty jako partner pro banking a finance se silnou přenositelnou praxí pro špičkovou mezinárodní kancelář a propojuje londýnské role s kandidáty ze své evropské sítě a sítě v Perském zálivu.',
-            ],
-          },
+            "heading": "Londýn a přeshraniční právní vedení",
+            "paragraphs": [
+              "U britské pozice oddělte místo výkonu práce od zemí a týmů, které bude právník podporovat. U partnera kanceláře upřesněte specializaci, roli v partnerství a očekávání od vedení a rozvoje praxe.",
+              "Pro první rozhovor s B Solution popište roli, kancelář nebo firmu, pracovní jazyky, odpovědnosti a rozhodovací harmonogram. Jména kandidátů ani důvěrné údaje o klientech do úvodní webové poptávky nepatří."
+            ]
+          }
         ],
       },
       de: {
-        title: 'Legal Executive Search im Vereinigten Königreich',
-        summary:
-          'Mandatierte Suche nach Kanzleipartnern und erfahrenen Inhouse-Juristen in London, einschließlich Partnern mit portablem Geschäft und grenzüberschreitenden Mandaten.',
-        metaTitle: 'Legal Executive Search UK | London',
-        metaDescription:
-          'Spezialisierte Legal Executive Search im Vereinigten Königreich. Vertrauliche Suche nach Kanzleipartnern und erfahrenen Inhouse-Juristen in London.',
+        title: "Juristische Personalberatung für Kanzleien und Unternehmen im Vereinigten Königreich",
+        summary: "Besprechen Sie mit B Solution eine Partner-, Counsel- oder juristische Führungsposition mit Arbeitsort im Vereinigten Königreich. Klären Sie Standort, Team, betreute Länder und Verantwortung, bevor Sie das Suchprofil festlegen.",
+        metaTitle: "Juristische Personalberatung UK | Kanzleien & Inhouse",
+        metaDescription: "Juristische Personalsuche für Kanzleien und Inhouse-Teams im Vereinigten Königreich. Partner-, Counsel- und Führungsrollen mit B Solution besprechen.",
         faq: [
+          {"question": "Was sollten wir für eine juristische Personalsuche im Vereinigten Königreich vorbereiten?", "answer": "Beschreiben Sie den britischen Standort oder Arbeitsort, Rolle, Berichtslinie, betreute Länder, benötigte Qualifikation und Arbeitssprachen. Unterscheiden Sie eine Inhouse-Aufgabe vom Kanzleiprofil und klären Sie Vertraulichkeitsanforderungen, bevor Sie Namen oder Unterlagen teilen."},
           { question: 'Sucht B Solution Kanzleipartner in London?', answer: 'Ja. B Solution führt mandatierte, vertrauliche Suchen nach Kanzleipartnern und erfahrenen Inhouse-Juristen in London und im gesamten Vereinigten Königreich durch, auch für Lateral-Partner mit portablem Geschäft.' },
           { question: 'Wie läuft eine Legal Executive Search mit B Solution ab?', answer: 'Nach Abstimmung des Profils analysiert B Solution den relevanten Markt systematisch, spricht passive Kandidaten diskret an und legt eine Shortlist mit einer ehrlichen, faktenbasierten Einschätzung jedes Kandidaten vor.' },
           { question: 'Wie schnell stellt B Solution Kandidaten im Vereinigten Königreich vor?', answer: 'Die ersten Kandidaten stellt B Solution in der Regel innerhalb von drei bis vier Wochen nach Abstimmung des Profils vor.' },
@@ -766,12 +778,26 @@ export const countries: Entity[] = [
         ],
         sections: [
           {
-            heading: 'London und grenzüberschreitende juristische Führung',
-            paragraphs: [
-              'London bleibt das Zentrum der internationalen Rechtsberatung, und viele leitende Rollen dort tragen Verantwortung für Mandanten, Teams oder Transaktionen in Kontinentaleuropa und am Golf. Partnerwechsel hängen vor allem von portablen Mandantenbeziehungen, kultureller Passung und einem glaubwürdigen Businessplan ab.',
-              'B Solution besetzt Mandate wie einen Banking- und Finance-Partner mit starkem portablem Geschäft für eine international führende Kanzlei und verbindet Londoner Rollen mit Kandidaten aus seinem europäischen Netzwerk und dem Golfraum.',
-            ],
+            "heading": "Arbeitsort und internationalen Aufgabenbereich getrennt festlegen",
+            "paragraphs": [
+              "Beschreiben Sie den Arbeitsort und die Standorte, Unternehmen oder Rechtsordnungen, die die Person betreuen soll. Eine Position in London kann einen größeren Aufgabenbereich haben; stimmen Sie Arbeitsort und grenzüberschreitende Verantwortung getrennt ab. Legen Sie Arbeitsmodell, benötigte Qualifikation und Arbeitssprachen passend zur tatsächlichen Aufgabe fest.",
+              "Unterscheiden Sie bei einer Inhouse-Position die Verantwortung für das britische Tagesgeschäft von regionaler Koordination oder konzernweiter juristischer Führung. Benennen Sie Berichtslinie, interne Ansprechpartner, Team und verfügbare externe Berater. Entscheiden Sie anhand der Verantwortung, ob ein Legal Counsel, Head of Legal oder General Counsel gesucht wird."
+            ]
           },
+          {
+            "heading": "Das Profil für einen Partner- oder Teamwechsel vorbereiten",
+            "paragraphs": [
+              "Definieren Sie für einen Lateral Partner das Fachgebiet, die fachlichen Aufgaben, die Stellung in der Partnerschaft und die Erwartungen an Führung und Geschäftsentwicklung. Benennen Sie bei einem Teamwechsel jede Rolle und die Unterstützung durch den aufnehmenden Standort. Trennen Sie individuelle Aufgaben vom Entwicklungsplan für die gesamte Praxisgruppe.",
+              "Unterscheiden Sie mögliche Mandantenchancen von bestätigten Zusagen. Eine erste Webanfrage kann Fachgebiet, Standort und Anlass der Suche beschreiben, ohne einzelne Kandidaten oder Mandanten zu identifizieren. Stimmen Sie vor der Weitergabe sensibler Informationen einen geeigneten Ablauf ab."
+            ]
+          },
+          {
+            "heading": "Mit einem gemeinsam bewertbaren Suchprofil beginnen",
+            "paragraphs": [
+              "Nennen Sie Rolle, Arbeitsort, geografischen Aufgabenbereich, Arbeitssprachen, benötigte Erfahrung, Besetzungsanlass und Entscheidungszeitplan. Beschreiben Sie bei einer Nachfolge die Vertraulichkeitsanforderungen. Erklären Sie bei einer grenzüberschreitenden Rolle, wie der britische Standort mit Kollegen in anderen Ländern zusammenarbeiten soll.",
+              "Vereinbaren Sie Bewertungskriterien und Entscheider vor dem Kandidatenvergleich. Prüfen Sie Beispiele, die zu den fachlichen Aufgaben, Führungsverantwortungen und geschäftlichen Beziehungen der Rolle passen. Über den Kontaktlink können Sie den Umfang einer mandatierten Suche mit B Solution besprechen."
+            ]
+          }
         ],
       },
       pl: {
@@ -791,12 +817,12 @@ export const countries: Entity[] = [
         ],
         sections: [
           {
-            heading: 'Londyn i transgraniczne przywództwo prawne',
-            paragraphs: [
-              'Londyn pozostaje centrum międzynarodowej praktyki prawniczej, a wiele wyższych stanowisk wiąże się tam z odpowiedzialnością za klientów, zespoły lub transakcje w Europie kontynentalnej i w regionie Zatoki. Zatrudnianie partnerów zależy przede wszystkim od przenośnych relacji z klientami, dopasowania kulturowego i wiarygodnego biznesplanu.',
-              'B Solution realizuje mandaty takie jak partner ds. bankowości i finansów z silną przenośną praktyką dla czołowej międzynarodowej kancelarii i łączy londyńskie role z kandydatami ze swojej sieci europejskiej i z regionu Zatoki.',
-            ],
-          },
+            "heading": "Londyn i transgraniczne przywództwo prawne",
+            "paragraphs": [
+              "W przypadku stanowiska w Wielkiej Brytanii oddziel miejsce pracy od krajów i zespołów, które prawnik będzie wspierać. Przy rekrutacji partnera kancelarii określ specjalizację, rolę w partnerstwie oraz oczekiwania dotyczące przywództwa i rozwoju praktyki.",
+              "Na pierwszą rozmowę z B Solution przygotuj opis roli, kancelarii lub firmy, języków pracy, odpowiedzialności i harmonogramu decyzji. Wstępne zapytanie internetowe nie powinno zawierać nazwisk kandydatów ani poufnych danych klientów."
+            ]
+          }
         ],
       },
     },
