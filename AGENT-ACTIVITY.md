@@ -90,3 +90,7 @@ The initial local graph exposed fragment navigation being counted as another HTT
 Preserve the explicit validated service choice across contact-locale switches; add an EN→DE→EN journey with correctly labelled service and document language. Other route/language behavior stays unchanged.
 
 The initial native handoff case exposed a spurious empty category update after the programmatic prefill. Accept only offered categories and use a functional update, preserving explicit resets and the unchanged regression assertion. Keep the failed source proof.
+
+## 2026-11-13 — Europe employer search brief
+
+Replace the existing Europe page's generic regional/network claims with a cross-border brief for corporate legal departments and law firms. Distinguish employment location, geographic remit and candidate markets; connect three hiring situations to detailed services and published methodology. Preserve the route and secure form, update the genuine content date and search descriptions. Add two browser journeys including mobile layout and an intercepted employer enquiry. See docs/reports/2026-11-13-europe-cross-border-employer-brief.md. No real message sent or ranking improvement claimed.
