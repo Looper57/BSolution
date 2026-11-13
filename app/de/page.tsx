@@ -2,8 +2,8 @@ import { HomepageDE } from '@/components/homepage-de'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: { absolute: 'B Solution | Legal Executive Search | Deutschland' },
-  description: 'Mandatierte Legal Executive Search für General Counsel, Head of Legal und juristische Führungskräfte in Europa und im Nahen Osten seit 2007.',
+  title: { absolute: 'Juristische Personalberatung & Executive Search | B Solution' },
+  description: 'General Counsel, Head of Legal und Partner für Unternehmen und Kanzleien finden. Vertrauliche juristische Personalsuche in Europa mit B Solution.',
   alternates: {
     canonical: 'https://www.bsolution.eu/de',
     languages: {
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   openGraph: {
     type: 'website',
     siteName: 'B Solution',
-    title: 'B Solution | Legal Executive Search | Deutschland',
-    description: 'Mandatierte Legal Executive Search für General Counsel, Head of Legal und juristische Führungskräfte in Europa und im Nahen Osten.',
+    title: 'Juristische Personalberatung & Executive Search | B Solution',
+    description: 'Vertrauliche juristische Personalsuche für General Counsel, Head of Legal und Kanzleipartner in Europa.',
     locale: 'de_DE',
     url: 'https://www.bsolution.eu/de',
     images: [

@@ -6,6 +6,7 @@
 
 - [Law firm recruitment](https://www.bsolution.eu/law-firm-recruitment): Partner and lateral hiring, team moves and practice development for international and regional law firms.
 - [In-house legal recruitment](https://www.bsolution.eu/hire-in-house-counsel): Recruitment for companies hiring lawyers and building corporate legal departments.
+- [Confidential legal leadership search](https://www.bsolution.eu/hire-legal-leader): General Counsel and Head of Legal appointments, including confidential replacement briefs.
 - [General Counsel and Head of Legal search](https://www.bsolution.eu/practice-areas/general-counsel): Senior corporate legal leadership appointments.
 - [Compliance leadership](https://www.bsolution.eu/practice-areas/compliance-officer): Compliance recruitment.
 - [Legal executive search process](https://www.bsolution.eu/services/legal-executive-search): Retained search methodology and existing published evidence.
@@ -22,7 +23,10 @@
 
 - [About B Solution](https://www.bsolution.eu/about)
 - [Contact the recruitment team](https://www.bsolution.eu/contact)
-- [Sitemap](https://www.bsolution.eu/sitemap.xml)
+- [For employers](https://www.bsolution.eu/clients): Recruitment services and available routes for companies and law firms.
+- [Anonymous legal candidate profiles](https://www.bsolution.eu/available-lawyers): View publicly available summaries and the terms for requesting a full profile.
+- [Canonical sitemap](https://www.bsolution.eu/site-sitemap.xml)
+- [Employer sitemap](https://www.bsolution.eu/employer-sitemap.xml)
 
 ## Candidate resources
 

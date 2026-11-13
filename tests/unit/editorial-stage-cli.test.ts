@@ -51,3 +51,19 @@ describe('actual editorial staging command', () => {
     expect(existsSync(f.output)).toBe(false)
   })
 })
+
+it('stages an approved future release through the real command without changing live input', () => {
+  const f = fixture(), original = readFileSync(f.registry, 'utf8')
+  const result = f.run(['--publish-on', '2026-11-20'])
+  expect(result.status).toBe(0)
+  const candidate = JSON.parse(readFileSync(f.output, 'utf8'))
+  expect(candidate.entries).toEqual([])
+  expect(candidate.calendar.entries[0]).toMatchObject({ publishOn: '2026-11-20', reviewUntil: '2026-12-13', entry: { contentUpdatedAt: '2026-11-20' } })
+  expect(readFileSync(f.registry, 'utf8')).toBe(original)
+  expect(result.stdout).not.toContain('Public text')
+})
+it('refuses a scheduled date outside the actual review window', () => {
+  const f = fixture()
+  expect(f.run(['--publish-on', '2026-12-13']).status).toBe(1)
+  expect(existsSync(f.output)).toBe(false)
+})

@@ -79,6 +79,9 @@ jobs:
 
       # This dummy public key exists only in the CI build. Provider script and
       # contact responses are intercepted; production keys/server verification stay intact.
+      - name: Install synthetic calendar fixture for browser verification
+        run: pnpm exec tsx scripts/ci/editorial-calendar-fixture.mts
+
       - name: Build widget-enabled browser fixture
         run: pnpm build
         env:
@@ -86,6 +89,17 @@ jobs:
 
       - name: Widget lifecycle browser tests
         run: pnpm exec playwright test --config playwright.challenge.config.ts
+
+      - name: Editorial calendar fixture browser test
+        run: pnpm exec playwright test --config playwright.calendar.config.ts
+
+      - name: Retain calendar browser proof
+        uses: actions/upload-artifact@v6
+        with:
+          name: editorial-calendar-fixture-proof
+          path: artifacts/editorial-calendar-fixture-proof.json
+          if-no-files-found: error
+          retention-days: 7
 
       - name: Upload Playwright failure artifacts
         if: failure()
@@ -96,5 +110,6 @@ jobs:
             playwright-report/
             test-results/
             test-results-challenge/
+            test-results-calendar/
           if-no-files-found: ignore
           retention-days: 7

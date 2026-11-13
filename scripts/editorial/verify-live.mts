@@ -1,8 +1,8 @@
 import { mkdir, writeFile } from 'node:fs/promises'
-import { parseEditorialPublication } from '../../lib/editorial/publication'
+import { parseEditorialPublication, editorialEntriesOn } from '../../lib/editorial/publication'
 import { getEditorialTargets } from '../../lib/editorial/targets'
 import payload from '../../lib/editorial/published.json' with { type: 'json' }
-import { verifyEditorialHtml, verifyEditorialSitemap } from './live-check'
+import { verifyEditorialHtml, verifyEditorialSitemap, verifyEditorialAbsent, verifyEditorialSitemapNotFuture } from './live-check'
 
 async function main() {
   const origin = new URL(process.env.EDITORIAL_VERIFY_ORIGIN ?? 'https://www.bsolution.eu')
@@ -10,13 +10,14 @@ async function main() {
   const local = origin.protocol === 'http:' && ['127.0.0.1', 'localhost'].includes(origin.hostname)
   if ((!production && !local) || origin.username || origin.password || origin.pathname !== '/' || origin.search || origin.hash) throw new Error('Unsupported verification origin')
   const publication = parseEditorialPublication(payload, getEditorialTargets())
-  const rows: { id: string; targetPath: string; errors: string[]; attempts: number }[] = []
+  const rows: { id: string; targetPath: string; errors: string[]; attempts: number; expectedVisibility: 'visible' | 'absent' }[] = []
   const read = async (path: string) => {
     const result = await fetch(new URL(path, origin), { redirect: 'manual', signal: AbortSignal.timeout(15000), headers: { 'User-Agent': 'BSolution-EditorialPostflight/1.0' } })
     if (result.status !== 200) throw new Error('Unexpected HTTP status')
     return result.text()
   }
-  for (const entry of publication.entries) {
+  const selected = editorialEntriesOn(publication)
+  for (const entry of selected) {
     let errors = ['request-failed'], attempts = 0
     for (let attempt = 1; attempt <= 3; attempt++) {
       attempts = attempt
@@ -27,9 +28,24 @@ async function main() {
       if (!errors.length) break
       if (attempt < 3) await new Promise(resolve => setTimeout(resolve, 3000))
     }
-    rows.push({ id: entry.id, targetPath: entry.targetPath, errors, attempts })
+    rows.push({ id: entry.id, targetPath: entry.targetPath, errors, attempts, expectedVisibility: 'visible' })
   }
-  const report = { scope: 'Public editorial HTML and sitemap only; no ranking, leads, complete-site or browser-visibility claim.', origin: origin.origin, checkedAt: new Date().toISOString(), checked: rows.length, valid: rows.every(row => row.errors.length === 0), entries: rows }
+  const inactive = (publication.calendar?.entries ?? []).filter(item => !selected.some(entry => entry.entryHash === item.entry.entryHash))
+  for (const item of inactive) {
+    const entry = item.entry, active = selected.find(row => row.targetPath === entry.targetPath)
+    let errors = ['request-failed'], attempts = 0
+    for (let attempt = 1; attempt <= 3; attempt++) {
+      attempts = attempt
+      try {
+        const [html, xml] = await Promise.all([read(entry.targetPath), read('/site-sitemap.xml')])
+        errors = [...verifyEditorialAbsent(html, entry, active), ...verifyEditorialSitemapNotFuture(xml, entry.targetPath)]
+      } catch { errors = ['request-failed'] }
+      if (!errors.length) break
+      if (attempt < 3) await new Promise(resolve => setTimeout(resolve, 3000))
+    }
+    rows.push({ id: entry.id, targetPath: entry.targetPath, errors, attempts, expectedVisibility: 'absent' })
+  }
+  const report = { scope: 'Public editorial HTML and sitemap only; no ranking, leads, complete-site or browser-visibility claim.', origin: origin.origin, checkedAt: new Date().toISOString(), checked: rows.length, selected: selected.length, checkedNotVisible: inactive.length, valid: rows.every(row => row.errors.length === 0), entries: rows }
   await mkdir('artifacts', { recursive: true })
   await writeFile('artifacts/editorial-live-check.json', JSON.stringify(report, null, 2) + '\n')
   console.log(JSON.stringify(report, null, 2))

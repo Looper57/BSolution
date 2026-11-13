@@ -1,5 +1,5 @@
 import { describe, expect, it } from 'vitest'
-import { verifyEditorialHtml, verifyEditorialSitemap } from '../../scripts/editorial/live-check'
+import { verifyEditorialHtml, verifyEditorialSitemap, verifyEditorialAbsent, verifyEditorialSitemapNotFuture } from '../../scripts/editorial/live-check'
 import type { PublishedEditorialEntry } from '../../lib/editorial/publication'
 
 const entry: PublishedEditorialEntry = { id: 'synthetic-public', targetPath: '/practice-areas/compliance-officer', locale: 'en', heading: 'Role & scope', paragraphs: ['A lawyer’s "scope" <requires> clarity & support.', "The employer's expectations."], contentUpdatedAt: '2026-11-13', reviewedRevision: 'a'.repeat(64), entryHash: 'b'.repeat(64) }
@@ -31,8 +31,26 @@ describe('actual public editorial HTML contract', () => {
   it('requires the exact sitemap document and a valid, non-regressing content date', () => {
     expect(verifyEditorialSitemap(sitemap('2026-11-12'), entry)).toContain('sitemap-modification-date')
     expect(verifyEditorialSitemap(sitemap('2026-99-99'), entry)).toContain('sitemap-modification-date')
-    expect(verifyEditorialSitemap(sitemap('2026-11-14'), entry)).toEqual([])
+    expect(verifyEditorialSitemap(sitemap('2026-11-14'), entry, '2026-11-14')).toEqual([])
+    expect(verifyEditorialSitemap(sitemap('2026-11-14'), entry, '2026-11-13')).toContain('sitemap-future-modification-date')
     expect(verifyEditorialSitemap('<urlset/>', entry)).toContain('sitemap-document-count')
     expect(verifyEditorialSitemap(sitemap().replace('</urlset>', sitemap().replace('<urlset>', '')), entry)).toContain('sitemap-document-count')
   })
+})
+
+
+it('detects an unselected version without confusing shared current text or transport data', () => {
+  const future = { ...entry, heading: 'Future section', paragraphs: ['Future unique paragraph.'] }
+  expect(verifyEditorialAbsent(page(), future, entry)).toEqual([])
+  const body = '<section data-editorial-id="synthetic-public"><h2>Future section</h2><p>Future unique paragraph.</p></section>'
+  expect(verifyEditorialAbsent(page(body), future, entry)).toEqual(['unselected-editorial-visible'])
+  expect(verifyEditorialAbsent(page(body), future)).toEqual(['unselected-editorial-visible'])
+  expect(verifyEditorialAbsent(page('<script>' + body + '</script>'), future)).toEqual([])
+  const partial = '<section data-editorial-id="synthetic-public"><h2>Role &amp; scope</h2><p>Future unique paragraph.</p></section>'
+  expect(verifyEditorialAbsent(page(partial), future, entry)).toEqual(['unselected-editorial-visible'])
+})
+
+it('does not publish a future sitemap date for a hidden scheduled version', () => {
+  expect(verifyEditorialSitemapNotFuture(sitemap('2026-11-16'), entry.targetPath, '2026-11-13')).toEqual(['sitemap-future-modification-date'])
+  expect(verifyEditorialSitemapNotFuture(sitemap('2026-11-13'), entry.targetPath, '2026-11-13')).toEqual([])
 })

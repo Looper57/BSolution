@@ -1,16 +1,16 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Hire a Legal Leader | Executive Search',
-  description: 'Find your next General Counsel, Head of Legal, or CLO with B Solution. Specialist legal executive search firm serving corporations across Europe.',
+  title: 'Confidential General Counsel & Head of Legal Search',
+  description: 'Hire a General Counsel or Head of Legal across Europe. Define a confidential replacement, succession plan or new leadership mandate with B Solution.',
   alternates: {
     canonical: 'https://www.bsolution.eu/hire-legal-leader',
   },
   openGraph: {
     type: 'website',
     siteName: 'B Solution',
-    title: 'Hire a Legal Leader | B Solution',
-    description: 'Specialist executive search for General Counsel, Head of Legal, and senior legal leadership positions.',
+    title: 'Confidential General Counsel & Head of Legal Search | B Solution',
+    description: 'Confidential search for General Counsel and Head of Legal appointments, including replacement, succession and new leadership mandates.',
     url: 'https://www.bsolution.eu/hire-legal-leader',
     images: [
       {

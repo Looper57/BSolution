@@ -2,6 +2,7 @@ import { getEmployerSitemapEntries } from '@/lib/sitemap-entries'
 import { sitemapXml } from '@/lib/sitemap-xml'
 
 export const dynamic = 'force-static'
+export const revalidate = 60
 
 /** Stable employer discovery and separate Search Console reporting. This
  * uses the same publication gates and canonical inventory as sitemap.xml;

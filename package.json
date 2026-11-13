@@ -17,7 +17,8 @@
     "content:queue": "tsx scripts/editorial/queue.mts",
     "content:stage": "tsx scripts/editorial/stage.mts",
     "content:verify-live": "tsx scripts/editorial/verify-live.mts",
-    "enquiries:report": "tsx scripts/enquiries/report.mts"
+    "enquiries:report": "tsx scripts/enquiries/report.mts",
+    "content:calendar": "tsx scripts/editorial/calendar.mts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

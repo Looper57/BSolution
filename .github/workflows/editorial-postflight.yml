@@ -1,6 +1,8 @@
 name: Editorial production postflight
 
 on:
+  schedule:
+    - cron: '15 1 * * *'
   deployment_status:
   workflow_dispatch:
 
@@ -9,7 +11,7 @@ permissions:
 
 jobs:
   verify:
-    if: github.repository == 'Looper57/BSolution' && (github.event_name == 'workflow_dispatch' || (github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production'))
+    if: github.repository == 'Looper57/BSolution' && (github.event_name == 'schedule' || github.event_name == 'workflow_dispatch' || (github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production'))
     concurrency:
       group: editorial-production-postflight
       cancel-in-progress: true

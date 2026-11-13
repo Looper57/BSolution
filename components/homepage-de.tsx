@@ -21,7 +21,7 @@ const content = {
     cta: 'Kontakt aufnehmen',
   },
   hero: {
-    headline: 'Boutique Legal Executive Search für Anwaltskanzleien und Rechtsabteilungen',
+    headline: 'Juristische Personalberatung für Unternehmen und Kanzleien',
     subheadline: 'Wir identifizieren juristische Fach- und Führungskräfte sowie Compliance-Experten durch fundierte Marktkenntnis, diskrete Direktansprache und internationale Reichweite in Europa und im Nahen Osten.',
     trustLine1: 'Seit 2007 vertrauen uns Unternehmensjuristen und führende Kanzleien in ganz Europa.',
     trustLine2: 'Jede Suche führen wir gründlich, diskret und auf das jeweilige Mandat zugeschnitten durch.',

@@ -17,3 +17,5 @@ artifacts/
 .env*
 
 test-results-challenge/
+
+test-results-calendar/

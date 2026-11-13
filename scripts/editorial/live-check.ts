@@ -33,9 +33,36 @@ export function verifyEditorialHtml(html: string, entry: PublishedEditorialEntry
   return errors
 }
 
-export function verifyEditorialSitemap(xml: string, entry: PublishedEditorialEntry) {
+export function verifyEditorialSitemap(xml: string, entry: PublishedEditorialEntry, asOf = new Date().toISOString().slice(0, 10)) {
   const documents = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].filter(match => match[1].match(/<loc>([^<]+)<\/loc>/)?.[1] === `https://www.bsolution.eu${entry.targetPath}`)
   if (documents.length !== 1) return ['sitemap-document-count']
   const modified = documents[0][1].match(/<lastmod>(\d{4}-\d{2}-\d{2})(?:T[^<]*)?<\/lastmod>/)?.[1]
-  return modified && sitemapDate(modified) === modified && modified >= entry.contentUpdatedAt ? [] : ['sitemap-modification-date']
+  return [...(modified && sitemapDate(modified) === modified && modified >= entry.contentUpdatedAt ? [] : ['sitemap-modification-date']), ...verifyEditorialSitemapNotFuture(xml, entry.targetPath, asOf)]
+}
+
+
+/** Unreleased or superseded content cannot stand in for the selected version. */
+export function verifyEditorialAbsent(html: string, entry: PublishedEditorialEntry, active?: PublishedEditorialEntry) {
+  const document = html.replace(/<!--[\s\S]*?-->/g, '').replace(/<(script|style)\b[^>]*>[\s\S]*?<\/\1>/gi, '')
+  const sections = [...document.matchAll(new RegExp(`<section\\b[^>]*data-editorial-id="${escapeRegex(entry.id)}"[^>]*>([\\s\\S]*?)<\\/section>`, 'g'))]
+  if (!sections.length) return []
+  if (!active || active.id !== entry.id) return ['unselected-editorial-visible']
+  const normalize = (value: string) => value.replace(/\s+/g, ' ').trim()
+  const uniqueParagraphs = entry.paragraphs.map(normalize).filter(value => !active.paragraphs.map(normalize).includes(value))
+  for (const section of sections) {
+    const heading = [...section[1].matchAll(/<h2\b[^>]*>([\s\S]*?)<\/h2>/g)].map(match => plainText(match[1].replace(/<[^>]*>/g, '')))
+    const paragraphs = [...section[1].matchAll(/<p\b[^>]*>([\s\S]*?)<\/p>/g)].map(match => plainText(match[1].replace(/<[^>]*>/g, '')))
+    if (normalize(entry.heading) !== normalize(active.heading) && heading.includes(normalize(entry.heading)) || paragraphs.some(value => uniqueParagraphs.includes(value))) return ['unselected-editorial-visible']
+  }
+  return []
+}
+
+
+export function verifyEditorialSitemapNotFuture(xml: string, targetPath: string, asOf = new Date().toISOString().slice(0, 10)) {
+  const documents = [...xml.matchAll(/<url>([\s\S]*?)<\/url>/g)].filter(match => match[1].match(/<loc>([^<]+)<\/loc>/)?.[1] === `https://www.bsolution.eu${targetPath}`)
+  if (documents.length !== 1) return ['sitemap-document-count']
+  const modified = documents[0][1].match(/<lastmod>(\d{4}-\d{2}-\d{2})(?:T[^<]*)?<\/lastmod>/)?.[1]
+  if (!modified) return []
+  if (sitemapDate(modified) !== modified) return ['sitemap-modification-date']
+  return modified > asOf ? ['sitemap-future-modification-date'] : []
 }
