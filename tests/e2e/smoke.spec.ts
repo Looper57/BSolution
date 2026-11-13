@@ -1077,3 +1077,32 @@ test('every promoted editorial entry is visible once on its canonical route', as
     expect(html).toContain(`data-editorial-id="${entry.id}"`)
   }
 })
+
+
+test('all homepage languages avoid hidden hero transfers on mobile and load it on desktop', async ({ page }, testInfo) => {
+  const report: { path: string; mobileHeroRequests: number; desktopHeroRequests: number; desktopWidth: number }[] = []
+  const heroRequests: string[] = []
+  page.on('request', request => {
+    const url = new URL(request.url())
+    if (url.pathname === '/images/hero-background.png' || url.searchParams.get('url') === '/images/hero-background.png') heroRequests.push(request.url())
+  })
+  for (const path of ['/', '/de', '/pl', '/cs']) {
+    await page.setViewportSize({ width: 390, height: 844 })
+    heroRequests.length = 0
+    await page.goto(path)
+    await expect(page.getByRole('heading', { level: 1 })).toBeVisible()
+    const image = page.locator('picture img[aria-hidden="true"]')
+    await expect(image).toHaveCount(1)
+    await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.currentSrc)).toMatch(/^data:image\/gif;/)
+    const mobileRequests = heroRequests.length
+    expect(mobileRequests, `hidden desktop image requested on mobile at ${path}`).toBe(0)
+    expect(await page.evaluate(() => document.documentElement.scrollWidth <= window.innerWidth)).toBe(true)
+    await page.setViewportSize({ width: 1280, height: 900 })
+    await expect(image).toBeVisible()
+    await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.complete && element.naturalWidth > 1)).toBe(true)
+    await expect.poll(() => image.evaluate((element: HTMLImageElement) => element.currentSrc)).toMatch(/\/_next\/image\?/)
+    expect(heroRequests.length).toBeGreaterThan(0)
+    report.push({ path, mobileHeroRequests: mobileRequests, desktopHeroRequests: heroRequests.length, desktopWidth: await image.evaluate((element: HTMLImageElement) => element.naturalWidth) })
+  }
+  await testInfo.attach('responsive-hero-transfer-proof', { body: JSON.stringify(report, null, 2), contentType: 'application/json' })
+})

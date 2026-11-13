@@ -69,6 +69,15 @@ jobs:
       - name: Browser smoke tests
         run: pnpm test:e2e
 
+      - name: Upload responsive hero proof
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: responsive-hero-proof
+          path: test-results/**/attachments/responsive-hero-transfer-proof-*.json
+          if-no-files-found: ignore
+          retention-days: 7
+
       # This dummy public key exists only in the CI build. Provider script and
       # contact responses are intercepted; production keys/server verification stay intact.
       - name: Build widget-enabled browser fixture
