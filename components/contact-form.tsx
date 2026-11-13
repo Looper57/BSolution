@@ -357,7 +357,14 @@ export function ContactForm({ heading, initialType = '' }: {
             </Label>
             <Select
               value={formData.type}
-              onValueChange={(value) => setFormData({ ...formData, type: value })}
+              onValueChange={(value) => {
+                // The form control can emit an empty change when its value
+                // is set after hydration. No empty option is offered here;
+                // explicit new-message resets remain controlled by the form.
+                if (value === 'hiring' || value === 'candidate' || value === 'other') {
+                  setFormData(current => ({ ...current, type: value }))
+                }
+              }}
             >
               <SelectTrigger id="type" className="border-gray-light focus:border-gold focus:ring-gold">
                 <SelectValue placeholder={copy.select}>{formData.type ? t(`contact.form.type.${formData.type}`) : undefined}</SelectValue>

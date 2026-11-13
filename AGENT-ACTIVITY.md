@@ -88,3 +88,5 @@ Carry the visitor's chosen service from the four existing overview cards into a 
 The initial local graph exposed fragment navigation being counted as another HTTP document. Normalize only followed anchor fragments; retain queries and verbatim canonical/hreflang guards. Preserve the first failed report and add three blocking regression fixtures without changing allowlists or thresholds.
 
 Preserve the explicit validated service choice across contact-locale switches; add an EN→DE→EN journey with correctly labelled service and document language. Other route/language behavior stays unchanged.
+
+The initial native handoff case exposed a spurious empty category update after the programmatic prefill. Accept only offered categories and use a functional update, preserving explicit resets and the unchanged regression assertion. Keep the failed source proof.
