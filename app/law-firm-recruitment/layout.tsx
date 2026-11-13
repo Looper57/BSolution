@@ -1,8 +1,8 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'International Law Firm Recruitment | Partner & Lateral Search',
-  description: 'Partner, counsel and senior associate recruitment for international law firms in Europe. Discuss a confidential lateral hire, succession or team-move brief with B Solution.',
+  title: 'International Law Firm Recruitment',
+  description: 'Partner, counsel and senior associate recruitment for law firms across Europe. Discuss a confidential lateral hire, succession or team move.',
   keywords: ['law firm recruitment', 'lateral partner search', 'legal associate hiring', 'practice group recruitment', 'law firm headhunter'],
   alternates: {
     canonical: 'https://www.bsolution.eu/law-firm-recruitment',

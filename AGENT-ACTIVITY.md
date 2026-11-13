@@ -48,3 +48,8 @@ Fix the concrete timezone-less lastmod defect with validated calendar dates. Add
 ## 2026-11-12 — complete sitemap recovery endpoint
 
 Keep the old complete sitemap available while exposing the same approved URL set at site-sitemap.xml with the XML envelope used by the successfully processed employer sitemap. Share the escaping/date serializer; robots references new complete and employer endpoints. Local191 units, lint/build/sequential post-build types and exact HTTP inventory/date/hreflang parity checked. Original Google error record is retained; actual new complete processing remains to be verified after deployment. No new marketing routes, fees, credentials or outbound actions.
+
+
+## 2026-11-13 — discovery and lifecycle consistency
+
+Unify public external-job list/country/detail lookups to remove independently stale active detail pages after closure. Strengthen the graph gate with homepage reachability and a blocking self-canonical missing-sitemap check. Fix the concrete overlong search metadata in the authenticated audit, preserving visible full job titles and location headings. Local200 units, lint/types/build and stricter actual graph pass. Private audit evidence and before/after production crawl remain outside Git; source CI and production verification follow. No claim of a score/ranking gain caused by these changes.

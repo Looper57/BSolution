@@ -134,7 +134,7 @@ export const COPY: Record<Locale, {
   },
   de: {
     title: 'Verfügbare Juristen, offen für Angebote',
-    metaDescription: 'Anonyme Profile erfahrener Juristen, offen für eine neue Rolle: Fachgebiet, Erfahrung, Sprachen und bevorzugter Standort. Vollständiges Profil bei B Solution anfragen.',
+    metaDescription: 'Anonyme Juristenprofile mit Fachgebiet, Erfahrung, Sprachen und Wunschstandort. Fragen Sie bei B Solution ein vollständiges Profil an.',
     question: 'Welche Juristen sind derzeit offen für eine neue Rolle?',
     answer: 'Anonyme Profile von Juristen, die B Solution gebeten haben, sie vorzustellen. Fragen Sie ein Profil an; den Lebenslauf teilen wir nur mit Zustimmung des Juristen.',
     years: (n) => `${n}+ Jahre Praxis`,
@@ -155,7 +155,7 @@ export const COPY: Record<Locale, {
   },
   pl: {
     title: 'Dostępni prawnicy otwarci na oferty',
-    metaDescription: 'Anonimowe profile doświadczonych prawników otwartych na nową rolę: specjalizacja, doświadczenie, języki i preferowana lokalizacja. Poproś B Solution o pełny profil.',
+    metaDescription: 'Anonimowe profile prawników: specjalizacja, doświadczenie, języki i preferowana lokalizacja. Poproś B Solution o pełny profil.',
     question: 'Którzy prawnicy są teraz otwarci na nową rolę?',
     answer: 'Anonimowe profile prawników, którzy poprosili B Solution o ich przedstawienie. Poproś o profil; CV udostępniamy wyłącznie za zgodą prawnika.',
     years: (n) => `${n}+ lat praktyki`,

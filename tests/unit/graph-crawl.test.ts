@@ -7,6 +7,7 @@ import {
   extractHreflangLinks,
   extractRobotsNoindex,
   heroImageAltOk,
+  findUnreachablePages,
   isGraphCrawlClean,
   type GraphCrawlReport,
 } from '@/lib/seo/graph-crawl'
@@ -36,6 +37,8 @@ function cleanTotals(): GraphCrawlReport['totals'] {
     entityConsistencyViolations: 0,
     forbiddenStructuredData: 0,
     orphanPages: 0,
+    unreachablePages: 0,
+    indexableNotInSitemap: 0,
     hreflangOnNonCanonicalPage: 0,
   }
 }
@@ -57,6 +60,8 @@ function emptyFindings(): GraphCrawlReport['findings'] {
     entityConsistencyViolations: [],
     forbiddenStructuredData: [],
     orphanPages: [],
+    unreachablePages: [],
+    indexableNotInSitemap: [],
     hreflangOnNonCanonicalPage: [],
   }
 }
@@ -83,6 +88,8 @@ describe('isGraphCrawlClean', () => {
     'entityConsistencyViolations',
     'forbiddenStructuredData',
     'orphanPages',
+    'unreachablePages',
+    'indexableNotInSitemap',
     'hreflangOnNonCanonicalPage',
   ] as const)('fails when %s is nonzero', (field) => {
     const totals = cleanTotals()
@@ -281,5 +288,20 @@ describe('checkForbiddenStructuredData (GEO claims audit)', () => {
       jobLocation: { '@type': 'Place', address: 'Prague' },
     })
     expect(violations).toEqual([])
+  })
+})
+
+
+describe('homepage discovery', () => {
+  it('finds disconnected cycles even when every page has an incoming link', () => {
+    const edges = new Map([['root', new Set(['service'])], ['service', new Set(['root'])], ['isolated-a', new Set(['isolated-b'])], ['isolated-b', new Set(['isolated-a'])]])
+    expect(findUnreachablePages('root', ['root', 'service', 'isolated-a', 'isolated-b'], edges)).toEqual(['isolated-a', 'isolated-b'])
+  })
+  it('accepts a real navigable intermediate hub outside the indexable inventory', () => {
+    const edges = new Map([['root', new Set(['hub'])], ['hub', new Set(['service'])]])
+    expect(findUnreachablePages('root', ['root', 'service'], edges)).toEqual([])
+  })
+  it('does not treat a self-link as a path from the homepage', () => {
+    expect(findUnreachablePages('root', ['root', 'isolated'], new Map([['isolated', new Set(['isolated'])]]))).toEqual(['isolated'])
   })
 })

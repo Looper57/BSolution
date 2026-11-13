@@ -17,9 +17,9 @@ export const services: Entity[] = [
         title: 'Legal Executive Search',
         summary:
           'Retained, confidential search for General Counsel, Heads of Legal and senior in-house lawyers across Europe and the Middle East.',
-        metaTitle: 'Legal Executive Search | Retained Search for Legal Leaders',
+        metaTitle: 'Legal Executive Search for Legal Leaders',
         metaDescription:
-          'Boutique retained legal executive search for General Counsel, Heads of Legal and senior in-house counsel across Europe and the Middle East. Confidential, mapped, and rigorous.',
+          'Retained search for General Counsel, Heads of Legal and senior in-house lawyers across Europe and the Middle East. Discuss a confidential mandate.',
         sections: [
           {
             heading: 'A retained search built for legal leadership',
@@ -54,9 +54,9 @@ export const services: Entity[] = [
         title: 'Executive search v právním sektoru',
         summary:
           'Exkluzivní a důvěrné vyhledávání pozic General Counsel, vedoucích právních oddělení a seniorních interních právníků napříč Evropou a Blízkým východem.',
-        metaTitle: 'Executive search v právním sektoru | Vyhledávání právních lídrů',
+        metaTitle: 'Executive search pro právní vedení',
         metaDescription:
-          'Butikový retained executive search pro pozice General Counsel, vedoucí právních oddělení a seniorní interní právníky napříč Evropou a Blízkým východem. Důvěrně, s mapováním trhu a důsledností.',
+          'Důvěrné vyhledávání General Counsel, vedoucích právních oddělení a seniorních interních právníků v Evropě a na Blízkém východě.',
         sections: [
           {
             heading: 'Retained search vytvořený pro právní vedení',
@@ -91,9 +91,9 @@ export const services: Entity[] = [
         title: 'Legal Executive Search',
         summary:
           'Mandatierte, vertrauliche Suche nach General Counsel, Leitern der Rechtsabteilung und erfahrenen Inhouse-Juristen in Europa und im Nahen Osten.',
-        metaTitle: 'Legal Executive Search | Mandatierte Suche nach Rechtsführungskräften',
+        metaTitle: 'Legal Executive Search für Führungskräfte',
         metaDescription:
-          'Spezialisierte, mandatierte Legal Executive Search für General Counsel, Leiter der Rechtsabteilung und erfahrene Inhouse-Juristen in Europa und im Nahen Osten. Vertraulich, marktweit recherchiert und gründlich.',
+          'Vertrauliche Suche nach General Counsel, Head of Legal und erfahrenen Unternehmensjuristen in Europa und im Nahen Osten.',
         sections: [
           {
             heading: 'Eine mandatierte Suche für die juristische Führung',
@@ -128,9 +128,9 @@ export const services: Entity[] = [
         title: 'Executive search w sektorze prawnym',
         summary:
           'Powierzone, poufne poszukiwania na stanowiska General Counsel, dyrektorów działów prawnych i doświadczonych prawników wewnętrznych w Europie i na Bliskim Wschodzie.',
-        metaTitle: 'Executive search w sektorze prawnym | Poszukiwanie liderów prawnych',
+        metaTitle: 'Executive search dla liderów prawnych',
         metaDescription:
-          'Butikowy, powierzony executive search dla stanowisk General Counsel, dyrektorów działów prawnych i doświadczonych prawników wewnętrznych w Europie i na Bliskim Wschodzie. Poufnie, z mapowaniem rynku i rzetelnością.',
+          'Poufny executive search dla General Counsel, szefów działów prawnych i starszych prawników wewnętrznych w Europie i na Bliskim Wschodzie.',
         sections: [
           {
             heading: 'Powierzone poszukiwanie stworzone dla przywództwa prawnego',

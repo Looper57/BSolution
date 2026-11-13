@@ -81,6 +81,8 @@ export interface GraphCrawlTotals {
   entityConsistencyViolations: number
   forbiddenStructuredData: number
   orphanPages: number
+  unreachablePages: number
+  indexableNotInSitemap: number
   hreflangOnNonCanonicalPage: number
 }
 
@@ -100,6 +102,8 @@ export interface GraphCrawlFindings {
   entityConsistencyViolations: Violation[]
   forbiddenStructuredData: Violation[]
   orphanPages: Violation[]
+  unreachablePages: Violation[]
+  indexableNotInSitemap: Violation[]
   hreflangOnNonCanonicalPage: Violation[]
 }
 
@@ -127,6 +131,8 @@ export function isGraphCrawlClean(report: GraphCrawlReport): boolean {
     && t.crawlableUrlExpansionRatio <= 1.25
     && t.entityConsistencyViolations === 0
     && t.forbiddenStructuredData === 0
+    && t.unreachablePages === 0
+    && t.indexableNotInSitemap === 0
     && t.orphanPages === 0
     && t.hreflangOnNonCanonicalPage === 0
   )
@@ -285,6 +291,19 @@ async function mapWithConcurrency<T, R>(items: T[], concurrency: number, fn: (it
   return results
 }
 
+/** A cycle of mutually linked pages is still undiscoverable from navigation. */
+export function findUnreachablePages(root: string, inventory: readonly string[], outgoing: ReadonlyMap<string, ReadonlySet<string>>): string[] {
+  const reached = new Set<string>()
+  const queue = [root]
+  for (let index = 0; index < queue.length; index++) {
+    const url = queue[index]
+    if (reached.has(url)) continue
+    reached.add(url)
+    for (const target of outgoing.get(url) ?? []) if (!reached.has(target)) queue.push(target)
+  }
+  return inventory.filter(url => !reached.has(url))
+}
+
 export async function runGraphCrawl(options: { baseUrl: string; concurrency?: number }): Promise<GraphCrawlReport> {
   const { baseUrl, concurrency = 6 } = options
   const siteOrigin = new URL(baseUrl).origin
@@ -306,6 +325,8 @@ export async function runGraphCrawl(options: { baseUrl: string; concurrency?: nu
     entityConsistencyViolations: [],
     forbiddenStructuredData: [],
     orphanPages: [],
+    unreachablePages: [],
+    indexableNotInSitemap: [],
     hreflangOnNonCanonicalPage: [],
   }
 
@@ -426,12 +447,15 @@ export async function runGraphCrawl(options: { baseUrl: string; concurrency?: nu
   const inventoryUrlSet = new Set(entries.map((e) => e.url))
   const discovered = new Set<string>()
   const inboundLinks = new Map<string, Set<string>>()
+  const outgoingLinks = new Map<string, Set<string>>()
   for (const entry of clusterEntries) {
     const html = pageCache.get(toLocal(entry.url, siteOrigin))!.html!
+    outgoingLinks.set(entry.url, new Set())
     for (const link of extractInternalLinks(html, siteOrigin)) {
       const canonicalForm = toCanonicalForm(link, siteOrigin)
       if (/\.[a-z0-9]+$/i.test(new URL(link).pathname) || canonicalForm.includes('/api/')) continue
       discovered.add(canonicalForm)
+      outgoingLinks.get(entry.url)!.add(canonicalForm)
       if (canonicalForm === entry.url) continue
       if (!inboundLinks.has(canonicalForm)) inboundLinks.set(canonicalForm, new Set())
       inboundLinks.get(canonicalForm)!.add(entry.url)
@@ -457,7 +481,11 @@ export async function runGraphCrawl(options: { baseUrl: string; concurrency?: nu
     for (const violation of checkHreflangOnNonCanonicalPage(link, canonical, html, siteOrigin)) {
       findings.hreflangOnNonCanonicalPage.push(violation)
     }
-    if (!extractRobotsNoindex(html)) return // indexable and 200 but not in sitemap yet — informational, not a hard failure here
+    outgoingLinks.set(link, new Set(extractInternalLinks(html, siteOrigin).map(target => toCanonicalForm(target, siteOrigin))))
+    if (!extractRobotsNoindex(html)) {
+      if (!canonical || toCanonicalForm(canonical, siteOrigin) === link) findings.indexableNotInSitemap.push({ url: link, detail: 'self-canonical indexable page is linked internally but absent from the authoritative sitemap' })
+      return
+    }
     const pathname = new URL(link).pathname
     const withoutLocale = LOCALES.reduce<string>((p, l) => (p === `/${l}` || p.startsWith(`/${l}/`) ? p.slice(`/${l}`.length) || '/' : p), pathname)
     const isNavigableFallbackHub = NAVIGABLE_FALLBACK_HUB_PATHS.includes(withoutLocale)
@@ -465,6 +493,10 @@ export async function runGraphCrawl(options: { baseUrl: string; concurrency?: nu
       findings.invalidInternalLinks.push({ url: link, detail: 'internal link targets a noindex page with no documented navigable purpose' })
     }
   })
+
+  for (const url of findUnreachablePages(SITE_URL, [...inventoryUrlSet], outgoingLinks)) {
+    if (!ORPHAN_PAGE_ALLOWLIST.includes(url)) findings.unreachablePages.push({ url, detail: 'no crawlable HTML navigation path from the homepage; reciprocal links within an isolated group are insufficient' })
+  }
 
   // Pass 4: unknown routes must be a clean 404 — no canonical, no hreflang,
   // noindex. Probed across every distinct dynamic-segment family, not just
@@ -512,6 +544,8 @@ export async function runGraphCrawl(options: { baseUrl: string; concurrency?: nu
     entityConsistencyViolations: findings.entityConsistencyViolations.length,
     forbiddenStructuredData: findings.forbiddenStructuredData.length,
     orphanPages: findings.orphanPages.length,
+    unreachablePages: findings.unreachablePages.length,
+    indexableNotInSitemap: findings.indexableNotInSitemap.length,
     hreflangOnNonCanonicalPage: findings.hreflangOnNonCanonicalPage.length,
   }
 

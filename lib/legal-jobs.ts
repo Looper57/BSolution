@@ -32,11 +32,14 @@ const FEED_URL = process.env.LAWBRIDGE_LEGAL_JOBS_FEED_URL ?? 'https://www.lawbr
 /** The feed is cached for an hour at LawBridge; pages revalidate hourly too. */
 export async function getLegalJobs(locale: Locale, country: string | null = null): Promise<LegalJob[]> {
   try {
-    const url = `${FEED_URL}?locale=${locale}${country ? `&country=${country}` : ''}`
+    // Listings, country pages, details and sitemap generation must use one
+    // collection per locale. Independently cached ?country / ?id requests
+    // could keep a closed advert indexable after its incoming links vanished.
+    const url = `${FEED_URL}?locale=${locale}`
     const response = await fetch(url, { next: { revalidate: 3600 } })
     if (!response.ok) return []
     const body = (await response.json()) as { jobs?: LegalJob[] }
-    return (body.jobs ?? []).filter((job) => job.status === 'open' && job.title && job.sourceUrl)
+    return (body.jobs ?? []).filter((job) => job.status === 'open' && job.title && job.sourceUrl && (!country || job.country === country))
   } catch {
     return []
   }
@@ -44,14 +47,7 @@ export async function getLegalJobs(locale: Locale, country: string | null = null
 
 export async function getLegalJob(id: string, locale: Locale): Promise<LegalJob | null> {
   if (!isJobId(id)) return null
-  try {
-    const response = await fetch(`${FEED_URL}?locale=${locale}&id=${id}`, { next: { revalidate: 3600 } })
-    if (!response.ok) return null
-    const body = (await response.json()) as { job?: LegalJob | null }
-    return body.job && body.job.status === 'open' ? body.job : null
-  } catch {
-    return null
-  }
+  return (await getLegalJobs(locale)).find(job => job.id === id) ?? null
 }
 
 export function isJobId(value: string): boolean {
