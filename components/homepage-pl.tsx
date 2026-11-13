@@ -280,7 +280,7 @@ function HeroSection() {
       </div>
       
       {/* Desktop hero */}
-      <HeroBackgroundImage fill className="object-cover hidden md:block" style={{ objectPosition: 'center calc(50% + 40px)' }} priority sizes="100vw" />
+      <HeroBackgroundImage desktopOnly fill className="object-cover hidden md:block" style={{ objectPosition: 'center calc(50% + 40px)' }} priority sizes="100vw" />
       <div className="absolute inset-0 bg-gradient-to-t from-black/15 via-transparent to-transparent z-10 hidden md:block" />
       
       <div className="flex-1" />

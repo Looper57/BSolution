@@ -118,3 +118,7 @@ Wire the existing English in-house, legal-leadership, law-firm and Europe pages 
 ## 2026-11-13 — Contact challenge lifecycle
 
 Repair repeat-message widget mounting and pending shared-script attachment after SPA navigation. Keep server challenge verification intact, ignore callbacks after unmount, preserve failed briefs and reset only the active widget. Eight unit cases plus two separately built, provider/contact-intercepted browser journeys with the documented public dummy site key; the baseline browser suite remains unchanged. No actual mail or production test enquiry. See docs/reports/2026-11-13-contact-challenge-lifecycle.md.
+
+## 2026-11-13 — Responsive homepage hero transfers
+
+Avoid downloading a CSS-hidden desktop hero on mobile across all four homepage languages. Preserve Next image optimization, desktop artwork/crop, decorative accessibility and normal rendering on pages where it is visible on mobile. Add SSR checks and native browser proof for mobile zero-request/desktop successful loading, with a retained JSON artifact. No claimed field performance score or ranking gain; see docs/reports/2026-11-13-responsive-hero-loading.md.

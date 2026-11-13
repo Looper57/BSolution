@@ -783,11 +783,12 @@ function HeroSection({ content: c, langPrefix }: { content: typeof content.en.he
       
       {/* Desktop hero */}
       <HeroBackgroundImage
+        desktopOnly
         fill
         className="object-cover hidden md:block"
         style={{ objectPosition: 'center calc(50% + 40px)', willChange: 'auto' }}
         priority
-        sizes="(max-width: 768px) 1px, 100vw"
+        sizes="100vw"
         loading="eager"
         fetchPriority="high"
       />
