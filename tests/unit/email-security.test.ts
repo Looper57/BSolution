@@ -90,6 +90,10 @@ describe("contact input validation", () => {
     { phone: "Bad\nPhone" },
     { company: { unsafe: true } },
     { type: "admin" },
+    { serviceInterest: "__proto__" },
+    { serviceInterest: "https://example.com/private" },
+    { serviceInterest: { bad: true } },
+    { serviceInterest: "executive-search?email=private@example.com" },
     { formPage: "https://example.com/private" },
     { formPage: "/contact?email=private@example.com" },
     { formPage: "/unknown/private-path" },
@@ -200,6 +204,7 @@ describe("contact email API boundary", () => {
         phone: "+49 123 456",
         type: "hiring",
         formPage: "/hire-in-house-counsel",
+        serviceInterest: "executive-search",
       })
     );
 
@@ -219,6 +224,8 @@ describe("contact email API boundary", () => {
     const accepted = info.mock.calls.map(call => JSON.parse(String(call[1]))).find(event => event.status === "accepted");
     expect(accepted.enquiryType).toBe("hiring");
     expect(accepted.formPage).toBe("/hire-in-house-counsel");
+    expect(accepted.serviceInterest).toBe("executive-search");
+    expect(payload.text).toContain("Selected service: Legal Executive Search");
     expect(payload.text).toContain("Submitted from: /hire-in-house-counsel");
     for (const privateValue of ["Example Legal", "+49 123 456", "visitor@example.com", "A confidential enquiry"]) expect(log).not.toContain(privateValue);
   });

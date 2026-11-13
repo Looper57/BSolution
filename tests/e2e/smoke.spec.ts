@@ -903,3 +903,61 @@ test('German employers can knowingly open the English Germany recruitment brief'
   await expect(page).toHaveURL(/de\/clients$/)
   await expect(page.locator('html')).toHaveAttribute('lang', 'de')
 })
+
+test('an explicitly chosen service reaches the visible enquiry and survives a failed send', async ({ page }) => {
+  const requests: Record<string, unknown>[] = []
+  await page.route('**/api/contact', async route => {
+    requests.push(route.request().postDataJSON())
+    await route.fulfill({ status: requests.length === 1 ? 503 : 200, contentType: 'application/json', body: JSON.stringify({ success: requests.length > 1 }) })
+  })
+  await page.goto('/services')
+  await page.locator('#executive-search').getByRole('link', { name: 'Discuss This Service', exact: true }).click()
+  await expect(page).toHaveURL(/contact#service-executive-search$/)
+  const form = page.locator('form#contact-form')
+  const selected = form.getByRole('region', { name: 'Selected service', exact: true })
+  await expect(selected).toContainText('Legal Executive Search')
+  await expect(selected).toBeInViewport()
+  await expect(form.getByLabel('I am...', { exact: true })).toContainText('Seeking to hire')
+  await form.locator('#name').fill('Test Employer')
+  await form.locator('#email').fill('employer@example.com')
+  await form.locator('#message').fill('Test search brief')
+  await form.getByRole('button', { name: 'Send Message', exact: true }).click()
+  await expect(form.getByRole('alert')).toBeVisible()
+  await expect(selected).toContainText('Legal Executive Search')
+  await expect(form.locator('#message')).toHaveValue('Test search brief')
+  await form.getByRole('button', { name: 'Send Message', exact: true }).click()
+  await expect(form).toHaveCount(0)
+  expect(requests).toHaveLength(2)
+  expect(requests[1]).toMatchObject({ serviceInterest: 'executive-search', formPage: '/contact', type: 'hiring', message: 'Test search brief' })
+})
+
+test('a visitor can clear the service choice without losing their brief', async ({ page }) => {
+  let submitted: Record<string, unknown> | undefined
+  await page.route('**/api/contact', async route => {
+    submitted = route.request().postDataJSON()
+    await route.fulfill({ status: 200, contentType: 'application/json', body: '{"success":true}' })
+  })
+  await page.goto('/services')
+  await page.locator('#strategic-advisory').getByRole('link', { name: 'Discuss This Service', exact: true }).click()
+  const form = page.locator('form#contact-form')
+  await expect(form.getByRole('region', { name: 'Selected service', exact: true })).toContainText('Strategic Advisory')
+  await form.locator('#name').fill('Test Employer')
+  await form.locator('#email').fill('employer@example.com')
+  await form.locator('#message').fill('Keep this brief')
+  await form.getByRole('button', { name: 'Clear service selection', exact: true }).click()
+  await expect(page).toHaveURL(/contact#contact-form$/)
+  await expect(form.getByRole('region', { name: 'Selected service', exact: true })).toHaveCount(0)
+  await expect(form.locator('#message')).toHaveValue('Keep this brief')
+  await form.getByRole('button', { name: 'Send Message', exact: true }).click()
+  await expect(form).toHaveCount(0)
+  expect(submitted).not.toHaveProperty('serviceInterest')
+  expect(submitted).toMatchObject({ message: 'Keep this brief', formPage: '/contact' })
+})
+
+test('unknown or query-bearing service fragments do not become an enquiry selection', async ({ page }) => {
+  for (const fragment of ['__proto__', 'executive-search?email=ignored']) {
+    await page.goto(`/contact#service-${fragment}`)
+    await expect(page.getByRole('region', { name: 'Selected service', exact: true })).toHaveCount(0)
+    await expect(page.locator('form#contact-form').getByLabel('I am...', { exact: true })).toContainText('Select an option')
+  }
+})

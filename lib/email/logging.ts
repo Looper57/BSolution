@@ -1,3 +1,4 @@
+import type { EnquiryService } from '@/lib/service-enquiry';
 import type { ContactFormPage } from '@/lib/contact-form-context';
 
 export type EmailLogStatus =
@@ -18,6 +19,7 @@ export type EmailLogEvent = {
   resendMessageId?: string;
   errorCategory?: string;
   formPage?: ContactFormPage;
+  serviceInterest?: EnquiryService;
   enquiryType?: "hiring" | "candidate" | "other" | "unspecified";
 };
 

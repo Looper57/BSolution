@@ -1,3 +1,4 @@
+import { enquiryServices } from '@/lib/service-enquiry';
 import type { ContactEmailInput } from "./input";
 
 export type ContactEmailContent = {
@@ -7,7 +8,7 @@ export type ContactEmailContent = {
 };
 
 export function createContactEmailContent(
-  input: Pick<ContactEmailInput, "name" | "email" | "message" | "company" | "phone" | "type" | "formPage">
+  input: Pick<ContactEmailInput, "name" | "email" | "message" | "company" | "phone" | "type" | "formPage" | "serviceInterest">
 ): ContactEmailContent {
   const safeName = escapeHtml(input.name);
   const safeEmail = escapeHtml(input.email);
@@ -18,6 +19,7 @@ export function createContactEmailContent(
     ["Phone", input.phone],
     ["Enquiry type", input.type],
     ["Submitted from", input.formPage],
+    ["Selected service", input.serviceInterest ? enquiryServices[input.serviceInterest].en : undefined],
   ].filter((entry): entry is [string, string] => Boolean(entry[1]));
 
   return {

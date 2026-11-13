@@ -1,3 +1,4 @@
+import type { EnquiryService } from '@/lib/service-enquiry';
 import type { ContactFormPage } from '@/lib/contact-form-context';
 import {
   EmailConfigurationError,
@@ -43,6 +44,7 @@ export async function POST(req: Request) {
       resendMessageId?: string;
       errorCategory?: string;
       formPage?: ContactFormPage;
+      serviceInterest?: EnquiryService;
       enquiryType?: "hiring" | "candidate" | "other" | "unspecified";
     } = {}
   ) => {
@@ -55,6 +57,7 @@ export async function POST(req: Request) {
       resendMessageId: options.resendMessageId,
       errorCategory: options.errorCategory,
       formPage: options.formPage,
+      serviceInterest: options.serviceInterest,
       enquiryType: options.enquiryType,
     });
 
@@ -134,6 +137,7 @@ export async function POST(req: Request) {
         input.phone ?? "",
         input.type ?? "",
         input.formPage ?? "",
+        input.serviceInterest ?? "",
       ]);
 
       const stored = await store.getResult(`api:idem:${idempotencyKey}`);
@@ -322,6 +326,7 @@ export async function POST(req: Request) {
       resendMessageId: result.id,
       enquiryType: input.type || "unspecified",
       formPage: input.formPage,
+      serviceInterest: input.serviceInterest,
     });
   } catch (error: unknown) {
     if (error instanceof ContactInputError) {

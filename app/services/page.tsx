@@ -5,6 +5,7 @@ import { ArrowRight } from 'lucide-react'
 import { useLanguage } from '@/lib/language-context'
 import { AuthorityHub } from '@/components/authority-hub'
 import { getEntitiesForSection } from '@/lib/content'
+import { serviceEnquiryHref } from '@/lib/service-enquiry'
 
 function IntroSection() {
   const { t } = useLanguage()
@@ -195,7 +196,7 @@ function ServicesContent() {
                 </div>
                 
                 <Link 
-                  href="/contact"
+                  href={serviceEnquiryHref(service.id, language)}
                   className="inline-flex items-center mt-8 text-gold hover:text-gold-dark text-[13px] font-semibold uppercase tracking-[0.1em] transition-colors"
                 >
                   {language === 'en' ? 'Discuss This Service' : 'Projednat tuto službu'}
