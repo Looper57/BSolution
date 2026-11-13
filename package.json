@@ -16,7 +16,8 @@
     "validate:predeploy": "pnpm typecheck && pnpm lint && pnpm test && pnpm build && pnpm graph-crawl:gate && pnpm test:e2e",
     "content:queue": "tsx scripts/editorial/queue.mts",
     "content:stage": "tsx scripts/editorial/stage.mts",
-    "content:verify-live": "tsx scripts/editorial/verify-live.mts"
+    "content:verify-live": "tsx scripts/editorial/verify-live.mts",
+    "enquiries:report": "tsx scripts/enquiries/report.mts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

@@ -1,3 +1,4 @@
+import { mkdir, writeFile } from 'node:fs/promises'
 import { expect, test, type Page } from '@playwright/test'
 import editorialPublication from '../../lib/editorial/published.json'
 
@@ -779,8 +780,8 @@ for (const locale of ['de', 'pl', 'cs']) {
     await form.locator('#company').fill('Example Legal')
     await form.locator('#phone').fill('+49 123 456')
     await form.locator('#message').fill('Test legal recruitment brief')
-    await form.getByRole('combobox').click()
-    await page.getByRole('option').first().click()
+    await form.locator('#type').click()
+    await page.getByRole('listbox').getByRole('option').first().click()
     await form.getByRole('button', { name: /./ }).click()
     await expect(form).toBeVisible()
     await expect(form.locator('#company')).toHaveValue('Example Legal')
@@ -1105,4 +1106,45 @@ test('all homepage languages avoid hidden hero transfers on mobile and load it o
     report.push({ path, mobileHeroRequests: mobileRequests, desktopHeroRequests: heroRequests.length, desktopWidth: await image.evaluate((element: HTMLImageElement) => element.naturalWidth) })
   }
   await testInfo.attach('responsive-hero-transfer-proof', { body: JSON.stringify(report, null, 2), contentType: 'application/json' })
+  await mkdir('artifacts', { recursive: true })
+  await writeFile('artifacts/responsive-hero-proof.json', JSON.stringify(report, null, 2) + '\n')
 })
+
+
+for (const locale of ['en', 'de', 'pl', 'cs'] as const) {
+  test(`${locale} discovery is optional, explicit, retained after failure and cleared for another message`, async ({ page }) => {
+    const { discoveryCopy } = await import('../../lib/enquiry-discovery')
+    const another = { en: 'Send Another Message', de: 'Weitere Nachricht senden', pl: 'Wyślij kolejną wiadomość', cs: 'Odeslat další zprávu' }
+    const requests: Record<string, unknown>[] = []
+    await page.route('**/api/contact', route => {
+      requests.push(route.request().postDataJSON())
+      return route.fulfill({ status: requests.length === 1 ? 503 : 200, contentType: 'application/json', body: JSON.stringify({ success: requests.length !== 1 }) })
+    })
+    const path = locale === 'en' ? '/contact' : `/${locale}/contact`
+    await page.goto(path)
+    const form = page.locator('form#contact-form')
+    const source = form.getByLabel(discoveryCopy[locale].label, { exact: true })
+    await expect(source).toHaveValue(''); await expect(source).not.toHaveAttribute('required')
+    await source.selectOption('ai-assistant')
+    const fill = async () => {
+      await form.locator('#name').fill('Test Employer')
+      await form.locator('#email').fill('employer@example.com')
+      await form.locator('#message').fill('Synthetic hiring brief')
+      await form.locator('#type').click(); await page.getByRole('listbox').getByRole('option').first().click()
+    }
+    await fill()
+    await form.locator('button[type="submit"]').click()
+    await expect(form.getByRole('alert')).toBeVisible()
+    await expect(source).toHaveValue('ai-assistant')
+    await form.locator('button[type="submit"]').click()
+    await expect(form).toHaveCount(0)
+    await page.getByRole('button', { name: another[locale], exact: true }).click()
+    await expect(source).toHaveValue('')
+    await fill(); await form.locator('button[type="submit"]').click()
+    await expect(form).toHaveCount(0)
+    expect(requests).toHaveLength(3)
+    expect(requests[0]).toMatchObject({ type: 'hiring', formPage: path, discoverySource: 'ai-assistant' })
+    expect(requests[1]).toMatchObject({ discoverySource: 'ai-assistant' })
+    expect(requests[2]).not.toHaveProperty('discoverySource')
+  })
+}

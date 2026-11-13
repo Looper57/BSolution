@@ -1,3 +1,4 @@
+import type { DiscoverySource } from '@/lib/enquiry-discovery';
 import type { EnquiryService } from '@/lib/service-enquiry';
 import type { ContactFormPage } from '@/lib/contact-form-context';
 import {
@@ -45,6 +46,7 @@ export async function POST(req: Request) {
       errorCategory?: string;
       formPage?: ContactFormPage;
       serviceInterest?: EnquiryService;
+      discoverySource?: DiscoverySource;
       enquiryType?: "hiring" | "candidate" | "other" | "unspecified";
     } = {}
   ) => {
@@ -58,6 +60,7 @@ export async function POST(req: Request) {
       errorCategory: options.errorCategory,
       formPage: options.formPage,
       serviceInterest: options.serviceInterest,
+      discoverySource: options.discoverySource,
       enquiryType: options.enquiryType,
     });
 
@@ -138,6 +141,7 @@ export async function POST(req: Request) {
         input.type ?? "",
         input.formPage ?? "",
         input.serviceInterest ?? "",
+        input.discoverySource ?? "",
       ]);
 
       const stored = await store.getResult(`api:idem:${idempotencyKey}`);
@@ -256,7 +260,7 @@ export async function POST(req: Request) {
       }
     }
 
-    const content = createContactEmailContent(input);
+    const content = createContactEmailContent(input, requestId);
     const resendResponse = await fetch("https://api.resend.com/emails", {
       method: "POST",
       headers: {
@@ -327,6 +331,7 @@ export async function POST(req: Request) {
       enquiryType: input.type || "unspecified",
       formPage: input.formPage,
       serviceInterest: input.serviceInterest,
+      discoverySource: input.discoverySource,
     });
   } catch (error: unknown) {
     if (error instanceof ContactInputError) {
