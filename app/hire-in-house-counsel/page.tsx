@@ -3,7 +3,8 @@
 import Link from 'next/link'
 import { ContactForm } from '@/components/contact-form'
 import { RecruitmentBrief } from '@/components/recruitment-brief'
-import { ArrowRight, Briefcase, Scale, Users, TrendingUp } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { InHouseHiringScope, InHouseAssessmentBrief } from '@/components/inhouse-hiring-scope'
 import { LanguageProvider } from '@/lib/language-context'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
@@ -38,90 +39,6 @@ function IntroSection() {
           <p className="text-[18px] text-gray-600 leading-[1.8]">
             This page focuses on building corporate legal capability at every level. Since 2007, B Solution has supported corporate legal departments and financial institutions with searches for Legal Counsel, senior specialists, Heads of Legal, General Counsel and Chief Legal Officers across Europe and selected Middle Eastern markets.
           </p>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function WhySection() {
-  const reasons = [
-    {
-      icon: Briefcase,
-      title: 'Corporate Understanding',
-      description: 'We understand corporate environments, from start-ups building their first legal function to multinationals restructuring regional teams. Every placement reflects this commercial awareness.'
-    },
-    {
-      icon: Scale,
-      title: 'Technical Assessment',
-      description: 'Our consultants evaluate legal competency rigorously, ensuring candidates possess the substantive expertise your business requires across relevant practice areas.'
-    },
-    {
-      icon: Users,
-      title: 'Cultural Fit Focus',
-      description: 'In-house success depends heavily on cultural alignment. We invest significant effort understanding your organization and assessing candidate fit accordingly.'
-    },
-    {
-      icon: TrendingUp,
-      title: 'Career Trajectory',
-      description: 'We identify candidates with genuine long-term potential, not just those seeking short-term moves. Our placements are designed for sustainable success.'
-    }
-  ]
-  
-  return (
-    <section className="bg-white py-20 lg:py-28">
-      <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
-        <div className="text-center mb-16">
-          <p className="text-gold text-[11px] font-semibold uppercase tracking-[0.2em] mb-4">Why B Solution</p>
-          <h2 className="text-navy text-[32px] lg:text-[40px] font-serif">
-            In-House Recruitment Expertise
-          </h2>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {reasons.map((reason, index) => (
-            <div key={index}>
-              <reason.icon className="h-8 w-8 text-gold mb-6" />
-              <h3 className="text-navy text-[18px] font-serif mb-4">{reason.title}</h3>
-              <p className="text-gray-500 text-[15px] leading-[1.7]">{reason.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function ProcessSection() {
-  const steps = [
-    { num: '01', title: 'Requirement Analysis', desc: 'Deep-dive into your legal function structure, team dynamics, growth plans, and the specific profile you need.' },
-    { num: '02', title: 'Candidate Identification', desc: 'Targeted search across relevant sectors, identifying candidates with the right blend of technical skills and commercial orientation.' },
-    { num: '03', title: 'Rigorous Assessment', desc: 'Multi-stage evaluation process covering legal competency, commercial judgment, and cultural alignment.' },
-    { num: '04', title: 'Successful Integration', desc: 'Support throughout the offer process and onboarding period to ensure your new hire succeeds from day one.' },
-  ]
-  
-  return (
-    <section className="bg-gray-100 py-20 lg:py-28">
-      <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
-        <div className="max-w-3xl mb-16">
-          <p className="text-gold text-[11px] font-semibold uppercase tracking-[0.2em] mb-4">Our Process</p>
-          <h2 className="text-navy text-[32px] lg:text-[40px] font-serif">
-            How We Find Your In-House Counsel
-          </h2>
-          <p className="mt-6 text-gray-600 text-[17px] leading-[1.8]">
-            Our methodology is designed specifically for in-house placements, recognizing that corporate legal roles require assessment of factors beyond legal expertise alone.
-          </p>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {steps.map((step, index) => (
-            <div key={index}>
-              <span className="text-gold text-[12px] font-semibold tracking-[0.15em]">{step.num}</span>
-              <div className="w-full h-px bg-gray-300 my-5" />
-              <h3 className="text-navy text-[18px] font-serif mb-4">{step.title}</h3>
-              <p className="text-gray-500 text-[15px] leading-[1.7]">{step.desc}</p>
-            </div>
-          ))}
         </div>
       </div>
     </section>
@@ -165,7 +82,7 @@ function RolesSection() {
               Positions We Recruit
             </h2>
             <p className="text-white/55 text-[17px] leading-[1.8] mb-8">
-              From building a legal function from scratch to strengthening an established team, we recruit across all levels of in-house legal seniority and across every key industry sector.
+              Define the level of responsibility your team needs, from a first internal appointment to specialist counsel or legal leadership. The title should reflect the actual work and reporting line.
             </p>
             <div className="bg-white/5 p-8">
               <p className="text-white text-[12px] font-semibold uppercase tracking-[0.15em] mb-4">Roles</p>
@@ -185,7 +102,7 @@ function RolesSection() {
               Industries We Serve
             </h2>
             <p className="text-white/55 text-[17px] leading-[1.8] mb-8">
-              Our sector specialists understand the specific legal requirements, regulatory environments, and talent dynamics that define recruitment in each industry.
+              Discuss the business model, products, customers and geographic scope alongside the legal role. These help identify which sector experience is essential and which work will need specialist support.
             </p>
             <div className="bg-white/5 p-8">
               <p className="text-white text-[12px] font-semibold uppercase tracking-[0.15em] mb-4">Key Sectors</p>
@@ -244,8 +161,8 @@ function HireInHouseCounselPage() {
       <main>
         <PageHeader />
         <IntroSection />
-        <WhySection />
-        <ProcessSection />
+        <InHouseHiringScope />
+        <InHouseAssessmentBrief />
         <RolesSection />
         <RecruitmentBrief audience="in-house" />
         <CTASection />

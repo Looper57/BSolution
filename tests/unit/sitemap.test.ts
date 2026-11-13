@@ -82,10 +82,11 @@ describe('employer discovery independent of external feeds', () => {
       // unchanged pages do not acquire a generated "today" timestamp.
       expect(employers.filter(entry => entry.lastModified).map(entry => entry.url).sort()).toEqual([
         'https://www.bsolution.eu/for-companies',
+        'https://www.bsolution.eu/hire-in-house-counsel',
         'https://www.bsolution.eu/hire-legal-leader',
         'https://www.bsolution.eu/law-firm-recruitment',
       ])
-      expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(3)
+      expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(4)
       expect(fetch).not.toHaveBeenCalled()
       const all = new Set((await sitemap()).map(entry => entry.url))
       expect(employers.every(entry => all.has(entry.url))).toBe(true)

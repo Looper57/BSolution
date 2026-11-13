@@ -70,3 +70,7 @@ Reuse the secure contact form on six existing service pages, with preserved head
 ## 2026-11-13 — law firm mandate content
 
 Replace generic law-firm service claims with original partner/team/practice decision content and a defined search discussion, informed by three primary competitor pages. Preserve the existing canonical route and form; connect published methodology/evidence and markets in context. Add the genuine content date and one native buyer journey. No copied claims, new references, invented results, new routes or outbound acquisition. Exact-source67-case CI and production verification follow.
+
+## 2026-11-13 — in-house hiring scope
+
+Replace generic company-service claims with original role/responsibility comparison and assessment prompts. Preserve the established brief, title/canonical and secure employer form; label the illustrative example and link approved methodology. Two primary competitor pages informed buyer questions without importing services or results. Date only the genuinely edited URL. Native68-case CI and actual public/mobile verification follow before closeout; no new routes or outbound acquisition.
