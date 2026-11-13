@@ -142,3 +142,7 @@ Replace the obsolete company/bsolution link in homepage/footer/contact and Organ
 ## 2026-11-13 — Consistent publication feed and truthful missing-job behavior
 
 Investigate the three own-mandate404s in the main graph crawl. Align the short feed cache while preserving request-time expiry; make mandatory detail/sitemap readers distinguish unavailable data from actual withdrawal. Preserve the failed evidence and strict graph checks. See docs/reports/2026-11-13-published-position-feed.md.
+
+## 2026-11-13 — Employer search-service handoff
+
+Keep the explicit Legal Executive Search choice when an employer follows the primary action from the localized service page. Reuse the existing translated, removable service selection and extend the four real browser journeys. No API generation or provider setup is part of this change.
