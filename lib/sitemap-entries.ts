@@ -32,6 +32,7 @@ const productionGatedBasePaths = new Set(productionAuthorityPages.map((page) => 
 // Significant, source-reviewed content edits only. Never use the sitemap
 // generation time as a modification date for unchanged pages.
 const employerContentUpdates: Readonly<Record<string, string>> = {
+  '/': '2026-11-13',
   '/de': '2026-11-13',
   '/clients': '2026-11-13',
   '/cs/clients': '2026-11-13',

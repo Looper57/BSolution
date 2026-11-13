@@ -2,8 +2,8 @@ import { Homepage } from '@/components/homepage'
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: { absolute: 'B Solution Legal Executive Search | GC & Head of Legal' },
-  description: 'Retained legal executive search for General Counsel, legal leaders and law-firm partners across Europe and the Middle East since 2007.',
+  title: { absolute: 'International Legal Recruitment | B Solution' },
+  description: 'Legal recruitment and retained executive search for law firms and in-house teams across Europe and the Middle East. Discuss your hiring brief with B Solution.',
   keywords: ['legal executive search', 'General Counsel recruitment', 'CLO search', 'Head of Legal hiring', 'law firm partner recruitment'],
   alternates: {
     canonical: 'https://www.bsolution.eu/',
@@ -17,8 +17,8 @@ export const metadata: Metadata = {
   },
   openGraph: {
     siteName: 'B Solution',
-    title: 'B Solution | Executive Search for Legal Leaders',
-    description: 'Retained legal executive search for General Counsel, legal leaders and law-firm partners across Europe and the Middle East since 2007.',
+    title: 'International Legal Recruitment | B Solution',
+    description: 'Legal recruitment and retained executive search for law firms and in-house teams across Europe and the Middle East. Discuss your hiring brief with B Solution.',
     url: 'https://www.bsolution.eu/',
     type: 'website',
     images: [

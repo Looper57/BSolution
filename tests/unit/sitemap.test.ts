@@ -82,6 +82,7 @@ describe('employer discovery independent of external feeds', () => {
       // Only genuinely updated employer pages carry review dates;
       // unchanged pages do not acquire a generated "today" timestamp.
       expect(employers.filter(entry => entry.lastModified).map(entry => entry.url).sort()).toEqual([
+        'https://www.bsolution.eu',
         'https://www.bsolution.eu/clients',
         'https://www.bsolution.eu/cs/clients',
         'https://www.bsolution.eu/de',
@@ -96,7 +97,7 @@ describe('employer discovery independent of external feeds', () => {
         'https://www.bsolution.eu/pl/clients',
         'https://www.bsolution.eu/practice-areas/compliance-officer',
       ])
-      expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(13)
+      expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(14)
       expect(fetch).not.toHaveBeenCalled()
       const all = new Set((await sitemap()).map(entry => entry.url))
       expect(employers.every(entry => all.has(entry.url))).toBe(true)

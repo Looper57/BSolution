@@ -21,13 +21,14 @@ describe('structured data', () => {
       name: 'B Solution',
       legalName: 'Yours Solution s.r.o.',
       identifier: { '@type': 'PropertyValue', propertyID: 'IČO', value: '19233043' },
-      foundingDate: '2007',
       url: 'https://www.bsolution.eu',
       contactPoint: {
         '@type': 'ContactPoint',
         contactType: 'recruitment',
       },
     })
+    expect(organizations[0]).not.toHaveProperty('foundingDate')
+    expect(organizations[0]).toMatchObject({ description: expect.stringContaining('experience since 2007') })
     expect(JSON.stringify(organizations[0])).not.toContain('customer service')
   })
 
