@@ -13,3 +13,5 @@ The first local graph treated each service fragment as a separate HTTP document 
 On contact routes only, the locale switch carries the validated public service choice to the target contact locale. Arbitrary fragments and other routes retain their existing navigation rules. No typed contact draft is claimed to persist through a locale change.
 
 The first source native run found the post-hydration employer prefill being cleared by an empty Select change. Retain that failed case. The category callback now accepts only its three offered values and uses a functional update so a spurious empty event cannot overwrite the chosen category or a more recent draft. Explicit new-message resets remain controlled by the form. This behavior matches the upstream [Radix form-control report](https://github.com/radix-ui/primitives/issues/3135); no dependency patch or upgrade is introduced.
+
+An existing reverse-locale journey could click its next control before client navigation to the intermediate page completed. It now waits for that destination URL before switching locale, retaining the same assertions.
