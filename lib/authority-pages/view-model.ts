@@ -1,4 +1,5 @@
-import type { Locale } from '@/lib/i18n/config'
+import { localizedPath, type Locale } from '@/lib/i18n/config'
+import { serviceEnquiryHref } from '@/lib/service-enquiry'
 import {
   getEligibleInternalLinks,
   resolveValidatedParent,
@@ -181,7 +182,9 @@ export function buildProductionAuthorityViewModel(
       })),
     },
     primaryCta: {
-      href: primaryHref,
+      href: primaryHref === localizedPath(page.locale, '/contact')
+        ? serviceEnquiryHref('executive-search', page.locale)
+        : primaryHref,
       label: page.primaryCta.label,
     },
     secondaryCta: resolvedSecondary[0]

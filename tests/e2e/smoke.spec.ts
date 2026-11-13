@@ -150,7 +150,7 @@ const authorityRenderingRoutes = [
     lang: 'en',
     h1: 'Legal Executive Search',
     breadcrumb: 'Breadcrumb navigation',
-    primary: ['Discuss a confidential search', '/contact'],
+    primary: ['Discuss a confidential search', '/contact#service-executive-search'],
     secondary: ['For candidates', '/candidates'],
     faq: 'Frequently asked questions',
   },
@@ -159,7 +159,7 @@ const authorityRenderingRoutes = [
     lang: 'cs',
     h1: 'Executive search a nábor seniorních právníků',
     breadcrumb: 'Drobečková navigace',
-    primary: ['Probrat důvěrné hledání', '/cs/contact'],
+    primary: ['Probrat důvěrné hledání', '/cs/contact#service-executive-search'],
     secondary: ['Pro kandidáty', '/cs/candidates'],
     faq: 'Časté otázky',
   },
@@ -168,7 +168,7 @@ const authorityRenderingRoutes = [
     lang: 'de',
     h1: 'Legal Executive Search',
     breadcrumb: 'Brotkrümelnavigation',
-    primary: ['Vertrauliche Suche besprechen', '/de/contact'],
+    primary: ['Vertrauliche Suche besprechen', '/de/contact#service-executive-search'],
     secondary: ['Für Kandidaten', '/de/candidates'],
     faq: 'Häufig gestellte Fragen',
   },
@@ -177,7 +177,7 @@ const authorityRenderingRoutes = [
     lang: 'pl',
     h1: 'Executive search w sektorze prawnym',
     breadcrumb: 'Nawigacja okruszkowa',
-    primary: ['Omów poufne poszukiwanie', '/pl/contact'],
+    primary: ['Omów poufne poszukiwanie', '/pl/contact#service-executive-search'],
     secondary: ['Dla kandydatów', '/pl/candidates'],
     faq: 'Najczęściej zadawane pytania',
   },
@@ -272,6 +272,18 @@ for (const route of authorityRenderingRoutes) {
     expect(nodes.some((node) => node['@type'] === 'FAQPage')).toBe(false)
     expect(nodes.some((node) => ['Review', 'AggregateRating', 'Rating'].includes(node['@type']))).toBe(false)
     expect(browserErrors).toEqual([])
+
+    // Follow the real employer action: keep its language and explicit
+    // service choice in the form, without sending a message.
+    await page.locator('[data-authority-cta="primary"]').click()
+    await expect(page).toHaveURL(new RegExp(`${route.primary[1]}$`))
+    await expect(page.locator('html')).toHaveAttribute('lang', route.lang)
+    const regionName = { en: 'Selected service', cs: 'Vybraná služba', de: 'Ausgewählte Leistung', pl: 'Wybrana usługa' }[route.lang]
+    const selectedService = page.locator('form#contact-form').getByRole('region', { name: regionName, exact: true })
+    await expect(selectedService).toContainText('Legal Executive Search')
+    await expect(selectedService).toBeInViewport()
+    await selectedService.getByRole('button').click()
+    await expect(selectedService).toHaveCount(0)
   })
 }
 

@@ -219,7 +219,7 @@ describe('production authority registry', () => {
         AUTHORITY_EDITORIAL_SECTION_KINDS,
       )
       expect(viewModel.primaryCta.href).toBe(
-        record.page.locale === 'en' ? '/contact' : `/${record.page.locale}/contact`,
+        (record.page.locale === 'en' ? '/contact' : `/${record.page.locale}/contact`) + '#service-executive-search',
       )
       expect(viewModel.secondaryCta?.href).toBe(
         record.page.locale === 'en'
