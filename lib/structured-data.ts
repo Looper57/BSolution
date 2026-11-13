@@ -11,7 +11,7 @@ export const organizationSchema = {
   '@type': 'Organization',
   '@id': STRUCTURED_DATA_IDS.organization,
   name: 'B Solution',
-  // The operating company (ARES 2026-10-25); "B Solution s.r.o." does not exist.
+  // The operating company (ARES 2026-11-13); "B Solution s.r.o." does not exist.
   legalName: 'Yours Solution s.r.o.',
   identifier: { '@type': 'PropertyValue', propertyID: 'IČO', value: '19233043' },
   // The brand people search for. Without it Google tends to read "B Solution"
@@ -24,8 +24,9 @@ export const organizationSchema = {
     url: 'https://www.bsolution.eu/images/logo.png',
   },
   description:
-    'Boutique Legal Executive Search firm serving law firms and corporate legal departments across Europe and the Middle East since 2007.',
-  foundingDate: '2007',
+    'Specialist legal recruitment brand for law firms and corporate legal departments across Europe and the Middle East. Legal recruitment experience since 2007.',
+  // Experience since 2007 is not the incorporation date of the legal operator.
+  // ARES records Yours Solution s.r.o. from 2023-04-06. Brand founding is not asserted here.
   address: {
     '@type': 'PostalAddress',
     streetAddress: 'Školská 689/20',

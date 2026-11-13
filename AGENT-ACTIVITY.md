@@ -130,3 +130,7 @@ Add a translated optional visitor-reported discovery field with strict server en
 ## 2026-11-13 — Reviewed editorial publication calendar
 
 Add date-based activation of exact reviewed source content, protected pause/resume candidate commands and common runtime/sitemap selection. Preserve old copy until due, refuse expired held work and backdated resume dates, and reject unchanged-text re-dating. Add a read-only daily postflight plus deterministic clock/CLI and real-route CI-fixture proof. No private queue import, self-approval, new provider credential, Git write scheduler, unapproved public copy or claimed ranking gain. See docs/reports/2026-11-13-editorial-calendar.md.
+
+## 2026-11-13 — Legal recruitment homepage and operator identity
+
+Clarify the English homepage's employer intent with international legal recruitment in its title/heading and retain the separate role landing pages. Remove the shared ambiguous2007 foundingDate: ARES records the legal operator from2023-04-06; preserve recruitment experience since2007 without asserting a brand founding date. Keep all IDs/contact/registration facts and commercial scope. See docs/reports/2026-11-13-brand-operator-identity.md.

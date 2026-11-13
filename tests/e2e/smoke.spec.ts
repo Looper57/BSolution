@@ -11,7 +11,7 @@ async function structuredDataNodes(page: Page) {
 }
 
 const standardRoutes = [
-  { path: '/', lang: 'en', identity: 'Legal Executive Search for Law Firms and Corporate Legal Departments', home: '/', canonical: 'https://www.bsolution.eu' },
+  { path: '/', lang: 'en', identity: 'International Legal Recruitment for Law Firms and In-House Teams', home: '/', canonical: 'https://www.bsolution.eu' },
   { path: '/cs', lang: 'cs', identity: 'Butikový Legal Executive Search pro advokátní kanceláře a korporátní právní oddělení', home: '/cs', canonical: 'https://www.bsolution.eu/cs' },
   { path: '/de', lang: 'de', identity: 'Juristische Personalberatung für Unternehmen und Kanzleien', home: '/de', canonical: 'https://www.bsolution.eu/de' },
   { path: '/pl', lang: 'pl', identity: 'Butikowy Legal Executive Search dla kancelarii prawnych i korporacyjnych działów prawnych', home: '/pl', canonical: 'https://www.bsolution.eu/pl' },

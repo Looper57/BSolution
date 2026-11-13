@@ -31,7 +31,7 @@ const hireLegalLeaderLabel: Record<Lang, string> = {
 const content = {
   en: {
     hero: {
-      headline: 'Legal Executive Search for Law Firms and Corporate Legal Departments',
+      headline: 'International Legal Recruitment for Law Firms and In-House Teams',
       subheadline: 'Since 2007, B Solution has delivered confidential Executive Search assignments across Europe and the Middle East, including partner, General Counsel and legal leadership recruitment.',
       trustLine1: '',
       trustLine2: '',
