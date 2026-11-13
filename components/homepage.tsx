@@ -755,7 +755,7 @@ function FooterLocalized({ lang, langPrefix }: { lang: Lang, langPrefix: string 
             <p className="text-white/50 text-[10px] font-semibold uppercase tracking-[0.2em] mb-6">{f.connect}</p>
             <nav className="space-y-4">
               <Link href={`${langPrefix}/contact`} className="block text-white/40 hover:text-white/70 text-[14px] transition-colors">Contact</Link>
-              <a href="https://linkedin.com/company/bsolution" target="_blank" rel="noopener noreferrer" className="block text-white/40 hover:text-white/70 text-[14px] transition-colors">LinkedIn</a>
+              <a href="https://www.linkedin.com/company/b-solution-executive-search" target="_blank" rel="noopener noreferrer" className="block text-white/40 hover:text-white/70 text-[14px] transition-colors">LinkedIn</a>
             </nav>
           </div>
         </div>
