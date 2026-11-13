@@ -829,3 +829,21 @@ for (const path of ['/hire-in-house-counsel', '/law-firm-recruitment', '/legal-r
     await expect(form.getByLabel('I am...', { exact: true })).toContainText('Seeking to hire')
   })
 }
+
+
+test('law firm decision-makers can define a partner or team mandate and reach its enquiry form', async ({ page, request }) => {
+  const html = await (await request.get('/law-firm-recruitment')).text()
+  expect(html).toContain('Which partner or team search does your firm need?')
+  expect(html).toContain('Assess proposed client opportunities separately from confirmed commitments.')
+  await page.goto('/law-firm-recruitment')
+  const guide = page.getByRole('region', { name: 'Which partner or team search does your firm need?', exact: true })
+  await expect(guide.getByRole('article')).toHaveCount(3)
+  await expect(guide.getByRole('heading', { name: 'Bring in a partner and team', exact: true })).toBeVisible()
+  const process = page.getByRole('region', { name: 'From a growth priority to a defined search', exact: true })
+  await expect(process.getByRole('listitem')).toHaveCount(4)
+  await expect(process.getByRole('link', { name: /published experience/ })).toHaveAttribute('href', '/services/legal-executive-search')
+  await guide.getByRole('link', { name: 'Discuss your partner or team recruitment brief', exact: true }).click()
+  await expect(page).toHaveURL(/\/law-firm-recruitment#contact-form$/)
+  await expect(page.locator('form#contact-form #name')).toBeVisible()
+  await expect(page.locator('form#contact-form').getByLabel('I am...', { exact: true })).toContainText('Seeking to hire')
+})

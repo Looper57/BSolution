@@ -3,7 +3,8 @@
 import Link from 'next/link'
 import { ContactForm } from '@/components/contact-form'
 import { RecruitmentBrief } from '@/components/recruitment-brief'
-import { ArrowRight, Building, UserCheck, Globe, Handshake } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { LawFirmMandateGuide, LawFirmSearchProcess } from '@/components/law-firm-mandates'
 import { LanguageProvider } from '@/lib/language-context'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
@@ -44,87 +45,6 @@ function IntroSection() {
   )
 }
 
-function WhySection() {
-  const reasons = [
-    {
-      icon: Building,
-      title: 'Firm-Focused Expertise',
-      description: 'We understand firm economics, partnership structures, and the complex factors that determine whether a lateral hire will succeed. Our advice is grounded in real market experience.'
-    },
-    {
-      icon: UserCheck,
-      title: 'Candidate Quality',
-      description: 'We focus on quality over quantity, presenting only candidates who genuinely match your requirements. Our thorough vetting process saves partner time and improves outcomes.'
-    },
-    {
-      icon: Globe,
-      title: 'European Network',
-      description: 'Active relationships across major European legal markets allow us to identify cross-border opportunities and support firms expanding internationally.'
-    },
-    {
-      icon: Handshake,
-      title: 'Mandate Context',
-      description: 'We invest in understanding the firm, partnership structure, practice priorities and cultural context before approaching the market.'
-    }
-  ]
-  
-  return (
-    <section className="bg-white py-20 lg:py-28">
-      <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
-        <div className="text-center mb-16">
-          <p className="text-gold text-[11px] font-semibold uppercase tracking-[0.2em] mb-4">Our Distinction</p>
-          <h2 className="text-navy text-[32px] lg:text-[40px] font-serif">
-            Why Law Firms Choose B Solution
-          </h2>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {reasons.map((reason, index) => (
-            <div key={index}>
-              <reason.icon className="h-8 w-8 text-gold mb-6" />
-              <h3 className="text-navy text-[18px] font-serif mb-4">{reason.title}</h3>
-              <p className="text-gray-500 text-[15px] leading-[1.7]">{reason.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function ServicesSection() {
-  const services = [
-    { num: '01', title: 'Lateral Partner Recruitment', desc: 'Identifying and approaching partners who can bring valuable client relationships, expertise, and practice development capability to your firm.' },
-    { num: '02', title: 'Practice Group Development', desc: 'Strategic talent planning to build or strengthen practice areas through coordinated recruitment at partner and associate level.' },
-    { num: '03', title: 'Associate & Counsel Hiring', desc: 'Finding talented lawyers at all levels who will develop within your firm and contribute to long-term success.' },
-    { num: '04', title: 'Market Intelligence', desc: 'Detailed insights into competitor structures, compensation benchmarks, and talent availability to inform your hiring strategy.' },
-  ]
-  
-  return (
-    <section className="bg-gray-100 py-20 lg:py-28">
-      <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
-        <div className="max-w-3xl mb-16">
-          <p className="text-gold text-[11px] font-semibold uppercase tracking-[0.2em] mb-4">Our Services</p>
-          <h2 className="text-navy text-[32px] lg:text-[40px] font-serif">
-            Comprehensive Law Firm Recruitment Services
-          </h2>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {services.map((service, index) => (
-            <div key={index}>
-              <span className="text-gold text-[12px] font-semibold tracking-[0.15em]">{service.num}</span>
-              <div className="w-full h-px bg-gray-300 my-5" />
-              <h3 className="text-navy text-[18px] font-serif mb-4">{service.title}</h3>
-              <p className="text-gray-500 text-[15px] leading-[1.7]">{service.desc}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
 function PracticeAreasSection() {
   const areas = [
     'Corporate / M&A',
@@ -148,10 +68,10 @@ function PracticeAreasSection() {
           <div>
             <p className="text-gold text-[11px] font-semibold uppercase tracking-[0.2em] mb-4">Practice Coverage</p>
             <h2 className="text-white text-[32px] lg:text-[40px] font-serif mb-6">
-              All Major Practice Areas
+              Define the Practice Area
             </h2>
             <p className="text-white/55 text-[17px] leading-[1.8]">
-              Our consultants have deep knowledge across all major practice areas, allowing us to assess technical capability and market positioning effectively. We understand the specific dynamics of each practice area and how they vary across different markets.
+              Define the work the appointment must cover, the level of responsibility and the office where the lawyer will be based. A specialist hire and a partner responsible for building a wider practice need different assessment criteria.
             </p>
             <Link 
               href="/services"
@@ -188,7 +108,7 @@ function CTASection() {
               Strengthen Your Practice
             </h2>
             <p className="text-gray-600 text-[17px] leading-[1.8] mb-8">
-              Whether you are pursuing a specific lateral target, looking to build a practice area, or planning strategic growth, B Solution provides the market intelligence, candidate access, and execution capability to deliver results.
+              Discuss the purpose of your appointment, the practice and the office involved. B Solution can help you define a search brief for a lateral partner, a team move or practice development.
             </p>
             <div className="space-y-4">
               <Link href={legalExecutiveSearchCanonicalPath} className="flex items-center text-gold hover:text-gold/80 text-[14px] font-medium">
@@ -216,8 +136,8 @@ function LawFirmRecruitmentPage() {
       <main>
         <PageHeader />
         <IntroSection />
-        <WhySection />
-        <ServicesSection />
+        <LawFirmMandateGuide />
+        <LawFirmSearchProcess />
         <PracticeAreasSection />
         <RecruitmentBrief audience="law-firm" />
         <CTASection />
