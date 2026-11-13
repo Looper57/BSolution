@@ -50,6 +50,12 @@ const employerContentUpdates: Readonly<Record<string, string>> = {
   '/legal-recruitment-germany': '2026-11-13',
   '/legal-recruitment-dubai': '2026-11-13',
   '/practice-areas/compliance-officer': '2026-11-13',
+  '/services/legal-executive-search': '2026-11-13',
+  '/cs/services/legal-executive-search': '2026-11-13',
+  '/de/services/legal-executive-search': '2026-11-13',
+  '/pl/services/legal-executive-search': '2026-11-13',
+  '/practice-areas/general-counsel': '2026-11-12',
+  '/de/practice-areas/general-counsel': '2026-11-12',
 }
 
 // `localizedPath` deliberately returns `/` for the English root so on-page
