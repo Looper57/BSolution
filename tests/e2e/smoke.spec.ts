@@ -1061,6 +1061,22 @@ for (const route of [
   test(`${route.locale} employer can choose candidate profiles, a scoped search or the separate legal-adviser directory`, async ({ page, request }) => {
     expect(await (await request.get(route.path)).text()).toContain(route.heading)
     await page.goto(route.path)
+    if (route.locale === 'de') {
+      await expect(page.getByRole('heading', { level: 1, name: 'Unternehmensjuristen und Kanzleipartner finden', exact: true })).toBeVisible()
+      await expect(page).toHaveTitle('Personalberatung für Rechtsabteilungen & Kanzleien | B Solution')
+      const brief = page.getByRole('region', { name: 'Welches Suchprofil braucht Ihr Unternehmen oder Ihre Kanzlei?', exact: true })
+      await expect(brief.locator('dt')).toHaveCount(6)
+      await brief.getByRole('link', { name: 'General Counsel und Head of Legal finden', exact: true }).click()
+      await expect(page).toHaveURL(/\/de\/practice-areas\/general-counsel$/)
+      await expect(page.locator('html')).toHaveAttribute('lang', 'de')
+      await page.goBack()
+      await page.getByRole('link', { name: 'Ihr Suchprofil mit B Solution besprechen', exact: true }).click()
+      await expect(page).toHaveURL(/\/de\/contact#service-executive-search$/)
+      await expect(page.getByRole('region', { name: route.selection, exact: true })).toBeVisible()
+      await page.goBack()
+    } else {
+      await expect(page.locator('#german-employer-brief')).toHaveCount(0)
+    }
     const guide = page.getByRole('region', { name: route.heading, exact: true })
     await expect(guide.getByRole('article')).toHaveCount(2)
     await expect(guide.locator(`a[href="${route.directory}"]`)).toHaveCount(1)

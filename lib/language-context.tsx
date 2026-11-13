@@ -489,9 +489,9 @@ const translations: Record<Language, Record<string, string>> = {
     'services.page.intro': 'Wir bieten fokussierte Dienstleistungen für Organisationen, die Führungskräftebesetzung im Rechtsbereich als strategische Priorität verstehen.',
     
     // For Clients Page
-    'clients.page.title': 'Für Mandanten',
-    'clients.page.subtitle': 'Vertrauenswürdige Berater für Rechtsführung',
-    'clients.page.intro': 'Wir verstehen, dass die Gewinnung des richtigen Rechtstalensts auf Führungsebene mehr als Rekrutierung erfordert — es erfordert Einblick, Diskretion und echtes Verständnis Ihrer Organisation.',
+    'clients.page.title': 'Unternehmensjuristen und Kanzleipartner finden',
+    'clients.page.subtitle': 'Juristische Personalsuche für Rechtsabteilungen und Kanzleien',
+    'clients.page.intro': 'Ob erste Inhouse-Position, Verstärkung eines Rechtsteams oder Kanzleipartner: B Solution bespricht mit Ihnen Aufgaben, Standort und Verantwortung, bevor das Suchprofil und der passende Suchumfang vereinbart werden.',
     'clients.lawfirms.title': 'Für Kanzleien',
     'clients.lawfirms.intro': 'Von der lateralen Partnerrekrutierung bis zum strategischen Teamaufbau helfen wir Kanzleien, ihre Praxis zu stärken.',
     'clients.corporations.title': 'Für Unternehmen',

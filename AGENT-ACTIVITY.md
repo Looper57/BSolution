@@ -154,3 +154,7 @@ Improve the existing UK entry for international law-firm and in-house hiring, wi
 ## 2026-11-13 — Accurate historical employer content dates
 
 Supply missing source-proven lastmod values for four localized search-service pages and EN/DE General Counsel. Preserve the inventory, copy and 18 existing current dates; do not stamp unchanged pages with today. Extend the existing sitemap regression, retaining ordinary source/main release gates. See docs/reports/2026-11-13-priority-content-dates.md. No indexing or ranking gain is asserted.
+
+## 2026-11-13 — German employer hiring brief
+
+Improve the existing German client route with practical in-house and law-firm briefing questions, matching employer title/heading and German role/methodology/enquiry paths. Identify English-only background links. Preserve other locales, commercial scope and the already genuine sitemap date; extend the existing employer journey. See docs/reports/2026-11-13-german-employer-brief.md. No new office, placement reference, private-calendar approval, AI access or ranking gain.

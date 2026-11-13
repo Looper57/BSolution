@@ -19,7 +19,7 @@ export const staticRouteMetadata: Record<Locale, Record<string, RouteMetadataCop
   },
   de: {
     about: { title: 'Über B Solution', description: 'Lernen Sie die auf Legal Executive Search spezialisierte Beratung kennen, der seit 2007 Führungsbesetzungen in Europa und im Nahen Osten anvertraut werden.' },
-    clients: { title: 'Legal Executive Search für Mandanten', description: 'Mandatierte Legal Executive Search für Unternehmen und Kanzleien bei der Besetzung von General Counsel, Rechtsführungskräften, Partnern und erfahrenen Juristen.' },
+    clients: { title: 'Personalberatung für Rechtsabteilungen & Kanzleien', description: 'Personalberatung für Rechtsabteilungen und Kanzleien: Unternehmensjuristen, Legal Counsel und Kanzleipartner mit B Solution finden.' },
     candidates: { title: 'Karrieremöglichkeiten im Rechtsmarkt', description: 'Entdecken Sie vertrauliche Möglichkeiten für erfahrene Juristen, Rechtsführungskräfte und Kanzleipartner in Europa und im Nahen Osten.' },
     contact: { title: 'B Solution kontaktieren', description: 'Vereinbaren Sie ein vertrauliches Gespräch über ein Executive-Search-Mandat, eine juristische Führungsposition oder Ihre nächste berufliche Herausforderung.' },
     positions: { title: 'Aktuelle juristische Positionen', description: 'Entdecken Sie ausgewählte vertrauliche Mandate für General Counsel, erfahrene Inhouse-Juristen, Kanzleipartner und Rechtsexperten.' },

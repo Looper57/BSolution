@@ -7,13 +7,14 @@ import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { localizedPath } from '@/lib/i18n/config'
 import { EmployerPlatformPaths } from '@/components/employer-platform-paths'
+import { GermanEmployerBrief } from '@/components/german-employer-brief'
 
 const clientsLocalizedCopy = {
   de: {
     corporationBody: 'Wir haben multinationale Unternehmen, regionale Zentralen und Portfoliounternehmen beim Aufbau ihrer Rechtsabteilungen unterstützt. Von der ersten juristischen Position bis zur Besetzung eines General Counsel verstehen wir die besonderen Anforderungen der Suche für Unternehmensrechtsabteilungen.',
     corporationCta: 'Suche für Rechtsabteilungen besprechen',
-    forCompaniesCta: 'Mehr für Unternehmen',
-    hireLegalLeaderCta: 'Eine Führungskraft im Rechtsbereich einstellen',
+    forCompaniesCta: 'Mehr für Unternehmen (Englisch)',
+    hireLegalLeaderCta: 'Juristische Führungssuche (Englisch)',
     corporationRolesTitle: 'Führungspositionen, die wir besetzen',
     corporationRoles: ['General Counsel', 'Chief Legal Officer', 'Head of Legal', 'Legal Director', 'Senior Legal Counsel', 'Legal Counsel', 'Compliance Director', 'Chief Compliance Officer'],
     lawFirmBody: 'Ob Sie einen Praxisbereich stärken, laterale Persönlichkeiten gewinnen oder die Partnernachfolge planen möchten: Wir verbinden Marktkenntnis mit gezielter Direktansprache. Unsere Erfahrung umfasst internationale Kanzleien, nationale Sozietäten und spezialisierte Boutiquen in Mitteleuropa und darüber hinaus.',
@@ -352,6 +353,7 @@ function CTASection() {
 }
 
 function ClientsPage() {
+  const { language } = useLanguage()
   return (
     <>
       <Header />
@@ -361,6 +363,7 @@ function ClientsPage() {
         <EmployerPlatformPaths />
         <CorporationsSection />
         <LawFirmsSection />
+        {language === 'de' && <GermanEmployerBrief />}
         <ApproachSection />
         <WhySection />
         <CTASection />
