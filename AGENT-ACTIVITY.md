@@ -98,3 +98,7 @@ Replace the existing Europe page's generic regional/network claims with a cross-
 ## 2026-11-13 — Private employer editorial queue preflight
 
 Add a local, read-only content queue command with existing-route validation, review tied to the exact content revision, source/claim mapping, exact existing experience-evidence scope, review dates, pause state and publication/rollback references. Private queues stay outside Git and are not imported by the website. Preparation cannot publish or bypass existing owner and release checks. Synthetic unit and actual-command tests cover refusal paths, stale reviews, private-output minimisation and unchanged files. See docs/editorial-workflow.md. No scheduler, new AI credential, external message, generated public page or measured ranking improvement is implied.
+
+## 2026-11-13 — Owner-approved compliance employer brief
+
+Add the explicitly approved six-paragraph English section to the existing compliance leadership page. Clarify role scope, reporting, resources, location/remit, working languages, assessment and an initial employer brief. Keep the route, translations and commercial FAQs intact. One new native journey covers rendered text and existing service/contact navigation. Private draft/approval records remain outside Git; see docs/reports/2026-11-13-compliance-employer-brief.md. Release requires the ordinary checks; no commercial or ranking gain is inferred.

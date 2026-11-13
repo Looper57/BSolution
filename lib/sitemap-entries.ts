@@ -38,6 +38,7 @@ const employerContentUpdates: Readonly<Record<string, string>> = {
   '/legal-recruitment-europe': '2026-11-13',
   '/legal-recruitment-germany': '2026-11-13',
   '/legal-recruitment-dubai': '2026-11-13',
+  '/practice-areas/compliance-officer': '2026-11-13',
 }
 
 // `localizedPath` deliberately returns `/` for the English root so on-page
