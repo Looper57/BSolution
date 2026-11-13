@@ -1,6 +1,8 @@
 "use client"
 
 import { useState, useEffect, useRef } from 'react'
+import { usePathname } from 'next/navigation'
+import { contactFormPage } from '@/lib/contact-form-context'
 import { Send, CheckCircle } from 'lucide-react'
 import { useLanguage } from '@/lib/language-context'
 import { COPY as availableLawyersCopy, PROFILE_INQUIRY_KEY, isProfileRef } from '@/lib/available-lawyers'
@@ -76,9 +78,13 @@ declare global {
   }
 }
 
-export function ContactForm() {
+export function ContactForm({ heading, initialType = '' }: {
+  heading?: string
+  initialType?: '' | 'hiring' | 'candidate' | 'other'
+} = {}) {
   const { language, t } = useLanguage()
   const copy = contactUiCopy[language]
+  const formPage = contactFormPage(usePathname())
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -90,7 +96,7 @@ export function ContactForm() {
     email: '',
     company: '',
     phone: '',
-    type: '',
+    type: String(initialType),
     message: '',
   })
   const [honeypot, setHoneypot] = useState('')
@@ -169,6 +175,7 @@ export function ContactForm() {
         headers: createContactRequestHeaders(),
         body: JSON.stringify({
           ...formData,
+          formPage,
           turnstileToken,
           _hp: honeypot,
         }),
@@ -186,7 +193,7 @@ export function ContactForm() {
         email: '',
         company: '',
         phone: '',
-        type: '',
+        type: String(initialType),
         message: '',
       })
       setTurnstileToken(null)
@@ -234,7 +241,7 @@ export function ContactForm() {
     <Card className="border-0 shadow-lg bg-white">
       <CardContent className="p-8 lg:p-10">
         <h3 className="text-navy font-serif text-xl font-medium mb-8">
-          {t('contact.form.title')}
+          {heading ?? t('contact.form.title')}
         </h3>
         <form id="contact-form" onSubmit={handleSubmit} className="space-y-6 scroll-mt-28">
           {/* Honeypot field - hidden from users, catches bots */}
@@ -318,8 +325,8 @@ export function ContactForm() {
               value={formData.type}
               onValueChange={(value) => setFormData({ ...formData, type: value })}
             >
-              <SelectTrigger className="border-gray-light focus:border-gold focus:ring-gold">
-                <SelectValue placeholder={copy.select} />
+              <SelectTrigger id="type" className="border-gray-light focus:border-gold focus:ring-gold">
+                <SelectValue placeholder={copy.select}>{formData.type ? t(`contact.form.type.${formData.type}`) : undefined}</SelectValue>
               </SelectTrigger>
               <SelectContent>
                 <SelectItem value="hiring">{t('contact.form.type.hiring')}</SelectItem>

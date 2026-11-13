@@ -792,3 +792,40 @@ for (const locale of ['de', 'pl', 'cs']) {
     expect(requests[2]).toMatchObject({ name: 'Test Employer', email: 'employer@example.com', company: 'Example Legal', phone: '+49 123 456', type: 'hiring', message: 'Test legal recruitment brief' })
   })
 }
+
+
+for (const path of ['/hire-in-house-counsel', '/law-firm-recruitment', '/legal-recruitment-europe', '/legal-recruitment-germany', '/legal-recruitment-dubai', '/legal-recruitment-prague']) {
+  test(`${path} preserves a failed employer brief and records only the submission page`, async ({ page }) => {
+    const requests: Record<string, unknown>[] = []
+    await page.route('**/api/contact', async route => {
+      requests.push(route.request().postDataJSON())
+      if (requests.length === 1) return route.abort('failed')
+      await route.fulfill({ status: 200, contentType: 'application/json', body: JSON.stringify({ success: requests.length > 2 }) })
+    })
+    await page.goto(`${path}?private=must-not-be-recorded#contact-form`)
+    const form = page.locator('form#contact-form')
+    await expect(form.getByLabel('I am...', { exact: true })).toContainText('Seeking to hire')
+    await form.locator('#name').fill('Test Employer')
+    await form.locator('#email').fill('employer@example.com')
+    await form.locator('#company').fill('Example Legal')
+    await form.locator('#message').fill('Test recruitment brief')
+    const submit = form.getByRole('button', { name: 'Send Message', exact: true })
+    await submit.click()
+    await expect(form.getByRole('alert')).toBeVisible()
+    await expect(form.locator('#message')).toHaveValue('Test recruitment brief')
+    await submit.click()
+    await expect(form.getByRole('alert')).toBeVisible()
+    if (path === '/law-firm-recruitment') {
+      await form.getByLabel('I am...', { exact: true }).click()
+      await page.getByRole('option', { name: 'A legal professional', exact: true }).click()
+    }
+    await submit.click()
+    await expect(form).toHaveCount(0)
+    expect(requests).toHaveLength(3)
+    expect(requests[2]).toMatchObject({ company: 'Example Legal', type: path === '/law-firm-recruitment' ? 'candidate' : 'hiring', formPage: path })
+    expect(JSON.stringify(requests)).not.toContain('must-not-be-recorded')
+    await page.getByRole('button', { name: 'Send Another Message', exact: true }).click()
+    await expect(form.locator('#message')).toHaveValue('')
+    await expect(form.getByLabel('I am...', { exact: true })).toContainText('Seeking to hire')
+  })
+}

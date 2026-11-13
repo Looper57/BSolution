@@ -62,3 +62,7 @@ Improve the two existing corporate entry points with specific hiring situations,
 ## 2026-11-13 — inbound enquiry integrity
 
 Repair the three localized homepage forms that previously showed success without sending. Extract the existing secure contact form, retain optional company/phone/type fields at the server boundary, and classify only provider-accepted enquiries in non-personal structured logs. Add failure/retry and payload/privacy regression coverage. No real test emails, outbound acquisition, added tracking identifiers, changed recipients or weaker security. See docs/reports/2026-11-13-inbound-enquiry-integrity.md; exact-source CI and production proof follow before closeout.
+
+## 2026-11-13 — service enquiry recovery
+
+Reuse the secure contact form on six existing service pages, with preserved headings, visible/changeable employer defaults, recoverable failures and a correctly labelled category. Add independently validated allowlisted submission paths to existing notifications and accepted-message logs; exclude queries, fragments and browsing identifiers. 210 unit cases and six additional native failure/retry/reset journeys protect the change. Source-specific CI and public production proof follow; no real test messages or new routes.

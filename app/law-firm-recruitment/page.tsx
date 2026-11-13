@@ -1,20 +1,13 @@
 "use client"
 
 import Link from 'next/link'
+import { ContactForm } from '@/components/contact-form'
 import { RecruitmentBrief } from '@/components/recruitment-brief'
 import { ArrowRight, Building, UserCheck, Globe, Handshake } from 'lucide-react'
 import { LanguageProvider } from '@/lib/language-context'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
-import { Button } from '@/components/ui/button'
-import { Input } from '@/components/ui/input'
-import { Textarea } from '@/components/ui/textarea'
-import { Label } from '@/components/ui/label'
-import { Card, CardContent } from '@/components/ui/card'
-import { useState } from 'react'
 import { legalExecutiveSearchCanonicalPath } from '@/lib/routes'
-import { TurnstileField } from '@/components/security/turnstile-field'
-import { createContactRequestHeaders } from '@/lib/contact-security-client'
 
 function PageHeader() {
   return (
@@ -184,74 +177,6 @@ function PracticeAreasSection() {
   )
 }
 
-function ContactForm() {
-  const [submitted, setSubmitted] = useState(false)
-  const [isSubmitting, setIsSubmitting] = useState(false)
-  const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
-  const [turnstileAttempt, setTurnstileAttempt] = useState(0)
-  const [formData, setFormData] = useState({ name: '', email: '', company: '', message: '' })
-  
-  const handleSubmit = async (e: React.FormEvent) => {
-    e.preventDefault()
-    if (process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY && !turnstileToken) return
-    setIsSubmitting(true)
-    try {
-      const response = await fetch('/api/contact', {
-        method: 'POST',
-        headers: createContactRequestHeaders(),
-        body: JSON.stringify({ ...formData, turnstileToken }),
-      })
-      if (response.ok) setSubmitted(true)
-    } finally {
-      setTurnstileToken(null)
-      setTurnstileAttempt((attempt) => attempt + 1)
-      setIsSubmitting(false)
-    }
-  }
-  
-  if (submitted) {
-    return (
-      <Card className="border-0 shadow-lg bg-white">
-        <CardContent className="p-8 text-center">
-          <h3 className="text-navy font-serif text-xl">Thank You</h3>
-          <p className="mt-4 text-gray-600">We will contact you shortly to discuss your law firm recruitment requirements.</p>
-        </CardContent>
-      </Card>
-    )
-  }
-  
-  return (
-    <Card className="border-0 shadow-lg bg-white">
-      <CardContent className="p-8">
-        <h3 className="text-navy font-serif text-xl mb-6">Discuss Your Firm&apos;s Needs</h3>
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div className="grid md:grid-cols-2 gap-4">
-            <div>
-              <Label htmlFor="name">Name *</Label>
-              <Input id="name" name="name" required value={formData.name} onChange={(e) => setFormData({...formData, name: e.target.value})} />
-            </div>
-            <div>
-              <Label htmlFor="email">Email *</Label>
-              <Input id="email" name="email" type="email" required value={formData.email} onChange={(e) => setFormData({...formData, email: e.target.value})} />
-            </div>
-          </div>
-          <div>
-            <Label htmlFor="company">Firm</Label>
-            <Input id="company" value={formData.company} onChange={(e) => setFormData({...formData, company: e.target.value})} />
-          </div>
-          <div>
-            <Label htmlFor="message">Message *</Label>
-            <Textarea id="message" name="message" rows={4} required value={formData.message} onChange={(e) => setFormData({...formData, message: e.target.value})} />
-          </div>
-          <TurnstileField key={turnstileAttempt} onToken={setTurnstileToken} />
-          <Button type="submit" disabled={isSubmitting} className="w-full bg-gold hover:bg-gold/90 text-white">
-            {isSubmitting ? 'Sending...' : 'Submit Enquiry'}
-          </Button>
-        </form>
-      </CardContent>
-    </Card>
-  )
-}
 
 function CTASection() {
   return (
@@ -277,7 +202,7 @@ function CTASection() {
               </Link>
             </div>
           </div>
-          <ContactForm />
+          <ContactForm heading="Discuss Your Firm&apos;s Needs" initialType="hiring" />
         </div>
       </div>
     </section>

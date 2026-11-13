@@ -1,0 +1,11 @@
+# Service enquiry recovery and submission context
+
+Six established English service pages had separate forms that checked only the HTTP status, lacked recoverable error feedback and did not declare an enquiry category. Replace the copies with the existing secure shared contact form on in-house counsel, law-firm recruitment, Europe, Germany, Dubai and Prague. Preserve each contextual heading and existing canonical routes. Employer enquiry is visibly preselected; the visitor may change it. A fresh message restores the page's default. The selector now has a correctly associated label.
+
+The shared form catches network failures and requires explicit API success, preserves the brief on failure, and offers retry and another-message actions. Existing Turnstile and honeypot handling remain in place. No actual test email is sent and no provider credentials, recipients, fees or agreements change.
+
+Record the submission page, not browsing history: the client reads only pathname, checks a closed list of13 established public form locations and never includes query strings or fragments. The server independently checks the same list, supports older clients without the optional field, includes the accepted public path in the existing notification, and adds it only to the provider-accepted structured log record. Request deduplication includes this context. Unknown paths, arbitrary URLs, query-bearing values and non-string fields are rejected. No cookies, new trackers, visitor identifiers or raw referrers are introduced.
+
+This permits comparisons by browser-declared form location and declared category; neither field is authoritative proof of visitor intent. A contact-page submission does not identify an earlier landing page. Provider acceptance does not prove inbox delivery, organic attribution, lead qualification, a signed mandate or ranking growth.
+
+210 unit cases include unsafe-context rejection and the API/provider payload/log proof. Six additional native browser journeys cover network failure,200/false, eventual200/true, retained text, employer defaults, a visitor's category override, fresh-message reset and exclusion of a query value. They intercept only the local endpoint; there is no production test submission. Exact-source66-case browser CI and production verification are recorded in the shared roadmap.

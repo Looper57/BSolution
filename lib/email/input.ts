@@ -1,3 +1,5 @@
+import { contactFormPage, type ContactFormPage } from '@/lib/contact-form-context';
+
 const MAX_REQUEST_BYTES = 16_384;
 const MAX_NAME_LENGTH = 100;
 const MAX_EMAIL_LENGTH = 254;
@@ -9,6 +11,7 @@ export type ContactEmailInput = {
   message: string;
   turnstileToken: string;
   honeypot: string;
+  formPage?: ContactFormPage;
   company?: string;
   phone?: string;
   type?: "hiring" | "candidate" | "other" | "";
@@ -94,7 +97,10 @@ export async function parseContactInput(
   if (type !== "" && type !== "hiring" && type !== "candidate" && type !== "other") {
     throw new ContactInputError("Enquiry type is invalid");
   }
-  return { name, email, message, turnstileToken, honeypot, company, phone, type };
+  const rawPage = readOptionalString(body, "formPage");
+  const formPage = contactFormPage(rawPage);
+  if (rawPage && !formPage) throw new ContactInputError("Form page is invalid");
+  return { name, email, message, turnstileToken, honeypot, company, phone, type, formPage };
 }
 
 function hasDuplicateTopLevelKeys(source: string): boolean {
