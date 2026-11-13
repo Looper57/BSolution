@@ -92,12 +92,12 @@ function ContactInfo() {
             <div>
               <h3 className="font-medium text-navy text-base">{t('contact.info.linkedin')}</h3>
               <a 
-                href="https://www.linkedin.com/company/bsolution" 
+                href="https://www.linkedin.com/company/b-solution-executive-search"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="mt-1 text-charcoal/70 hover:text-gold transition-colors block"
               >
-                linkedin.com/company/bsolution
+                linkedin.com/company/b-solution-executive-search
               </a>
             </div>
           </div>

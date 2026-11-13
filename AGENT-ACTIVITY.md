@@ -134,3 +134,7 @@ Add date-based activation of exact reviewed source content, protected pause/resu
 ## 2026-11-13 — Legal recruitment homepage and operator identity
 
 Clarify the English homepage's employer intent with international legal recruitment in its title/heading and retain the separate role landing pages. Remove the shared ambiguous2007 foundingDate: ARES records the legal operator from2023-04-06; preserve recruitment experience since2007 without asserting a brand founding date. Keep all IDs/contact/registration facts and commercial scope. See docs/reports/2026-11-13-brand-operator-identity.md.
+
+## 2026-11-13 — Correct public LinkedIn identity
+
+Replace the obsolete company/bsolution link in homepage/footer/contact and Organization.sameAs with the verified B Solution Legal Executive Search company profile. The public company page names the legal recruitment business and links back to bsolution.eu. No LinkedIn account, profile content or message is changed.

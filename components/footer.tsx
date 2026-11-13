@@ -170,7 +170,7 @@ export function Footer() {
             </div>
             
             <a
-              href="https://www.linkedin.com/company/bsolution"
+              href="https://www.linkedin.com/company/b-solution-executive-search"
               target="_blank"
               rel="noopener noreferrer"
               className="inline-flex items-center gap-3 mt-10 text-[13px] text-white/35 hover:text-gold transition-colors"

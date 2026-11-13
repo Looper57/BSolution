@@ -55,7 +55,7 @@ export const organizationSchema = {
     'Partner recruitment',
     'Leadership recruitment',
   ],
-  sameAs: ['https://www.linkedin.com/company/bsolution'],
+  sameAs: ['https://www.linkedin.com/company/b-solution-executive-search'],
 } as const
 
 export const personSchema = {
