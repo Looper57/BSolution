@@ -35,6 +35,7 @@ const employerContentUpdates: Readonly<Record<string, string>> = {
   '/hire-legal-leader': '2026-11-13',
   '/law-firm-recruitment': '2026-11-13',
   '/hire-in-house-counsel': '2026-11-13',
+  '/legal-recruitment-europe': '2026-11-13',
   '/legal-recruitment-germany': '2026-11-13',
   '/legal-recruitment-dubai': '2026-11-13',
 }

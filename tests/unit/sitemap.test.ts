@@ -86,9 +86,10 @@ describe('employer discovery independent of external feeds', () => {
         'https://www.bsolution.eu/hire-legal-leader',
         'https://www.bsolution.eu/law-firm-recruitment',
         'https://www.bsolution.eu/legal-recruitment-dubai',
+        'https://www.bsolution.eu/legal-recruitment-europe',
         'https://www.bsolution.eu/legal-recruitment-germany',
       ])
-      expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(6)
+      expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(7)
       expect(fetch).not.toHaveBeenCalled()
       const all = new Set((await sitemap()).map(entry => entry.url))
       expect(employers.every(entry => all.has(entry.url))).toBe(true)
