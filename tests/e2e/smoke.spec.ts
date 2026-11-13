@@ -868,3 +868,38 @@ test('companies can compare in-house responsibilities and reach a scoped employe
   const widths = await page.evaluate(() => ({ page: document.documentElement.scrollWidth, viewport: window.innerWidth }))
   expect(widths.page).toBeLessThanOrEqual(widths.viewport)
 })
+
+for (const market of [
+  { path: '/legal-recruitment-germany', heading: 'Define your legal recruitment brief for Germany', enquiry: 'Discuss a legal hire in Germany', distinct: 'DACH or group-wide remit', removed: 'years of active engagement' },
+  { path: '/legal-recruitment-dubai', heading: 'Define your legal recruitment brief for Dubai and the UAE', enquiry: 'Discuss a legal hire in Dubai or the UAE', distinct: 'Dubai or Abu Dhabi appointment', removed: 'B Solution has built significant expertise in Middle East' },
+]) {
+  test(`${market.path} keeps employer intent and market scope distinct`, async ({ page, request }) => {
+    const html = await (await request.get(market.path)).text()
+    expect(html).toContain(market.heading)
+    expect(html).toContain(market.distinct)
+    expect(html).not.toContain(market.removed)
+    await page.goto(market.path)
+    const guide = page.getByRole('region', { name: market.heading, exact: true })
+    await expect(guide.getByRole('article')).toHaveCount(2)
+    await expect(guide.getByRole('link', { name: 'Define your in-house recruitment scope', exact: true })).toHaveAttribute('href', '/hire-in-house-counsel')
+    await expect(guide.getByRole('link', { name: 'Plan a partner or team search', exact: true })).toHaveAttribute('href', '/law-firm-recruitment')
+    const scope = page.getByRole('region', { name: 'Agree the location, responsibilities and assessment', exact: true })
+    await expect(scope.locator('dt')).toHaveCount(4)
+    await expect(scope.getByRole('link', { name: /published experience/ })).toHaveAttribute('href', '/services/legal-executive-search')
+    await guide.getByRole('link', { name: market.enquiry, exact: true }).click()
+    await expect(page).toHaveURL(new RegExp(`${market.path}#contact-form$`))
+    await expect(page.locator('form#contact-form').getByLabel('I am...', { exact: true })).toContainText('Seeking to hire')
+  })
+}
+
+test('German employers can knowingly open the English Germany recruitment brief', async ({ page }) => {
+  await page.goto('/de')
+  await page.getByRole('link', { name: 'Personalbedarf in Deutschland konkretisieren (Englisch)', exact: true }).click()
+  await expect(page).toHaveURL(/legal-recruitment-germany$/)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+  await expect(page.getByRole('heading', { name: 'Define your legal recruitment brief for Germany', exact: true })).toBeVisible()
+  await page.locator('header a[href="/clients"]').click()
+  await page.locator('header').getByRole('button', { name: 'Auf Deutsch umschalten', exact: true }).click()
+  await expect(page).toHaveURL(/de\/clients$/)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'de')
+})

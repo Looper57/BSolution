@@ -47,3 +47,9 @@ export function buildAlternates(locale: Locale, path: string) {
     languages,
   }
 }
+
+/** Resolve the language of an actual route; English pages are unprefixed. */
+export function localeFromPathname(pathname: string): Locale {
+  const segment = pathname.split('/')[1]
+  return segment === 'cs' || segment === 'de' || segment === 'pl' ? segment : DEFAULT_LOCALE
+}
