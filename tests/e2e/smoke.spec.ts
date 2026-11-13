@@ -1062,6 +1062,17 @@ for (const route of [
     expect(await (await request.get(route.path)).text()).toContain(route.heading)
     await page.goto(route.path)
     if (route.locale === 'de') {
+      await page.setViewportSize({ width: 390, height: 844 })
+      const mobileLayout = await page.evaluate(() => ({
+        viewport: window.innerWidth,
+        document: document.documentElement.scrollWidth,
+        heading: document.querySelector('main h1')?.clientWidth ?? 0,
+        headingContent: document.querySelector('main h1')?.scrollWidth ?? 0,
+      }))
+      expect(mobileLayout.document).toBeLessThanOrEqual(mobileLayout.viewport)
+      expect(mobileLayout.heading).toBeGreaterThan(0)
+      expect(mobileLayout.headingContent).toBeLessThanOrEqual(mobileLayout.heading + 1)
+      await page.setViewportSize({ width: 1280, height: 720 })
       await expect(page.getByRole('heading', { level: 1, name: 'Unternehmensjuristen und Kanzleipartner finden', exact: true })).toBeVisible()
       await expect(page).toHaveTitle('Personalberatung für Rechtsabteilungen & Kanzleien | B Solution')
       const brief = page.getByRole('region', { name: 'Welches Suchprofil braucht Ihr Unternehmen oder Ihre Kanzlei?', exact: true })
