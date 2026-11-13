@@ -78,3 +78,5 @@ Replace generic company-service claims with original role/responsibility compari
 ## 2026-11-13 — international employer briefs
 
 Continue the inbound workstream with existing Germany and Dubai/UAE pages: replace unsupported local/expertise claims with distinct employer scope, connect verified service/evidence paths, and orient metadata to buyers. Add a knowingly English route from the German homepage and accurate edit dates. No new routes, legal rules, commercial terms or acquisition outreach. Native71-case source/main CI and production verification follow; private demand data remains outside Git.
+
+Native pre-release verification caught stale html.lang after a cross-locale client navigation. Fix initial/server and subsequent/client language with one shared route-locale resolver and a root synchronizer; extend the existing failure case to the reverse transition. Preserve the failed proof; do not waive the assertion.

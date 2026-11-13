@@ -2,6 +2,8 @@ import type { Metadata, Viewport } from 'next'
 import localFont from 'next/font/local'
 import { Analytics } from '@vercel/analytics/next'
 import { headers } from 'next/headers'
+import { RouteLanguage } from '@/components/route-language'
+import { localeFromPathname } from '@/lib/i18n/config'
 import { globalStructuredData, serializeJsonLd } from '@/lib/structured-data'
 import './globals.css'
 
@@ -88,8 +90,7 @@ export default async function RootLayout({
   children: React.ReactNode
 }>) {
   const pathname = (await headers()).get('x-bsolution-pathname') ?? '/'
-  const routeLocale = pathname.split('/')[1]
-  const lang = routeLocale === 'cs' || routeLocale === 'de' || routeLocale === 'pl' ? routeLocale : 'en'
+  const lang = localeFromPathname(pathname)
 
   return (
     <html lang={lang} className={`${inter.variable} ${playfair.variable}`}>
@@ -100,6 +101,7 @@ export default async function RootLayout({
         />
       </head>
       <body className="font-sans antialiased">
+        <RouteLanguage />
         {children}
         {process.env.NODE_ENV === 'production' && <Analytics />}
       </body>

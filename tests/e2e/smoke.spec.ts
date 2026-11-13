@@ -898,4 +898,8 @@ test('German employers can knowingly open the English Germany recruitment brief'
   await expect(page).toHaveURL(/legal-recruitment-germany$/)
   await expect(page.locator('html')).toHaveAttribute('lang', 'en')
   await expect(page.getByRole('heading', { name: 'Define your legal recruitment brief for Germany', exact: true })).toBeVisible()
+  await page.locator('header a[href="/clients"]').click()
+  await page.locator('header').getByRole('button', { name: 'Auf Deutsch umschalten', exact: true }).click()
+  await expect(page).toHaveURL(/de\/clients$/)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'de')
 })
