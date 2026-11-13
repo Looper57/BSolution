@@ -33,6 +33,7 @@ const productionGatedBasePaths = new Set(productionAuthorityPages.map((page) => 
 const employerContentUpdates: Readonly<Record<string, string>> = {
   '/for-companies': '2026-11-13',
   '/hire-legal-leader': '2026-11-13',
+  '/law-firm-recruitment': '2026-11-13',
 }
 
 // `localizedPath` deliberately returns `/` for the English root so on-page

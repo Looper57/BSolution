@@ -66,3 +66,7 @@ Repair the three localized homepage forms that previously showed success without
 ## 2026-11-13 — service enquiry recovery
 
 Reuse the secure contact form on six existing service pages, with preserved headings, visible/changeable employer defaults, recoverable failures and a correctly labelled category. Add independently validated allowlisted submission paths to existing notifications and accepted-message logs; exclude queries, fragments and browsing identifiers. 210 unit cases and six additional native failure/retry/reset journeys protect the change. Source-specific CI and public production proof follow; no real test messages or new routes.
+
+## 2026-11-13 — law firm mandate content
+
+Replace generic law-firm service claims with original partner/team/practice decision content and a defined search discussion, informed by three primary competitor pages. Preserve the existing canonical route and form; connect published methodology/evidence and markets in context. Add the genuine content date and one native buyer journey. No copied claims, new references, invented results, new routes or outbound acquisition. Exact-source67-case CI and production verification follow.
