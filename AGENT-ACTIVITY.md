@@ -150,3 +150,7 @@ Keep the explicit Legal Executive Search choice when an employer follows the pri
 ## 2026-11-13 — Existing UK employer brief
 
 Improve the existing UK entry for international law-firm and in-house hiring, with clearer EN/DE intent, concrete briefing questions and an inbound link from the Europe brief. Replace the ambiguous specific example in four languages, preserve every original FAQ/commercial statement and add only genuine modification dates. No new route, office, reference or API provider.
+
+## 2026-11-13 — Accurate historical employer content dates
+
+Supply missing source-proven lastmod values for four localized search-service pages and EN/DE General Counsel. Preserve the inventory, copy and 18 existing current dates; do not stamp unchanged pages with today. Extend the existing sitemap regression, retaining ordinary source/main release gates. See docs/reports/2026-11-13-priority-content-dates.md. No indexing or ranking gain is asserted.
