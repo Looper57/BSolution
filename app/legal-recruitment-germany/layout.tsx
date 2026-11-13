@@ -1,9 +1,9 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'Legal Recruitment Germany | Syndikusanwalt',
-  description: 'Legal recruitment in Germany. Executive search for General Counsel, Syndikusanwalt, and senior legal professionals in Frankfurt, Munich and Berlin.',
-  keywords: ['legal recruitment Germany', 'Syndikusanwalt recruitment', 'German legal headhunter', 'Frankfurt legal jobs', 'Munich lawyer recruitment'],
+  title: 'Legal Recruitment Germany | In-House & Law Firms',
+  description: 'Hire General Counsel, Head of Legal, in-house lawyers and law firm partners in Germany. Define your recruitment brief with B Solution.',
+  keywords: ['legal recruitment Germany', 'General Counsel recruitment Germany', 'Head of Legal search Germany', 'law firm recruitment Germany'],
   alternates: {
     canonical: 'https://www.bsolution.eu/legal-recruitment-germany',
   },
@@ -11,7 +11,7 @@ export const metadata: Metadata = {
     type: 'website',
     siteName: 'B Solution',
     title: 'Legal Recruitment Germany | B Solution',
-    description: 'Executive search for General Counsel, Syndikusanwalt, and senior legal professionals across Germany.',
+    description: 'Recruit in-house lawyers, legal leaders and law firm partners in Germany. Discuss the location, responsibilities and search brief with B Solution.',
     url: 'https://www.bsolution.eu/legal-recruitment-germany',
     images: [{ url: 'https://www.bsolution.eu/images/og-image.jpg', width: 1200, height: 630, alt: 'B Solution - Legal Recruitment Germany' }],
   },

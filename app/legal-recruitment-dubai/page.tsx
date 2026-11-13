@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import { ContactForm } from '@/components/contact-form'
-import { ArrowRight, Globe, Building, Sun, Briefcase } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { InternationalEmployerBrief } from '@/components/international-employer-brief'
 import { LanguageProvider } from '@/lib/language-context'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
@@ -21,7 +22,7 @@ function PageHeader() {
             Legal Recruitment Dubai
           </h1>
           <p className="mt-8 text-[19px] text-white/55 leading-[1.75] max-w-2xl">
-            Executive search for legal professionals in Dubai, Abu Dhabi, and across the UAE. Connecting international talent with the region&apos;s leading corporations and law firms.
+            Recruitment for companies and law firms hiring legal professionals in Dubai, Abu Dhabi and the UAE, including roles with wider regional responsibilities.
           </p>
         </div>
       </div>
@@ -35,89 +36,8 @@ function IntroSection() {
       <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-[18px] text-gray-600 leading-[1.8]">
-            Dubai and the wider UAE have emerged as one of the world&apos;s most dynamic legal markets, attracting international law firms, multinational corporations, and ambitious legal professionals from across the globe. B Solution has built significant expertise in Middle East legal recruitment, understanding the unique dynamics of the region including DIFC and ADGM requirements, the mix of common law and civil law frameworks, and the specific expectations of employers and candidates in the Gulf. We connect exceptional legal talent with outstanding opportunities across Dubai, Abu Dhabi, and the broader GCC region.
+            For a company hiring in Dubai or Abu Dhabi, or a law firm strengthening its UAE practice, define the local responsibilities and any wider regional scope together. B Solution can help shape a confidential brief for in-house lawyers, legal leaders and private-practice appointments.
           </p>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function WhySection() {
-  const reasons = [
-    {
-      icon: Globe,
-      title: 'Regional Understanding',
-      description: 'Deep knowledge of the UAE legal landscape including DIFC, ADGM, onshore requirements, and the specific dynamics of international versus local law firms and corporations.'
-    },
-    {
-      icon: Building,
-      title: 'Premium Client Base',
-      description: 'Relationships with leading international law firms, sovereign wealth funds, major corporations, and regional champions seeking exceptional legal talent.'
-    },
-    {
-      icon: Sun,
-      title: 'Candidate Network',
-      description: 'Access to qualified international lawyers considering relocation and established UAE-based professionals open to new opportunities.'
-    },
-    {
-      icon: Briefcase,
-      title: 'Relocation Support',
-      description: 'Guidance on compensation expectations, visa requirements, and practical considerations for candidates relocating to the region.'
-    }
-  ]
-  
-  return (
-    <section className="bg-white py-20 lg:py-28">
-      <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
-        <div className="text-center mb-16">
-          <p className="text-gold text-[11px] font-semibold uppercase tracking-[0.2em] mb-4">Our Expertise</p>
-          <h2 className="text-navy text-[32px] lg:text-[40px] font-serif">
-            Why Choose B Solution for UAE Recruitment
-          </h2>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {reasons.map((reason, index) => (
-            <div key={index}>
-              <reason.icon className="h-8 w-8 text-gold mb-6" />
-              <h3 className="text-navy text-[18px] font-serif mb-4">{reason.title}</h3>
-              <p className="text-gray-500 text-[15px] leading-[1.7]">{reason.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function ProcessSection() {
-  const steps = [
-    { num: '01', title: 'Regional Briefing', desc: 'Understanding your specific requirements within the UAE context, including jurisdiction, qualification requirements, and compensation expectations.' },
-    { num: '02', title: 'International Search', desc: 'Identifying candidates from our international network and UAE-based contacts, focusing on those with genuine interest and appropriate qualifications.' },
-    { num: '03', title: 'Thorough Assessment', desc: 'Evaluating technical capability, cultural fit, and commitment to relocate or remain in the region long-term.' },
-    { num: '04', title: 'Successful Placement', desc: 'Supporting offer negotiations, relocation planning, and ensuring smooth transitions for both clients and candidates.' },
-  ]
-  
-  return (
-    <section className="bg-gray-100 py-20 lg:py-28">
-      <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
-        <div className="max-w-3xl mb-16">
-          <p className="text-gold text-[11px] font-semibold uppercase tracking-[0.2em] mb-4">Our Process</p>
-          <h2 className="text-navy text-[32px] lg:text-[40px] font-serif">
-            How We Deliver Results in the Middle East
-          </h2>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {steps.map((step, index) => (
-            <div key={index}>
-              <span className="text-gold text-[12px] font-semibold tracking-[0.15em]">{step.num}</span>
-              <div className="w-full h-px bg-gray-300 my-5" />
-              <h3 className="text-navy text-[18px] font-serif mb-4">{step.title}</h3>
-              <p className="text-gray-500 text-[15px] leading-[1.7]">{step.desc}</p>
-            </div>
-          ))}
         </div>
       </div>
     </section>
@@ -157,7 +77,7 @@ function SectorsSection() {
               Key Industries in the UAE
             </h2>
             <p className="text-white/55 text-[17px] leading-[1.8] mb-8">
-              Dubai and Abu Dhabi&apos;s diverse economies create demand for legal professionals across multiple sectors, each with distinct requirements and compensation structures.
+              Describe the products, clients and business activities the new lawyer will support. Agree the specialist experience, internal resources and external adviser support the position requires.
             </p>
             <div className="bg-white/5 p-8">
               <div className="grid grid-cols-2 gap-3">
@@ -206,7 +126,7 @@ function CTASection() {
               Start Your Dubai Legal Search
             </h2>
             <p className="text-gray-600 text-[17px] leading-[1.8] mb-8">
-              Whether you are establishing a regional legal function, expanding your Dubai office, or seeking to relocate to the UAE, B Solution provides the expertise and network to make it happen.
+              Outline the place of work, legal responsibilities and regional coverage. Discuss your in-house appointment or law firm brief, including the candidate availability and practical arrangements your organisation can support.
             </p>
             <div className="space-y-4">
               <Link href="/legal-recruitment-europe" className="flex items-center text-gold hover:text-gold/80 text-[14px] font-medium">
@@ -234,8 +154,7 @@ function LegalRecruitmentDubaiPage() {
       <main>
         <PageHeader />
         <IntroSection />
-        <WhySection />
-        <ProcessSection />
+        <InternationalEmployerBrief market="uae" />
         <SectorsSection />
         <CTASection />
       </main>

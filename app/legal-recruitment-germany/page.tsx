@@ -2,7 +2,8 @@
 
 import Link from 'next/link'
 import { ContactForm } from '@/components/contact-form'
-import { ArrowRight, Globe, Scale, Building2, TrendingUp } from 'lucide-react'
+import { ArrowRight } from 'lucide-react'
+import { InternationalEmployerBrief } from '@/components/international-employer-brief'
 import { LanguageProvider } from '@/lib/language-context'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
@@ -21,7 +22,7 @@ function PageHeader() {
             Legal Recruitment Germany
           </h1>
           <p className="mt-8 text-[19px] text-white/55 leading-[1.75] max-w-2xl">
-            Executive search for General Counsel, Syndikusanwalt, and senior legal professionals across Germany. Serving Frankfurt, Munich, Dusseldorf, Hamburg, and Berlin.
+            Recruitment for companies hiring in-house lawyers and law firms appointing partners, counsel or senior associates in Germany.
           </p>
         </div>
       </div>
@@ -35,89 +36,8 @@ function IntroSection() {
       <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
         <div className="max-w-3xl mx-auto text-center">
           <p className="text-[18px] text-gray-600 leading-[1.8]">
-            Germany represents Europe&apos;s largest legal market and one of our core areas of expertise. The German legal profession has its own distinctive characteristics, from the Syndikusanwalt status for in-house counsel to the structure of leading law firms. B Solution has developed deep expertise in German legal recruitment through years of active engagement with corporations and law firms across the country. We understand the specific requirements of the German market and bring genuine relationships with senior legal professionals in Frankfurt, Munich, Dusseldorf, Hamburg, Berlin, and beyond.
+            For a German business, an international company hiring in Germany or a law firm strengthening its German practice, the search starts with the work and responsibilities. B Solution can help define a confidential recruitment brief for in-house counsel, General Counsel, Head of Legal and private-practice appointments.
           </p>
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function WhySection() {
-  const reasons = [
-    {
-      icon: Globe,
-      title: 'German Market Expertise',
-      description: 'Active presence and deep relationships in the German legal market. We understand Syndikusanwalt requirements, German corporate structures, and local compensation benchmarks.'
-    },
-    {
-      icon: Scale,
-      title: 'Rechtliche Kompetenz',
-      description: 'Our consultants understand German legal qualifications, state bar requirements, and practice area specializations, ensuring accurate candidate assessment.'
-    },
-    {
-      icon: Building2,
-      title: 'Major City Coverage',
-      description: 'Strong networks in Frankfurt, Munich, Dusseldorf, Hamburg, and Berlin, covering all key financial and industrial centers.'
-    },
-    {
-      icon: TrendingUp,
-      title: 'Corporate & Law Firm',
-      description: 'Equal strength serving multinational corporations building German legal teams and international law firms seeking lateral talent.'
-    }
-  ]
-  
-  return (
-    <section className="bg-white py-20 lg:py-28">
-      <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
-        <div className="text-center mb-16">
-          <p className="text-gold text-[11px] font-semibold uppercase tracking-[0.2em] mb-4">Our Expertise</p>
-          <h2 className="text-navy text-[32px] lg:text-[40px] font-serif">
-            Why Choose B Solution for German Recruitment
-          </h2>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {reasons.map((reason, index) => (
-            <div key={index}>
-              <reason.icon className="h-8 w-8 text-gold mb-6" />
-              <h3 className="text-navy text-[18px] font-serif mb-4">{reason.title}</h3>
-              <p className="text-gray-500 text-[15px] leading-[1.7]">{reason.description}</p>
-            </div>
-          ))}
-        </div>
-      </div>
-    </section>
-  )
-}
-
-function ProcessSection() {
-  const steps = [
-    { num: '01', title: 'Anforderungsanalyse', desc: 'Detailed briefing to understand your requirements, the German market context, and specific Syndikusanwalt or qualification needs.' },
-    { num: '02', title: 'Marktrecherche', desc: 'Comprehensive mapping of relevant candidates across German corporations, law firms, and international organizations.' },
-    { num: '03', title: 'Diskrete Ansprache', desc: 'Confidential engagement with potential candidates, presenting your opportunity professionally while protecting all parties.' },
-    { num: '04', title: 'Erfolgreiche Besetzung', desc: 'Managing the offer process, negotiating packages appropriate to the German market, and ensuring smooth transitions.' },
-  ]
-  
-  return (
-    <section className="bg-gray-100 py-20 lg:py-28">
-      <div className="max-w-[1440px] mx-auto px-8 lg:px-16">
-        <div className="max-w-3xl mb-16">
-          <p className="text-gold text-[11px] font-semibold uppercase tracking-[0.2em] mb-4">Unser Prozess</p>
-          <h2 className="text-navy text-[32px] lg:text-[40px] font-serif">
-            Proven Methodology for the German Market
-          </h2>
-        </div>
-        
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-10">
-          {steps.map((step, index) => (
-            <div key={index}>
-              <span className="text-gold text-[12px] font-semibold tracking-[0.15em]">{step.num}</span>
-              <div className="w-full h-px bg-gray-300 my-5" />
-              <h3 className="text-navy text-[18px] font-serif mb-4">{step.title}</h3>
-              <p className="text-gray-500 text-[15px] leading-[1.7]">{step.desc}</p>
-            </div>
-          ))}
         </div>
       </div>
     </section>
@@ -157,7 +77,7 @@ function SectorsSection() {
               Key German Sectors
             </h2>
             <p className="text-white/55 text-[17px] leading-[1.8] mb-8">
-              Germany&apos;s strength in automotive, manufacturing, and financial services creates specific legal talent requirements. Our sector specialists understand these dynamics and the legal expertise they demand.
+              Discuss the products, customers, transactions and operational work the role will support. Define which sector experience is essential for the appointment and which specialist resources will be available.
             </p>
             <div className="bg-white/5 p-8">
               <div className="grid grid-cols-2 gap-3">
@@ -206,7 +126,7 @@ function CTASection() {
               Start Your German Legal Search
             </h2>
             <p className="text-gray-600 text-[17px] leading-[1.8] mb-8">
-              Whether you are establishing a legal function in Germany, seeking a Syndikusanwalt, or recruiting partners for your German offices, B Solution provides the market access and expertise to deliver outstanding results.
+              Outline the legal work, office, reporting line and reason for hiring. Discuss a first internal lawyer, a legal leadership appointment or a partner and team search with B Solution.
             </p>
             <div className="space-y-4">
               <Link href="/legal-recruitment-europe" className="flex items-center text-gold hover:text-gold/80 text-[14px] font-medium">
@@ -234,8 +154,7 @@ function LegalRecruitmentGermanyPage() {
       <main>
         <PageHeader />
         <IntroSection />
-        <WhySection />
-        <ProcessSection />
+        <InternationalEmployerBrief market="germany" />
         <SectorsSection />
         <CTASection />
       </main>

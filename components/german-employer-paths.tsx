@@ -11,6 +11,7 @@ export function GermanEmployerPaths() {
           <h3 className="font-serif text-2xl text-navy">Für Unternehmen und Rechtsabteilungen</h3>
           <p className="mt-4 leading-relaxed text-gray-600">Sie besetzen erstmals eine juristische Führungsrolle, planen die Nachfolge Ihres General Counsel oder suchen einen Head of Legal für mehrere Länder? Klären Sie Aufgaben, Verantwortung und Zielmarkt für Ihre Suche.</p>
           <ul className="mt-5 space-y-3 text-navy">
+            <li><Link className="underline underline-offset-4 hover:text-gold" href="/legal-recruitment-germany">Personalbedarf in Deutschland konkretisieren (Englisch)</Link></li>
             <li><Link className="underline underline-offset-4 hover:text-gold" href="/de/practice-areas/general-counsel">General Counsel oder Head of Legal finden</Link></li>
             <li><Link className="underline underline-offset-4 hover:text-gold" href="/de/practice-areas/compliance-officer">Compliance-Führungskraft finden</Link></li>
           </ul>
