@@ -28,6 +28,13 @@ import {
 // (2026-08-22 Ahrefs audit).
 const productionGatedBasePaths = new Set(productionAuthorityPages.map((page) => page.basePath))
 
+// Significant, source-reviewed content edits only. Never use the sitemap
+// generation time as a modification date for unchanged pages.
+const employerContentUpdates: Readonly<Record<string, string>> = {
+  '/for-companies': '2026-11-13',
+  '/hire-legal-leader': '2026-11-13',
+}
+
 // `localizedPath` deliberately returns `/` for the English root so on-page
 // `<Link href>` navigation is never an empty string — correct for
 // navigation, but Next's own canonical-tag renderer normalizes the root to
@@ -102,6 +109,10 @@ export function getEmployerSitemapEntries(): MetadataRoute.Sitemap {
 
   return [...localizedPages, ...authorityPages, ...gatedAuthorityPages, ...englishPages]
     .filter(entry => !/\/(?:cs\/|de\/|pl\/)?candidates$/.test(new URL(entry.url).pathname))
+    .map(entry => {
+      const updated = employerContentUpdates[new URL(entry.url).pathname]
+      return updated ? { ...entry, lastModified: updated } : entry
+    })
 }
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {

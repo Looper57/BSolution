@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowRight, Briefcase, Building2, Globe, Users, Shield, Target, CheckCircle } from 'lucide-react'
 import { LanguageProvider, useLanguage } from '@/lib/language-context'
 import { HeroBackgroundImage } from '@/components/hero-background-image'
+import { CompanyHiringPaths } from '@/components/employer-decision-guides'
 
 function ForCompaniesContent() {
   const { language } = useLanguage()
@@ -85,6 +86,8 @@ function ForCompaniesContent() {
             <div className="w-px h-12 bg-gradient-to-b from-white/30 to-transparent" />
           </div>
         </section>
+
+        {language === 'en' && <CompanyHiringPaths />}
 
         {/* CLIENT TYPES SECTION */}
         <section className="bg-white py-24 md:py-32 lg:py-40">

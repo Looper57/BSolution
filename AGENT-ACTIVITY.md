@@ -53,3 +53,8 @@ Keep the old complete sitemap available while exposing the same approved URL set
 ## 2026-11-13 — discovery and lifecycle consistency
 
 Unify public external-job list/country/detail lookups to remove independently stale active detail pages after closure. Strengthen the graph gate with homepage reachability and a blocking self-canonical missing-sitemap check. Fix the concrete overlong search metadata in the authenticated audit, preserving visible full job titles and location headings. Local200 units, lint/types/build and stricter actual graph pass. Private audit evidence and before/after production crawl remain outside Git; source CI and production verification follow. No claim of a score/ranking gain caused by these changes.
+
+
+## 2026-11-13 — employer decision guides
+
+Improve the two existing corporate entry points with specific hiring situations, agreed leadership-brief questions and contextual links to established services and markets. Keep the fintech account visibly illustrative, remove an unsupported generic replacement duration, and publish accurate modification dates only for the two edited pages. No new landing route, altered terms, customer outreach or invented proof. Local200 units/types/lint/build/strict graph and actual HTTP/XML checked; two new native browser cases and exact-source CI verify the new57-case suite before release.
