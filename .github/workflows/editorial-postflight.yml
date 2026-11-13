@@ -1,0 +1,69 @@
+name: Editorial production postflight
+
+on:
+  deployment_status:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  verify:
+    if: github.repository == 'Looper57/BSolution' && (github.event_name == 'workflow_dispatch' || (github.event.deployment_status.state == 'success' && github.event.deployment.environment == 'Production'))
+    concurrency:
+      group: editorial-production-postflight
+      cancel-in-progress: true
+    runs-on: ubicloud-standard-2
+    timeout-minutes: 8
+    steps:
+      - name: Check that the deployment still matches main
+        id: current
+        env:
+          GH_TOKEN: ${{ github.token }}
+          DEPLOYED_SHA: ${{ github.event.deployment.sha || github.sha }}
+        run: |
+          if [[ ! "$DEPLOYED_SHA" =~ ^[0-9a-f]{40}$ ]]; then exit 1; fi
+          current_main_sha="$(gh api "repos/$GITHUB_REPOSITORY/git/ref/heads/main" --jq '.object.sha')"
+          if [ "$DEPLOYED_SHA" = "$current_main_sha" ]; then
+            echo 'current=true' >> "$GITHUB_OUTPUT"
+          else
+            echo 'current=false' >> "$GITHUB_OUTPUT"
+            echo 'A newer main revision superseded this deployment; no live-content success is claimed.'
+          fi
+
+      - name: Check out the exact deployed source
+        if: steps.current.outputs.current == 'true'
+        uses: actions/checkout@v6
+        with:
+          ref: ${{ github.event.deployment.sha || github.sha }}
+          persist-credentials: false
+
+      - name: Set up pnpm
+        if: steps.current.outputs.current == 'true'
+        uses: pnpm/action-setup@v4
+        with:
+          version: 11.13.0
+
+      - name: Set up Node.js
+        if: steps.current.outputs.current == 'true'
+        uses: actions/setup-node@v6
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        if: steps.current.outputs.current == 'true'
+        run: pnpm install --frozen-lockfile
+
+      - name: Verify actual public editorial text and sitemap
+        if: steps.current.outputs.current == 'true'
+        run: pnpm content:verify-live
+
+      - name: Retain public postflight report
+        if: always() && steps.current.outputs.current == 'true'
+        uses: actions/upload-artifact@v6
+        with:
+          name: editorial-live-check
+          path: artifacts/editorial-live-check.json
+          if-no-files-found: warn
+          retention-days: 7

@@ -14,7 +14,9 @@
     "graph-crawl:gate": "node scripts/run-graph-crawl-gate.mjs",
     "validate": "pnpm typecheck && pnpm lint && pnpm test && pnpm build && pnpm test:e2e",
     "validate:predeploy": "pnpm typecheck && pnpm lint && pnpm test && pnpm build && pnpm graph-crawl:gate && pnpm test:e2e",
-    "content:queue": "tsx scripts/editorial/queue.mts"
+    "content:queue": "tsx scripts/editorial/queue.mts",
+    "content:stage": "tsx scripts/editorial/stage.mts",
+    "content:verify-live": "tsx scripts/editorial/verify-live.mts"
   },
   "dependencies": {
     "@hookform/resolvers": "^3.9.1",

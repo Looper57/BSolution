@@ -1,0 +1,22 @@
+{
+  "version": 1,
+  "entries": [
+    {
+      "id": "compliance-remit",
+      "targetPath": "/practice-areas/compliance-officer",
+      "locale": "en",
+      "heading": "Define the compliance role before the search",
+      "paragraphs": [
+        "Agree whether the appointment owns day-to-day compliance delivery, leads a country function or coordinates a regional or group programme. A title alone does not define authority, resources or geographic responsibility.",
+        "Clarify the reporting line and access to decision-makers; distinguish the work of compliance, legal, risk and internal audit for this assignment. Set the responsibilities and support available before comparing candidates.",
+        "Specify the employment location, countries supported and working languages. Describe the actual regulatory topics and stakeholder situations the appointee will handle, alongside the experience and qualifications the work requires.",
+        "Agree which decisions the appointee may take, when issues must be escalated and which colleagues or external specialists provide support. Identify the current team, immediate priorities and the outcomes the employer expects from the appointment.",
+        "Use role-specific examples in assessment: explaining a concern to management, handling competing priorities and deciding when to seek specialist advice. Agree interviewers and assessment criteria before comparing candidates from different markets.",
+        "For an initial discussion, share the business and sector, place of work, geographic remit, reporting line, priority responsibilities, working languages and preferred timing. Identify confidentiality requirements for a replacement search."
+      ],
+      "contentUpdatedAt": "2026-11-13",
+      "reviewedRevision": "855b1325e73b9680be5a1b974be0e96554b75fa5791784e39e5db90c8b17bc64",
+      "entryHash": "097c8fad0e246cbf02a4e72be7f5cb831a6e53e3b07c19974631e250916d7109"
+    }
+  ]
+}

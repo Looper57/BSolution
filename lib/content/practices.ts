@@ -222,17 +222,6 @@ export const practices: Entity[] = [
             ],
           },
           {
-            heading: "Define the compliance role before the search",
-            paragraphs: [
-              "Agree whether the appointment owns day-to-day compliance delivery, leads a country function or coordinates a regional or group programme. A title alone does not define authority, resources or geographic responsibility.",
-              "Clarify the reporting line and access to decision-makers; distinguish the work of compliance, legal, risk and internal audit for this assignment. Set the responsibilities and support available before comparing candidates.",
-              "Specify the employment location, countries supported and working languages. Describe the actual regulatory topics and stakeholder situations the appointee will handle, alongside the experience and qualifications the work requires.",
-              "Agree which decisions the appointee may take, when issues must be escalated and which colleagues or external specialists provide support. Identify the current team, immediate priorities and the outcomes the employer expects from the appointment.",
-              "Use role-specific examples in assessment: explaining a concern to management, handling competing priorities and deciding when to seek specialist advice. Agree interviewers and assessment criteria before comparing candidates from different markets.",
-              "For an initial discussion, share the business and sector, place of work, geographic remit, reporting line, priority responsibilities, working languages and preferred timing. Identify confidentiality requirements for a replacement search.",
-            ],
-          },
-          {
             heading: 'What we evaluate',
             paragraphs: [
               'We assess how candidates have built compliance frameworks that scale, managed regulator relationships, and held their ground when commercial pressure and regulatory duty pull in different directions.',

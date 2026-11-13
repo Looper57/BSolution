@@ -1,5 +1,6 @@
 import type { MetadataRoute } from 'next'
 import { sitemapDate } from '@/lib/sitemap-date'
+import { publishedEditorialDates } from '@/lib/editorial/registry'
 import { jobsData } from '@/lib/jobs-data'
 import { getLivePositions, livePositionPath } from '@/lib/live-positions'
 import { getLegalJobs, legalJobPath, legalJobsCountryPath, legalJobsPath } from '@/lib/legal-jobs'
@@ -83,6 +84,7 @@ async function translatedLegalJobPages(): Promise<MetadataRoute.Sitemap> {
 }
 
 export function getEmployerSitemapEntries(): MetadataRoute.Sitemap {
+  const editorialDates = publishedEditorialDates()
   const fullyLocalizedPaths = [
     '/',
     ...localizedStaticPages,
@@ -120,7 +122,8 @@ export function getEmployerSitemapEntries(): MetadataRoute.Sitemap {
   return [...localizedPages, ...authorityPages, ...gatedAuthorityPages, ...englishPages]
     .filter(entry => !/\/(?:cs\/|de\/|pl\/)?candidates$/.test(new URL(entry.url).pathname))
     .map(entry => {
-      const updated = employerContentUpdates[new URL(entry.url).pathname]
+      const path = new URL(entry.url).pathname
+      const updated = [employerContentUpdates[path], editorialDates[path]].filter(Boolean).sort().at(-1)
       return updated ? { ...entry, lastModified: updated } : entry
     })
 }
