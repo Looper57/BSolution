@@ -41,6 +41,7 @@ export async function POST(req: Request) {
       success?: boolean;
       resendMessageId?: string;
       errorCategory?: string;
+      enquiryType?: "hiring" | "candidate" | "other" | "unspecified";
     } = {}
   ) => {
     logEmailEvent({
@@ -51,6 +52,7 @@ export async function POST(req: Request) {
       durationMs: Math.round(performance.now() - startedAt),
       resendMessageId: options.resendMessageId,
       errorCategory: options.errorCategory,
+      enquiryType: options.enquiryType,
     });
 
     return secureJsonResponse(
@@ -125,6 +127,9 @@ export async function POST(req: Request) {
         input.name,
         input.email,
         input.message,
+        input.company ?? "",
+        input.phone ?? "",
+        input.type ?? "",
       ]);
 
       const stored = await store.getResult(`api:idem:${idempotencyKey}`);
@@ -311,6 +316,7 @@ export async function POST(req: Request) {
     return respond("accepted", 200, {
       success: true,
       resendMessageId: result.id,
+      enquiryType: input.type || "unspecified",
     });
   } catch (error: unknown) {
     if (error instanceof ContactInputError) {

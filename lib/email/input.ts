@@ -9,6 +9,9 @@ export type ContactEmailInput = {
   message: string;
   turnstileToken: string;
   honeypot: string;
+  company?: string;
+  phone?: string;
+  type?: "hiring" | "candidate" | "other" | "";
 };
 
 export class ContactInputError extends Error {
@@ -85,7 +88,13 @@ export async function parseContactInput(
     throw new ContactInputError("Message is invalid");
   }
 
-  return { name, email, message, turnstileToken, honeypot };
+  const company = readOptionalSingleLine(body, "company", 200);
+  const phone = readOptionalSingleLine(body, "phone", 80);
+  const type = readOptionalString(body, "type");
+  if (type !== "" && type !== "hiring" && type !== "candidate" && type !== "other") {
+    throw new ContactInputError("Enquiry type is invalid");
+  }
+  return { name, email, message, turnstileToken, honeypot, company, phone, type };
 }
 
 function hasDuplicateTopLevelKeys(source: string): boolean {
@@ -195,4 +204,13 @@ function hasLoneSurrogate(value: string): boolean {
     }
   }
   return false;
+}
+
+function readOptionalSingleLine(record: Record<string, unknown>, key: string, max: number): string {
+  const raw = readOptionalString(record, key);
+  const value = normalizeSingleLine(raw);
+  if (hasControlCharacter(raw) || value.length > max) {
+    throw new ContactInputError(`${key} is invalid`);
+  }
+  return value;
 }

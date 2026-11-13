@@ -761,3 +761,34 @@ test('leadership visitors receive a decision brief and clearly labelled illustra
   await expect(page).toHaveURL(/\/contact$/)
   await expect(page.getByRole('textbox').first()).toBeVisible()
 })
+
+
+for (const locale of ['de', 'pl', 'cs']) {
+  test(`${locale} homepage enquiry waits for confirmed delivery and retains employer details`, async ({ page }) => {
+    const requests: Record<string, unknown>[] = []
+    await page.route('**/api/contact', async route => {
+      requests.push(route.request().postDataJSON())
+      const first = requests.length === 1
+      await route.fulfill({ status: first ? 503 : 200, contentType: 'application/json', body: JSON.stringify({ success: requests.length > 2 }) })
+    })
+    await page.goto(`/${locale}#kontakt-form`)
+    const form = page.locator('#kontakt-form form')
+    await form.locator('#name').fill('Test Employer')
+    await form.locator('#email').fill('employer@example.com')
+    await form.locator('#company').fill('Example Legal')
+    await form.locator('#phone').fill('+49 123 456')
+    await form.locator('#message').fill('Test legal recruitment brief')
+    await form.getByRole('combobox').click()
+    await page.getByRole('option').first().click()
+    await form.getByRole('button', { name: /./ }).click()
+    await expect(form).toBeVisible()
+    await expect(form.locator('#company')).toHaveValue('Example Legal')
+    await expect(form.getByRole('alert')).toBeVisible()
+    await form.getByRole('button', { name: /./ }).click()
+    await expect(form.getByRole('alert')).toBeVisible()
+    await form.getByRole('button', { name: /./ }).click()
+    await expect(form).toHaveCount(0)
+    expect(requests).toHaveLength(3)
+    expect(requests[2]).toMatchObject({ name: 'Test Employer', email: 'employer@example.com', company: 'Example Legal', phone: '+49 123 456', type: 'hiring', message: 'Test legal recruitment brief' })
+  })
+}

@@ -85,6 +85,21 @@ describe("contact input validation", () => {
     );
   });
 
+  it.each([
+    { company: "x".repeat(201) },
+    { phone: "Bad\nPhone" },
+    { company: { unsafe: true } },
+    { type: "admin" },
+  ])("rejects invalid optional enquiry details", async (details) => {
+    await expect(parseContactInput(request({ name: "Name", email: "a@example.com", message: "Hello", ...details }))).rejects.toBeInstanceOf(ContactInputError);
+  });
+
+  it("retains optional employer details and supports older clients", async () => {
+    const base = { name: "Name", email: "a@example.com", message: "Hello" };
+    expect(await parseContactInput(request({ ...base, company: " Example   Legal ", phone: "+49 123 456", type: "hiring" }))).toMatchObject({ company: "Example Legal", phone: "+49 123 456", type: "hiring" });
+    expect(await parseContactInput(request(base))).toMatchObject({ company: "", phone: "", type: "" });
+  });
+
   it("rejects malformed UTF-8 before JSON parsing", async () => {
     const malformed = new Uint8Array([0x7b, 0x22, 0x78, 0x22, 0x3a, 0xc3, 0x7d]);
     const malformedRequest = new Request(
@@ -128,6 +143,14 @@ describe("contact email content", () => {
     expect(content.text).toContain("<script>alert('x')</script>");
   });
 
+  it("includes optional employer details with HTML escaping", () => {
+    const content = createContactEmailContent({ name: "Name", email: "a@example.com", message: "Hello", company: "<script>company</script>", phone: "+49 123", type: "hiring" });
+    expect(content.html).toContain("&lt;script&gt;company&lt;/script&gt;");
+    expect(content.html).not.toContain("<script>");
+    expect(content.text).toContain("Phone: +49 123");
+    expect(content.text).toContain("Enquiry type: hiring");
+  });
+
   it("provides accessible HTML and a plain-text alternative", () => {
     const content = createContactEmailContent({
       name: "Ada Lovelace",
@@ -154,7 +177,7 @@ describe("contact email API boundary", () => {
     vi.stubEnv("EMAIL_FROM", PRODUCTION_EMAIL_FROM);
     vi.stubEnv("CONTACT_TO_EMAIL", "contact@bsolution.eu");
     vi.stubEnv("TURNSTILE_SECRET_KEY", "");
-    vi.spyOn(console, "info").mockImplementation(() => undefined);
+    const info = vi.spyOn(console, "info").mockImplementation(() => undefined);
     vi.spyOn(console, "error").mockImplementation(() => undefined);
 
     const send = vi.spyOn(globalThis, "fetch").mockResolvedValue(
@@ -169,6 +192,9 @@ describe("contact email API boundary", () => {
         name: "Ada Lovelace",
         email: "visitor@example.com",
         message: "A confidential enquiry",
+        company: "Example Legal",
+        phone: "+49 123 456",
+        type: "hiring",
       })
     );
 
@@ -181,6 +207,13 @@ describe("contact email API boundary", () => {
     expect(payload.from).not.toContain("visitor@example.com");
     expect(payload).toHaveProperty("html");
     expect(payload).toHaveProperty("text");
+    expect(payload.text).toContain("Company: Example Legal");
+    expect(payload.text).toContain("Phone: +49 123 456");
+    expect(payload.text).toContain("Enquiry type: hiring");
+    const log = JSON.stringify(info.mock.calls);
+    const accepted = info.mock.calls.map(call => JSON.parse(String(call[1]))).find(event => event.status === "accepted");
+    expect(accepted.enquiryType).toBe("hiring");
+    for (const privateValue of ["Example Legal", "+49 123 456", "visitor@example.com", "A confidential enquiry"]) expect(log).not.toContain(privateValue);
   });
 
   it("returns a generic error without exposing a Resend payload", async () => {

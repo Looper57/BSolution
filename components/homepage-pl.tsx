@@ -1,7 +1,9 @@
 "use client"
 
 import Link from 'next/link'
-import { ArrowRight, Check } from 'lucide-react'
+import { ContactForm } from '@/components/contact-form'
+import { LanguageProvider } from '@/lib/language-context'
+import { ArrowRight } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import { AuthorityProof } from '@/components/authority-proof'
 import { HeroBackgroundImage } from '@/components/hero-background-image'
@@ -520,177 +522,14 @@ function FinalCtaSection() {
 
 function ContactFormSection() {
   const c = content.contactForm
-  const [formData, setFormData] = useState({
-    name: '',
-    company: '',
-    email: '',
-    phone: '',
-    role: '',
-    message: '',
-  })
-  const [status, setStatus] = useState<'idle' | 'success' | 'error'>('idle')
-  const [errorFields, setErrorFields] = useState<string[]>([])
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault()
-    const required = ['name', 'email', 'role']
-    const missing = required.filter(field => !formData[field as keyof typeof formData].trim())
-    
-    if (missing.length > 0) {
-      setErrorFields(missing)
-      setStatus('error')
-      return
-    }
-    
-    setStatus('success')
-    setErrorFields([])
-  }
-
-  const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>) => {
-    const { name, value } = e.target
-    setFormData(prev => ({ ...prev, [name]: value }))
-    if (errorFields.includes(name)) {
-      setErrorFields(prev => prev.filter(f => f !== name))
-    }
-    if (status === 'error' && errorFields.length <= 1) {
-      setStatus('idle')
-    }
-  }
-
   return (
-    <section id="kontakt-form" className="bg-navy py-24 md:py-32 scroll-mt-20">
-      <div className="max-w-[1440px] mx-auto px-8 lg:px-20">
-        <div className="max-w-2xl mx-auto">
-          <div className="flex justify-center mb-10">
-            <div className="w-16 h-px bg-gold/40" />
-          </div>
-          
-          <div className="text-center mb-12">
-            <h2 className="text-white text-[clamp(1.75rem,3.5vw,2.5rem)] font-serif leading-[1.2] mb-6">{c.headline}</h2>
-            <p className="text-white/60 text-[17px] lg:text-[18px] leading-[1.75]">{c.subheadline}</p>
-          </div>
-          
-          {status === 'success' ? (
-            <div className="bg-gold/10 border border-gold/30 p-8 text-center">
-              <div className="w-12 h-12 mx-auto mb-4 flex items-center justify-center bg-gold/20 rounded-full">
-                <Check className="h-6 w-6 text-gold" />
-              </div>
-              <p className="text-white text-[18px] font-medium">{c.successMessage}</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-6">
-              {status === 'error' && (
-                <div className="bg-red-500/10 border border-red-500/30 p-4 text-center">
-                  <p className="text-red-400 text-[14px]">{c.errorMessage}</p>
-                </div>
-              )}
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="name" className="block text-white/70 text-[12px] uppercase tracking-[0.1em] mb-2">
-                    {c.nameLabel} <span className="text-gold">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    id="name"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    placeholder={c.namePlaceholder}
-                    className={`w-full bg-white/5 border ${errorFields.includes('name') ? 'border-red-500' : 'border-white/10'} text-white px-4 py-3 text-[15px] placeholder:text-white/30 focus:outline-none focus:border-gold/50 transition-colors`}
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="company" className="block text-white/70 text-[12px] uppercase tracking-[0.1em] mb-2">
-                    {c.companyLabel}
-                  </label>
-                  <input
-                    type="text"
-                    id="company"
-                    name="company"
-                    value={formData.company}
-                    onChange={handleChange}
-                    placeholder={c.companyPlaceholder}
-                    className="w-full bg-white/5 border border-white/10 text-white px-4 py-3 text-[15px] placeholder:text-white/30 focus:outline-none focus:border-gold/50 transition-colors"
-                  />
-                </div>
-              </div>
-              
-              <div className="grid md:grid-cols-2 gap-6">
-                <div>
-                  <label htmlFor="email" className="block text-white/70 text-[12px] uppercase tracking-[0.1em] mb-2">
-                    {c.emailLabel} <span className="text-gold">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    id="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    placeholder={c.emailPlaceholder}
-                    className={`w-full bg-white/5 border ${errorFields.includes('email') ? 'border-red-500' : 'border-white/10'} text-white px-4 py-3 text-[15px] placeholder:text-white/30 focus:outline-none focus:border-gold/50 transition-colors`}
-                  />
-                </div>
-                
-                <div>
-                  <label htmlFor="phone" className="block text-white/70 text-[12px] uppercase tracking-[0.1em] mb-2">
-                    {c.phoneLabel}
-                  </label>
-                  <input
-                    type="tel"
-                    id="phone"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    placeholder={c.phonePlaceholder}
-                    className="w-full bg-white/5 border border-white/10 text-white px-4 py-3 text-[15px] placeholder:text-white/30 focus:outline-none focus:border-gold/50 transition-colors"
-                  />
-                </div>
-              </div>
-              
-              <div>
-                <label htmlFor="role" className="block text-white/70 text-[12px] uppercase tracking-[0.1em] mb-2">
-                  {c.roleLabel} <span className="text-gold">*</span>
-                </label>
-                <input
-                  type="text"
-                  id="role"
-                  name="role"
-                  value={formData.role}
-                  onChange={handleChange}
-                  placeholder={c.rolePlaceholder}
-                  className={`w-full bg-white/5 border ${errorFields.includes('role') ? 'border-red-500' : 'border-white/10'} text-white px-4 py-3 text-[15px] placeholder:text-white/30 focus:outline-none focus:border-gold/50 transition-colors`}
-                />
-              </div>
-              
-              <div>
-                <label htmlFor="message" className="block text-white/70 text-[12px] uppercase tracking-[0.1em] mb-2">
-                  {c.messageLabel}
-                </label>
-                <textarea
-                  id="message"
-                  name="message"
-                  value={formData.message}
-                  onChange={handleChange}
-                  placeholder={c.messagePlaceholder}
-                  rows={4}
-                  className="w-full bg-white/5 border border-white/10 text-white px-4 py-3 text-[15px] placeholder:text-white/30 focus:outline-none focus:border-gold/50 transition-colors resize-none"
-                />
-              </div>
-              
-              <div className="pt-4">
-                <button
-                  type="submit"
-                  className="w-full md:w-auto inline-flex items-center justify-center px-12 py-4 bg-gold hover:bg-gold-light text-navy text-[12px] font-semibold uppercase tracking-[0.12em] transition-colors"
-                >
-                  {c.submit}
-                  <ArrowRight className="ml-3 h-4 w-4" />
-                </button>
-              </div>
-            </form>
-          )}
+    <section id="kontakt-form" className="bg-white px-6 py-24 scroll-mt-20">
+      <div className="mx-auto max-w-2xl">
+        <div className="mb-12 text-center">
+          <h2 className="font-serif text-3xl leading-tight text-navy md:text-4xl">{c.headline}</h2>
+          <p className="mt-6 text-lg leading-relaxed text-gray-600">{c.subheadline}</p>
         </div>
+        <LanguageProvider><ContactForm /></LanguageProvider>
       </div>
     </section>
   )
