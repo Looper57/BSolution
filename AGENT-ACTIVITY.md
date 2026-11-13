@@ -94,3 +94,7 @@ The initial native handoff case exposed a spurious empty category update after t
 ## 2026-11-13 — Europe employer search brief
 
 Replace the existing Europe page's generic regional/network claims with a cross-border brief for corporate legal departments and law firms. Distinguish employment location, geographic remit and candidate markets; connect three hiring situations to detailed services and published methodology. Preserve the route and secure form, update the genuine content date and search descriptions. Add two browser journeys including mobile layout and an intercepted employer enquiry. See docs/reports/2026-11-13-europe-cross-border-employer-brief.md. No real message sent or ranking improvement claimed.
+
+## 2026-11-13 — Private employer editorial queue preflight
+
+Add a local, read-only content queue command with existing-route validation, review tied to the exact content revision, source/claim mapping, exact existing experience-evidence scope, review dates, pause state and publication/rollback references. Private queues stay outside Git and are not imported by the website. Preparation cannot publish or bypass existing owner and release checks. Synthetic unit and actual-command tests cover refusal paths, stale reviews, private-output minimisation and unchanged files. See docs/editorial-workflow.md. No scheduler, new AI credential, external message, generated public page or measured ranking improvement is implied.
