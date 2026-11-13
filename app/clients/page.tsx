@@ -75,7 +75,7 @@ const clientsLocalizedCopy = {
 } as const
 
 function PageHeader() {
-  const { t } = useLanguage()
+  const { language, t } = useLanguage()
   
   return (
     <section className="bg-navy pt-32 pb-20 lg:pt-40 lg:pb-28">
@@ -85,7 +85,7 @@ function PageHeader() {
             <div className="w-12 h-px bg-gold" />
             <p className="eyebrow">{t('clients.eyebrow')}</p>
           </div>
-          <h1 className="text-white">{t('clients.page.title')}</h1>
+          <h1 className={language === 'de' ? 'text-white hyphens-auto [overflow-wrap:anywhere]' : 'text-white'}>{t('clients.page.title')}</h1>
           <p className="mt-8 text-[19px] text-white/55 leading-[1.75] max-w-2xl">
             {t('clients.page.subtitle')}
           </p>

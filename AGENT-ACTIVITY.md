@@ -158,3 +158,7 @@ Supply missing source-proven lastmod values for four localized search-service pa
 ## 2026-11-13 — German employer hiring brief
 
 Improve the existing German client route with practical in-house and law-firm briefing questions, matching employer title/heading and German role/methodology/enquiry paths. Identify English-only background links. Preserve other locales, commercial scope and the already genuine sitemap date; extend the existing employer journey. See docs/reports/2026-11-13-german-employer-brief.md. No new office, placement reference, private-calendar approval, AI access or ranking gain.
+
+## 2026-11-13 — German client mobile heading wrap
+
+Actual390px production QA caught the new long employer heading overflowing despite desktop checks. Preserve the failure, apply German-only wrapping without changing the wording and extend the existing browser journey with the mobile width regression. See docs/reports/2026-11-13-german-client-mobile-wrap.md. Release and actual mobile confirmation remain required.
