@@ -1,6 +1,6 @@
 import { mkdir, writeFile } from 'node:fs/promises'
 import { expect, test, type Page } from '@playwright/test'
-import editorialPublication from '../../lib/editorial/published.json'
+import { currentEditorialEntries } from '../../lib/editorial/registry'
 
 async function structuredDataNodes(page: Page) {
   const jsonLd = await page.locator('script[type="application/ld+json"]').allTextContents()
@@ -13,7 +13,7 @@ async function structuredDataNodes(page: Page) {
 const standardRoutes = [
   { path: '/', lang: 'en', identity: 'Legal Executive Search for Law Firms and Corporate Legal Departments', home: '/', canonical: 'https://www.bsolution.eu' },
   { path: '/cs', lang: 'cs', identity: 'Butikový Legal Executive Search pro advokátní kanceláře a korporátní právní oddělení', home: '/cs', canonical: 'https://www.bsolution.eu/cs' },
-  { path: '/de', lang: 'de', identity: 'Boutique Legal Executive Search für Anwaltskanzleien und Rechtsabteilungen', home: '/de', canonical: 'https://www.bsolution.eu/de' },
+  { path: '/de', lang: 'de', identity: 'Juristische Personalberatung für Unternehmen und Kanzleien', home: '/de', canonical: 'https://www.bsolution.eu/de' },
   { path: '/pl', lang: 'pl', identity: 'Butikowy Legal Executive Search dla kancelarii prawnych i korporacyjnych działów prawnych', home: '/pl', canonical: 'https://www.bsolution.eu/pl' },
   { path: '/services', lang: 'en', identity: 'Legal Executive Search Services', home: '/', canonical: 'https://www.bsolution.eu/services' },
   { path: '/cs/services', lang: 'cs', identity: 'Služby Legal Executive Search', home: '/cs', canonical: 'https://www.bsolution.eu/cs/services' },
@@ -755,6 +755,8 @@ test('leadership visitors receive a decision brief and clearly labelled illustra
   expect(html).toContain('A legal leadership brief your decision-makers can agree')
   expect(html).not.toContain('Replacing the wrong hire often takes 6–12 months')
   await page.goto('/hire-legal-leader')
+  await expect(page).toHaveTitle('Confidential General Counsel & Head of Legal Search | B Solution')
+  await expect(page.getByRole('heading', { level: 1 })).toHaveText('Confidential General Counsel and Head of Legal Search')
   const brief = page.getByRole('region', { name: 'A legal leadership brief your decision-makers can agree', exact: true })
   await expect(brief.locator('dt')).toHaveCount(4)
   await expect(brief.getByRole('link', { name: 'illustrative first-General-Counsel mandate for a cross-border fintech', exact: true })).toHaveAttribute('href', '/case-studies/general-counsel-fintech')
@@ -1065,7 +1067,7 @@ for (const route of [
 
 
 test('every promoted editorial entry is visible once on its canonical route', async ({ page, request }) => {
-  for (const entry of editorialPublication.entries) {
+  for (const entry of currentEditorialEntries()) {
     const response = await page.goto(entry.targetPath)
     expect(response?.status()).toBe(200)
     await expect(page.locator('html')).toHaveAttribute('lang', entry.locale)

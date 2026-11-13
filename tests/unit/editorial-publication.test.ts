@@ -1,10 +1,12 @@
-import { describe, expect, it } from 'vitest'
+import { afterEach, describe, expect, it, vi } from 'vitest'
 import { editorialEntryHash, parseEditorialPublication, type PublishedEditorialEntry } from '../../lib/editorial/publication'
 import { stageEditorialRelease } from '../../scripts/editorial/release'
 import { contentRevision, type EditorialTask, type WorkflowContext } from '../../scripts/editorial/workflow'
 import { publishedEditorialSections, publishedEditorialDates } from '../../lib/editorial/registry'
 import { getEditorialTargets } from '../../lib/editorial/targets'
 import payload from '../../lib/editorial/published.json'
+
+afterEach(() => vi.useRealTimers())
 
 const targets = new Map([['/practice-areas/compliance-officer', { locale: 'en', headings: ['Existing section'] }]])
 const context: WorkflowContext = { asOf: '2026-11-13', allowedPaths: new Set(targets.keys()), pageIds: new Map(), evidence: [] }
@@ -70,15 +72,24 @@ describe('public editorial release boundary', () => {
     expect(() => stageEditorialRelease(queue(moved), moved.id, original, { ...context, allowedPaths: new Set(nextTargets.keys()) }, nextTargets)).toThrow('silently moved')
   })
   it('renders the actual approved supplement once, only on the intended language and route', () => {
+    vi.useFakeTimers(); vi.setSystemTime('2026-11-13T12:00:00Z')
     const records = publishedEditorialSections('/practice-areas/compliance-officer', 'en')
     expect(records).toHaveLength(1)
     expect(records[0].paragraphs).toHaveLength(6)
     expect(records[0].reviewedRevision).toBe('855b1325e73b9680be5a1b974be0e96554b75fa5791784e39e5db90c8b17bc64')
     for (const locale of ['cs', 'de', 'pl'] as const) expect(publishedEditorialSections('/practice-areas/compliance-officer', locale)).toEqual([])
     expect(publishedEditorialSections('/practice-areas/general-counsel', 'en')).toEqual([])
-    expect(publishedEditorialDates()).toEqual({ '/practice-areas/compliance-officer': '2026-11-13' })
+    expect(publishedEditorialDates()).toEqual({ '/practice-areas/compliance-officer': '2026-11-13', '/hire-legal-leader': '2026-11-13' })
     expect(() => parseEditorialPublication(payload, getEditorialTargets())).not.toThrow()
     const entry = records[0] as PublishedEditorialEntry
     expect(entry.entryHash).toBe(editorialEntryHash(entry))
   })
+})
+
+it('keeps the real content date when an unchanged text is reviewed again', () => {
+  const previous = staged(), row = task()
+  row.review!.reviewedAt = '2026-11-18'
+  const result = stageEditorialRelease(queue(row), row.id, previous, { ...context, asOf: '2026-11-18' }, targets)
+  expect(result.entries[0].contentUpdatedAt).toBe('2026-11-13')
+  expect(result.entries[0].paragraphs).toEqual(previous.entries[0].paragraphs)
 })

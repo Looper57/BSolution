@@ -188,3 +188,6 @@ export default async function Page({ params }: { params: Promise<{ segments: str
   }
   notFound()
 }
+
+// Calendar-approved text is evaluated again after this bounded cache interval.
+export const revalidate = 60

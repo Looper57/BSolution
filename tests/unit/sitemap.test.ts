@@ -69,6 +69,7 @@ describe('employer discovery independent of external feeds', () => {
     const fetch = vi.fn(async () => { throw new Error('feed unavailable') })
     vi.stubGlobal('fetch', fetch)
     try {
+      vi.useFakeTimers({ toFake: ['Date'] }); vi.setSystemTime('2026-11-13T12:00:00Z')
       const employers = getEmployerSitemapEntries()
       expect(fetch).not.toHaveBeenCalled()
       expect(employers.some(entry => entry.url.endsWith('/law-firm-recruitment'))).toBe(true)
@@ -83,6 +84,7 @@ describe('employer discovery independent of external feeds', () => {
       expect(employers.filter(entry => entry.lastModified).map(entry => entry.url).sort()).toEqual([
         'https://www.bsolution.eu/clients',
         'https://www.bsolution.eu/cs/clients',
+        'https://www.bsolution.eu/de',
         'https://www.bsolution.eu/de/clients',
         'https://www.bsolution.eu/for-companies',
         'https://www.bsolution.eu/hire-in-house-counsel',
@@ -94,11 +96,11 @@ describe('employer discovery independent of external feeds', () => {
         'https://www.bsolution.eu/pl/clients',
         'https://www.bsolution.eu/practice-areas/compliance-officer',
       ])
-      expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(12)
+      expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(13)
       expect(fetch).not.toHaveBeenCalled()
       const all = new Set((await sitemap()).map(entry => entry.url))
       expect(employers.every(entry => all.has(entry.url))).toBe(true)
-    } finally { vi.unstubAllGlobals() }
+    } finally { vi.unstubAllGlobals(); vi.useRealTimers() }
   })
 
   it('serializes timezone-less dates on source and translated job pages and omits malformed dates', async () => {

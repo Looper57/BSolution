@@ -43,14 +43,14 @@ function HireLegalLeaderContent({ editorialSupplement }: { editorialSupplement: 
               {/* Headline */}
               <h1 className="text-white text-[clamp(2.25rem,5.5vw,4rem)] font-serif font-normal leading-[1.08] tracking-[-0.02em]">
                 {language === 'en' 
-                  ? 'Hire a Head of Legal Who Can Actually Lead — Not Just Advise'
+                  ? 'Confidential General Counsel and Head of Legal Search'
                   : 'Najměte Head of Legal, který dokáže vést — ne jen radit'}
               </h1>
               
               {/* Subheadline */}
               <p className="mt-8 lg:mt-10 text-white/75 text-[18px] lg:text-[20px] leading-[1.7] max-w-2xl">
                 {language === 'en'
-                  ? 'Avoid costly hiring mistakes. We deliver proven legal leaders trusted in complex international environments.'
+                  ? 'Confidential executive search for companies appointing a General Counsel, Head of Legal or regional legal leader. Define the role, reporting line and international remit before starting the search.'
                   : 'Vyhněte se nákladným náborovým chybám. Dodáváme ověřené právní lídry důvěryhodné v komplexních mezinárodních prostředích.'}
               </p>
               

@@ -2,6 +2,23 @@
   "version": 1,
   "entries": [
     {
+      "id": "confidential-legal-leader-replacement",
+      "targetPath": "/hire-legal-leader",
+      "locale": "en",
+      "heading": "Plan a confidential General Counsel replacement",
+      "paragraphs": [
+        "A confidential replacement of a General Counsel or Head of Legal calls for two briefs: the leadership role the business needs next, and the information that may be shared at each stage of the search. Separate these before discussing names or approaching the market.",
+        "Begin with an anonymised outline: employment location, countries supported, reporting line, team size, working languages and the business problem the new legal leader should address. Describe the organisation by sector and scale at this stage. Avoid names, internal documents or details that identify the incumbent in an initial web enquiry.",
+        "Decide who can authorise the search, review profiles and join interviews. Agree when the employer's identity and the reason for the appointment can be disclosed, which communication channels should be used, and who coordinates internal updates. Treat references and contact with a candidate's current employer as separate decisions to agree in advance.",
+        "Review the role rather than copying the incumbent's job description. Identify the legal decisions the new hire will own, the relationship with the board and business leaders, the work kept with external counsel, and any changes in geographic or regulatory remit. Use these responsibilities to agree assessment criteria and the seniority required.",
+        "Plan continuity alongside recruitment: which person or external adviser covers urgent matters, what handover can realistically be arranged, and which approvals are needed before an offer. Distinguish a desired start date from a commitment that has already been agreed.",
+        "For an initial conversation with B Solution, share the role outline, location, search restrictions and decision timetable. Sensitive names and documents can wait until an appropriate process for sharing them has been agreed. Use the enquiry link on this page to discuss a leadership mandate."
+      ],
+      "contentUpdatedAt": "2026-11-13",
+      "reviewedRevision": "f9205fc529fa87b5568ec5563833d8f5843ad4d1180f9e7950a397cedccb028a",
+      "entryHash": "d0ab322e5160c8f2a7b85b5f8e9a5ddfc0cb953df82bb82371b4d9b425ebfe10"
+    },
+    {
       "id": "compliance-remit",
       "targetPath": "/practice-areas/compliance-officer",
       "locale": "en",
@@ -18,5 +35,31 @@
       "reviewedRevision": "855b1325e73b9680be5a1b974be0e96554b75fa5791784e39e5db90c8b17bc64",
       "entryHash": "097c8fad0e246cbf02a4e72be7f5cb831a6e53e3b07c19974631e250916d7109"
     }
-  ]
+  ],
+  "calendar": {
+    "entries": [
+      {
+        "publishOn": "2026-11-16",
+        "reviewUntil": "2026-11-27",
+        "entry": {
+          "id": "partner-practice-integration",
+          "targetPath": "/law-firm-recruitment",
+          "locale": "en",
+          "heading": "Plan integration before recruiting a lateral partner",
+          "paragraphs": [
+            "A partner search needs a clear role inside the receiving firm. Before deciding whom to approach, agree what the appointment is expected to add to the practice and what the firm will provide in return. Make the integration plan part of the recruitment brief.",
+            "Identify a partner who will sponsor the appointment and the people responsible for resourcing, internal introductions and operational onboarding. Clarify how the incoming partner will work with existing practice heads, offices and client relationship partners.",
+            "Separate an individual's experience from assumptions about future instructions. Discuss the type of work the partner can lead, the clients or sectors the firm wants to serve, and the support needed to develop that work. Treat any expectation of clients or colleagues moving with the partner as something to assess, not a confirmed commitment.",
+            "For a proposed team, describe each person's intended role, reporting line and dependencies. Consider what happens if only part of the group joins, or if start dates differ. Agree who will assess each individual and how the receiving team will cover gaps while the move is being considered.",
+            "Set practical priorities for the first three months: internal introductions, access to the right support, allocation of work and a review with the sponsoring partner. Decide how progress will be discussed and which assumptions should be revisited. Commercial targets and contractual terms should be agreed separately with the appropriate decision-makers.",
+            "To discuss a lateral partner or team search with B Solution, begin with the practice, office, intended responsibilities, available support and decision timetable. An initial enquiry can use an anonymous outline. Agree how confidential candidate and client information will be shared before sending detailed material."
+          ],
+          "contentUpdatedAt": "2026-11-16",
+          "reviewedRevision": "60bab195e7ef6a83dbcb2de939486f3777876f2f946eadc2b1875cf40d0c235f",
+          "entryHash": "bc0a7d606ebabf2ef303a180e9ec0272a6383a9c2946f8bd826bf67c5207c27f"
+        },
+        "scheduleHash": "b4639da2ac89e52c8dd446f7aed119c2d6688f28c781ce8f32604808b130a89f"
+      }
+    ]
+  }
 }
