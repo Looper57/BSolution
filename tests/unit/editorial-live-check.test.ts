@@ -17,6 +17,7 @@ describe('actual public editorial HTML contract', () => {
   })
   it('rejects duplicate, missing and altered paragraphs rather than matching text elsewhere', () => {
     expect(verifyEditorialHtml(page(section + section), entry)).toContain('editorial-section-count')
+    expect(verifyEditorialHtml(page('<h3>Role &amp; scope</h3>' + section), entry)).toContain('heading-not-unique')
     expect(verifyEditorialHtml(page(section.replace("The employer&#x27;s expectations.", 'Changed.')), entry)).toContain('paragraph-mismatch')
     expect(verifyEditorialHtml(page(section.replace('<p>The employer&#x27;s expectations.</p>', '')), entry)).toContain('paragraph-mismatch')
     expect(verifyEditorialHtml(page(section.replace('Role &amp; scope', 'Different heading')), entry)).toContain('heading-mismatch')

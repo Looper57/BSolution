@@ -20,6 +20,8 @@ export function verifyEditorialHtml(html: string, entry: PublishedEditorialEntry
   if (canonical.length !== 1 || canonical[0] !== `https://www.bsolution.eu${entry.targetPath}`) errors.push('canonical-mismatch')
   if (document.match(/<html\b[^>]*lang="([^"]+)"/i)?.[1] !== entry.locale) errors.push('language-mismatch')
   if (/<meta\b[^>]*name="robots"[^>]*content="[^"]*noindex/i.test(document)) errors.push('unexpected-noindex')
+  const matchingHeadings = [...document.matchAll(/<h[1-6]\b[^>]*>([\s\S]*?)<\/h[1-6]>/gi)].filter(match => plainText(match[1].replace(/<[^>]*>/g, '')) === entry.heading.replace(/\s+/g, ' ').trim())
+  if (matchingHeadings.length !== 1) errors.push('heading-not-unique')
   const sections = [...document.matchAll(new RegExp(`<section\\b[^>]*data-editorial-id="${escapeRegex(entry.id)}"[^>]*>([\\s\\S]*?)<\\/section>`, 'g'))]
   if (sections.length !== 1) return [...errors, 'editorial-section-count']
   try {

@@ -110,3 +110,7 @@ Connect the four existing client pages to localized published candidate profiles
 ## 2026-11-13 — Reviewed editorial release rendering
 
 Connect exact approved/published private task revisions to a minimal staged public manifest and the real generic authority renderer. Replay the already owner-approved compliance paragraphs, removing the duplicate hand-written source. Add strict target/language/integrity validation and genuine sitemap dates. Stage writes only a new candidate file, never approvals, queues, existing files/symlinks, PRs or deploys. Private source/reviewer/demand data remain outside Git. Source/release review remains mandatory; no unattended scheduler or new AI/provider integration. See docs/reports/2026-11-13-editorial-release-rendering.md.
+
+## 2026-11-13 — Server editorial slots for four employer landing routes
+
+Wire the existing English in-house, legal-leadership, law-firm and Europe pages to the reviewed publication path using server-provided ReactNode slots before their enquiry. Keep interactive client shells and public text/metadata unchanged; no manifest/Node validation imported by client JS and no invented approval. Register observed headings and explicit supported targets, add real-shell SSR/empty-state tests plus a native check of every promoted entry, and reject globally duplicate editorial headings in production postflight. See docs/reports/2026-11-13-editorial-landing-adapter.md.

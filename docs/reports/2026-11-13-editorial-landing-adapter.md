@@ -1,0 +1,9 @@
+# Reviewed editorial slots in the existing employer landing pages
+
+The editorial adapter only supported generic authority pages; the main employer landing pages were still outside that delivery path. Add explicit server-rendered slots for the existing English in-house, legal-leadership, law-firm and Europe routes. Preserve their interactive client shells and insert the server-provided content inside main before the enquiry. Do not import the whole publication manifest or Node validation into client JavaScript. Empty slots add no content or layout band.
+
+Existing copy, secure forms, canonical URLs, languages and modification dates remain unchanged. No new editorial text or approval is created. The public manifest still contains only the six already approved compliance paragraphs. The target registry records the actual published H1/H2s on the four routes for duplicate-title validation. Other custom routes, translations, case studies and owner-gated service renderers remain outside this adapter.
+
+Synthetic server rendering tests exercise all four actual page shells with a supplied supplement and prove placement inside main before the enquiry, plus empty-state behavior and supported-route/heading gates. A new native aggregate journey checks every actual promoted manifest entry for unique visible heading/section and exact server-rendered paragraphs; the automatic production check also detects a matching heading duplicated elsewhere on a page. Normal source/main, graph, native and actual postflight evidence remain required.
+
+Composition reference: [Next.js Server and Client Components](https://nextjs.org/docs/app/getting-started/server-and-client-components#interleaving-server-and-client-components). This is delivery support for reviewed content, not an unattended new-content generator or reason to rewrite freshly improved pages without evidence of a useful gap.
