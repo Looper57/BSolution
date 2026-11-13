@@ -4,6 +4,7 @@ import {
   checkHreflangOnNonCanonicalPage,
   checkOrganizationConsistency,
   extractCanonical,
+  extractInternalLinks,
   extractHreflangLinks,
   extractRobotsNoindex,
   heroImageAltOk,
@@ -303,5 +304,26 @@ describe('homepage discovery', () => {
   })
   it('does not treat a self-link as a path from the homepage', () => {
     expect(findUnreachablePages('root', ['root', 'isolated'], new Map([['isolated', new Set(['isolated'])]]))).toEqual(['isolated'])
+  })
+})
+
+
+describe('navigation fragments and the canonical document', () => {
+  const origin = 'https://www.bsolution.eu'
+  it('follows the contact document once for distinct service fragments', () => {
+    expect(extractInternalLinks('<a href="/contact#service-executive-search">A</a><a href="https://www.bsolution.eu/contact#service-strategic-advisory">B</a>', origin)).toEqual([origin + '/contact'])
+  })
+  it('preserves query variants so the non-canonical guard still rejects them', () => {
+    const target = extractInternalLinks('<a href="/contact?variant=unexpected#section">A</a>', origin)[0]
+    expect(target).toBe(origin + '/contact?variant=unexpected')
+    const html = `<link rel="canonical" href="${origin}/contact" /><link rel="alternate" hreflang="en" href="${origin}/contact" />`
+    expect(checkHreflangOnNonCanonicalPage(target, extractCanonical(html), html, origin)).toHaveLength(1)
+  })
+  it('does not strip malformed fragments from canonical or hreflang declarations', () => {
+    const target = origin + '/contact#unexpected'
+    const html = `<link rel="canonical" href="${target}" /><link rel="alternate" hreflang="en" href="${target}" />`
+    expect(extractCanonical(html)).toBe(target)
+    expect(extractHreflangLinks(html)[0].href).toBe(target)
+    expect(checkHreflangOnNonCanonicalPage(origin + '/contact', extractCanonical(html), html, origin)).toHaveLength(1)
   })
 })

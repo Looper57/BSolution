@@ -83,4 +83,6 @@ Native pre-release verification caught stale html.lang after a cross-locale clie
 
 ## 2026-11-13 — explicit service enquiry handoff
 
-Carry the visitor's chosen service from the four existing overview cards into a visible, clearable contact-form context and the existing notification/accepted log. Independently validate the closed service list, preserve legacy clients and failed briefs, and avoid query routes, cookies or visitor tracking.214 units and three new native journeys protect the handoff (74 total). Exact-source CI and actual production verification follow; no real test messages.
+Carry the visitor's chosen service from the four existing overview cards into a visible, clearable contact-form context and the existing notification/accepted log. Independently validate the closed service list, preserve legacy clients and failed briefs, and avoid query routes, cookies or visitor tracking.217 units and three new native journeys protect the handoff (74 total). Exact-source CI and actual production verification follow; no real test messages.
+
+The initial local graph exposed fragment navigation being counted as another HTTP document. Normalize only followed anchor fragments; retain queries and verbatim canonical/hreflang guards. Preserve the first failed report and add three blocking regression fixtures without changing allowlists or thresholds.

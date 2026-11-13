@@ -197,17 +197,21 @@ export function checkHreflangOnNonCanonicalPage(url: string, canonical: string |
   return [{ url, detail: `page canonicalizes to ${canonical ?? '(none)'} but still declares hreflang for: ${hreflang.map((h) => h.lang).join(', ')}` }]
 }
 
-function extractInternalLinks(html: string, siteOrigin: string): string[] {
+export function extractInternalLinks(html: string, siteOrigin: string): string[] {
   const results = new Set<string>()
   const re = /<a[^>]+href="([^"]+)"/g
   let m: RegExpExecArray | null
   while ((m = re.exec(html))) {
     const href = m[1]
     if (href.startsWith('#') || href.startsWith('mailto:') || href.startsWith('tel:')) continue
-    if (href.startsWith('/')) {
-      results.add(`${siteOrigin}${href}`)
-    } else if (href.startsWith(siteOrigin)) {
-      results.add(href)
+    // A navigation fragment selects a place/state within the same HTTP
+    // document. Strip it only from followed anchors; preserve queries and
+    // inspect canonical/hreflang attributes verbatim in their own checks.
+    const documentHref = href.split('#')[0]
+    if (documentHref.startsWith('/')) {
+      results.add(`${siteOrigin}${documentHref}`)
+    } else if (documentHref.startsWith(siteOrigin)) {
+      results.add(documentHref)
     }
   }
   return [...results]
