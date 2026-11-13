@@ -6,6 +6,7 @@ import { LanguageProvider, useLanguage } from '@/lib/language-context'
 import { Header } from '@/components/header'
 import { Footer } from '@/components/footer'
 import { localizedPath } from '@/lib/i18n/config'
+import { EmployerPlatformPaths } from '@/components/employer-platform-paths'
 
 const clientsLocalizedCopy = {
   de: {
@@ -357,6 +358,7 @@ function ClientsPage() {
       <main>
         <PageHeader />
         <IntroSection />
+        <EmployerPlatformPaths />
         <CorporationsSection />
         <LawFirmsSection />
         <ApproachSection />

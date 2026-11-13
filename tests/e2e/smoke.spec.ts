@@ -1035,3 +1035,28 @@ test('an employer can read the compliance scope and reach the established search
   await expect(page).toHaveURL(/contact$/)
   await expect(page.locator('form#contact-form')).toBeVisible()
 })
+
+for (const route of [
+  { locale: 'en', path: '/clients', heading: 'Choose the next step for your legal hire', catalogue: '/available-lawyers', directory: 'https://www.lawbridge.eu/en/lawyers', selection: 'Selected service' },
+  { locale: 'cs', path: '/cs/clients', heading: 'Vyberte další krok pro váš právní tým', catalogue: '/cs/available-lawyers', directory: 'https://www.lawbridge.eu/cs/advokati', selection: 'Vybraná služba' },
+  { locale: 'de', path: '/de/clients', heading: 'Wählen Sie den nächsten Schritt für Ihr Rechtsteam', catalogue: '/de/available-lawyers', directory: 'https://www.lawbridge.eu/de/anwaelte', selection: 'Ausgewählte Leistung' },
+  { locale: 'pl', path: '/pl/clients', heading: 'Wybierz kolejny krok dla swojego zespołu prawnego', catalogue: '/pl/available-lawyers', directory: 'https://www.lawbridge.eu/pl/prawnicy', selection: 'Wybrana usługa' },
+]) {
+  test(`${route.locale} employer can choose candidate profiles, a scoped search or the separate legal-adviser directory`, async ({ page, request }) => {
+    expect(await (await request.get(route.path)).text()).toContain(route.heading)
+    await page.goto(route.path)
+    const guide = page.getByRole('region', { name: route.heading, exact: true })
+    await expect(guide.getByRole('article')).toHaveCount(2)
+    await expect(guide.locator(`a[href="${route.directory}"]`)).toHaveCount(1)
+    await expect(guide.locator('aside')).toContainText('LawBridge')
+    await guide.locator(`a[href="${route.catalogue}"]`).click()
+    await expect(page).toHaveURL(new RegExp(`${route.catalogue}$`))
+    await expect(page.locator('html')).toHaveAttribute('lang', route.locale)
+    await page.goBack()
+    await expect(page).toHaveURL(new RegExp(`${route.path}$`))
+    await page.getByRole('region', { name: route.heading, exact: true }).locator('a[href$="#service-executive-search"]').click()
+    await expect(page).toHaveURL(/contact#service-executive-search$/)
+    await expect(page.getByRole('region', { name: route.selection, exact: true })).toBeVisible()
+    await expect(page.locator('html')).toHaveAttribute('lang', route.locale)
+  })
+}
