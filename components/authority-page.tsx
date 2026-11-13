@@ -2,6 +2,7 @@ import Link from 'next/link'
 import { ArrowRight } from 'lucide-react'
 import type { Entity } from '@/lib/content/types'
 import { publishedEditorialSections } from '@/lib/editorial/registry'
+import { EditorialSections } from '@/components/published-editorial'
 import { absoluteUrl, localizedPath, LOCALES, LOCALE_META, type Locale } from '@/lib/i18n/config'
 import { UI } from '@/lib/i18n/ui'
 import { authorityEntities } from '@/lib/content'
@@ -157,14 +158,7 @@ export function AuthorityPage({ entity, locale, section }: { entity: Entity; loc
                 </div>
               </section>
             ))}
-            {publishedEditorialSections(entity.basePath, locale).map(entry => (
-              <section key={entry.id} data-editorial-id={entry.id} className="border-t border-border pt-9">
-                <h2 className="text-balance font-serif text-3xl leading-tight text-navy">{entry.heading}</h2>
-                <div className="mt-6 flex flex-col gap-5">
-                  {entry.paragraphs.map((paragraph, index) => <p key={index} className="text-base leading-relaxed text-muted-foreground md:text-lg">{paragraph}</p>)}
-                </div>
-              </section>
-            ))}
+            <EditorialSections entries={publishedEditorialSections(entity.basePath, locale)} />
             {relatedEntities.length > 0 && (
               <section className="border-t border-border pt-9">
                 <h2 className="font-serif text-3xl text-navy">{ui.common.relatedServices}</h2>

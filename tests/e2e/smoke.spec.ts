@@ -1,4 +1,5 @@
 import { expect, test, type Page } from '@playwright/test'
+import editorialPublication from '../../lib/editorial/published.json'
 
 async function structuredDataNodes(page: Page) {
   const jsonLd = await page.locator('script[type="application/ld+json"]').allTextContents()
@@ -1060,3 +1061,19 @@ for (const route of [
     await expect(page.locator('html')).toHaveAttribute('lang', route.locale)
   })
 }
+
+
+test('every promoted editorial entry is visible once on its canonical route', async ({ page, request }) => {
+  for (const entry of editorialPublication.entries) {
+    const response = await page.goto(entry.targetPath)
+    expect(response?.status()).toBe(200)
+    await expect(page.locator('html')).toHaveAttribute('lang', entry.locale)
+    await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', `https://www.bsolution.eu${entry.targetPath}`)
+    await expect(page.getByRole('heading', { name: entry.heading, exact: true })).toHaveCount(1)
+    const section = page.locator(`section[data-editorial-id="${entry.id}"]`)
+    await expect(section).toHaveCount(1)
+    await expect(section.locator('p')).toHaveText(entry.paragraphs)
+    const html = await (await request.get(entry.targetPath)).text()
+    expect(html).toContain(`data-editorial-id="${entry.id}"`)
+  }
+})
