@@ -25,21 +25,22 @@ function slugify(text: string): string {
   return text.toLowerCase().normalize('NFD').replace(/\p{M}/gu, '').replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60)
 }
 
-/** `revalidateSeconds` only for the sitemap, which must stay a static,
- * hourly regenerated file: served dynamically on Vercel it returned 404
- * (2026-10-24). Pages read the feed live. */
-export async function getLivePositions(options: { revalidateSeconds?: number } = {}): Promise<LivePosition[]> {
+/** Listings, details and sitemaps use the same short-lived collection.
+ * Required readers must distinguish an unavailable feed from a successful
+ * empty publication list: an upstream failure is not evidence of closure. */
+export async function getLivePositions(options: { required?: boolean } = {}): Promise<LivePosition[]> {
   try {
-    // No local cache: the LawBridge feed is already cached for an hour at
-    // its CDN and in front of PCRecruiter. A local data cache kept serving
-    // the empty pre-publication feed for hours (2026-10-24).
-    const response = await fetch(FEED_URL, options.revalidateSeconds ? { next: { revalidate: options.revalidateSeconds } } : { cache: 'no-store' })
-    if (!response.ok) return []
+    // One cache key/policy for every reader. Never keep the old hourly
+    // sitemap snapshot while independently fetching each detail uncached.
+    const response = await fetch(FEED_URL, { next: { revalidate: 60 } })
+    if (!response.ok) throw new Error('Published positions temporarily unavailable')
     const body = (await response.json()) as { positions?: Omit<LivePosition, 'slug'>[] }
-    return (body.positions ?? [])
-      .filter((p) => Number.isSafeInteger(p.id) && p.title && new Date(p.validThrough) > new Date())
+    if (!Array.isArray(body?.positions)) throw new Error('Published positions temporarily unavailable')
+    return body.positions
+      .filter((p) => p && Number.isSafeInteger(p.id) && p.id > 0 && typeof p.title === 'string' && p.title && new Date(p.validThrough) > new Date())
       .map((p) => ({ ...p, slug: `${p.id}-${slugify(p.title) || 'position'}` }))
   } catch {
+    if (options.required) throw new Error('Published positions temporarily unavailable')
     return []
   }
 }
@@ -47,7 +48,7 @@ export async function getLivePositions(options: { revalidateSeconds?: number } =
 export async function getLivePositionBySlug(slug: string): Promise<LivePosition | null> {
   const id = Number(slug.split('-')[0])
   if (!Number.isSafeInteger(id)) return null
-  return (await getLivePositions()).find((p) => p.id === id) ?? null
+  return (await getLivePositions({ required: true })).find((p) => p.id === id) ?? null
 }
 
 export function livePositionPath(position: Pick<LivePosition, 'slug'>): string {

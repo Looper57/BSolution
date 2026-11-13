@@ -4,7 +4,9 @@ import { SITE_URL } from '@/lib/i18n/config'
 import { getLivePositionBySlug, jobPostingJsonLd, livePositionPath } from '@/lib/live-positions'
 import { OpenPositionDetail } from './open-position-detail'
 
-export const dynamic = 'force-dynamic'
+// Keep expiry checks at request time without forcing every feed read
+// past the shared data cache (as force-dynamic would).
+export const revalidate = 0
 
 export async function generateMetadata({ params }: { params: Promise<{ slug: string }> }): Promise<Metadata> {
   const position = await getLivePositionBySlug((await params).slug)
@@ -20,7 +22,8 @@ export async function generateMetadata({ params }: { params: Promise<{ slug: str
 }
 
 /** A position published for bsolution.eu in the LawBridge console. Gone
- * from the feed (closed, paused or expired) means 404 — never a stale ad. */
+ * from a successful feed (closed/paused), or expired, means 404.
+ * An unavailable feed throws instead of claiming that the position is gone. */
 export default async function OpenPositionPage({ params }: { params: Promise<{ slug: string }> }) {
   const position = await getLivePositionBySlug((await params).slug)
   if (!position) notFound()

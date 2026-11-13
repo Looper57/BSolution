@@ -2,7 +2,9 @@ import type { Metadata } from 'next'
 import { PositionsPageContent } from './positions-client'
 import { getLivePositions } from '@/lib/live-positions'
 
-export const dynamic = 'force-dynamic'
+// Render each request so expiry is checked now, while preserving the
+// feed's explicit shared data-cache policy.
+export const revalidate = 0
 
 // This listing's own canonical/hreflang/OpenGraph must live here, not in
 // layout.tsx (which also wraps /positions/[slug]) — a layout-level

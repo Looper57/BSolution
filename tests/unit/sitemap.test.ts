@@ -99,6 +99,11 @@ describe('employer discovery independent of external feeds', () => {
       ])
       expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(14)
       expect(fetch).not.toHaveBeenCalled()
+      // An unavailable publication feed must not silently publish a new
+      // full sitemap with every active mandate removed. The independent
+      // employer sitemap above remains available without that feed.
+      await expect(sitemap()).rejects.toThrow('Published positions temporarily unavailable')
+      vi.stubGlobal('fetch', vi.fn(async () => new Response(JSON.stringify({ positions: [], jobs: [] }), { status: 200 })))
       const all = new Set((await sitemap()).map(entry => entry.url))
       expect(employers.every(entry => all.has(entry.url))).toBe(true)
     } finally { vi.unstubAllGlobals(); vi.useRealTimers() }

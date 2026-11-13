@@ -138,3 +138,7 @@ Clarify the English homepage's employer intent with international legal recruitm
 ## 2026-11-13 — Correct public LinkedIn identity
 
 Replace the obsolete company/bsolution link in homepage/footer/contact and Organization.sameAs with the verified B Solution Legal Executive Search company profile. The public company page names the legal recruitment business and links back to bsolution.eu. No LinkedIn account, profile content or message is changed.
+
+## 2026-11-13 — Consistent publication feed and truthful missing-job behavior
+
+Investigate the three own-mandate404s in the main graph crawl. Align the short feed cache while preserving request-time expiry; make mandatory detail/sitemap readers distinguish unavailable data from actual withdrawal. Preserve the failed evidence and strict graph checks. See docs/reports/2026-11-13-published-position-feed.md.
