@@ -69,6 +69,16 @@ jobs:
       - name: Browser smoke tests
         run: pnpm test:e2e
 
+      # This dummy public key exists only in the CI build. Provider script and
+      # contact responses are intercepted; production keys/server verification stay intact.
+      - name: Build widget-enabled browser fixture
+        run: pnpm build
+        env:
+          NEXT_PUBLIC_TURNSTILE_SITE_KEY: 1x00000000000000000000AA
+
+      - name: Widget lifecycle browser tests
+        run: pnpm exec playwright test --config playwright.challenge.config.ts
+
       - name: Upload Playwright failure artifacts
         if: failure()
         uses: actions/upload-artifact@v6
@@ -77,5 +87,6 @@ jobs:
           path: |
             playwright-report/
             test-results/
+            test-results-challenge/
           if-no-files-found: ignore
           retention-days: 7

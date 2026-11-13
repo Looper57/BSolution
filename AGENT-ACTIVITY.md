@@ -114,3 +114,7 @@ Connect exact approved/published private task revisions to a minimal staged publ
 ## 2026-11-13 — Server editorial slots for four employer landing routes
 
 Wire the existing English in-house, legal-leadership, law-firm and Europe pages to the reviewed publication path using server-provided ReactNode slots before their enquiry. Keep interactive client shells and public text/metadata unchanged; no manifest/Node validation imported by client JS and no invented approval. Register observed headings and explicit supported targets, add real-shell SSR/empty-state tests plus a native check of every promoted entry, and reject globally duplicate editorial headings in production postflight. See docs/reports/2026-11-13-editorial-landing-adapter.md.
+
+## 2026-11-13 — Contact challenge lifecycle
+
+Repair repeat-message widget mounting and pending shared-script attachment after SPA navigation. Keep server challenge verification intact, ignore callbacks after unmount, preserve failed briefs and reset only the active widget. Eight unit cases plus two separately built, provider/contact-intercepted browser journeys with the documented public dummy site key; the baseline browser suite remains unchanged. No actual mail or production test enquiry. See docs/reports/2026-11-13-contact-challenge-lifecycle.md.

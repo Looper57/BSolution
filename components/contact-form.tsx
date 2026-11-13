@@ -13,6 +13,7 @@ import { Input } from '@/components/ui/input'
 import { Textarea } from '@/components/ui/textarea'
 import { Label } from '@/components/ui/label'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
+import { mountContactChallenge, type ContactChallenge } from '@/lib/contact-challenge'
 import { createContactRequestHeaders } from '@/lib/contact-security-client'
 
 export const contactUiCopy = {
@@ -70,23 +71,6 @@ export const contactUiCopy = {
   },
 } as const
 
-// Declare Turnstile types
-declare global {
-  interface Window {
-    turnstile?: {
-      render: (container: string | HTMLElement, options: {
-        sitekey: string;
-        action?: string;
-        callback: (token: string) => void;
-        'expired-callback'?: () => void;
-        'error-callback'?: () => void;
-      }) => string;
-      reset: (widgetId: string) => void;
-      remove: (widgetId: string) => void;
-    };
-  }
-}
-
 export function ContactForm({ heading, initialType = '' }: {
   heading?: string
   initialType?: '' | 'hiring' | 'candidate' | 'other'
@@ -99,7 +83,7 @@ export function ContactForm({ heading, initialType = '' }: {
   const [error, setError] = useState<string | null>(null)
   const [turnstileToken, setTurnstileToken] = useState<string | null>(null)
   const turnstileRef = useRef<HTMLDivElement>(null)
-  const widgetIdRef = useRef<string | null>(null)
+  const challengeRef = useRef<ContactChallenge | null>(null)
   const [formData, setFormData] = useState({
     name: '',
     email: '',
@@ -146,45 +130,18 @@ export function ContactForm({ heading, initialType = '' }: {
     setFormData((current) => (current.message ? current : { ...current, message }))
   }, [language])
   
-  // Load Turnstile script and render widget
+  // A successful message removes the form; another message needs a fresh widget.
   useEffect(() => {
     const siteKey = process.env.NEXT_PUBLIC_TURNSTILE_SITE_KEY
-    if (!siteKey) return
-    
-    const scriptId = 'turnstile-script'
-    let script = document.getElementById(scriptId) as HTMLScriptElement | null
-    
-    const renderWidget = () => {
-      if (window.turnstile && turnstileRef.current && !widgetIdRef.current) {
-        widgetIdRef.current = window.turnstile.render(turnstileRef.current, {
-          sitekey: siteKey,
-          action: 'contact',
-          callback: (token: string) => setTurnstileToken(token),
-          'expired-callback': () => setTurnstileToken(null),
-          'error-callback': () => setTurnstileToken(null),
-        })
-      }
-    }
-    
-    if (!script) {
-      script = document.createElement('script')
-      script.id = scriptId
-      script.src = 'https://challenges.cloudflare.com/turnstile/v0/api.js'
-      script.async = true
-      script.onload = renderWidget
-      document.head.appendChild(script)
-    } else if (window.turnstile) {
-      renderWidget()
-    }
-    
+    if (submitted || !siteKey || !turnstileRef.current) return
+    const challenge = mountContactChallenge(turnstileRef.current, siteKey, setTurnstileToken)
+    challengeRef.current = challenge
     return () => {
-      if (widgetIdRef.current && window.turnstile) {
-        window.turnstile.remove(widgetIdRef.current)
-        widgetIdRef.current = null
-      }
+      challenge.dispose()
+      challengeRef.current = null
     }
-  }, [])
-  
+  }, [submitted])
+
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
     setIsSubmitting(true)
@@ -227,16 +184,10 @@ export function ContactForm({ heading, initialType = '' }: {
         message: '',
       })
       setTurnstileToken(null)
-      // Reset Turnstile widget
-      if (widgetIdRef.current && window.turnstile) {
-        window.turnstile.reset(widgetIdRef.current)
-      }
     } catch {
       setError(copy.failure)
       setTurnstileToken(null)
-      if (widgetIdRef.current && window.turnstile) {
-        window.turnstile.reset(widgetIdRef.current)
-      }
+      challengeRef.current?.reset()
     } finally {
       setIsSubmitting(false)
     }
