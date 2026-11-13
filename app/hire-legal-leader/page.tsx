@@ -4,6 +4,7 @@ import Link from 'next/link'
 import { ArrowRight, Check, Clock } from 'lucide-react'
 import { LanguageProvider, useLanguage } from '@/lib/language-context'
 import { HeroBackgroundImage } from '@/components/hero-background-image'
+import { LeadershipMandateBrief } from '@/components/employer-decision-guides'
 
 function HireLegalLeaderContent() {
   const { language } = useLanguage()
@@ -83,6 +84,8 @@ function HireLegalLeaderContent() {
           </div>
         </section>
 
+        {language === 'en' && <LeadershipMandateBrief />}
+
         {/* RISK SECTION */}
         <section className="bg-cream py-24 md:py-32 lg:py-40">
           <div className="max-w-[1440px] mx-auto px-6 lg:px-12">
@@ -104,12 +107,12 @@ function HireLegalLeaderContent() {
               {(language === 'en' ? [
                 'Delayed decisions can impact business performance',
                 'Weak legal leadership slows growth and increases risk',
-                'Replacing the wrong hire often takes 6–12 months',
+                'An unclear mandate creates mismatched expectations',
                 'The best candidates are rarely actively looking'
               ] : [
                 'Opožděná rozhodnutí mohou ovlivnit výkonnost firmy',
                 'Slabé právní vedení zpomaluje růst a zvyšuje riziko',
-                'Nahrazení špatného náboru často trvá 6–12 měsíců',
+                'Nejasné zadání vede k rozdílným očekáváním',
                 'Nejlepší kandidáti aktivně práci většinou nehledají'
               ]).map((point, index) => (
                 <div key={index} className="flex items-start gap-5">

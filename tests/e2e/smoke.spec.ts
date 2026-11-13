@@ -732,3 +732,32 @@ test('foreign employer pages state their recruitment scope and lead to a volunta
     await expect(page.getByRole('textbox').first()).toBeVisible()
   }
 })
+
+test('company visitors can choose the right legal recruitment service from crawlable content', async ({ page, request }) => {
+  const response = await request.get('/for-companies')
+  expect(await response.text()).toContain('Which legal recruitment brief fits your company?')
+  await page.goto('/for-companies')
+  await expect(page).toHaveTitle('Corporate Legal Recruitment | For Companies | B Solution')
+  await expect(page.locator('link[rel="canonical"]')).toHaveAttribute('href', 'https://www.bsolution.eu/for-companies')
+  const guide = page.getByRole('region', { name: 'Which legal recruitment brief fits your company?', exact: true })
+  await expect(guide.getByRole('article')).toHaveCount(3)
+  await expect(guide.getByRole('link', { name: 'international law firm partner and lateral recruitment', exact: true })).toHaveAttribute('href', '/law-firm-recruitment')
+  await guide.getByRole('link', { name: 'Plan your first in-house counsel appointment', exact: true }).click()
+  await expect(page).toHaveURL(/\/hire-in-house-counsel$/)
+  await expect(page.getByRole('heading', { level: 1 })).toContainText('In-House Legal Recruitment')
+})
+
+test('leadership visitors receive a decision brief and clearly labelled illustrative context', async ({ page, request }) => {
+  const response = await request.get('/hire-legal-leader')
+  const html = await response.text()
+  expect(html).toContain('A legal leadership brief your decision-makers can agree')
+  expect(html).not.toContain('Replacing the wrong hire often takes 6–12 months')
+  await page.goto('/hire-legal-leader')
+  const brief = page.getByRole('region', { name: 'A legal leadership brief your decision-makers can agree', exact: true })
+  await expect(brief.locator('dt')).toHaveCount(4)
+  await expect(brief.getByRole('link', { name: 'illustrative first-General-Counsel mandate for a cross-border fintech', exact: true })).toHaveAttribute('href', '/case-studies/general-counsel-fintech')
+  await expect(brief.getByRole('link', { name: 'General Counsel and Head of Legal role', exact: true })).toHaveAttribute('href', '/practice-areas/general-counsel')
+  await brief.getByRole('link', { name: 'Discuss your legal leadership brief', exact: true }).click()
+  await expect(page).toHaveURL(/\/contact$/)
+  await expect(page.getByRole('textbox').first()).toBeVisible()
+})

@@ -1,16 +1,16 @@
 import type { Metadata } from 'next'
 
 export const metadata: Metadata = {
-  title: 'For Companies | Legal Executive Search',
-  description: 'Partner with B Solution to hire senior legal leaders. We help corporations and law firms find General Counsel, Head of Legal, and CLO candidates across Europe.',
+  title: 'Corporate Legal Recruitment | For Companies',
+  description: 'Recruit in-house lawyers and legal leaders across Europe and the Middle East. Define the right hiring brief for your company with B Solution.',
   alternates: {
     canonical: 'https://www.bsolution.eu/for-companies',
   },
   openGraph: {
     type: 'website',
     siteName: 'B Solution',
-    title: 'Legal Executive Search for Companies | B Solution',
-    description: 'Hire senior legal leaders with B Solution. Trusted partner for General Counsel and Head of Legal recruitment since 2007.',
+    title: 'Corporate Legal Recruitment | B Solution',
+    description: 'Recruit in-house lawyers and legal leaders across Europe and the Middle East. Define the right hiring brief for your company with B Solution.',
     url: 'https://www.bsolution.eu/for-companies',
     images: [
       {
