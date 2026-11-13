@@ -14,6 +14,15 @@ function social(locale: Locale, path: string, title: string, description: string
   }
 }
 
+// The root template appends " | B Solution" (13 characters). Reserve
+// that space and shorten only search metadata; the visible job title stays full.
+function searchTitle(value: string): string {
+  if (value.length <= 52) return value
+  const prefix = value.slice(0, 51)
+  const boundary = prefix.lastIndexOf(' ')
+  return `${boundary >= 30 ? prefix.slice(0, boundary) : prefix}…`
+}
+
 /**
  * /legal-jobs (all markets), /legal-jobs/{cc} (one market) and
  * /legal-jobs/{uuid} (one external advert), in every site locale. A detail
@@ -26,14 +35,15 @@ export async function legalJobsMetadata(locale: Locale, segment: string | null):
     const name = countryName(segment.toUpperCase(), locale)
     const path = legalJobsCountryPath(segment)
     const jobs = await getLegalJobs(locale, segment.toUpperCase())
-    const metadata = social(locale, path, copy.countryTitle(name).slice(0, 60), copy.countryMeta(name), buildAlternates(locale, path))
+    const searchName = segment.toUpperCase() === 'AE' ? { en: 'UAE', cs: 'SAE', de: 'VAE', pl: 'ZEA' }[locale] : name
+    const metadata = social(locale, path, searchTitle(copy.countryTitle(searchName)), copy.countryMeta(searchName), buildAlternates(locale, path))
     // An empty market page is thin content until the first advert arrives.
     return jobs.length === 0 ? { ...metadata, ...NOINDEX } : metadata
   }
   const job = isJobId(segment) ? await getLegalJob(segment, locale) : null
   if (!job) return NOINDEX
   const path = legalJobPath(job)
-  const title = `${job.title}${job.city ? ` – ${job.city}` : ''}`.slice(0, 60)
+  const title = searchTitle(`${job.title}${job.city ? ` – ${job.city}` : ''}`)
   const description = job.summary.replace(/\s+/g, ' ').slice(0, 155)
   const alternates = job.summaryLocale === locale ? buildAlternates(locale, path) : { canonical: absoluteUrl('en', path) }
   return social(locale, path, title, description, alternates)
