@@ -3,6 +3,7 @@
 import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { contactFormPage } from '@/lib/contact-form-context'
+import { enquiryServices, enquiryServiceFromHash, type EnquiryService } from '@/lib/service-enquiry'
 import { Send, CheckCircle } from 'lucide-react'
 import { useLanguage } from '@/lib/language-context'
 import { COPY as availableLawyersCopy, PROFILE_INQUIRY_KEY, isProfileRef } from '@/lib/available-lawyers'
@@ -23,6 +24,8 @@ export const contactUiCopy = {
     confidentiality: 'All enquiries are handled with strict confidentiality.',
     another: 'Send Another Message',
     select: 'Select an option',
+    selectedService: 'Selected service',
+    clearService: 'Clear service selection',
     sending: 'Sending...',
     location: 'Prague, Czech Republic',
   },
@@ -34,6 +37,8 @@ export const contactUiCopy = {
     confidentiality: 'Všechny dotazy jsou zpracovávány s naprostou důvěrností.',
     another: 'Odeslat další zprávu',
     select: 'Vyberte možnost',
+    selectedService: 'Vybraná služba',
+    clearService: 'Zrušit výběr služby',
     sending: 'Odesílám...',
     location: 'Praha, Česká republika',
   },
@@ -45,6 +50,8 @@ export const contactUiCopy = {
     confidentiality: 'Alle Anfragen werden streng vertraulich behandelt.',
     another: 'Weitere Nachricht senden',
     select: 'Bitte auswählen',
+    selectedService: 'Ausgewählte Leistung',
+    clearService: 'Leistungsauswahl aufheben',
     sending: 'Wird gesendet...',
     location: 'Prag, Tschechien',
   },
@@ -56,6 +63,8 @@ export const contactUiCopy = {
     confidentiality: 'Wszystkie zapytania traktujemy jako ściśle poufne.',
     another: 'Wyślij kolejną wiadomość',
     select: 'Wybierz opcję',
+    selectedService: 'Wybrana usługa',
+    clearService: 'Wyczyść wybór usługi',
     sending: 'Wysyłanie...',
     location: 'Praga, Czechy',
   },
@@ -100,6 +109,26 @@ export function ContactForm({ heading, initialType = '' }: {
     message: '',
   })
   const [honeypot, setHoneypot] = useState('')
+  const [serviceInterest, setServiceInterest] = useState<EnquiryService | undefined>()
+
+  useEffect(() => {
+    const syncService = () => {
+      const selected = enquiryServiceFromHash(window.location.hash)
+      setServiceInterest(selected)
+      if (selected) {
+        setFormData(current => current.type ? current : { ...current, type: 'hiring' })
+        document.getElementById('contact-form')?.scrollIntoView({ block: 'start' })
+      }
+    }
+    syncService()
+    window.addEventListener('hashchange', syncService)
+    return () => window.removeEventListener('hashchange', syncService)
+  }, [])
+
+  const clearService = () => {
+    setServiceInterest(undefined)
+    window.history.replaceState(window.history.state, '', '#contact-form')
+  }
 
   // "Ask for the full profile" on /available-lawyers hands over the profile
   // reference (PROFILE_INQUIRY_KEY): the enquiry arrives naming the profile.
@@ -176,6 +205,7 @@ export function ContactForm({ heading, initialType = '' }: {
         body: JSON.stringify({
           ...formData,
           formPage,
+          serviceInterest,
           turnstileToken,
           _hp: honeypot,
         }),
@@ -193,7 +223,7 @@ export function ContactForm({ heading, initialType = '' }: {
         email: '',
         company: '',
         phone: '',
-        type: String(initialType),
+        type: serviceInterest ? 'hiring' : String(initialType),
         message: '',
       })
       setTurnstileToken(null)
@@ -244,6 +274,10 @@ export function ContactForm({ heading, initialType = '' }: {
           {heading ?? t('contact.form.title')}
         </h3>
         <form id="contact-form" onSubmit={handleSubmit} className="space-y-6 scroll-mt-28">
+          {serviceInterest && <div className="rounded border border-gold/40 bg-cream p-4" role="region" aria-label={copy.selectedService}>
+            <p className="font-medium text-navy">{copy.selectedService}: {enquiryServices[serviceInterest][language]}</p>
+            <button type="button" className="mt-2 text-sm underline underline-offset-4 hover:text-gold" onClick={clearService}>{copy.clearService}</button>
+          </div>}
           {/* Honeypot field - hidden from users, catches bots */}
           <div className="absolute -left-[9999px]" aria-hidden="true">
             <input
@@ -323,7 +357,14 @@ export function ContactForm({ heading, initialType = '' }: {
             </Label>
             <Select
               value={formData.type}
-              onValueChange={(value) => setFormData({ ...formData, type: value })}
+              onValueChange={(value) => {
+                // The form control can emit an empty change when its value
+                // is set after hydration. No empty option is offered here;
+                // explicit new-message resets remain controlled by the form.
+                if (value === 'hiring' || value === 'candidate' || value === 'other') {
+                  setFormData(current => ({ ...current, type: value }))
+                }
+              }}
             >
               <SelectTrigger id="type" className="border-gray-light focus:border-gold focus:ring-gold">
                 <SelectValue placeholder={copy.select}>{formData.type ? t(`contact.form.type.${formData.type}`) : undefined}</SelectValue>

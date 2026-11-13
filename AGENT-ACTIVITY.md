@@ -80,3 +80,13 @@ Replace generic company-service claims with original role/responsibility compari
 Continue the inbound workstream with existing Germany and Dubai/UAE pages: replace unsupported local/expertise claims with distinct employer scope, connect verified service/evidence paths, and orient metadata to buyers. Add a knowingly English route from the German homepage and accurate edit dates. No new routes, legal rules, commercial terms or acquisition outreach. Native71-case source/main CI and production verification follow; private demand data remains outside Git.
 
 Native pre-release verification caught stale html.lang after a cross-locale client navigation. Fix initial/server and subsequent/client language with one shared route-locale resolver and a root synchronizer; extend the existing failure case to the reverse transition. Preserve the failed proof; do not waive the assertion.
+
+## 2026-11-13 — explicit service enquiry handoff
+
+Carry the visitor's chosen service from the four existing overview cards into a visible, clearable contact-form context and the existing notification/accepted log. Independently validate the closed service list, preserve legacy clients and failed briefs, and avoid query routes, cookies or visitor tracking.217 units and four new native journeys protect the handoff (75 total). Exact-source CI and actual production verification follow; no real test messages.
+
+The initial local graph exposed fragment navigation being counted as another HTTP document. Normalize only followed anchor fragments; retain queries and verbatim canonical/hreflang guards. Preserve the first failed report and add three blocking regression fixtures without changing allowlists or thresholds.
+
+Preserve the explicit validated service choice across contact-locale switches; add an EN→DE→EN journey with correctly labelled service and document language. Other route/language behavior stays unchanged.
+
+The initial native handoff case exposed a spurious empty category update after the programmatic prefill. Accept only offered categories and use a functional update, preserving explicit resets and the unchanged regression assertion. Keep the failed source proof.

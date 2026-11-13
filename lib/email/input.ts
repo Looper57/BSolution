@@ -1,3 +1,4 @@
+import { enquiryService, type EnquiryService } from '@/lib/service-enquiry';
 import { contactFormPage, type ContactFormPage } from '@/lib/contact-form-context';
 
 const MAX_REQUEST_BYTES = 16_384;
@@ -12,6 +13,7 @@ export type ContactEmailInput = {
   turnstileToken: string;
   honeypot: string;
   formPage?: ContactFormPage;
+  serviceInterest?: EnquiryService;
   company?: string;
   phone?: string;
   type?: "hiring" | "candidate" | "other" | "";
@@ -100,7 +102,10 @@ export async function parseContactInput(
   const rawPage = readOptionalString(body, "formPage");
   const formPage = contactFormPage(rawPage);
   if (rawPage && !formPage) throw new ContactInputError("Form page is invalid");
-  return { name, email, message, turnstileToken, honeypot, company, phone, type, formPage };
+  const rawService = readOptionalString(body, "serviceInterest");
+  const serviceInterest = enquiryService(rawService);
+  if (rawService && !serviceInterest) throw new ContactInputError("Service interest is invalid");
+  return { name, email, message, turnstileToken, honeypot, company, phone, type, formPage, serviceInterest };
 }
 
 function hasDuplicateTopLevelKeys(source: string): boolean {
