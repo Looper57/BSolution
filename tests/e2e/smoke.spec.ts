@@ -961,3 +961,18 @@ test('unknown or query-bearing service fragments do not become an enquiry select
     await expect(page.locator('form#contact-form').getByLabel('I am...', { exact: true })).toContainText('Select an option')
   }
 })
+
+
+test('an explicit service choice follows the visitor to a translated contact form', async ({ page }) => {
+  await page.goto('/services')
+  await page.locator('#executive-search').getByRole('link', { name: 'Discuss This Service', exact: true }).click()
+  await expect(page.getByRole('region', { name: 'Selected service', exact: true })).toContainText('Legal Executive Search')
+  await page.locator('header').getByRole('button', { name: 'Auf Deutsch umschalten', exact: true }).click()
+  await expect(page).toHaveURL(/de\/contact#service-executive-search$/)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'de')
+  await expect(page.getByRole('region', { name: 'Ausgewählte Leistung', exact: true })).toContainText('Legal Executive Search')
+  await page.locator('header').getByRole('button', { name: 'Switch to English', exact: true }).click()
+  await expect(page).toHaveURL(/contact#service-executive-search$/)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+  await expect(page.getByRole('region', { name: 'Selected service', exact: true })).toContainText('Legal Executive Search')
+})
