@@ -17,6 +17,7 @@ globalThis.fetch = async (input, init) => {
     const payload = JSON.parse(init?.body)
     assert.deepEqual(payload.to, ['runtime-observability@example.com'])
     assert.equal(payload.from, 'B Solution <noreply@bsolution.eu>')
+    assert.ok(payload.text.includes('Recruitment page (browser-declared): /de/hire-in-house-counsel'))
     assert.equal(new Headers(init?.headers).get('authorization'), 'Bearer re_observability_fixture')
     process.stdout.write('[observability-fixture] mocked-provider-request\n')
     return payload.text.includes('runtime-provider-failure')

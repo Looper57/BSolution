@@ -7,6 +7,8 @@ import { absoluteUrl, localizedPath, LOCALES, LOCALE_META, type Locale } from '@
 import { UI } from '@/lib/i18n/ui'
 import { authorityEntities } from '@/lib/content'
 import { countryRecruitmentLandingPages } from '@/lib/routes'
+import { recruitmentPage } from '@/lib/enquiry-recruitment'
+import { serviceEnquiryHref } from '@/lib/service-enquiry'
 import {
   buildArticleSchema,
   buildBreadcrumbSchema,
@@ -61,7 +63,8 @@ export function AuthorityPage({ entity, locale, section }: { entity: Entity; loc
   const ui = UI[locale]
   const sectionLabel = ui.nav[sectionLabels[section]]
   const currentPath = entity.basePath
-  const contactPath = localizedPath(locale, '/contact')
+  const recruitmentContext = recruitmentPage(localizedPath(locale, currentPath))
+  const contactPath = recruitmentContext ? serviceEnquiryHref('executive-search', locale, recruitmentContext) : localizedPath(locale, '/contact')
   const countryLandingPage = entity.kind === 'country' ? countryRecruitmentLandingPages[entity.slug as keyof typeof countryRecruitmentLandingPages] : undefined
   const relatedSlugs = Object.entries(entity.related ?? {})
     .filter(([group]) => group !== 'insights')

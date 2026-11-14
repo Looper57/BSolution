@@ -41,7 +41,7 @@ try {
   const payload = {
     name: 'Runtime Private Name', email: 'runtime-private@example.com', company: 'Runtime Private Company',
     phone: '+49 000000000', message: 'runtime-private-brief', type: 'hiring',
-    formPage: '/hire-in-house-counsel', serviceInterest: 'executive-search', discoverySource: 'google',
+    formPage: '/contact', recruitmentPage: '/de/hire-in-house-counsel', serviceInterest: 'executive-search', discoverySource: 'google',
     turnstileToken: 'observability-valid-token',
   }
   const post = async (body: Record<string, unknown>) => {
@@ -73,7 +73,8 @@ try {
   report = enquiryReport(logRows(output))
   assert.equal(report.providerAcceptedMessages, 1)
   assert.equal(report.declaredEmployerEnquiries, 1)
-  assert.equal(report.employerBySubmissionPage['/hire-in-house-counsel'], 1)
+  assert.equal(report.employerBySubmissionPage['/contact'], 1)
+  assert.equal(report.employerByRecruitmentPage['/de/hire-in-house-counsel'], 1)
   assert.equal(report.recordedQualifiedEmployerEnquiries, null)
 } catch (error) {
   failure = error
@@ -90,6 +91,7 @@ try {
     mockedTurnstileRequests: stdout.split('[observability-fixture] mocked-turnstile-request').length - 1,
     mockedProviderRequests: stdout.split('[observability-fixture] mocked-provider-request').length - 1,
     qualificationsInferred: false,
+    recruitmentPageRetained: report?.employerByRecruitmentPage['/de/hire-in-house-counsel'] === 1,
   }, null, 2) + '\n')
 }
 if (failure) throw failure

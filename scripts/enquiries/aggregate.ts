@@ -1,9 +1,10 @@
 import { discoverySource } from '../../lib/enquiry-discovery'
 import { contactFormPage } from '../../lib/contact-form-context'
 import { enquiryService } from '../../lib/service-enquiry'
+import { recruitmentPage } from '../../lib/enquiry-recruitment'
 
 type Outcome = { requestId: string; status: 'qualified' | 'mandated' | 'not-qualified'; recordedOn: string }
-type Accepted = { requestId: string; deliveryId: string; day: string; type: string; source: string; page: string; service: string }
+type Accepted = { requestId: string; deliveryId: string; day: string; type: string; source: string; page: string; service: string; recruitment: string }
 const identifier = (v: unknown): v is string => typeof v === 'string' && /^[a-zA-Z0-9_-]{1,128}$/.test(v)
 const record = (v: unknown): v is Record<string, unknown> => typeof v === 'object' && v !== null && !Array.isArray(v)
 const date = (v: unknown): v is string => typeof v === 'string' && /^\d{4}-\d{2}-\d{2}$/.test(v) && !Number.isNaN(Date.parse(v)) && new Date(v).toISOString().slice(0, 10) === v
@@ -45,13 +46,13 @@ export function enquiryReport(input: unknown[], outcomes: unknown = undefined, a
     if (e.status !== 'accepted') { otherRows++; continue }
     if (!identifier(e.requestId) || !identifier(e.resendMessageId) || typeof e.timestamp !== 'string' || !/^\d{4}-\d{2}-\d{2}T\d{2}:\d{2}:\d{2}(?:\.\d{1,3})?Z$/.test(e.timestamp) || Number.isNaN(Date.parse(e.timestamp))) { invalidRows++; continue }
     const day = new Date(e.timestamp).toISOString().slice(0, 10)
-    if (day > asOf || !['hiring', 'candidate', 'other', 'unspecified'].includes(String(e.enquiryType ?? 'unspecified')) || e.discoverySource !== undefined && !discoverySource(e.discoverySource) || e.formPage !== undefined && !contactFormPage(e.formPage) || e.serviceInterest !== undefined && !enquiryService(e.serviceInterest)) { invalidRows++; continue }
-    const entry: Accepted = { requestId: e.requestId, deliveryId: e.resendMessageId, day, type: String(e.enquiryType ?? 'unspecified'), source: String(e.discoverySource ?? 'unspecified'), page: String(e.formPage ?? 'unspecified'), service: String(e.serviceInterest ?? 'unspecified') }
+    if (day > asOf || !['hiring', 'candidate', 'other', 'unspecified'].includes(String(e.enquiryType ?? 'unspecified')) || e.discoverySource !== undefined && !discoverySource(e.discoverySource) || e.formPage !== undefined && !contactFormPage(e.formPage) || e.serviceInterest !== undefined && !enquiryService(e.serviceInterest) || e.recruitmentPage !== undefined && !recruitmentPage(e.recruitmentPage)) { invalidRows++; continue }
+    const entry: Accepted = { requestId: e.requestId, deliveryId: e.resendMessageId, day, type: String(e.enquiryType ?? 'unspecified'), source: String(e.discoverySource ?? 'unspecified'), page: String(e.formPage ?? 'unspecified'), service: String(e.serviceInterest ?? 'unspecified'), recruitment: String(e.recruitmentPage ?? 'unspecified') }
     const old = accepted.get(entry.deliveryId), previousDelivery = requestIds.get(entry.requestId)
     if (previousDelivery && previousDelivery !== entry.deliveryId) throw new Error('Conflicting acceptance references')
     requestIds.set(entry.requestId, entry.deliveryId)
     if (old) {
-      if (old.day !== entry.day || old.type !== entry.type || old.source !== entry.source || old.page !== entry.page || old.service !== entry.service) throw new Error('Conflicting acceptance records')
+      if (old.day !== entry.day || old.type !== entry.type || old.source !== entry.source || old.page !== entry.page || old.service !== entry.service || old.recruitment !== entry.recruitment) throw new Error('Conflicting acceptance records')
       duplicateAcceptedRows++; continue
     }
     accepted.set(entry.deliveryId, entry)
@@ -74,6 +75,7 @@ export function enquiryReport(input: unknown[], outcomes: unknown = undefined, a
     asOf, inputRows: input.length, invalidAcceptedRows: invalidRows, otherRows, unrecognizedRows, duplicateAcceptedRows,
     providerAcceptedMessages: entries.length, declaredEmployerEnquiries: employers.length,
     employerByDiscovery: counts(employers, 'source'), allByEnquiryType: counts(entries, 'type'), employerByDay: counts(employers, 'day'), employerBySubmissionPage: counts(employers, 'page'), employerByService: counts(employers, 'service'),
+    employerByRecruitmentPage: counts(employers, 'recruitment'),
     outcomesProvided: outcomes !== undefined,
     employerOutcomesRecorded: employers.filter(e => stages.has(e.deliveryId)).length,
     recordedQualifiedEmployerEnquiries: outcomes === undefined ? null : employers.filter(e => ['qualified', 'mandated'].includes(stages.get(e.deliveryId)?.status ?? '')).length,

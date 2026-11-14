@@ -86,6 +86,7 @@ describe('employer discovery independent of external feeds', () => {
         'https://www.bsolution.eu/clients',
         'https://www.bsolution.eu/cs/clients',
         'https://www.bsolution.eu/cs/locations/united-kingdom',
+        'https://www.bsolution.eu/cs/practice-areas/general-counsel',
         'https://www.bsolution.eu/cs/services/legal-executive-search',
         'https://www.bsolution.eu/de',
         'https://www.bsolution.eu/de/clients',
@@ -103,19 +104,27 @@ describe('employer discovery independent of external feeds', () => {
         'https://www.bsolution.eu/locations/united-kingdom',
         'https://www.bsolution.eu/pl/clients',
         'https://www.bsolution.eu/pl/locations/united-kingdom',
+        'https://www.bsolution.eu/pl/practice-areas/general-counsel',
         'https://www.bsolution.eu/pl/services/legal-executive-search',
         'https://www.bsolution.eu/practice-areas/compliance-officer',
         'https://www.bsolution.eu/practice-areas/general-counsel',
         'https://www.bsolution.eu/services/legal-executive-search',
       ])
-      expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(20)
+      expect(xml.match(/<lastmod>2026-11-13<\/lastmod>/g)).toHaveLength(17)
       expect(employers.filter(entry => entry.lastModified === '2026-11-14').map(entry => entry.url).sort()).toEqual([
+        'https://www.bsolution.eu/cs/practice-areas/general-counsel',
         'https://www.bsolution.eu/de',
         'https://www.bsolution.eu/de/clients',
         'https://www.bsolution.eu/de/hire-in-house-counsel',
+        'https://www.bsolution.eu/de/practice-areas/general-counsel',
+        'https://www.bsolution.eu/for-companies',
+        'https://www.bsolution.eu/hire-in-house-counsel',
+        'https://www.bsolution.eu/hire-legal-leader',
+        'https://www.bsolution.eu/pl/practice-areas/general-counsel',
+        'https://www.bsolution.eu/practice-areas/general-counsel',
       ])
-      expect(xml.match(/<lastmod>2026-11-14<\/lastmod>/g)).toHaveLength(3)
-      expect(xml.match(/<lastmod>2026-11-12<\/lastmod>/g)).toHaveLength(2)
+      expect(xml.match(/<lastmod>2026-11-14<\/lastmod>/g)).toHaveLength(10)
+      expect(xml).not.toContain('<lastmod>2026-11-12</lastmod>')
       expect(fetch).not.toHaveBeenCalled()
       // An unavailable publication feed must not silently publish a new
       // full sitemap with every active mandate removed. The independent

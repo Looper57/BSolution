@@ -4,7 +4,8 @@ import { useState, useEffect, useRef } from 'react'
 import { usePathname } from 'next/navigation'
 import { discoverySources, discoverySource as parseDiscoverySource, discoveryCopy, type DiscoverySource } from '@/lib/enquiry-discovery'
 import { contactFormPage } from '@/lib/contact-form-context'
-import { enquiryServices, enquiryServiceFromHash, type EnquiryService } from '@/lib/service-enquiry'
+import { enquiryServices, enquiryServiceFromHash, recruitmentPageFromHash, type EnquiryService } from '@/lib/service-enquiry'
+import { recruitmentPage, recruitmentPageLabel, type RecruitmentPage } from '@/lib/enquiry-recruitment'
 import { Send, CheckCircle } from 'lucide-react'
 import { useLanguage } from '@/lib/language-context'
 import { COPY as availableLawyersCopy, PROFILE_INQUIRY_KEY, isProfileRef } from '@/lib/available-lawyers'
@@ -27,6 +28,8 @@ export const contactUiCopy = {
     another: 'Send Another Message',
     select: 'Select an option',
     selectedService: 'Selected service',
+    selectedBrief: 'Recruitment brief',
+    clearBrief: 'Clear recruitment brief',
     clearService: 'Clear service selection',
     sending: 'Sending...',
     location: 'Prague, Czech Republic',
@@ -40,6 +43,8 @@ export const contactUiCopy = {
     another: 'Odeslat další zprávu',
     select: 'Vyberte možnost',
     selectedService: 'Vybraná služba',
+    selectedBrief: 'Náborové zadání',
+    clearBrief: 'Zrušit náborové zadání',
     clearService: 'Zrušit výběr služby',
     sending: 'Odesílám...',
     location: 'Praha, Česká republika',
@@ -53,6 +58,8 @@ export const contactUiCopy = {
     another: 'Weitere Nachricht senden',
     select: 'Bitte auswählen',
     selectedService: 'Ausgewählte Leistung',
+    selectedBrief: 'Suchauftrag',
+    clearBrief: 'Suchauftrag aufheben',
     clearService: 'Leistungsauswahl aufheben',
     sending: 'Wird gesendet...',
     location: 'Prag, Tschechien',
@@ -66,6 +73,8 @@ export const contactUiCopy = {
     another: 'Wyślij kolejną wiadomość',
     select: 'Wybierz opcję',
     selectedService: 'Wybrana usługa',
+    selectedBrief: 'Zlecenie rekrutacyjne',
+    clearBrief: 'Wyczyść zlecenie rekrutacyjne',
     clearService: 'Wyczyść wybór usługi',
     sending: 'Wysyłanie...',
     location: 'Praga, Czechy',
@@ -78,7 +87,9 @@ export function ContactForm({ heading, initialType = '' }: {
 } = {}) {
   const { language, t } = useLanguage()
   const copy = contactUiCopy[language]
-  const formPage = contactFormPage(usePathname())
+  const pathname = usePathname()
+  const formPage = contactFormPage(pathname)
+  const directRecruitmentPage = recruitmentPage(pathname)
   const [submitted, setSubmitted] = useState(false)
   const [isSubmitting, setIsSubmitting] = useState(false)
   const [error, setError] = useState<string | null>(null)
@@ -96,23 +107,29 @@ export function ContactForm({ heading, initialType = '' }: {
   const [honeypot, setHoneypot] = useState('')
   const [discoverySource, setDiscoverySource] = useState<DiscoverySource | undefined>()
   const [serviceInterest, setServiceInterest] = useState<EnquiryService | undefined>()
+  const [recruitmentContext, setRecruitmentContext] = useState<RecruitmentPage | undefined>()
 
   useEffect(() => {
     const syncService = () => {
       const selected = enquiryServiceFromHash(window.location.hash)
+      const context = directRecruitmentPage ?? recruitmentPageFromHash(window.location.hash)
       setServiceInterest(selected)
-      if (selected) {
+      setRecruitmentContext(context)
+      if (selected || context) {
         setFormData(current => current.type ? current : { ...current, type: 'hiring' })
+      }
+      if (selected) {
         document.getElementById('contact-form')?.scrollIntoView({ block: 'start' })
       }
     }
     syncService()
     window.addEventListener('hashchange', syncService)
     return () => window.removeEventListener('hashchange', syncService)
-  }, [])
+  }, [directRecruitmentPage])
 
   const clearService = () => {
     setServiceInterest(undefined)
+    setRecruitmentContext(undefined)
     window.history.replaceState(window.history.state, '', '#contact-form')
   }
 
@@ -165,6 +182,7 @@ export function ContactForm({ heading, initialType = '' }: {
           ...formData,
           formPage,
           serviceInterest,
+          recruitmentPage: recruitmentContext,
           discoverySource,
           turnstileToken,
           _hp: honeypot,
@@ -229,9 +247,10 @@ export function ContactForm({ heading, initialType = '' }: {
           {heading ?? t('contact.form.title')}
         </h3>
         <form id="contact-form" onSubmit={handleSubmit} className="space-y-6 scroll-mt-28">
-          {serviceInterest && <div className="rounded border border-gold/40 bg-cream p-4" role="region" aria-label={copy.selectedService}>
-            <p className="font-medium text-navy">{copy.selectedService}: {enquiryServices[serviceInterest][language]}</p>
-            <button type="button" className="mt-2 text-sm underline underline-offset-4 hover:text-gold" onClick={clearService}>{copy.clearService}</button>
+          {(serviceInterest || recruitmentContext) && <div className="rounded border border-gold/40 bg-cream p-4" role="region" aria-label={serviceInterest ? copy.selectedService : copy.selectedBrief}>
+            {serviceInterest && <p className="font-medium text-navy">{copy.selectedService}: {enquiryServices[serviceInterest][language]}</p>}
+            {recruitmentContext && <p className="mt-2 text-sm text-navy">{copy.selectedBrief}: {recruitmentPageLabel(recruitmentContext, language)}</p>}
+            <button type="button" className="mt-2 text-sm underline underline-offset-4 hover:text-gold" onClick={clearService}>{serviceInterest ? copy.clearService : copy.clearBrief}</button>
           </div>}
           {/* Honeypot field - hidden from users, catches bots */}
           <div className="absolute -left-[9999px]" aria-hidden="true">

@@ -8,7 +8,7 @@ import { serviceEnquiryHref } from '@/lib/service-enquiry'
 
 const title = 'Unternehmensjuristen finden: Inhouse-Recruitment'
 const description = 'Legal Counsel, ersten Unternehmensjuristen oder Head of Legal einstellen. B Solution unterstützt Firmen bei der vertraulichen juristischen Personalsuche in Europa.'
-const enquiry = serviceEnquiryHref('executive-search', 'de')
+const enquiry = serviceEnquiryHref('executive-search', 'de', '/de/hire-in-house-counsel')
 
 export const metadata: Metadata = {
   title,

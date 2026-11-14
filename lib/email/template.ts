@@ -1,5 +1,6 @@
 import { discoverySources } from '@/lib/enquiry-discovery';
 import { enquiryServices } from '@/lib/service-enquiry';
+import { recruitmentPageLabel } from '@/lib/enquiry-recruitment';
 import type { ContactEmailInput } from "./input";
 
 export type ContactEmailContent = {
@@ -9,7 +10,7 @@ export type ContactEmailContent = {
 };
 
 export function createContactEmailContent(
-  input: Pick<ContactEmailInput, "name" | "email" | "message" | "company" | "phone" | "type" | "formPage" | "serviceInterest" | "discoverySource">,
+  input: Pick<ContactEmailInput, "name" | "email" | "message" | "company" | "phone" | "type" | "formPage" | "serviceInterest" | "recruitmentPage" | "discoverySource">,
   requestId?: string
 ): ContactEmailContent {
   const safeName = escapeHtml(input.name);
@@ -24,6 +25,8 @@ export function createContactEmailContent(
     ["Discovery (visitor-reported)", input.discoverySource ? discoverySources[input.discoverySource].en : undefined],
     ["Submitted from", input.formPage],
     ["Selected service", input.serviceInterest ? enquiryServices[input.serviceInterest].en : undefined],
+    ["Recruitment brief", input.recruitmentPage ? recruitmentPageLabel(input.recruitmentPage, 'en') : undefined],
+    ["Recruitment page (browser-declared)", input.recruitmentPage],
   ].filter((entry): entry is [string, string] => Boolean(entry[1]));
 
   return {

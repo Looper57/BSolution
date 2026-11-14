@@ -1,4 +1,5 @@
 import Link from 'next/link'
+import { serviceEnquiryHref } from '@/lib/service-enquiry'
 
 const linkStyle = 'underline underline-offset-4 hover:text-gold'
 
@@ -58,7 +59,7 @@ export function LeadershipMandateBrief() {
       <div className="mt-10 border-t border-navy/20 pt-8">
         <p className="max-w-3xl leading-relaxed text-gray-600">Explore the <Link className={linkStyle} href="/practice-areas/general-counsel">General Counsel and Head of Legal role</Link> and our <Link className={linkStyle} href="/services/legal-executive-search">retained legal executive search process</Link>. For a hands-on first legal hire, start with <Link className={linkStyle} href="/hire-in-house-counsel">in-house counsel recruitment</Link>.</p>
         <p className="mt-5 max-w-3xl leading-relaxed text-gray-600">For context, read our <Link className={linkStyle} href="/case-studies/general-counsel-fintech">illustrative first-General-Counsel mandate for a cross-border fintech</Link>. It explains the approach without identifying a client.</p>
-        <Link className="mt-8 inline-block bg-navy px-6 py-4 text-sm font-medium text-white hover:bg-navy-light" href="/contact">Discuss your legal leadership brief</Link>
+        <Link className="mt-8 inline-block bg-navy px-6 py-4 text-sm font-medium text-white hover:bg-navy-light" href={serviceEnquiryHref('executive-search', 'en', '/hire-legal-leader')}>Discuss your legal leadership brief</Link>
       </div>
     </div>
   </section>
