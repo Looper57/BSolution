@@ -6,7 +6,11 @@ const nextConfig = {
     imageSizes: [16, 32, 48, 64, 96, 128, 256],
   },
   compiler: {
-    removeConsole: process.env.NODE_ENV === 'production',
+    // Contact acceptance/error records and security events use these levels.
+    // Removing them makes production enquiry reports silently incomplete.
+    removeConsole: process.env.NODE_ENV === 'production'
+      ? { exclude: ['info', 'warn', 'error'] }
+      : false,
   },
   async redirects() {
     return [
