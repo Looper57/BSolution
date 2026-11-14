@@ -12,9 +12,22 @@ import {
   positionContentLocales,
   positionDetailLocale,
   positionFallbackLocales,
+  inHouseRecruitmentHref,
 } from '@/lib/routes'
+import { inHouseRecruitmentAlternates } from '@/lib/inhouse-recruitment'
 
 describe('public route registry', () => {
+  it('advertises only real English and German in-house employer translations', () => {
+    expect(inHouseRecruitmentHref('de')).toBe('/de/hire-in-house-counsel')
+    for (const locale of ['en', 'cs', 'pl'] as const) expect(inHouseRecruitmentHref(locale)).toBe('/hire-in-house-counsel')
+    const en = inHouseRecruitmentAlternates('en')
+    const de = inHouseRecruitmentAlternates('de')
+    expect(de.languages).toEqual(en.languages)
+    expect(Object.keys(de.languages).sort()).toEqual(['de', 'en', 'x-default'])
+    expect(de.canonical).toBe(de.languages.de)
+    expect(en.canonical).toBe(en.languages.en)
+    expect(isEnglishOnlyStaticPage('/hire-in-house-counsel')).toBe(false)
+  })
   it('has unique homepage and authority-hub paths', () => {
     expect(new Set(localizedHomepages).size).toBe(localizedHomepages.length)
     expect(new Set(authorityHubs).size).toBe(authorityHubs.length)

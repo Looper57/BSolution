@@ -12,6 +12,8 @@ import { LOCALES, localizedPath, SITE_URL, type Locale } from '@/lib/i18n/config
 import {
   authorityHubs,
   englishOnlyStaticPages,
+  inHouseRecruitmentLocales,
+  inHouseRecruitmentPath,
   legalRoutes,
   localizedStaticPages,
   positionContentLocales,
@@ -42,6 +44,7 @@ const employerContentUpdates: Readonly<Record<string, string>> = {
   '/hire-legal-leader': '2026-11-13',
   '/law-firm-recruitment': '2026-11-13',
   '/hire-in-house-counsel': '2026-11-13',
+  '/de/hire-in-house-counsel': '2026-11-14',
   '/legal-recruitment-europe': '2026-11-13',
   '/locations/united-kingdom': '2026-11-13',
   '/cs/locations/united-kingdom': '2026-11-13',
@@ -131,7 +134,8 @@ export function getEmployerSitemapEntries(): MetadataRoute.Sitemap {
     priority: 0.6,
   }))
 
-  return [...localizedPages, ...authorityPages, ...gatedAuthorityPages, ...englishPages]
+  const inHousePages = inHouseRecruitmentLocales.map(locale => ({ ...localizedEntry(inHouseRecruitmentPath, locale, inHouseRecruitmentLocales), priority: 0.6 }))
+  return [...localizedPages, ...authorityPages, ...gatedAuthorityPages, ...englishPages, ...inHousePages]
     .filter(entry => !/\/(?:cs\/|de\/|pl\/)?candidates$/.test(new URL(entry.url).pathname))
     .map(entry => {
       const path = new URL(entry.url).pathname

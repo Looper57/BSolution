@@ -18,7 +18,7 @@ describe('sitemap', () => {
   it('contains only unique canonical URLs', () => {
     // 134 + the external legal-jobs listing in four locales (M13.3, 2026-10-29).
     // + the available-lawyers listing in four locales (pilot 2026-11-03).
-    expect(urls).toHaveLength(142)
+    expect(urls).toHaveLength(143)
     expect(new Set(urls).size).toBe(urls.length)
   })
 
@@ -89,6 +89,7 @@ describe('employer discovery independent of external feeds', () => {
         'https://www.bsolution.eu/cs/services/legal-executive-search',
         'https://www.bsolution.eu/de',
         'https://www.bsolution.eu/de/clients',
+        'https://www.bsolution.eu/de/hire-in-house-counsel',
         'https://www.bsolution.eu/de/locations/united-kingdom',
         'https://www.bsolution.eu/de/practice-areas/general-counsel',
         'https://www.bsolution.eu/de/services/legal-executive-search',
@@ -111,8 +112,9 @@ describe('employer discovery independent of external feeds', () => {
       expect(employers.filter(entry => entry.lastModified === '2026-11-14').map(entry => entry.url).sort()).toEqual([
         'https://www.bsolution.eu/de',
         'https://www.bsolution.eu/de/clients',
+        'https://www.bsolution.eu/de/hire-in-house-counsel',
       ])
-      expect(xml.match(/<lastmod>2026-11-14<\/lastmod>/g)).toHaveLength(2)
+      expect(xml.match(/<lastmod>2026-11-14<\/lastmod>/g)).toHaveLength(3)
       expect(xml.match(/<lastmod>2026-11-12<\/lastmod>/g)).toHaveLength(2)
       expect(fetch).not.toHaveBeenCalled()
       // An unavailable publication feed must not silently publish a new
