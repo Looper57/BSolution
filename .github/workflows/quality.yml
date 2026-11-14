@@ -45,6 +45,18 @@ jobs:
       - name: Production build
         run: pnpm build
 
+      - name: Production contact observability
+        run: pnpm exec tsx scripts/ci/contact-observability.mts
+
+      - name: Retain contact observability proof
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: contact-observability-proof
+          path: artifacts/contact-observability-proof.json
+          if-no-files-found: ignore
+          retention-days: 7
+
       # Technical-SEO graph crawl gate (2026-08-22 Ahrefs audit) — crawls
       # the complete authoritative inventory (app/sitemap.ts's own output)
       # plus every first-party link discovered on it, against the just-built
