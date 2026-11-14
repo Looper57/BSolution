@@ -40,10 +40,10 @@ const employerContentUpdates: Readonly<Record<string, string>> = {
   '/cs/clients': '2026-11-13',
   '/de/clients': '2026-11-14',
   '/pl/clients': '2026-11-13',
-  '/for-companies': '2026-11-13',
-  '/hire-legal-leader': '2026-11-13',
+  '/for-companies': '2026-11-14',
+  '/hire-legal-leader': '2026-11-14',
   '/law-firm-recruitment': '2026-11-13',
-  '/hire-in-house-counsel': '2026-11-13',
+  '/hire-in-house-counsel': '2026-11-14',
   '/de/hire-in-house-counsel': '2026-11-14',
   '/legal-recruitment-europe': '2026-11-13',
   '/locations/united-kingdom': '2026-11-13',
@@ -57,8 +57,10 @@ const employerContentUpdates: Readonly<Record<string, string>> = {
   '/cs/services/legal-executive-search': '2026-11-13',
   '/de/services/legal-executive-search': '2026-11-13',
   '/pl/services/legal-executive-search': '2026-11-13',
-  '/practice-areas/general-counsel': '2026-11-12',
-  '/de/practice-areas/general-counsel': '2026-11-12',
+  '/practice-areas/general-counsel': '2026-11-14',
+  '/de/practice-areas/general-counsel': '2026-11-14',
+  '/cs/practice-areas/general-counsel': '2026-11-14',
+  '/pl/practice-areas/general-counsel': '2026-11-14',
 }
 
 // `localizedPath` deliberately returns `/` for the English root so on-page

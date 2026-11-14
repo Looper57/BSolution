@@ -5,6 +5,7 @@ import { ArrowRight, Briefcase, Building2, Globe, Users, Shield, Target, CheckCi
 import { LanguageProvider, useLanguage } from '@/lib/language-context'
 import { HeroBackgroundImage } from '@/components/hero-background-image'
 import { CompanyHiringPaths } from '@/components/employer-decision-guides'
+import { serviceEnquiryHref } from '@/lib/service-enquiry'
 
 function ForCompaniesContent() {
   const { language } = useLanguage()
@@ -65,14 +66,14 @@ function ForCompaniesContent() {
               {/* CTAs */}
               <div className="mt-12 lg:mt-14 flex flex-col sm:flex-row gap-4">
                 <Link 
-                  href="/contact"
+                  href={serviceEnquiryHref('executive-search', 'en', '/for-companies')}
                   className="inline-flex items-center justify-center px-10 py-5 bg-gold hover:bg-gold-light text-navy text-[12px] font-semibold uppercase tracking-[0.14em] transition-all duration-300"
                 >
                   {ctaPrimary}
                   <ArrowRight className="ml-3 h-4 w-4" />
                 </Link>
                 <Link 
-                  href="/contact"
+                  href={serviceEnquiryHref('executive-search', 'en', '/for-companies')}
                   className="inline-flex items-center justify-center px-10 py-5 border border-white/25 text-white hover:border-white/40 hover:text-white text-[12px] font-semibold uppercase tracking-[0.14em] transition-all duration-300"
                 >
                   {ctaSecondary}
@@ -174,7 +175,7 @@ function ForCompaniesContent() {
                 </p>
                 
                 <Link 
-                  href="/contact"
+                  href={serviceEnquiryHref('executive-search', 'en', '/for-companies')}
                   className="inline-flex items-center justify-center mt-10 px-10 py-4 bg-gold hover:bg-gold-light text-navy text-[11px] font-semibold uppercase tracking-[0.14em] transition-all duration-300"
                 >
                   {ctaPrimary}
@@ -353,14 +354,14 @@ function ForCompaniesContent() {
               
               <div className="mt-12 flex flex-col sm:flex-row gap-5 justify-center">
                 <Link 
-                  href="/contact"
+                  href={serviceEnquiryHref('executive-search', 'en', '/for-companies')}
                   className="inline-flex items-center justify-center px-12 py-5 bg-gold hover:bg-gold-light text-navy text-[12px] font-semibold uppercase tracking-[0.14em] transition-all duration-300"
                 >
                   {ctaPrimary}
                   <ArrowRight className="ml-3 h-4 w-4" />
                 </Link>
                 <Link 
-                  href="/contact"
+                  href={serviceEnquiryHref('executive-search', 'en', '/for-companies')}
                   className="inline-flex items-center justify-center px-12 py-5 border border-white/20 text-white/85 hover:border-white/40 hover:text-white text-[12px] font-semibold uppercase tracking-[0.14em] transition-all duration-300"
                 >
                   {ctaSecondary}

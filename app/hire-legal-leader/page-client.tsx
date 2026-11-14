@@ -7,6 +7,7 @@ import { ArrowRight, Check, Clock } from 'lucide-react'
 import { LanguageProvider, useLanguage } from '@/lib/language-context'
 import { HeroBackgroundImage } from '@/components/hero-background-image'
 import { LeadershipMandateBrief } from '@/components/employer-decision-guides'
+import { serviceEnquiryHref } from '@/lib/service-enquiry'
 
 function HireLegalLeaderContent({ editorialSupplement }: { editorialSupplement: ReactNode }) {
   const { language } = useLanguage()
@@ -64,14 +65,14 @@ function HireLegalLeaderContent({ editorialSupplement }: { editorialSupplement: 
               {/* CTAs */}
               <div className="mt-12 lg:mt-14 flex flex-col sm:flex-row gap-4">
                 <Link 
-                  href="/contact"
+                  href={serviceEnquiryHref('executive-search', 'en', '/hire-legal-leader')}
                   className="inline-flex items-center justify-center px-10 py-5 bg-gold hover:bg-gold-light text-navy text-[12px] font-semibold uppercase tracking-[0.12em] transition-all duration-300"
                 >
                   {language === 'en' ? 'Discuss Your Hiring Needs (Confidential)' : 'Projednejte vaše náborové potřeby (důvěrně)'}
                   <ArrowRight className="ml-3 h-4 w-4" />
                 </Link>
                 <Link 
-                  href="/contact"
+                  href={serviceEnquiryHref('executive-search', 'en', '/hire-legal-leader')}
                   className="inline-flex items-center justify-center px-10 py-5 border border-white/25 text-white hover:border-white/40 hover:text-white text-[12px] font-semibold uppercase tracking-[0.12em] transition-all duration-300"
                 >
                   {language === 'en' ? 'Speak to Us' : 'Kontaktujte nás'}
@@ -310,7 +311,7 @@ function HireLegalLeaderContent({ editorialSupplement }: { editorialSupplement: 
               </p>
               
               <Link 
-                href="/contact"
+                href={serviceEnquiryHref('executive-search', 'en', '/hire-legal-leader')}
                 className="inline-flex items-center justify-center mt-12 px-12 py-5 bg-gold hover:bg-gold-light text-navy text-[12px] font-semibold uppercase tracking-[0.12em] transition-all duration-300"
               >
                 {language === 'en' ? 'Discuss Your Hiring Needs (Confidential)' : 'Projednejte vaše náborové potřeby (důvěrně)'}

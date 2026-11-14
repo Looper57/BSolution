@@ -90,6 +90,10 @@ describe("contact input validation", () => {
     { phone: "Bad\nPhone" },
     { company: { unsafe: true } },
     { type: "admin" },
+    { recruitmentPage: "__proto__" },
+    { recruitmentPage: "/hire-in-house-counsel?secret=private" },
+    { recruitmentPage: "https://www.bsolution.eu/hire-in-house-counsel" },
+    { recruitmentPage: { unsafe: true } },
     { discoverySource: "__proto__" },
     { discoverySource: "https://private.example/query?email=person@example.com" },
     { discoverySource: { unsafe: true } },
@@ -208,6 +212,7 @@ describe("contact email API boundary", () => {
         phone: "+49 123 456",
         type: "hiring",
         formPage: "/hire-in-house-counsel",
+        recruitmentPage: "/hire-in-house-counsel",
         serviceInterest: "executive-search",
         discoverySource: "ai-assistant",
       })
@@ -229,12 +234,14 @@ describe("contact email API boundary", () => {
     const accepted = info.mock.calls.map(call => JSON.parse(String(call[1]))).find(event => event.status === "accepted");
     expect(accepted.enquiryType).toBe("hiring");
     expect(accepted.formPage).toBe("/hire-in-house-counsel");
+    expect(accepted.recruitmentPage).toBe("/hire-in-house-counsel");
     expect(accepted.serviceInterest).toBe("executive-search");
     expect(accepted.discoverySource).toBe("ai-assistant");
     expect(payload.text).toContain("Discovery (visitor-reported): An AI assistant");
     expect(payload.text).toContain(`Enquiry reference: ${accepted.requestId}`);
     expect(payload.text).toContain("Selected service: Legal Executive Search");
     expect(payload.text).toContain("Submitted from: /hire-in-house-counsel");
+    expect(payload.text).toContain("Recruitment page (browser-declared): /hire-in-house-counsel");
     for (const privateValue of ["Example Legal", "+49 123 456", "visitor@example.com", "A confidential enquiry"]) expect(log).not.toContain(privateValue);
   });
 

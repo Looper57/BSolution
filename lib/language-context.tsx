@@ -3,7 +3,7 @@
 import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
 import { inHouseRecruitmentHref, inHouseRecruitmentPath, isEnglishOnlyStaticPage, legalPath } from '@/lib/routes'
-import { enquiryServiceFromHash, serviceEnquiryHref } from '@/lib/service-enquiry'
+import { enquiryServiceFromHash, recruitmentPageFromHash, serviceEnquiryHref } from '@/lib/service-enquiry'
 import { localeFromPathname } from '@/lib/i18n/config'
 
 type Language = 'en' | 'cs' | 'de' | 'pl'
@@ -770,8 +770,9 @@ const nextPath = basePath === '/privacy' || basePath === '/cookies'
   : isEnglishOnlyStaticPage(basePath) ? basePath
   : nextLanguage === 'en' ? basePath : `/${nextLanguage}${basePath === '/' ? '' : basePath}`
 const selectedService = basePath === '/contact' ? enquiryServiceFromHash(window.location.hash) : undefined
+const selectedPage = basePath === '/contact' ? recruitmentPageFromHash(window.location.hash) : undefined
 setLanguageState(localeFromPathname(nextPath))
-router.push(selectedService ? serviceEnquiryHref(selectedService, nextLanguage) : nextPath)
+router.push(selectedService ? serviceEnquiryHref(selectedService, nextLanguage, selectedPage) : nextPath)
 }, [pathname, router])
 
 const t = useCallback((key: string): string => {

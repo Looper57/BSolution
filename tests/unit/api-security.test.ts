@@ -237,7 +237,7 @@ describe("API response and input hardening", () => {
 });
 
 describe("production idempotency integration", () => {
-  it("returns the stored result without a duplicate Resend submission", async () => {
+  it.each([undefined, '/de/hire-in-house-counsel'])("returns the stored result without duplicate delivery and isolates changed recruitment context: %s", async context => {
     vi.stubEnv("NODE_ENV", "production");
     vi.stubEnv("RESEND_API_KEY", "re_test");
     vi.stubEnv("EMAIL_FROM", PRODUCTION_EMAIL_FROM);
@@ -285,7 +285,7 @@ describe("production idempotency integration", () => {
     });
 
     const timestamp = String(Date.now());
-    const makeRequest = () =>
+    const makeRequest = (recruitmentPage = context) =>
       new Request("https://www.bsolution.eu/api/contact", {
         method: "POST",
         headers: {
@@ -300,6 +300,7 @@ describe("production idempotency integration", () => {
           email: "ada@example.com",
           message: "Confidential enquiry",
           turnstileToken: "single-use-token",
+          ...(recruitmentPage ? { recruitmentPage } : {}),
         }),
       });
 
@@ -308,6 +309,14 @@ describe("production idempotency integration", () => {
     expect(first.status).toBe(200);
     expect(second.status).toBe(200);
     await expect(second.json()).resolves.toEqual({ success: true });
+    expect(resendCalls).toBe(1);
+    if (!context) {
+      const actor = await hmacFingerprint('x'.repeat(32), ['192.0.2.1', 'security-test', '/api/contact']);
+      const legacy = await hmacFingerprint('x'.repeat(32), [actor, 'Ada Lovelace', 'ada@example.com', 'Confidential enquiry', '', '', '', '', '', '']);
+      expect(JSON.parse(storedResult!).fingerprint).toBe(legacy);
+    }
+    const changed = await POST(makeRequest(context ? '/hire-legal-leader' : '/de/hire-in-house-counsel'));
+    expect(changed.status).toBe(409);
     expect(resendCalls).toBe(1);
   });
 });

@@ -649,8 +649,8 @@ test('German employers can discover a leadership service and initiate their own 
   await help.getByRole('link', { name: 'General Counsel oder Head of Legal finden', exact: true }).click()
   await expect(page).toHaveURL(/\/de\/practice-areas\/general-counsel$/)
   await expect(page.getByRole('heading', { level: 1 })).toContainText('Head of Legal')
-  await page.locator('aside a[href="/de/contact"]').click()
-  await expect(page).toHaveURL(/\/de\/contact$/)
+  await page.locator('aside a').click()
+  await expect(page).toHaveURL(/\/de\/contact#service-executive-search&recruitment=%2Fde%2Fpractice-areas%2Fgeneral-counsel$/)
   await expect(page.getByRole('textbox').first()).toBeVisible()
 })
 
@@ -774,7 +774,7 @@ test('leadership visitors receive a decision brief and clearly labelled illustra
   await expect(brief.getByRole('link', { name: 'illustrative first-General-Counsel mandate for a cross-border fintech', exact: true })).toHaveAttribute('href', '/case-studies/general-counsel-fintech')
   await expect(brief.getByRole('link', { name: 'General Counsel and Head of Legal role', exact: true })).toHaveAttribute('href', '/practice-areas/general-counsel')
   await brief.getByRole('link', { name: 'Discuss your legal leadership brief', exact: true }).click()
-  await expect(page).toHaveURL(/\/contact$/)
+  await expect(page).toHaveURL(/\/contact#service-executive-search&recruitment=%2Fhire-legal-leader$/)
   await expect(page.getByRole('textbox').first()).toBeVisible()
 })
 
@@ -811,7 +811,7 @@ for (const locale of ['de', 'pl', 'cs']) {
 
 
 for (const path of ['/hire-in-house-counsel', '/law-firm-recruitment', '/legal-recruitment-europe', '/legal-recruitment-germany', '/legal-recruitment-dubai', '/legal-recruitment-prague']) {
-  test(`${path} preserves a failed employer brief and records only the submission page`, async ({ page }) => {
+  test(`${path} preserves a failed employer brief and omits private URL parameters`, async ({ page }) => {
     const requests: Record<string, unknown>[] = []
     await page.route('**/api/contact', async route => {
       requests.push(route.request().postDataJSON())
@@ -970,10 +970,54 @@ test('German in-house recruitment has genuine reciprocal languages and a mobile 
   const widths = await page.evaluate(() => ({ viewport: innerWidth, document: document.documentElement.scrollWidth }))
   expect(widths.document).toBeLessThanOrEqual(widths.viewport)
   await page.getByRole('link', { name: 'Inhouse-Besetzung vertraulich besprechen', exact: true }).click()
-  await expect(page).toHaveURL(/\/de\/contact#service-executive-search$/)
+  await expect(page).toHaveURL(/\/de\/contact#service-executive-search&recruitment=%2Fde%2Fhire-in-house-counsel$/)
   await expect(page.getByRole('region', { name: 'Ausgewählte Leistung', exact: true })).toContainText('Legal Executive Search')
   await expect(page.locator('form#contact-form').getByLabel('Ich bin...', { exact: true })).toContainText('Auf der Suche nach Kandidaten')
   await page.setViewportSize({ width: 1280, height: 720 })
+})
+
+test('corporate recruitment context survives language choice and failed delivery and can be cleared', async ({ page }) => {
+  const requests: Record<string, unknown>[] = []
+  await page.route('**/api/contact', async route => {
+    requests.push(route.request().postDataJSON())
+    await route.fulfill({ status: requests.length === 1 ? 503 : 200, contentType: 'application/json', body: JSON.stringify({ success: requests.length > 1 }) })
+  })
+  await page.goto('/hire-in-house-counsel')
+  await expect(page.getByRole('region', { name: 'Recruitment brief', exact: true })).toContainText('In-house legal recruitment')
+  await expect(page.getByRole('heading', { level: 1 })).toBeInViewport()
+  await page.goto('/de/hire-in-house-counsel?private=must-not-be-recorded')
+  await page.getByRole('link', { name: 'Inhouse-Besetzung vertraulich besprechen', exact: true }).click()
+  await expect(page.getByRole('region', { name: 'Ausgewählte Leistung', exact: true })).toContainText('Suchauftrag: Unternehmensjuristen einstellen')
+  await page.locator('header').getByRole('button', { name: 'Switch to English', exact: true }).click()
+  await expect(page).toHaveURL(/\/contact#service-executive-search&recruitment=%2Fde%2Fhire-in-house-counsel$/)
+  await expect(page.locator('html')).toHaveAttribute('lang', 'en')
+  const form = page.locator('form#contact-form')
+  const selected = form.getByRole('region', { name: 'Selected service', exact: true })
+  await expect(selected).toContainText('Recruitment brief: In-house legal recruitment')
+  await form.locator('#name').fill('Test Employer')
+  await form.locator('#email').fill('employer@example.com')
+  await form.locator('#message').fill('Test corporate brief')
+  await form.locator('#discovery-source').selectOption('google')
+  await form.getByRole('button', { name: 'Send Message', exact: true }).click()
+  await expect(form.getByRole('alert')).toBeVisible()
+  await expect(selected).toContainText('In-house legal recruitment')
+  await expect(form.locator('#message')).toHaveValue('Test corporate brief')
+  await form.getByRole('button', { name: 'Send Message', exact: true }).click()
+  await expect(form).toHaveCount(0)
+  expect(requests[1]).toMatchObject({ recruitmentPage: '/de/hire-in-house-counsel', formPage: '/contact', serviceInterest: 'executive-search', discoverySource: 'google', type: 'hiring' })
+  expect(JSON.stringify(requests)).not.toContain('must-not-be-recorded')
+  await page.getByRole('button', { name: 'Send Another Message', exact: true }).click()
+  await form.locator('#name').fill('Test Employer')
+  await form.locator('#email').fill('employer@example.com')
+  await form.locator('#message').fill('Test brief after clear')
+  await form.getByRole('button', { name: 'Clear service selection', exact: true }).click()
+  await expect(selected).toHaveCount(0)
+  await expect(form.locator('#message')).toHaveValue('Test brief after clear')
+  await form.getByRole('button', { name: 'Send Message', exact: true }).click()
+  await expect(form).toHaveCount(0)
+  expect(requests).toHaveLength(3)
+  expect(requests[2].recruitmentPage).toBeUndefined()
+  expect(requests[2].serviceInterest).toBeUndefined()
 })
 
 test('an explicitly chosen service reaches the visible enquiry and survives a failed send', async ({ page }) => {

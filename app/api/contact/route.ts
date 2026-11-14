@@ -1,6 +1,7 @@
 import type { DiscoverySource } from '@/lib/enquiry-discovery';
 import type { EnquiryService } from '@/lib/service-enquiry';
 import type { ContactFormPage } from '@/lib/contact-form-context';
+import type { RecruitmentPage } from '@/lib/enquiry-recruitment';
 import {
   EmailConfigurationError,
   getEmailConfiguration,
@@ -46,6 +47,7 @@ export async function POST(req: Request) {
       errorCategory?: string;
       formPage?: ContactFormPage;
       serviceInterest?: EnquiryService;
+      recruitmentPage?: RecruitmentPage;
       discoverySource?: DiscoverySource;
       enquiryType?: "hiring" | "candidate" | "other" | "unspecified";
     } = {}
@@ -60,6 +62,7 @@ export async function POST(req: Request) {
       errorCategory: options.errorCategory,
       formPage: options.formPage,
       serviceInterest: options.serviceInterest,
+      recruitmentPage: options.recruitmentPage,
       discoverySource: options.discoverySource,
       enquiryType: options.enquiryType,
     });
@@ -142,6 +145,8 @@ export async function POST(req: Request) {
         input.formPage ?? "",
         input.serviceInterest ?? "",
         input.discoverySource ?? "",
+        // Preserve fingerprints for older requests without the optional context.
+        ...(input.recruitmentPage ? [`recruitment-page:${input.recruitmentPage}`] : []),
       ]);
 
       const stored = await store.getResult(`api:idem:${idempotencyKey}`);
@@ -331,6 +336,7 @@ export async function POST(req: Request) {
       enquiryType: input.type || "unspecified",
       formPage: input.formPage,
       serviceInterest: input.serviceInterest,
+      recruitmentPage: input.recruitmentPage,
       discoverySource: input.discoverySource,
     });
   } catch (error: unknown) {

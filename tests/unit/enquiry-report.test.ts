@@ -16,6 +16,16 @@ it('counts only provider-accepted messages and keeps employer/candidate traffic 
 it('marks missing self-reports as unspecified rather than inferring Google or direct traffic', () => {
   expect(enquiryReport([event({ discoverySource: undefined })], undefined, asOf).employerByDiscovery).toEqual({ unspecified: 1 })
 })
+it('counts browser-declared recruitment context independently of submission page and discovery, without backfilling older logs', () => {
+  const r = enquiryReport([event({ recruitmentPage: '/de/hire-in-house-counsel', formPage: '/contact' }), event({ requestId: 'legacy', resendMessageId: 'legacy-provider', formPage: '/hire-in-house-counsel' })], undefined, asOf)
+  expect(r.employerByRecruitmentPage).toEqual({ '/de/hire-in-house-counsel': 1, unspecified: 1 })
+  expect(r.employerBySubmissionPage).toEqual({ '/contact': 1, '/hire-in-house-counsel': 1 })
+  expect(r.recordedQualifiedEmployerEnquiries).toBeNull()
+})
+it('refuses unsafe or conflicting recruitment context in accepted log records', () => {
+  expect(enquiryReport([event({ recruitmentPage: '/hire-in-house-counsel?secret=PRIVATE' })], undefined, asOf).invalidAcceptedRows).toBe(1)
+  expect(() => enquiryReport([event({ recruitmentPage: '/hire-in-house-counsel' }), event({ recruitmentPage: '/hire-legal-leader' })], undefined, asOf)).toThrow('Conflicting acceptance records')
+})
 it('deduplicates provider acceptance and links a recorded outcome through any request alias', () => {
   const r = enquiryReport([event(), event({ requestId: 'request-alias' })], [outcome({ requestId: 'request-alias', status: 'mandated' })], asOf)
   expect(r).toMatchObject({ providerAcceptedMessages: 1, duplicateAcceptedRows: 1, employerOutcomesRecorded: 1, recordedQualifiedEmployerEnquiries: 1, recordedEmployerMandates: 1 })
