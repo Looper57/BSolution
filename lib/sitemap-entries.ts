@@ -33,10 +33,10 @@ const productionGatedBasePaths = new Set(productionAuthorityPages.map((page) => 
 // generation time as a modification date for unchanged pages.
 const employerContentUpdates: Readonly<Record<string, string>> = {
   '/': '2026-11-13',
-  '/de': '2026-11-13',
+  '/de': '2026-11-14',
   '/clients': '2026-11-13',
   '/cs/clients': '2026-11-13',
-  '/de/clients': '2026-11-13',
+  '/de/clients': '2026-11-14',
   '/pl/clients': '2026-11-13',
   '/for-companies': '2026-11-13',
   '/hire-legal-leader': '2026-11-13',
