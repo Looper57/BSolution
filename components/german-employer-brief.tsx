@@ -39,6 +39,7 @@ export function GermanEmployerBrief() {
             <dd className="mt-3 leading-relaxed text-gray-600">{item.answer}</dd>
           </div>)}</dl>
           <Link className="mt-7 inline-block underline underline-offset-4 hover:text-gold" href={brief.href}>{brief.link}</Link>
+          {brief.id === 'inhouse-suchprofil' && <p className="mt-5"><Link className="underline underline-offset-4 hover:text-gold" href="/de/hire-in-house-counsel">Inhouse-Juristen einstellen: Rollen und Suchauftrag klären</Link></p>}
         </article>)}
       </div>
       <p className="mt-12 max-w-3xl leading-relaxed text-gray-600">Für die erste Anfrage genügen Rolle, Anlass, Standort, betreute Länder, Sprachen und ein grober Vergütungsrahmen. Übermitteln Sie zunächst keine vertraulichen Personal- oder Mandantendaten. Den Suchumfang stimmen wir anschließend gemeinsam ab.</p>

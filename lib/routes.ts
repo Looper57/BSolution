@@ -60,12 +60,20 @@ export const englishOnlyStaticPages = [
   '/for-companies',
   '/hire-legal-leader',
   '/legal-recruitment-europe',
-  '/hire-in-house-counsel',
   '/law-firm-recruitment',
   '/legal-recruitment-prague',
   '/legal-recruitment-germany',
   '/legal-recruitment-dubai',
 ] as const
+
+// Genuine in-house employer content exists in English and German only.
+// Unsupported language choices retain the English original, not a 404 or
+// an untranslated page advertised as a translation.
+export const inHouseRecruitmentPath = '/hire-in-house-counsel' as const
+export const inHouseRecruitmentLocales = ['en', 'de'] as const satisfies readonly Locale[]
+export function inHouseRecruitmentHref(locale: Locale): string {
+  return locale === 'de' ? `/de${inHouseRecruitmentPath}` : inHouseRecruitmentPath
+}
 
 // English-only recruitment landing pages, one per country, used to give the
 // dedicated country-specific page in englishOnlyStaticPages above a real

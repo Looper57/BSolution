@@ -2,8 +2,9 @@
 
 import { createContext, useContext, useState, useCallback, useEffect, type ReactNode } from 'react'
 import { usePathname, useRouter } from 'next/navigation'
-import { isEnglishOnlyStaticPage, legalPath } from '@/lib/routes'
+import { inHouseRecruitmentHref, inHouseRecruitmentPath, isEnglishOnlyStaticPage, legalPath } from '@/lib/routes'
 import { enquiryServiceFromHash, serviceEnquiryHref } from '@/lib/service-enquiry'
+import { localeFromPathname } from '@/lib/i18n/config'
 
 type Language = 'en' | 'cs' | 'de' | 'pl'
 
@@ -765,10 +766,11 @@ if (['cs', 'de', 'pl'].includes(segments[0])) segments.shift()
 const basePath = segments.length ? `/${segments.join('/')}` : '/'
 const nextPath = basePath === '/privacy' || basePath === '/cookies'
   ? legalPath(nextLanguage, basePath)
+  : basePath === inHouseRecruitmentPath ? inHouseRecruitmentHref(nextLanguage)
   : isEnglishOnlyStaticPage(basePath) ? basePath
   : nextLanguage === 'en' ? basePath : `/${nextLanguage}${basePath === '/' ? '' : basePath}`
 const selectedService = basePath === '/contact' ? enquiryServiceFromHash(window.location.hash) : undefined
-setLanguageState(nextLanguage)
+setLanguageState(localeFromPathname(nextPath))
 router.push(selectedService ? serviceEnquiryHref(selectedService, nextLanguage) : nextPath)
 }, [pathname, router])
 

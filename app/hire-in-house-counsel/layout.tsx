@@ -1,12 +1,11 @@
 import type { Metadata } from 'next'
+import { inHouseRecruitmentAlternates } from '@/lib/inhouse-recruitment'
 
 export const metadata: Metadata = {
   title: 'In-House Legal Recruitment | Hire Corporate Lawyers',
   description: 'Recruit in-house counsel and legal leaders for your company in Europe. Discuss your first legal hire or cross-border team brief with B Solution.',
   keywords: ['in-house counsel recruitment', 'corporate legal hiring', 'General Counsel search', 'Legal Director recruitment', 'in-house lawyer'],
-  alternates: {
-    canonical: 'https://www.bsolution.eu/hire-in-house-counsel',
-  },
+  alternates: inHouseRecruitmentAlternates('en'),
   openGraph: {
     type: 'website',
     siteName: 'B Solution',

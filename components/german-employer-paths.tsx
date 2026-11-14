@@ -13,7 +13,7 @@ export function GermanEmployerPaths() {
           <p className="mt-4 leading-relaxed text-gray-600">Sie suchen einen Legal Counsel für das Tagesgeschäft, einen Senior Legal Counsel für ein Fachgebiet oder den ersten Unternehmensjuristen? Auch bei der Besetzung eines Head of Legal oder General Counsel beginnt die Suche mit den tatsächlichen Aufgaben: Verträge, Beratung der Fachbereiche, betreute Länder und Verantwortung im Unternehmen.</p>
           <ul className="mt-5 space-y-3 text-navy">
             <li><Link className="underline underline-offset-4 hover:text-gold" href="/de/clients#inhouse-suchprofil">Suchprofil für Ihren Unternehmensjuristen vorbereiten</Link></li>
-            <li><Link className="underline underline-offset-4 hover:text-gold" href="/hire-in-house-counsel">Legal Counsel oder ersten Inhouse-Juristen einstellen (Englisch)</Link></li>
+            <li><Link className="underline underline-offset-4 hover:text-gold" href="/de/hire-in-house-counsel">Legal Counsel oder ersten Inhouse-Juristen einstellen</Link></li>
             <li><Link className="underline underline-offset-4 hover:text-gold" href="/legal-recruitment-germany">Personalbedarf in Deutschland konkretisieren (Englisch)</Link></li>
             <li><Link className="underline underline-offset-4 hover:text-gold" href="/de/practice-areas/general-counsel">General Counsel oder Head of Legal finden</Link></li>
             <li><Link className="underline underline-offset-4 hover:text-gold" href="/de/practice-areas/compliance-officer">Compliance-Führungskraft finden</Link></li>
