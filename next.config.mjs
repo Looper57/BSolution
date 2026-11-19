@@ -12,6 +12,14 @@ const nextConfig = {
       ? { exclude: ['info', 'warn', 'error'] }
       : false,
   },
+  async rewrites() {
+    // One runtime XML handler for both public URLs. The hosting build omits
+    // the reserved /sitemap.xml function even when Next builds it locally.
+    // Route before filesystem matching so no old metadata asset can win.
+    return {
+      beforeFiles: [{ source: '/sitemap.xml', destination: '/site-sitemap.xml' }],
+    }
+  },
   async redirects() {
     return [
       {

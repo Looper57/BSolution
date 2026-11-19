@@ -48,6 +48,18 @@ jobs:
       - name: Production contact observability
         run: pnpm exec tsx scripts/ci/contact-observability.mts
 
+      - name: Production sitemap freshness
+        run: pnpm exec tsx scripts/ci/sitemap-freshness.mts
+
+      - name: Retain sitemap freshness proof
+        if: always()
+        uses: actions/upload-artifact@v6
+        with:
+          name: sitemap-freshness-proof
+          path: artifacts/sitemap-freshness-proof.json
+          if-no-files-found: error
+          retention-days: 7
+
       - name: Retain contact observability proof
         if: always()
         uses: actions/upload-artifact@v6

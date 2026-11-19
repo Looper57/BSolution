@@ -1,6 +1,6 @@
 import { beforeAll, describe, expect, it, vi } from 'vitest'
 import type { MetadataRoute } from 'next'
-import sitemap from '@/app/sitemap'
+import sitemap from '@/lib/sitemap-entries'
 import { getEmployerSitemapEntries } from '@/lib/sitemap-entries'
 import { GET as employerSitemap } from '@/app/employer-sitemap.xml/route'
 
