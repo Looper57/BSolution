@@ -2,7 +2,7 @@
  * Permanent rendered-output technical-SEO gate (2026-08-22 Ahrefs audit).
  *
  * The authoritative inventory is not re-derived here — it is the exact
- * output of `app/sitemap.ts`, the same function Next.js uses to build
+ * output of `lib/sitemap-entries.ts`, the same function Next.js uses to build
  * sitemap.xml. That is the one thing this validator refuses to duplicate:
  * every other check below inspects what the running app actually renders
  * for that inventory, not a second hand-maintained list of expected URLs.
@@ -14,7 +14,7 @@
  * crawls internal links — which is what would have caught the internal
  * link to a noindex /de/positions/[slug] duplicate before it shipped.
  */
-import sitemap from '@/app/sitemap'
+import sitemap from '@/lib/sitemap-entries'
 import { LOCALES, SITE_URL } from '@/lib/i18n/config'
 import { authorityHubs, positionListingPath } from '@/lib/routes'
 import { productionAuthorityPages } from '@/lib/authority-pages'
@@ -144,7 +144,7 @@ function toLocal(url: string, siteOrigin: string): string {
 
 function toCanonicalForm(url: string, siteOrigin: string): string {
   const rewritten = url.startsWith(siteOrigin) ? `${SITE_URL}${url.slice(siteOrigin.length)}` : url
-  // Match app/sitemap.ts's own homepage normalization (absoluteCanonicalUrl):
+  // Match sitemap inventory's own homepage normalization (absoluteCanonicalUrl):
   // the root path never carries a trailing slash. Without this, a homepage
   // link discovered as `href="/"` fails to match the sitemap's slash-less
   // inventory entry and the homepage is misreported as an orphan with
