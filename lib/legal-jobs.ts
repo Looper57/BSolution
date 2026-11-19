@@ -29,14 +29,15 @@ export interface LegalJob {
 
 const FEED_URL = process.env.LAWBRIDGE_LEGAL_JOBS_FEED_URL ?? 'https://www.lawbridge.eu/api/recruitment/legal-jobs'
 
-/** The feed is cached for an hour at LawBridge; pages revalidate hourly too. */
+/** LawBridge caches the feed upstream. Do not add a second independent
+ * snapshot here: details and sitemaps must see withdrawals together. */
 export async function getLegalJobs(locale: Locale, country: string | null = null): Promise<LegalJob[]> {
   try {
     // Listings, country pages, details and sitemap generation must use one
     // collection per locale. Independently cached ?country / ?id requests
     // could keep a closed advert indexable after its incoming links vanished.
     const url = `${FEED_URL}?locale=${locale}`
-    const response = await fetch(url, { next: { revalidate: 3600 } })
+    const response = await fetch(url, { cache: 'no-store' })
     if (!response.ok) return []
     const body = (await response.json()) as { jobs?: LegalJob[] }
     return (body.jobs ?? []).filter((job) => job.status === 'open' && job.title && job.sourceUrl && (!country || job.country === country))
